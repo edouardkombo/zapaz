@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Description of UserDao
+ *
+ * @author fabien
+ */
+class UserDao {
+
+  private $db;
+
+  public function __construct() {
+    global $db;
+    $this->db = $db;
+  }
+
+  public function getUserById($id) {
+    if ($id == null || $id < 1) {
+      return null;
+    }
+    $q = $this->db->query("SELECT * FROM User WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
+      return $this->fetchUser($t);
+    }
+    return null;
+  }
+  
+  public function saveOrUpdate($user) {
+    if ($user == null) {
+      return 0;
+    }
+    if ($user->getId() == 0) {
+      return $this->save($user);
+    }
+    return $this->update($user);
+  }
+  
+  public function save($user) {
+    if ($user == null) {
+      return 0;
+    }
+  }
+  
+  public function update($user) {
+    if ($user == null || $user->getId() == null || $user->getId() < 1) {
+      return 0;
+    }
+  }
+  
+  public function delete($userId) {
+    if ($userId == null || $userId < 1) {
+      return 0;
+    }
+    return $this->db->exec("DELETE FROM User WHERE id = ".$this->db->quote($userId, PDO::PARAM_INT));
+  }
+  
+  private function fetchUser($t) {
+    return new User($t["email"], $t["password"], $t["id"]);
+  }
+}
+
+?>
