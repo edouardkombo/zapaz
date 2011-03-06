@@ -1,13 +1,9 @@
 <?php
 
 if (!defined("ROOT")) {
-$documentRoot = explode('/',$_SERVER['DOCUMENT_ROOT']);
-$root = "";
-$i = 0;
-do {
-  $root .= $documentRoot[$i++]."/";
-} while ($documentRoot[$i-1] != "admin" && $i < count($documentRoot));
 
+$root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) - 3);
+  
 // Base de données
 define("ROOT"                     , $root                           );
 define("MYSQL_HOSTNAME"           , "localhost"                     );
