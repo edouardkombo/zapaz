@@ -24,6 +24,32 @@ class ShopDao {
     }
     return null;
   }
+  /* @mohamed
+   * 
+   */
+  public function getAllShops($filter = '', $startIndex = 0, $length = 10) {
+    $filter .= "%";
+    $array   = array();
+
+    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q->execute(array($filter));
+    if ($q != null) {
+      while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        array_push($array, $this->fetchShop($t));
+      }
+    }
+    return $array;
+  }
+  /* @mohamed
+   * 
+   */
+  public function count($filter = '') {
+    $filter .= "%";
+    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `Shop` WHERE name LIKE ?");
+    $q->execute(array($filter));
+    $r = $q->fetch(PDO::FETCH_OBJ);
+    return $r != null ? $r->count : 0;
+  }
   
   public function saveOrUpdate($shop) {
     if ($shop == null) {
@@ -55,7 +81,7 @@ class ShopDao {
   }
   
   private function fetchShop($t) {
-    return new Shop($t["name"], $t["currencyId"], $t["latitute"], $t["longitude"], $t["id"]);
+    return new Shop($t["name"], $t["currencyId"], $t["latitute"], $t["longitude"], $t["email"], $t["id"]);
   }
 }
 

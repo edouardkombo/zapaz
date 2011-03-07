@@ -3,7 +3,7 @@
 /**
  * Description of ShopManager
  *
- * @author fabien
+ * @author mohamed
  */
 class ShopManager {
   
@@ -11,6 +11,21 @@ class ShopManager {
   
   public function __construct() {
     $this->shopDao = new ShopDao();
+  }
+  public function getAllShops($filter = '', $startIndex = 0, $limit = 10) {
+    return $this->shopDao->getAllShops($filter, $startIndex, $limit);
+  }
+  
+  public function count($filter = '') {
+    return $this->shopDao->count($filter);
+  }
+  
+  public function saveOrUpdate($shop) {
+    return $this->shopDao->saveOrUpdate($shop);
+  }
+  
+  public function delete($shopId) {
+    return $this->shopDao->delete($shopId);
   }
 }
 
