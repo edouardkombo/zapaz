@@ -14,7 +14,7 @@ html, body {
 
 table tr, table td { padding:0; border-collapse: collapse; }
 td { vertical-align:top; }
-select, input[type=text], input[type=url], input.date,textarea {
+select, input[type=text], input[type=file], input.date,textarea {
 	position:relative;
 	display:inline-block;
 	border:1px solid #CCC;
@@ -23,8 +23,11 @@ select, input[type=text], input[type=url], input.date,textarea {
 	font-size:11px;
 	background-color:white;
 }
-select:hover, input[type=text]:hover, input[type=url]:hover, input.date:hover, textarea:hover { border-color:#888; }
-select:focus, input[type=text]:focus, input[type=url]:focus, input.date:focus, textarea:focus { border:1px solid #c7a054; box-shadow:0 0 8px #ebc57c; }
+select:hover, input[type=text]:hover, input[type=file]:hover, input.date:hover, textarea:hover { border-color:#888; }
+select:focus, input[type=text]:focus, input[type=file]:focus, input.date:focus, textarea:focus { border:1px solid #c7a054; box-shadow:0 0 8px #ebc57c; }
+input.red { border-color:red; }
+.required { color:red; }
+
 
 a.blue { color:#06C; text-decoration:none; padding:0 4px; font-size:1.1em; }
 a.blue:hover { text-decoration:underline; }
@@ -159,6 +162,9 @@ input[name=filter].default {
 #calendar-chooser input[name=startDate] { width:100px; margin-right:34px; }
 #calendar-chooser .submit-button { position:absolute; top:0; right:0 }
 
+.box a { color:#06c; text-decoration: none; }
+.box a:hover { text-decoration: underline; }
+
 table.dataview { width:100%; border-collapse:collapse; }
 table.dataview thead { background-color:#F3F3F3; }
 table.dataview thead, table.dataview thead a { color:#333; font-weight:bold; text-decoration:none; }
@@ -189,6 +195,22 @@ div.light img { display:block; }
 div.light.red img { margin-top:0; }
 div.light.orange img { margin-top:-8px; }
 div.light.green img { margin-top:-16px; }
+
+/************** shop/view *******************/
+#ishop fieldset { width:600px; margin:10px auto; padding:5px; border:1px solid #ccc; border-radius:5px; font-size:13px; }
+#ishop legend { padding:0 5px; background-color: white; font-style: italic; font-size:1.1em; font-weight: bold; }
+#ishop label { width:120px; float:left; clear:left; margin-top:5px; }
+#ishop label:after { content:" :"; }
+#ishop input, #ishop select { float:left; margin:2px; width:400px; }
+#ishop input.alone { margin:2px 0 2px 122px; }
+#ishop #logo { position:relative; width:96px; height:96px; float:left; border:2px solid #c6c6c6; cursor: pointer; margin:5px 15px; padding:5px; }
+#iship #logo:hover { border-color:darkblue; }
+#ishop #rlogo { width:400px; float:left; }
+#ishop #rlogo label { width:80px; }
+#ishop #rlogo input, #ishop #rlogo select { width:293px; margin-left:14px; }
+#ishop fieldset + fieldset { padding:10px 15px; width:580px; }
+#submit-shop { width:100%; }
+#ishop #logo a { position:absolute; left:0; top:85px; width:100%; height:14px; padding:3px 0; text-align:center; display:block; background-color:lightblue; }
 
 /************ namespace/view ****************/
 table#list-namespaces tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
@@ -275,3 +297,15 @@ a.lock {
 a.lock:hover { background-position: 0 -22px; }
 a.lock.current { background-position: 0 -44px; }
 a.lock.disabled { visibility:hidden; }
+
+#lock-background { position:absolute; top:0; left:0; display:none; width:100%; height:100%; background-image:url(http://static.shop.zap.com/img/bg-shadow.png); }
+#popup { position:absolute; top:0; left:0; width:750px; height:109px; background-color: white; padding:25px 15px; border:5px solid #5184d2; /*#084;*/ border-radius:10px; }
+#popup h1 { font-size:14px; height:25px; border-bottom:1px solid #ececec; text-indent:15px; }
+#popup p { font-size:12px; margin:15px 0 0 0; padding:3px 25px 2px 25px;  }
+#popup p + p { margin:0; }
+#popup fieldset { border: 1px solid #ececec; padding:4px; }
+#popup legend { font-weight:bold; padding:2px; font-size:13px; margin:0 0 0 5px; text-transform:capitalize; }
+#popup label { float:left; clear:left; width:135px; margin:7px 0 0 15px; font-size:12px; font-weight:normal; }
+#popup input { float:left;  width:575px; margin:3px 0; font-size:12px; }
+#popup #buttons { position:absolute; bottom:0; left:0; width:100%; text-align:right; padding:5px 0; border-top:1px solid #ececec; }
+#popup .submit-button { margin:0 5px 0 0; }
