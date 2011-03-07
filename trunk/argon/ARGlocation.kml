@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+<Document id="doc">
+  
+  <Style id="overlayStyle"> <!-- style for ScreenOverlay -->
+    <BalloonStyle>
+      <displayMode>undecorated</displayMode>
+    </BalloonStyle>
+  </Style>
+
+  <ScreenOverlay id="description_javascript">
+    <name>Location Changed</name>
+    <description><![CDATA[
+        <script type="text/javascript">
+        var counter = 0;
+		
+		function removePlacemarkers() //called in between location changes to clear out old placemarkers before new ones are added
+        {
+          for (kmlObjId in KHARMA.dom.elements)
+          {
+            var kmlObj = KHARMA.dom.elements[kmlObjId];
+            var feature = document.getElementById(kmlObj.id);
+            if (feature && kmlObjId.substring(0,2) == 'PM') //only removes objects with the substring "PM" at the beginning of their id (short for "PlaceMarker").  without this extra condition, this function would remove everything in the scene, including the UI
+            {
+              
+              //var distance = $(feature).data("distance");
+              //console.log("***** " + distance);
+              $(feature).remove();
+              KHARMA.dom.removeElementWithID(kmlObj.id);
+            }
+          }
+        }
+		
+        function displayLocation()
+        {
+            var myLoc = KHARMA.getLocation();
+            if(myLoc != null)
+            {
+                var lat = myLoc.latitude;
+                var lon = myLoc.longitude;         
+				document.getElementById("outputDiv").innerHTML =("Location Found. Will perform image select.");
+				
+				var GTLlat = 49.10214696903935;
+				var GTLlon = 6.214932019790306;
+				var sub1 = GTLlat-lat;
+				var sub2 = GTLlon-lon;
+				var num1 = Math.pow(sub1, 2);
+				var num2 = Math.pow(sub2, 2);
+				var distanceGTL= Math.sqrt( num1 + num2 );		
+				
+				var ALOESlat = 49.10431478395054;
+				var ALOESlon = 6.218988390733585;
+				var sub3 = ALOESlat-lat;
+				var sub4 = ALOESlon-lon;
+				var num3 = Math.pow(sub3, 2);
+				var num4 = Math.pow(sub4, 2);
+				var distanceALOES= Math.sqrt( num3 + num4 );
+								
+				if(distanceGTL < .002) //at GTL
+				{	
+					document.getElementById("pic").innerHTML='<img src=" http://www.femto-st.fr/i/d/b/gtl_bat.jpg " alt="GTL pic" />'
+					document.getElementById("distance").innerHTML = "GTL Distance: <br>" + distanceGTL;
+				}
+				else if(distanceALOES < 0.002)//at ALOES
+				{
+				document.getElementById("pic").innerHTML='<img src="http://www.metz.supelec.fr/metz/residence/images/miniatures/img_7770.png" alt="ALOES pic" />'
+				document.getElementById("distance").innerHTML = "ALOES Distance: <br>" + distanceALOES;
+				}
+				else //display generic
+				{
+				document.getElementById("distance").innerHTML = "At Elsewhere:<br>Your Latitude: " + lat + "<br>Your Longitude:" + lon + "<br>Updates: " + counter;
+				}
+			}
+            else
+            {
+                document.getElementById("outputDiv").innerHTML = "Location: Null<br>Counter: " + counter;
+            }            
+            counter++;
+            console.log('location update received');
+        }
+		
+	    function description_javascript_init() {
+            $(document).bind('locationChanged',function(event) {displayLocation()});
+            console.log('description_javascript initialized');
+        }
+        </script>
+        
+		<div id="outputDiv" style="font-family:sans-serif; font-size:8px; width:300px">Location: [14]</div>
+		<div id="distance" style="font-family:sans-serif; font-size:8px; width:300px">Distance??</div>
+		<div id="pic" style="font-family:sans-serif; font-size:8px; width:300px">Pic?</div>
+        
+		]]>
+    </description>
+    <overlayXY x="0.0" y="0.0" xunits="fraction" yunits="fraction"/> 
+    <screenXY x="0.1" y="0.9" xunits="fraction" yunits="fraction"/>
+    <size x="0" y="0" xunits="pixels" yunits="pixels"/>
+    <styleUrl>#overlayStyle</styleUrl>
+  </ScreenOverlay>
+  
+  <!-- KML document description -->
+  <name>Zap Location-Based Test</name>
+  <Snippet>Example of binding to KHARMA location events and retrieving location data</Snippet>
+  <description><![CDATA[
+    <div><p><b>Example of binding to KHARMA location events and retrieving location data</b></p>
+    <p>
+    <b>notes:</b>
+    <ul>
+    <li> The client API will generate the <em>locationChanged</em> event for each location udpate
+    <li> binding a function to this event will call the function each time the event is generated
+    <li> the updated location is displayed in the overlay
+    </ul>
+    ]]>
+  </description>          
+  <styleUrl>#document_style</styleUrl>    
+  <Style id="document_style">
+    <IconStyle>
+      <Icon>
+        <href>http://google-maps-icons.googlecode.com/files/administration.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+</Document>
+</kml>
