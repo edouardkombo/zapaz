@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+
+  <Placemark>
+    <name>Zap Headquarters Geospot</name>
+    <description>Zap Geospot (Georgia Tech Lorraine Building)</description>
+    <Camera> <!-- camera element indicates that feature is a GeoSpot -->
+     <longitude>6.214199643672915</longitude>
+	 <latitude>49.10219172887489</latitude>
+      <altitude>0</altitude>
+      <TimeStamp> <!-- applicable time (likely when GeoSpot was surveyed) -->
+        <when>1997-07-16T10:30:15+03:00</when>
+      </TimeStamp>
+      <Icon>
+        <href>http://www.maychildtechnologies.com/CS/ZapGeoSpot.jpg</href>  <!-- an image indicating exactly where to stand -->
+      </Icon>
+    </Camera>
+    <Point> <!-- location displayed on map or within browser view -->
+      <coordinates>6.214199643672915,49.10219172887489</coordinates>
+    </Point>
+  </Placemark>
+
+  <!-- KML document description -->
+  <name>ZapGeoSpot.kml</name>
+  <Snippet>Example of a placemark that establishes a GeoSpot</Snippet>
+  <description><![CDATA[
+    <p><b>Example of a placemark that establishes a GeoSpot for the Zap project.</b></p>
+    <p>
+    <b>notes: none</b>
+    ]]>
+  </description>          
+  <styleUrl>#document_style</styleUrl>    
+  <Style id="document_style">
+    <IconStyle>
+      <Icon>
+        <href>http://google-maps-icons.googlecode.com/files/administration.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+</Document>
+</kml>
