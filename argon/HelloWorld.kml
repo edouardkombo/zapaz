@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+
+  <Placemark id="balloon_orientation">
+    <name>Hello World</name>
+    <description>Example placemark with fixed orientation for Zap.</description>
+    <Balloon>
+      <locationMode>relative</locationMode>
+      <location>
+        <latitude>0.00006656</latitude> <!-- 6 m north @ 35deg lat -->
+        <longitude>0.00005477</longitude> <!-- 6 m east @ 35deg lat -->
+        <altitude>0.0</altitude>
+      </location>
+      <orientation>
+        <heading>-45.0</heading> <!-- facing southwest -->
+        <tilt>0.0</tilt> <!-- tilted into vertical -->
+        <roll>0.0</roll>
+      </orientation>
+    </Balloon>
+  </Placemark>
+  
+  <!-- KML document description -->
+  <name>HelloWorld.kml</name>
+  <Snippet>Example of specifying placemark description balloon orientation</Snippet>
+  <description><![CDATA[
+    <p><b>Hello World Example of Argon for the Zap Project.</b></p>
+    <p>
+    <b>notes:none</b>
+     ]]>
+  </description>          
+  <styleUrl>#document_style</styleUrl>    
+  <Style id="document_style">
+    <IconStyle>
+      <Icon>
+        <href>http://google-maps-icons.googlecode.com/files/administration.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+</Document>
+</kml>
