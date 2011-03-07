@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of Label
+ * Description of Shop
  *
  * @author mohamed
  */
@@ -12,15 +12,17 @@ class Shop {
   private $currencyId;
   private $latitude;
   private $longitude;
+  private $email;
   private $currency = null;
   private $keywords = null;
 
-  function __construct($name, $currencyId, $latitude, $longitude, $id = 0) {
+  function __construct($name, $currencyId, $latitude, $longitude, $email, $id = 0) {
     $this->id = $id;
     $this->name = $name;
     $this->currencyId = $currencyId;
     $this->longitude = $longitude;
     $this->latitude = $latitude;
+    $this->email = $email;
   }
 
   public function setId($id) {
@@ -61,6 +63,14 @@ class Shop {
 
   public function getLongitude() {
     return $this->longitude;
+  }
+
+  public function getEmail() {
+    return $this->email;
+  }
+
+  public function setEmail($email) {
+    $this->email = $email;
   }
 
   public function getCurrency() {
