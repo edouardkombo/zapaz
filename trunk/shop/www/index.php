@@ -8,6 +8,7 @@ $page = isset($_GET['p']) && in_array($_GET['p'], $array_page) ? $_GET['p'] : $a
 
 $javascript = array(
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery.js",
+    PROTOCOL.DOMAIN_ZSHOP."/js/jquery.form.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery.tools.min.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery-ui-admin.min.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/vars.js",

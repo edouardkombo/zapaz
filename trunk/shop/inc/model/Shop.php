@@ -17,10 +17,13 @@ class Shop {
   private $phone = null;
   private $logo = null;
   private $currencyId;
+  private $email;
+  private $latitude;
+  private $longitude;
   private $currency = null;
   private $keywords = null;
 
-  function __construct($name, $address, $zipCode, $city, $countryId, $currencyId, $id = 0) {
+  function __construct($name, $address, $zipCode, $city, $countryId, $currencyId, $email, $latitude, $longitude, $id = 0) {
     $this->id = $id;
     $this->name = $name;
     $this->address = $address;
@@ -28,6 +31,9 @@ class Shop {
     $this->city = $city;
     $this->countryId = $countryId;
     $this->currencyId = $currencyId;
+    $this->email = $email;
+    $this->latitude = $latitude;
+    $this->longitude = $longitude;
   }
 
   public function setId($id) {
@@ -43,7 +49,7 @@ class Shop {
   }
 
   public function getName() {
-    return $this->nameId;
+    return $this->name;
   }
 
   public function setAddress($address) {
@@ -71,7 +77,7 @@ class Shop {
   }
 
   public function setState($state) {
-    $this->state = state;
+    $this->state = $state;
   }
 
   public function getState() {
@@ -93,7 +99,31 @@ class Shop {
   public function getCurrencyId() {
     return $this->currencyId;
   }
+  
+  public function getEmail() {
+    return $this->email;
+  }
 
+  public function setEmail($email) {
+    $this->email = $email;
+  }
+
+  public function getLatitude() {
+    return $this->latitude;
+  }
+
+  public function setLatitude($latitude) {
+    $this->latitude = $latitude;
+  }
+
+  public function getLongitude() {
+    return $this->longitude;
+  }
+
+  public function setLongitude($longitude) {
+    $this->longitude = $longitude;
+  }
+  
   public function setPhone($phone) {
     $this->phone = $phone;
   }

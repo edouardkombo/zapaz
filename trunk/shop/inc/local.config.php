@@ -22,16 +22,17 @@ try {
 include(MX_GENERAL_PATH.'ModeliXe.php');
 
 // Model
-// include model files here !
-// e.g: include(INC_GENERAL_PATH.'model/MyModel.php');
+include(INC_GENERAL_PATH.'model/Currency.php');
+include(INC_GENERAL_PATH.'model/Keyword.php');
+include(INC_GENERAL_PATH.'model/Shop.php');
 
 // DAO 
-// include dao files here !
-// e.g: include(INC_GENERAL_PATH.'dao/MyDAO.php');
+include(INC_GENERAL_PATH.'dao/CurrencyDao.php');
+include(INC_GENERAL_PATH.'dao/KeywordDao.php');
+include(INC_GENERAL_PATH.'dao/ShopDao.php');
 
 // Services
-// include services files here !
-// e.g: include(INC_GENERAL_PATH.'service/myService.php');
+include(INC_GENERAL_PATH.'service/ShopManager.php');
 }
 
 ?>
