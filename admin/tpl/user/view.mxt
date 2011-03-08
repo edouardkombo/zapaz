@@ -8,7 +8,6 @@
           <tr>
             <td><input type="checkbox" name="checkAll" value="0" /></td>
             <td><a href="#">email</a></td>
-            <td><a href="#">password</a></td>
             <td><a href="#">choices</a></td>
           </tr>
         </thead>
