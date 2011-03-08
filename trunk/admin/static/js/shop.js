@@ -67,7 +67,7 @@ var refreshShops = function(page, filter, action, callback) {
   changeShop("/shop/view", filter, start, limit, callback);
 };
 
-var changeShop = function() {
+var changeShop = function(link, filter, start, limit, callback) {
   if (link   == null) link   = "/shop/view";
   if (filter == null) filter = "";
   if (start  == null) start  = 0;

@@ -48,7 +48,7 @@ if (page == null)
   changeUser("/user/view", filter, start, limit, callback);
 };
 
-var changeUser = function() {
+var changeUser = function(link, filter, start, limit, callback) {
   if (link   == null) link   = "/user/view";
   if (filter == null) filter = "";
   if (start  == null) start  = 0;

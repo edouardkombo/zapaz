@@ -43,7 +43,7 @@
             <td><a href="#"><mx:text id="shopName" /></a></td>
             <td><a href="#"><mx:text id="shopEmail"/></a></td>
             <td><a href="#"><mx:text id="shopKeywords"/></a></td>  
-            <td><a href="#"><mx:text id="shopCoordinates"/></a></td>
+            <td><mx:text id="shopCoordinates"/></a></td>
             <td><a href="#"><mx:text id="shopCurrency"/></a></td>
           </tr>
 </mx:bloc id="row">
