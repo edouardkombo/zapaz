@@ -58,8 +58,9 @@ foreach ($shopList as $c) {
     $template->MxText     ($pre."row.shopEmail", $c->getEmail());
     $template->MxText     ($pre."row.shopKeywords", $c->getKeywords());
     $a = $c->getLatitude();
+    $separator = ",";
     $b = $c->getLongitude();
-    $template->MxText     ($pre."row.shopCoordinates", $a.$b);
+    $template->MxText     ($pre."row.shopCoordinates", $a.$separator.$b);
     $template->MxText     ($pre."row.shopCurrency", $c->getCurrency()->getSymbol());
     $template->MxBloc($pre."row", "loop");
 }
