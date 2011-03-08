@@ -48,13 +48,13 @@ for ($i = 1, $j = 0; $i < $nbPage && $j < 5; $i++) {
   }
 }
 $template->MxAttribut($pre."maxPage", (int)$nbPage);
-$template->MxFormField($pre."newUser", "text", "userEmail", "", 'size="60"');
 
 $userList = $userManager->getAllUsers($filter, $startIndex, $limit);
 foreach ($userList as $c) {
     $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
     $template->MxBloc     ($pre."row.input", "loop");
     $template->MxText     ($pre."row.userEmail", $c->getEmail());
+    $template->MxText     ($pre."row.userChoices", "");
     $template->MxBloc($pre."row", "loop");
 }
 
