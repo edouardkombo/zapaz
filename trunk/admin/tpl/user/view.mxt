@@ -5,6 +5,7 @@
     <form method="post" action="#">
       <table id="list-users" class="dataview">
         <thead>
+
           <tr>
             <td><input type="checkbox" name="checkAll" value="0" /></td>
             <td><a href="#">email</a></td>

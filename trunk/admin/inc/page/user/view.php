@@ -1,4 +1,5 @@
 <?php
+
 $fullPage = isset($fullPage) ? $fullPage : false;
 $pre      = $fullPage        ? "content.": "";
 if (!$fullPage)
