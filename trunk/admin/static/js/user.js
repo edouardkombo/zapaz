@@ -15,11 +15,37 @@ var deleteUsers = function() {
 
 
 var filterUser = function(filter) {
-
+ refreshUsers(null, filter, "", function() {
+    if (lastFilterValue != filter) {
+      lastFilterValue = filter;
+      var input = $("input[name=filter]");
+      $(input).focus();
+      var txt = $(input).val();
+      $(input).val('');
+      $(input).val(txt);
+    }
+  });
 };
 
 var refreshUsers = function(page, filter, action, callback) {
-
+if (page == null)
+    page = $("a.current.other-page").text();
+  if(filter == null)
+    filter = $("input[name=filter]").val();
+  if (filter == defaultUserFilterText)
+    filter = '';
+  var limit = $("select[name=limit]").val();
+  start = (page - 1) * limit;
+  if (action == "first") {
+    start = 0;
+  } else if (action == "prev") {
+    start = (page - 2) * limit;
+  } else if (action == "next") {
+    start = page * limit;
+  } else if (action == "last") {
+    start = (parseInt($("a[href=#last-page]").attr('rel'), 10) - 1) * limit;
+  }
+  changeUser("/user/view", filter, start, limit, callback);
 };
 
 var changeUser = function() {
@@ -51,5 +77,5 @@ var parseUser = function() {
   $("a[href=#prev-page]").click(function() {refreshUsers(null, null, "prev");});
   $("a[href=#next-page]").click(function() {refreshUsers(null, null, "next");});
   $("a[href=#last-page]").click(function() {refreshUsers(null, null, "last");});
-  setUpFilter(defaultCategoryFilterText, filterCategory);  
+  setUpFilter(defaultUserFilterText, filterUser);  
 };
