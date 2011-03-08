@@ -8,11 +8,10 @@
           <tr>
             <td><input type="checkbox" name="checkAll" value="0" /></td>
             <td><a href="#">Name</a></td>
-            <td><a href="#">Currency</a></td>
-            <td><a href="#">Latitude</a></td>
-            <td><a href="#">Longitude</a></td>
             <td><a href="#">Email</a></td>
             <td><a href="#">Keywords</a></td>
+            <td><a href="#">Coordinates</a></td>
+            <td><a href="#">Currency</a></td>
           </tr>
         </thead>
         <tfoot>
@@ -41,11 +40,10 @@
           <tr>
             <td><mx:bloc id="input"><mx:checker id="check" /></mx:bloc id="input"></td>
             <td><a href="#"><mx:text id="shopName" /></a></td>
+            <td><a href="#"><mx:text id="shopEmail"/></a></td>
+            <td><a href="#"><mx:text id="shopKeywords"/></a></td>  
+            <td><a href="#"><mx:text id="shopCoordinates"/></a></td>
             <td><a href="#"><mx:text id="shopCurrency"/></a></td>
-            <td><a href="#"><mx:text id="shopLatitude"/></a></td>
-            <td><a href="#"><mx:text id="shopLongitude"/></a></td>
-            <td><a href="#"><mx:text id="shopEmail"/></a></td>  
-            <td><a href="#"><mx:text id="shopKeywords"/></a></td>
           </tr>
 </mx:bloc id="row">
         </tbody>

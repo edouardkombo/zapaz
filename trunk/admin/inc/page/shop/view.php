@@ -48,13 +48,19 @@ for ($i = 1, $j = 0; $i < $nbPage && $j < 5; $i++) {
   }
 }
 $template->MxAttribut($pre."maxPage", (int)$nbPage);
-$template->MxFormField($pre."newShop", "text", "shopName", "", 'size="60"');
+
 
 $shopList = $shopManager->getAllShops($filter, $startIndex, $limit);
 foreach ($shopList as $c) {
     $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
     $template->MxBloc     ($pre."row.input", "loop");
     $template->MxText     ($pre."row.shopName", $c->getName());
+    $template->MxText     ($pre."row.shopEmail", $c->getEmail());
+    $template->MxText     ($pre."row.shopKeywords", $c->getKeywords());
+    $a = $c->getLatitude();
+    $b = $c->getLongitude();
+    $template->MxText     ($pre."row.shopCoordinates", $a.$b);
+    $template->MxText     ($pre."row.shopCurrency", $c->getCurrency());
     $template->MxBloc($pre."row", "loop");
 }
 
