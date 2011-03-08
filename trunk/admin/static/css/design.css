@@ -224,6 +224,39 @@ table#list-types tbody td.editing { padding: 0; }
 table#list-types tbody input[type=text] { margin:0; border:0; height:14px; padding:5px; width:99%; border:1px solid white; }
 table#list-types tbody input[type=text]:focus { border:1px solid #eeab29; box-shadow:0 0 4px #ebc57c; }
 
+/************ shop/view ****************/
+table#list-shops tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
+table#list-shops tbody tr:hover td { background-color:#F6F6F6; }
+table#list-shops tbody tr:hover td:nth-child(2) a { border-color:#CCC; }
+table#list-shops tbody tr.current { background-color:#FFF6C3; }
+table#list-shops tbody tr.current td:nth-child(2) a { border-color:#FFF6C3; }
+table#list-shops tbody tr.current:hover td { background-color:#FFF6C3; }
+table#list-shops tbody tr.current:hover td:nth-child(2) a { border-color:#CCC; }
+table#list-shops tbody td:nth-child(1), table#list-shops thead td:nth-child(1) { width:20px; text-align:center; }
+table#list-shops tbody td:nth-child(2) a { display:block; height:14px; overflow:hidden; color:black; text-decoration:none; border:1px solid white; }
+table#list-shops td.link { width:400px; }
+table#list-shops tbody td.link a { display:block; height:14px; overflow:hidden; color:#06C; text-decoration:none; }
+table#list-shops tbody td.link a:hover { text-decoration:underline; }
+table#list-shops tbody td.editing { padding: 0; }
+table#list-shops tbody input[type=text] { margin:0; border:0; height:14px; padding:5px; width:99%; border:1px solid white; }
+table#list-shops tbody input[type=text]:focus { border:1px solid #eeab29; box-shadow:0 0 4px #ebc57c; }
+
+/************ user/view ****************/
+table#list-users tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
+table#list-users tbody tr:hover td { background-color:#F6F6F6; }
+table#list-users tbody tr:hover td:nth-child(2) a { border-color:#CCC; }
+table#list-users tbody tr.current { background-color:#FFF6C3; }
+table#list-users tbody tr.current td:nth-child(2) a { border-color:#FFF6C3; }
+table#list-users tbody tr.current:hover td { background-color:#FFF6C3; }
+table#list-users tbody tr.current:hover td:nth-child(2) a { border-color:#CCC; }
+table#list-users tbody td:nth-child(1), table#list-users thead td:nth-child(1) { width:20px; text-align:center; }
+table#list-users tbody td:nth-child(2) a { display:block; height:14px; overflow:hidden; color:black; text-decoration:none; border:1px solid white; }
+table#list-users td.link { width:400px; }
+table#list-users tbody td.link a { display:block; height:14px; overflow:hidden; color:#06C; text-decoration:none; }
+table#list-users tbody td.link a:hover { text-decoration:underline; }
+table#list-users tbody td.editing { padding: 0; }
+table#list-users tbody input[type=text] { margin:0; border:0; height:14px; padding:5px; width:99%; border:1px solid white; }
+table#list-users tbody input[type=text]:focus { border:1px solid #eeab29; box-shadow:0 0 4px #ebc57c; }
 
  /************ namespace/edit ****************/
 table#edit-namespace tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
