@@ -10,7 +10,7 @@ var addShop = function() {
 };
 
 var editShop = function(shop) {
-  
+
 };
 
 var doEditShop = function(input) {
