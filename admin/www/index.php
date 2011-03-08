@@ -41,4 +41,5 @@ include('../inc/page/'.$page.'/view.php');
 
 $template->MxWrite();
 
+
 ?>

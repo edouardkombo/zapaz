@@ -12,6 +12,7 @@
             <td><a href="#">Keywords</a></td>
             <td><a href="#">Coordinates</a></td>
             <td><a href="#">Currency</a></td>
+
           </tr>
         </thead>
         <tfoot>
