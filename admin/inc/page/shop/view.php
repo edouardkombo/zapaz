@@ -57,7 +57,7 @@ foreach ($shopList as $c) {
     $template->MxBloc     ($pre."row.input", "loop");
     $template->MxText     ($pre."row.shopName", $c->getName());
     $template->MxText     ($pre."row.shopEmail", $c->getEmail());
-    $template->MxText     ($pre."row.shopKeywords", $c->getKeywords());
+    $template->MxText     ($pre."row.shopKeywords",  implode(",", $c->getKeywords()) );
     $a = $c->getLatitude();
     $separator = ",";
     $b = $c->getLongitude();

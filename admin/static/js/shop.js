@@ -51,7 +51,7 @@ var refreshShops = function(page, filter, action, callback) {
     page = $("a.current.other-page").text();
   if(filter == null)
     filter = $("input[name=filter]").val();
-  if (filter == defaultCategoryFilterText)
+  if (filter == defaultShopFilterText)
     filter = '';
   var limit = $("select[name=limit]").val();
   start = (page - 1) * limit;
@@ -96,5 +96,5 @@ var parseShop = function() {
   $("a[href=#prev-page]").click(function() {refreshShops(null, null, "prev");});
   $("a[href=#next-page]").click(function() {refreshShops(null, null, "next");});
   $("a[href=#last-page]").click(function() {refreshShops(null, null, "last");});
-  setUpFilter(defaultCategoryFilterText, filterCategory);  
+  setUpFilter(defaultShopFilterText, filterShop);  
 };
