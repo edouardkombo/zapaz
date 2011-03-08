@@ -15,6 +15,7 @@ $javascript = array(
     PROTOCOL.DOMAIN_ZADMIN."/js/category.js",
     PROTOCOL.DOMAIN_ZADMIN."/js/product-type.js",
     PROTOCOL.DOMAIN_ZADMIN."/js/shop.js",
+    PROTOCOL.DOMAIN_ZADMIN."/js/user.js",
     PROTOCOL.DOMAIN_ZADMIN."/js/main.js"
 );
 $css = array(
