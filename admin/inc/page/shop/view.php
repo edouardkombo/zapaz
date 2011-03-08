@@ -56,13 +56,12 @@ foreach ($shopList as $c) {
     $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
     $template->MxBloc     ($pre."row.input", "loop");
     $template->MxText     ($pre."row.shopName", $c->getName());
+    $template->MxAttribut ($pre."row.mailto", "mailto:".$c->getEmail());
     $template->MxText     ($pre."row.shopEmail", $c->getEmail());
     $template->MxText     ($pre."row.shopKeywords",  implode(",", $c->getKeywords()) );
-    $a = $c->getLatitude();
-    $separator = ",";
-    $b = $c->getLongitude();
-    $template->MxText     ($pre."row.shopCoordinates", $a.$separator.$b);
-    $template->MxText     ($pre."row.shopCurrency", $c->getCurrency()->getSymbol());
+    $template->MxAttribut ($pre."row.geo", "http://maps.google.com/?ll=".$c->getLatitude().",".$c->getLongitude());
+    $template->MxText     ($pre."row.shopCoordinates", $c->getLatitude()." ".$c->getLongitude());
+    $template->MxText     ($pre."row.shopCurrency", $c->getCurrency()->getName());
     $template->MxBloc($pre."row", "loop");
 }
 

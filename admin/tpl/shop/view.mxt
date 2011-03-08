@@ -41,10 +41,10 @@
           <tr>
             <td><mx:bloc id="input"><mx:checker id="check" /></mx:bloc id="input"></td>
             <td><a href="#"><mx:text id="shopName" /></a></td>
-            <td><a href="#"><mx:text id="shopEmail"/></a></td>
-            <td><a href="#"><mx:text id="shopKeywords"/></a></td>  
-            <td><mx:text id="shopCoordinates"/></a></td>
-            <td><a href="#"><mx:text id="shopCurrency"/></a></td>
+            <td><a mXattribut="href:mailto"><mx:text id="shopEmail"/></a></td>
+            <td><mx:text id="shopKeywords"/></td>  
+            <td><a mXattribut="href:geo" title="Show this location on Google Maps" rev="external"><mx:text id="shopCoordinates"/></a></td>
+            <td><mx:text id="shopCurrency"/></td>
           </tr>
 </mx:bloc id="row">
         </tbody>

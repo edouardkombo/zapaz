@@ -168,6 +168,8 @@ table.dataview thead td.current { background-color:#CCC; }
 table.dataview tfoot { background-color:#DDD; }
 table.dataview tfoot td { height:14px; padding:5px 4px; border-bottom:1px solid #084; }
 table.dataview td.status { width:8px; padding:0 8px; text-align:center; vertical-align:middle; }
+table.dataview tbody td a { color:#06C; text-decoration:none; }
+table.dataview tbody td a:hover { text-decoration:underline; }
 
 /*table.dataview tbody tr:nth-child(odd) td { background-color:#ffffff; }
 table.dataview tbody tr:nth-child(even) td { background-color:#f9f9f9; }*/
@@ -232,7 +234,10 @@ table#list-shops tbody tr.current { background-color:#FFF6C3; }
 table#list-shops tbody tr.current td:nth-child(2) a { border-color:#FFF6C3; }
 table#list-shops tbody tr.current:hover td { background-color:#FFF6C3; }
 table#list-shops tbody tr.current:hover td:nth-child(2) a { border-color:#CCC; }
-table#list-shops tbody td:nth-child(5) { width:180px; ; text-align:center;}
+table#list-shops td:nth-child(2) { width:200px; }
+table#list-shops td:nth-child(3) { width:200px; }
+table#list-shops td:nth-child(5) { width:240px; ; text-align:center;}
+table#list-shops td:nth-child(6) { width:60px; ; text-align:center; text-transform: capitalize; }
 table#list-shops tbody td:nth-child(1), table#list-shops thead td:nth-child(1) { width:20px; text-align:center; }
 table#list-shops tbody td:nth-child(2) a { display:block; height:14px; overflow:hidden; color:black; text-decoration:none; border:1px solid white; }
 table#list-shops td.link { width:400px; }

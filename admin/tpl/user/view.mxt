@@ -37,8 +37,8 @@
 <mx:bloc id="row">
           <tr>
             <td><mx:bloc id="input"><mx:checker id="check" /></mx:bloc id="input"></td>
-            <td><a href="#"><mx:text id="userEmail" /></a></td>
-            <td><a href="#"><mx:text id="userChoices"/></a></td>
+            <td><a mXattribut="href:mailto"><mx:text id="userEmail" /></a></td>
+            <td><mx:text id="userChoices"/></td>
           </tr>
 </mx:bloc id="row">
         </tbody>
