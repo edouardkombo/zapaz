@@ -60,7 +60,7 @@ foreach ($shopList as $c) {
     $a = $c->getLatitude();
     $b = $c->getLongitude();
     $template->MxText     ($pre."row.shopCoordinates", $a.$b);
-    $template->MxText     ($pre."row.shopCurrency", $c->getCurrency());
+    $template->MxText     ($pre."row.shopCurrency", $c->getCurrency()->getSymbol());
     $template->MxBloc($pre."row", "loop");
 }
 
