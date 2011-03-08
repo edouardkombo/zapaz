@@ -9,7 +9,7 @@ define("ROOT"                     , $root                           );
 define("MYSQL_HOSTNAME"           , "localhost"                     );
 define("MYSQL_PORT"               , "3306"                          );
 define("MYSQL_USERNAME"           , "root"                          );
-define("MYSQL_PASSWORD"           , "datesvac"                      );
+define("MYSQL_PASSWORD"           , "zappaz"                      );
 define("MYSQL_DB_ADMIN"           , "zapgen"                        );
 define("MYSQL_DB_SHOP"            , "zapshop"                       );
 
