@@ -96,5 +96,6 @@ var parseShop = function() {
   $("a[href=#prev-page]").click(function() {refreshShops(null, null, "prev");});
   $("a[href=#next-page]").click(function() {refreshShops(null, null, "next");});
   $("a[href=#last-page]").click(function() {refreshShops(null, null, "last");});
+  $("a[rev=external]").each(function() { $(this).attr('target', '_blank'); });
   setUpFilter(defaultShopFilterText, filterShop);  
 };

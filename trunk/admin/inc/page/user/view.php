@@ -54,6 +54,7 @@ $userList = $userManager->getAllUsers($filter, $startIndex, $limit);
 foreach ($userList as $c) {
     $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
     $template->MxBloc     ($pre."row.input", "loop");
+    $template->MxAttribut ($pre."row.mailto", "mailto:".$c->getEmail());
     $template->MxText     ($pre."row.userEmail", $c->getEmail());
     $template->MxText     ($pre."row.userChoices", "");
     $template->MxBloc($pre."row", "loop");
