@@ -81,7 +81,7 @@ class ShopDao {
   }
   
   private function fetchShop($t) {
-    return new Shop($t["name"], $t["currencyId"], $t["latitute"], $t["longitude"], $t["email"], $t["id"]);
+    return new Shop($t["name"], $t["currencyId"], $t["latitude"], $t["longitude"], $t["email"], $t["id"]);
   }
 }
 

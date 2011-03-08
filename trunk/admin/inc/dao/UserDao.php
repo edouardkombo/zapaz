@@ -24,6 +24,32 @@ class UserDao {
     }
     return null;
   }
+    /* @mohamed
+   * 
+   */
+  public function getAllUsers($filter = '', $startIndex = 0, $length = 10) {
+    $filter .= "%";
+    $array   = array();
+
+    $q = $this->db->prepare("SELECT * FROM `User` WHERE email LIKE ? ORDER BY email ASC LIMIT $startIndex, $length");
+    $q->execute(array($filter));
+    if ($q != null) {
+      while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        array_push($array, $this->fetchUser($t));
+      }
+    }
+    return $array;
+  }
+  /* @mohamed
+   * 
+   */
+  public function count($filter = '') {
+    $filter .= "%";
+    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `User` WHERE email LIKE ?");
+    $q->execute(array($filter));
+    $r = $q->fetch(PDO::FETCH_OBJ);
+    return $r != null ? $r->count : 0;
+  }
   
   public function saveOrUpdate($user) {
     if ($user == null) {
