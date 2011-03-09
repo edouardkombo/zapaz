@@ -1,6 +1,6 @@
 <?php
 
-include('../inc/local.config.php');
+include('../inc/global.config.php');
 
 $array_page = array("shop", "user", "category", "product-type");
 

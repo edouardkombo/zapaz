@@ -1,6 +1,6 @@
 <?php
 
-include('../inc/local.config.php');
+include('../inc/global.config.php');
 
 $d = isset($_GET['d']) && $_GET['d'] != "" ? stripslashes($_GET['d']) : null;
 $p = isset($_GET['p']) && $_GET['p'] != "" ? stripslashes($_GET['p']) : null;
