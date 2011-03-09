@@ -12,6 +12,7 @@ class ShopManager {
   public function __construct() {
     $this->shopDao = new ShopDao();
   }
+  
   public function getAllShops($filter = '', $startIndex = 0, $limit = 10) {
     return $this->shopDao->getAllShops($filter, $startIndex, $limit);
   }

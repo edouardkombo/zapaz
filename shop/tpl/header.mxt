@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>Administration | shop.zap.com</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Administration | shop.zap.com</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <mx:bloc id="css">
   <link mXattribut="href:cssf" rel="stylesheet" type="text/css" media="screen" title="Style par défaut"/>
 </mx:bloc id="css">

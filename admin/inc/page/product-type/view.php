@@ -51,11 +51,15 @@ $template->MxAttribut($pre."maxPage", (int)$nbPage);
 $template->MxFormField($pre."newType", "text", "typeName", "", 'size="60"');
 
 $typeList = $productTypeManager->getAllProductTypes($filter, $startIndex, $limit);
-foreach ($typeList as $t) {
-    $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $t->getId());
-    $template->MxBloc     ($pre."row.input", "loop");
-    $template->MxText     ($pre."row.typeName", $t->getName());
-    $template->MxBloc($pre."row", "loop");
+if (count($typeList) == 0) {
+  $template->MxBloc($pre."row", "reset");
+} else {
+  foreach ($typeList as $t) {
+      $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $t->getId());
+      $template->MxBloc     ($pre."row.input", "loop");
+      $template->MxText     ($pre."row.typeName", $t->getName());
+      $template->MxBloc($pre."row", "loop");
+  }
 }
 
 if (!$fullPage) {

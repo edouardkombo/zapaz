@@ -55,6 +55,8 @@ var updateShop = function() {
   if ($("input.red").length == 0) {
     $.post("/shop/update", params, function(xml) {
       var result = $(xml).find("result").text() == "1";
+      var id = $(xml).find('id').text();
+      $("input[name=id]").val(id);
       if (result) {
         alert("Data has been saved!");
       } else {
@@ -109,4 +111,7 @@ var changeShop = function() {
 var parseShop = function() {
   initLogoChangeButton();
   $("#submit-shop").click(updateShop);
+  $("input[name=latitude]").attr('disabled', true);
+  $("input[name=longitude]").attr('disabled', true);
+  initGoogleMap();
 };

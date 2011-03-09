@@ -9,14 +9,6 @@ var addShop = function() {
   });
 };
 
-var editShop = function(shop) {
-
-};
-
-var doEditShop = function(input) {
- 
-};
-
 var deleteShops = function() {
   var arr = getCheckedLines();
   if (arr[0] == "") {
@@ -83,12 +75,8 @@ var changeShop = function(link, filter, start, limit, callback) {
 };
 
 var parseShop = function() {
-  $("#submit-shop").click(addShop);
-  $("#create-shop").submit(function() {addShop();return false;});
-  $("#create-shop input").keypress(function(e) {if (e.keyCode == 13) {addShop();return false;}});
   $("#list-shops thead input:checkbox").click(checkAllLines);
   $("#list-shops tbody input:checkbox").click(function() {checkLine($(this));});
-  $("#list-shops tbody td:nth-child(2) a").click(function() { editShop($(this)); });
   $("a[href=#remove]").click(deleteShops);
   $("select[name=limit]").change(function() {refreshShops();});
   $("a.other-page").click(function() {refreshShops($(this).text());});

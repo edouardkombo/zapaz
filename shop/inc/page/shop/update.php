@@ -17,8 +17,10 @@ $city      = isset($in["city"])      && $in["city"]      != "" ? stripslashes($i
 $state     = isset($in["state"])     && $in["state"]     != "" ? stripslashes($in["state"])     : null;
 $countryId = isset($in["countryId"]) && is_numeric($in["countryId"]) && $in["countryId"] > 0 ? stripslashes($in["countryId"])   : null;
 $phone     = isset($in["phone"])     && $in["phone"]     != "" ? stripslashes($in["phone"])     : null;
+$webServiceUrl = isset($in["$webServiceUrl"]) && $in["$webServiceUrl"] != "" ? stripslashes($in["$webServiceUrl"]) : null;
 
 $result = 0;
+$id = 0;
 if ($name != null
  && $email != null
  && $latitude != null
@@ -30,17 +32,20 @@ if ($name != null
  && $countryId != null) {
   $shopManager = new ShopManager();
   $address = $shopManager->mergeAddresses($address0, $address1, $address2);
-  $shop = new Shop($name, $address, $zipCode, $city, $countryId, $currencyId, $email, $latitude, $longitude, $id);
+  $shop = new Shop("None", $name, $address, $zipCode, $city, $countryId, $currencyId, $email, $latitude, $longitude, $id);
   $shop->setState($state);
   $shop->setLogo($logo);
   $shop->setPhone($phone);
+  $shop->setWebServiceUrl($webServiceUrl);
   $result = $shopManager->saveOrUpdate($shop);
+  $id = $shop->getId();
 }
 
 echo <<< END
 <?xml version="1.0" encoding="utf-8"?>
 <r>
 <result>$result</result>
+<id>$id</id>
 </r>
 END;
 

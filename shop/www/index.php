@@ -7,6 +7,7 @@ $array_page = array("shop", "product", "offer");
 $page = isset($_GET['p']) && in_array($_GET['p'], $array_page) ? $_GET['p'] : $array_page[0];
 
 $javascript = array(
+    "http://maps.google.com/maps/api/js?sensor=false",
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery.form.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery.tools.min.js",
@@ -16,6 +17,7 @@ $javascript = array(
     PROTOCOL.DOMAIN_ZSHOP."/js/shop.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/product.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/offer.js",
+    PROTOCOL.DOMAIN_ZSHOP."/js/gmaps.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/main.js"
 );
 $css = array(
