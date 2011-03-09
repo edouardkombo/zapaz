@@ -14,6 +14,7 @@ class Product {
   private $shopId;
   private $manufacturer;
   private $price;
+  private $picture;
   private $description = null;
   private $category = null;
   private $type = null;
@@ -123,7 +124,15 @@ class Product {
       $this->typeId = $type->getId();
     }
   }
+  
+  public function getPicture() {
+    return $this->picture;
+  }
 
+  public function setPicture($picture) {
+    $this->picture = $picture;
+  }
+  
   public function getShop() {
     if ($this->shop == null && $this->shopId != 0) {
       $d = new ShopDao();

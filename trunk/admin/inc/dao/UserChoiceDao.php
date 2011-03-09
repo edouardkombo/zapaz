@@ -69,7 +69,15 @@ class UserChoiceDao {
   }
   
   private function fetchUserChoice($t) {
-    return new UserChoice($t["choice"], $t["startTime"], $t["endTime"], $t["userId"], $t["id"]);
+    return new UserChoice(
+      $t["choice"],
+      $t["startTime"],
+      $t["endTime"],
+      $t["userId"],
+      $t["creationTime"],
+      $t["lastUpdate"],
+      $t["id"]
+    );
   }
 }
 

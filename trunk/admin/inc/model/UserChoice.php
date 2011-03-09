@@ -12,13 +12,17 @@ class UserChoice {
   private $choice;
   private $startTime;
   private $endTime;
+  private $creationTime;
+  private $lastUpdate;
 
-  function __construct($choice, $startTime, $endTime, $userId, $id = 0) {
+  function __construct($choice, $startTime, $endTime, $userId, $creationTime, $lastUpdate, $id = 0) {
     $this->id = $id;
     $this->userId = $userId;
     $this->choice = $choice;
     $this->startTime = $startTime;
     $this->endTime = $endTime;
+    $this->creationTime = $creationTime;
+    $this->lastUpdate = $lastUpdate;
   }
 
   public function setId($id) {
@@ -53,6 +57,29 @@ class UserChoice {
     return $this->endTime;
   }
 
+  public function getChoice() {
+    return $this->choice;
+  }
+
+  public function setChoice($choice) {
+    $this->choice = $choice;
+  }
+
+  public function getCreationTime() {
+    return $this->creationTime;
+  }
+
+  public function setCreationTime($creationTime) {
+    $this->creationTime = $creationTime;
+  }
+
+  public function getLastUpdate() {
+    return $this->lastUpdate;
+  }
+
+  public function setLastUpdate($lastUpdate) {
+    $this->lastUpdate = $lastUpdate;
+  }
 }
 
 ?>

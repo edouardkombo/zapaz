@@ -197,21 +197,21 @@ div.light.orange img { margin-top:-8px; }
 div.light.green img { margin-top:-16px; }
 
 /************** shop/view *******************/
-#ishop fieldset { width:600px; margin:10px auto; padding:5px; border:1px solid #ccc; border-radius:5px; font-size:13px; }
+#ishop fieldset { width:600px; margin:10px 20px; padding:5px; border:1px solid #ccc; font-size:13px; }
 #ishop legend { padding:0 5px; background-color: white; font-style: italic; font-size:1.1em; font-weight: bold; }
-#ishop label { width:120px; float:left; clear:left; margin-top:5px; }
+#ishop label { width:150px; float:left; clear:left; margin-top:5px; }
 #ishop label:after { content:" :"; }
 #ishop input, #ishop select { float:left; margin:2px; width:400px; }
-#ishop input.alone { margin:2px 0 2px 122px; }
-#ishop #logo { position:relative; width:96px; height:96px; float:left; border:2px solid #c6c6c6; cursor: pointer; margin:5px 15px; padding:5px; }
+#ishop input.alone { margin:2px 0 2px 152px; }
+#ishop #logo { position:relative; width:96px; height:96px; float:left; border:2px solid #c6c6c6; cursor: pointer; margin:20px 15px; padding:5px; }
 #iship #logo:hover { border-color:darkblue; }
-#ishop #rlogo { width:400px; float:left; }
-#ishop #rlogo label { width:80px; }
+#ishop #rlogo { width:440px; float:left; }
+#ishop #rlogo label { width:120px; }
 #ishop #rlogo input, #ishop #rlogo select { width:293px; margin-left:14px; }
 #ishop fieldset + fieldset { padding:10px 15px; width:580px; }
 #submit-shop { width:100%; }
 #ishop #logo a { position:absolute; left:0; top:85px; width:100%; height:14px; padding:3px 0; text-align:center; display:block; background-color:lightblue; }
-
+#google-map-canvas { width: 100%; height:100%; border:1px solid red;}
 /************ namespace/view ****************/
 table#list-namespaces tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
 table#list-namespaces tbody tr:hover td { background-color:#F6F6F6; }

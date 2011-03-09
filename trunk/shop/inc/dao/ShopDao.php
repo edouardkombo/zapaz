@@ -36,35 +36,10 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
-    $sql = "INSERT INTO Shop (name, address, zipCode, city, state, country, phone, logo, currencyId, email, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO Shop (publicUid, name, address, zipCode, city, state, country, phone, logo, currencyId, email, latitude, longitude, webServiceUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
-      $shop->getName(),
-      $shop->getAddress(),
-      $shop->getZipCode(),
-      $shop->getCity(),
-      $shop->getState(),
-      $shop->getCountryId(),
-      $shop->getPhone(),
-      $shop->getLogo(),
-      $shop->getCurrencyId(),
-      $shop->getEmail(),
-      $shop->getLatitude(),
-      $shop->getLongitude()
-    ));
-    if ($r == 1) {
-      $shop->setId($this->db->lastInsertId());
-    }
-    return $r;
-  }
-  
-  public function update($shop) {
-    if ($shop == null || $shop->getId() == null || $shop->getId() < 1) {
-      return 0;
-    }
-    $sql = "UPDATE Shop SET name = ?, address = ?, zipCode = ?, city = ?, state = ?, country = ?, phone = ?, logo = ?, currencyId = ?, email = ?, latitude = ?, longitude = ? WHERE id = ?";
-    $q = $this->db->prepare($sql);
-    return $q->execute(array(
+      $shop->getPublicUid(),
       $shop->getName(),
       $shop->getAddress(),
       $shop->getZipCode(),
@@ -77,6 +52,35 @@ class ShopDao {
       $shop->getEmail(),
       $shop->getLatitude(),
       $shop->getLongitude(),
+      $shop->getWebServiceUrl()
+    ));
+    if ($r == 1) {
+      $shop->setId($this->db->lastInsertId());
+    }
+    return $r;
+  }
+  
+  public function update($shop) {
+    if ($shop == null || $shop->getId() == null || $shop->getId() < 1) {
+      return 0;
+    }
+    $sql = "UPDATE Shop SET publicUid = ?, name = ?, address = ?, zipCode = ?, city = ?, state = ?, country = ?, phone = ?, logo = ?, currencyId = ?, email = ?, latitude = ?, longitude = ?, webServiceUrl = ? WHERE id = ?";
+    $q = $this->db->prepare($sql);
+    return $q->execute(array(
+      $shop->getPublicUid(),
+      $shop->getName(),
+      $shop->getAddress(),
+      $shop->getZipCode(),
+      $shop->getCity(),
+      $shop->getState(),
+      $shop->getCountryId(),
+      $shop->getPhone(),
+      $shop->getLogo(),
+      $shop->getCurrencyId(),
+      $shop->getEmail(),
+      $shop->getLatitude(),
+      $shop->getLongitude(),
+      $shop->getWebServiceUrl(),
       $shop->getId()
     ));
   }
@@ -89,10 +93,23 @@ class ShopDao {
   }
   
   private function fetchShop($t) {
-    $shop = new Shop($t["name"], $t["address"], $t["zipCode"], $t["city"], $t["country"], $t["currencyId"], $t["email"], $t["latitude"], $t["longitude"], $t["id"]);
+    $shop = new Shop(
+      $t["publicUid"],
+      $t["name"],
+      $t["address"],
+      $t["zipCode"],
+      $t["city"],
+      $t["country"],
+      $t["currencyId"],
+      $t["email"],
+      $t["latitude"],
+      $t["longitude"],
+      $t["id"]
+    );
     $shop->setLogo($t["logo"]);
     $shop->setState($t["state"]);
     $shop->setPhone($t["phone"]);
+    $shop->setWebServiceUrl($t["webServiceUrl"]);
     return $shop;
   }
 }

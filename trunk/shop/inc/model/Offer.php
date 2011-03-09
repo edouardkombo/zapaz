@@ -12,6 +12,8 @@ class Offer {
   private $price;
   private $startTime;
   private $endTime;
+  private $commercialImage;
+  private $displayOnlyImage;
   private $product = null;
 
   function __construct($productId, $price, $startTime, $endTime, $id = 0) {
@@ -60,6 +62,22 @@ class Offer {
 
   public function getEndTime() {
     return $this->endTime;
+  }
+  
+  public function getCommercialImage() {
+    return $this->commercialImage;
+  }
+
+  public function setCommercialImage($commercialImage) {
+    $this->commercialImage = $commercialImage;
+  }
+
+  public function getDisplayOnlyImage() {
+    return $this->displayOnlyImage;
+  }
+
+  public function setDisplayOnlyImage($displayOnlyImage) {
+    $this->displayOnlyImage = $displayOnlyImage;
   }
 
   public function getProduct() {

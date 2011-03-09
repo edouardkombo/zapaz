@@ -8,21 +8,30 @@
 class Shop {
 
   private $id;
+  private $publicUid;
   private $name;
   private $currencyId;
   private $latitude;
   private $longitude;
   private $email;
+  private $webServiceUrl;
+  private $countOfProducts;
+  private $creationTime;
+  private $lastUpdate;
   private $currency = null;
   private $keywords = null;
 
-  function __construct($name, $currencyId, $latitude, $longitude, $email, $id = 0) {
+  function __construct($publicUid, $name, $currencyId, $latitude, $longitude, $email, $countOfProducts, $creationTime, $lastUpdate, $id = 0) {
     $this->id = $id;
+    $this->publicUid = $publicUid;
     $this->name = $name;
     $this->currencyId = $currencyId;
     $this->longitude = $longitude;
     $this->latitude = $latitude;
     $this->email = $email;
+    $this->countOfProducts = $countOfProducts;
+    $this->creationTime = $creationTime;
+    $this->lastUpdate = $lastUpdate;
   }
 
   public function setId($id) {
@@ -33,6 +42,14 @@ class Shop {
     return $this->id;
   }
   
+  public function getPublicUid() {
+    return $this->publicUid;
+  }
+
+  public function setPublicUid($publicUid) {
+    $this->publicUid = $publicUid;
+  }
+    
   public function setName($name) {
     $this->name = $name;
   }
@@ -73,6 +90,38 @@ class Shop {
     $this->email = $email;
   }
 
+  public function getWebServiceUrl() {
+    return $this->webServiceUrl;
+  }
+
+  public function setWebServiceUrl($webServiceUrl) {
+    $this->webServiceUrl = $webServiceUrl;
+  }
+  
+  public function getCountOfProducts() {
+    return $this->countOfProducts;
+  }
+
+  public function setCountOfProducts($countOfProducts) {
+    $this->countOfProducts = $countOfProducts;
+  }
+  
+  public function getCreationTime() {
+    return $this->creationTime;
+  }
+
+  public function setCreationTime($creationTime) {
+    $this->creationTime = $creationTime;
+  }
+  
+  public function getLastUpdate() {
+    return $this->lastUpdate;
+  }
+
+  public function setLastUpdate($lastUpdate) {
+    $this->lastUpdate = $lastUpdate;
+  }
+      
   public function getCurrency() {
     if ($this->currency == null && $this->currencyId != 0) {
       $d = new CurrencyDao();

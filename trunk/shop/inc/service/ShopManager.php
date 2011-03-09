@@ -26,15 +26,19 @@ class ShopManager {
     $array = array();
     if (count($tmp) > 0) {
       foreach ($tmp as $c) {
-        $array[$c->getId()] = $c->getName()." (".$c->getSymbol().")";
+        $array[$c->getId()] = ucwords($c->getName())." (".$c->getSymbol().")";
       }
     }
     return $array;
   }
   
   public function splitAddress($address) {
+    $result = array("", "", "");
     preg_match_all("/\{\{([^\}]*)\}\}/", $address, $matches);
-    return $matches[1];
+    for ($i = 0; $i < count($matches[1]) && $i < 3; $i++) {
+      $result[$i] = $matches[1][$i];
+    }
+    return $result;
   }
   
   public function mergeAddresses($address0, $address1, $address2) {

@@ -8,6 +8,7 @@
 class Shop {
 
   private $id;
+  private $publicUid;
   private $name;
   private $address;
   private $zipCode;
@@ -20,11 +21,13 @@ class Shop {
   private $email;
   private $latitude;
   private $longitude;
+  private $webServiceUrl;
   private $currency = null;
   private $keywords = null;
 
-  function __construct($name, $address, $zipCode, $city, $countryId, $currencyId, $email, $latitude, $longitude, $id = 0) {
+  function __construct($publicUid, $name, $address, $zipCode, $city, $countryId, $currencyId, $email, $latitude, $longitude, $id = 0) {
     $this->id = $id;
+    $this->publicUid = $publicUid;
     $this->name = $name;
     $this->address = $address;
     $this->zipCode = $zipCode;
@@ -43,7 +46,15 @@ class Shop {
   public function getId() {
     return $this->id;
   }
+  
+  public function getPublicUid() {
+    return $this->publicUid;
+  }
 
+  public function setPublicUid($publicUid) {
+    $this->publicUid = $publicUid;
+  }
+  
   public function setName($name) {
     $this->name = $name;
   }
@@ -139,7 +150,15 @@ class Shop {
   public function getLogo() {
     return $this->logo;
   }
+  
+  public function getWebServiceUrl() {
+    return $this->webServiceUrl;
+  }
 
+  public function setWebServiceUrl($webServiceUrl) {
+    $this->webServiceUrl = $webServiceUrl;
+  }
+  
   public function getCurrency() {
     if ($this->currency == null && $this->currencyId != 0) {
       $d = new CurrencyDao();

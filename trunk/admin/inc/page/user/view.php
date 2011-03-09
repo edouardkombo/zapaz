@@ -51,13 +51,17 @@ for ($i = 1, $j = 0; $i < $nbPage && $j < 5; $i++) {
 $template->MxAttribut($pre."maxPage", (int)$nbPage);
 
 $userList = $userManager->getAllUsers($filter, $startIndex, $limit);
-foreach ($userList as $c) {
-    $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
-    $template->MxBloc     ($pre."row.input", "loop");
-    $template->MxAttribut ($pre."row.mailto", "mailto:".$c->getEmail());
-    $template->MxText     ($pre."row.userEmail", $c->getEmail());
-    $template->MxText     ($pre."row.userChoices", "");
-    $template->MxBloc($pre."row", "loop");
+if (count($userList) == 0) {
+  $template->MxBloc($pre."row", "reset");
+} else {
+  foreach ($userList as $c) {
+      $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
+      $template->MxBloc     ($pre."row.input", "loop");
+      $template->MxAttribut ($pre."row.mailto", "mailto:".$c->getEmail());
+      $template->MxText     ($pre."row.userEmail", $c->getEmail());
+      $template->MxText     ($pre."row.userChoices", "");
+      $template->MxBloc($pre."row", "loop");
+  }
 }
 
 if (!$fullPage) {

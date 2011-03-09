@@ -14,7 +14,7 @@ if (!$fullPage) {
 $shopManager = new ShopManager();
 $shop = $shopManager->getShop();
 if ($shop == null) {
-  $shop = new Shop("", "", "", "", 0, 0);
+  $shop = new Shop("", "", "", "", "", 1, 1, "", 0, 0);
 }
 
 $logo = $shop->getLogo() != null ? PROTOCOL.DOMAIN_ZSHOP.$shop->getLogo() : PROTOCOL.DOMAIN_ZSHOP."/img/logo/nologo.jpg";
@@ -25,8 +25,8 @@ $template->MxHidden($pre."hlogo", $template->GetQueryString(array("id" => $shop-
 
 $template->MxFormField($pre."name", "text", "name", $shop->getName(), 'id="name"');
 $template->MxFormField($pre."email", "text", "email", $shop->getEmail(), 'id="email"');
-$template->MxFormField($pre."latitude", "text", "latitude", $shop->getLatitude(), 'id="latitude"');
-$template->MxFormField($pre."longitude", "text", "longitude", $shop->getLongitude(), 'id="longitude"');
+$template->MxFormField($pre."webServiceUrl", "text", "webServiceUrl", $shop->getWebServiceUrl(), 'id="webServiceUrl"');
+$template->MxSelect($pre."currency", "currency", $shop->getCurrencyId(), $currencyArray);
 $template->MxAttribut($pre."logo", $logo);
 
 $template->MxFormField($pre."address0", "text", "address0", $address[0], 'id="address0" size="40" maxlength="85"');
@@ -37,17 +37,10 @@ $template->MxFormField($pre."city", "text", "city", $shop->getCity(), 'id="city"
 $template->MxFormField($pre."state", "text", "state", $shop->getState(), 'id="state"');
 $template->MxSelect($pre."country", "country", $shop->getCountryId(), $countryArray);
 $template->MxFormField($pre."phone", "text", "phone", $shop->getPhone(), 'id="phone"');
-$template->MxSelect($pre."currency", "currency", $shop->getCurrencyId(), $currencyArray);
 
-/*
-$categoryList = $categoryManager->getAllCategories($filter, $startIndex, $limit);
-foreach ($categoryList as $c) {
-    $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
-    $template->MxBloc     ($pre."row.input", "loop");
-    $template->MxText     ($pre."row.categoryName", $c->getName());
-    $template->MxBloc($pre."row", "loop");
-}
-*/
+$template->MxFormField($pre."latitude", "text", "latitude", $shop->getLatitude(), 'id="latitude"');
+$template->MxFormField($pre."longitude", "text", "longitude", $shop->getLongitude(), 'id="longitude"');
+
 if (!$fullPage) {
   $template->MxWrite();
 }

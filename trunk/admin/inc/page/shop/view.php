@@ -52,17 +52,21 @@ $template->MxAttribut($pre."maxPage", (int)$nbPage);
 
 
 $shopList = $shopManager->getAllShops($filter, $startIndex, $limit);
-foreach ($shopList as $c) {
-    $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
-    $template->MxBloc     ($pre."row.input", "loop");
-    $template->MxText     ($pre."row.shopName", $c->getName());
-    $template->MxAttribut ($pre."row.mailto", "mailto:".$c->getEmail());
-    $template->MxText     ($pre."row.shopEmail", $c->getEmail());
-    $template->MxText     ($pre."row.shopKeywords",  implode(",", $c->getKeywords()) );
-    $template->MxAttribut ($pre."row.geo", "http://maps.google.com/?ll=".$c->getLatitude().",".$c->getLongitude());
-    $template->MxText     ($pre."row.shopCoordinates", $c->getLatitude()." ".$c->getLongitude());
-    $template->MxText     ($pre."row.shopCurrency", $c->getCurrency()->getName());
-    $template->MxBloc($pre."row", "loop");
+if (count($shopList) == 0) {
+  $template->MxBloc($pre."row", "reset");
+} else {
+  foreach ($shopList as $c) {
+      $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
+      $template->MxBloc     ($pre."row.input", "loop");
+      $template->MxText     ($pre."row.shopName", $c->getName());
+      $template->MxAttribut ($pre."row.mailto", "mailto:".$c->getEmail());
+      $template->MxText     ($pre."row.shopEmail", $c->getEmail());
+      $template->MxText     ($pre."row.shopKeywords",  implode(",", $c->getKeywords()) );
+      $template->MxAttribut ($pre."row.geo", "http://maps.google.com/?ll=".$c->getLatitude().",".$c->getLongitude());
+      $template->MxText     ($pre."row.shopCoordinates", $c->getLatitude()." ".$c->getLongitude());
+      $template->MxText     ($pre."row.shopCurrency", $c->getCurrency()->getName());
+      $template->MxBloc($pre."row", "loop");
+  }
 }
 
 if (!$fullPage) {

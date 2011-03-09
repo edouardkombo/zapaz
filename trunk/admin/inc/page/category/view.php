@@ -51,11 +51,15 @@ $template->MxAttribut($pre."maxPage", (int)$nbPage);
 $template->MxFormField($pre."newCategory", "text", "categoryName", "", 'size="60"');
 
 $categoryList = $categoryManager->getAllCategories($filter, $startIndex, $limit);
-foreach ($categoryList as $c) {
-    $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
-    $template->MxBloc     ($pre."row.input", "loop");
-    $template->MxText     ($pre."row.categoryName", $c->getName());
-    $template->MxBloc($pre."row", "loop");
+if (count($categoryList) == 0) {
+  $template->MxBloc($pre."row", "reset");
+} else {
+  foreach ($categoryList as $c) {
+      $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
+      $template->MxBloc     ($pre."row.input", "loop");
+      $template->MxText     ($pre."row.categoryName", $c->getName());
+      $template->MxBloc($pre."row", "loop");
+  }
 }
 
 if (!$fullPage) {
