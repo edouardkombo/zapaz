@@ -21,7 +21,7 @@ $logo = $shop->getLogo() != null ? PROTOCOL.DOMAIN_ZSHOP.$shop->getLogo() : PROT
 $address = $shopManager->splitAddress($shop->getAddress());
 $currencyArray = $shopManager->getAllCurrencies();
 
-$template->MxHidden($pre."hlogo", $template->GetQueryString(array("id" => $shop->getId(), "hlogo" => $shop->getLogo())));
+$template->MxHidden($pre."hlogo", $template->GetQueryString(array("id" => $shop->getId(), "keywords" => "", "hlogo" => $shop->getLogo())));
 
 $template->MxFormField($pre."name", "text", "name", $shop->getName(), 'id="name"');
 $template->MxFormField($pre."email", "text", "email", $shop->getEmail(), 'id="email"');
