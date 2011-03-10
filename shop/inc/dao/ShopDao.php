@@ -36,7 +36,7 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
-    $sql = "INSERT INTO Shop (publicUid, name, address, zipCode, city, state, country, phone, logo, currencyId, email, latitude, longitude, webServiceUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO Shop (publicUid, name, address, zipCode, city, state, country, phone, logo, currencyId, email, latitude, longitude, webServiceUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
       $shop->getPublicUid(),

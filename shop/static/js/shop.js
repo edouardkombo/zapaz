@@ -43,6 +43,7 @@ var updateShop = function() {
   var params = getFormValues("#ishop");
   params["logo"] = $("input[name=hlogo]").val();
   params["id"] = $("input[name=id]").val();
+  params["keywords"] = $("input[name=keywords]").val();
   params["currencyId"] = $("select[name=currency] option:selected").val();
   params["countryId"] = $("select[name=country] option:selected").val();
   assertField(params, "name", stringNotEmpty);
@@ -104,14 +105,49 @@ var askLogo = function() {
   });
 };
 
+var addKeyword = function() {
+  var txt = $("input[name=word]").val();
+  if (txt != "") {
+    var found = false;
+    $("#keywords").find("span").each(function() {
+      if ($(this).text() == txt) {
+        found = true;
+      }
+    });
+    if (found) {
+      alert("This word is already in the list.");
+    } else {
+      var span = document.createElement("span");
+          span.appendChild(document.createTextNode(txt));
+        $(span).click(function() { $(this).remove(); });
+      $("#keywords").append(span);
+      $("input[name=word]").val('');
+    }
+  }
+};
+
+var hideStateField = function() {
+  $("input[name=state]").hide();
+  $("input[name=state]").prev('label').hide();
+};
+
+var showStateField = function() {
+  $("input[name=state]").show();
+  $("input[name=state]").prev('label').show();
+};
+
 var changeShop = function() {
   
 };
 
 var parseShop = function() {
+  hideStateField();
   initLogoChangeButton();
   $("#submit-shop").click(updateShop);
+  $("#submit-word").click(addKeyword);
+  $("input[name=word]").keypress(function(e) { if (e.keyCode == 13) addKeyword(); });
   $("input[name=latitude]").attr('disabled', true);
   $("input[name=longitude]").attr('disabled', true);
+  $("input[name=state]").attr('disabled', true);
   initGoogleMap();
 };

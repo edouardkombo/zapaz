@@ -197,7 +197,10 @@ div.light.orange img { margin-top:-8px; }
 div.light.green img { margin-top:-16px; }
 
 /************** shop/view *******************/
-#ishop fieldset { width:600px; margin:10px 20px; padding:5px; border:1px solid #ccc; font-size:13px; }
+#ishop { width:99%; padding:1%; }
+#ishop-fields { width:650px; }
+#ishop fieldset, #ishop .fieldset { width:600px; margin:10px 20px; padding:5px; border:1px solid #ccc; font-size:13px; }
+#ishop .fieldset { border: 0; }
 #ishop legend { padding:0 5px; background-color: white; font-style: italic; font-size:1.1em; font-weight: bold; }
 #ishop label { width:150px; float:left; clear:left; margin-top:5px; }
 #ishop label:after { content:" :"; }
@@ -210,8 +213,28 @@ div.light.green img { margin-top:-16px; }
 #ishop #rlogo input, #ishop #rlogo select { width:293px; margin-left:14px; }
 #ishop fieldset + fieldset { padding:10px 15px; width:580px; }
 #submit-shop { width:100%; }
-#ishop #logo a { position:absolute; left:0; top:85px; width:100%; height:14px; padding:3px 0; text-align:center; display:block; background-color:lightblue; }
-#google-map-canvas { width: 100%; height:100%; border:1px solid red;}
+#ishop #logo a { position:absolute; left:0; top:86px; width:100%; height:14px; padding:3px 0; text-align:center; display:block; background-color:lightblue; }
+#ishop #word { width:364px; }
+#ishop #keywords { width:100%; min-height:21px; border:1px solid #bbb; padding:3px; }
+#ishop #submit-word { float:left; margin:2px 0 0 0; width:50px; }
+#map-fields { padding:18px 0; }
+#help-location p, #ishop p { padding:5px; margin:0 5px; text-indent: 15px; text-align: justify; }
+#google-map-canvas { width: 100%; height:836px; margin:0 5px; }
+#keywords span {
+  cursor:pointer;
+  display:inline-block;
+  background-image: url(http://static.shop.zap.com/img/cross.png);
+	background-repeat:no-repeat;
+  background-color:#3692e7;
+  background-position:right;
+  border:1px solid #293ea9;
+  border-radius:7px;
+  padding:2px 15px 2px 4px;
+  margin:3x 2px 0 1px;
+}
+#keywords span:hover { background-color:#80b6e8; border-color:#5184d2; }
+
+
 /************ namespace/view ****************/
 table#list-namespaces tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
 table#list-namespaces tbody tr:hover td { background-color:#F6F6F6; }
@@ -298,8 +321,8 @@ a.lock:hover { background-position: 0 -22px; }
 a.lock.current { background-position: 0 -44px; }
 a.lock.disabled { visibility:hidden; }
 
-#lock-background { position:absolute; top:0; left:0; display:none; width:100%; height:100%; background-image:url(http://static.shop.zap.com/img/bg-shadow.png); }
-#popup { position:absolute; top:0; left:0; width:750px; height:109px; background-color: white; padding:25px 15px; border:5px solid #5184d2; /*#084;*/ border-radius:10px; }
+#lock-background { position:fixed; top:0; left:0; display:none; width:100%; height:100%; background-image:url(http://static.shop.zap.com/img/bg-shadow.png); }
+#popup { position:fixed; top:0; left:0; width:750px; height:109px; background-color: white; padding:25px 15px; border:5px solid #5184d2; /*#084;*/ border-radius:10px; }
 #popup h1 { font-size:14px; height:25px; border-bottom:1px solid #ececec; text-indent:15px; }
 #popup p { font-size:12px; margin:15px 0 0 0; padding:3px 25px 2px 25px;  }
 #popup p + p { margin:0; }
