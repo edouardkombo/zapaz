@@ -46,6 +46,11 @@ var updateShop = function() {
   params["keywords"] = $("input[name=keywords]").val();
   params["currencyId"] = $("select[name=currency] option:selected").val();
   params["countryId"] = $("select[name=country] option:selected").val();
+  var keywords = "";
+  $("#keywords span").each(function() {
+    keywords += $(this).text() + ";";
+  });
+  params["keywords"] = keywords;
   assertField(params, "name", stringNotEmpty);
   assertField(params, "email", isEmail);
   assertField(params, "latitude", isDouble);

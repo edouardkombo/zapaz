@@ -21,7 +21,7 @@ $logo = $shop->getLogo() != null ? PROTOCOL.DOMAIN_ZSHOP.$shop->getLogo() : PROT
 $address = $shopManager->splitAddress($shop->getAddress());
 $currencyArray = $shopManager->getAllCurrencies();
 
-$template->MxHidden($pre."hlogo", $template->GetQueryString(array("id" => $shop->getId(), "keywords" => "", "hlogo" => $shop->getLogo())));
+$template->MxHidden($pre."hlogo", $template->GetQueryString(array("id" => $shop->getId(), "hlogo" => $shop->getLogo())));
 
 $template->MxFormField($pre."name", "text", "name", $shop->getName(), 'id="name"');
 $template->MxFormField($pre."email", "text", "email", $shop->getEmail(), 'id="email"');
@@ -40,6 +40,16 @@ $template->MxFormField($pre."phone", "text", "phone", $shop->getPhone(), 'id="ph
 
 $template->MxFormField($pre."latitude", "text", "latitude", $shop->getLatitude(), 'id="latitude"');
 $template->MxFormField($pre."longitude", "text", "longitude", $shop->getLongitude(), 'id="longitude"');
+
+$keywords = $shop->getKeywords();
+if ($keywords == null || count($keywords) == 0) {
+  $template->MxBloc($pre."word", "reset");
+} else {
+  foreach ($keywords as $word) {
+    $template->MxText($pre."word.value", $word);
+    $template->MxBloc($pre."word", "loop");
+  }
+}
 
 if (!$fullPage) {
   $template->MxWrite();
