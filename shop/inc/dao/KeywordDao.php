@@ -39,23 +39,36 @@ class KeywordDao {
     return $array;
   }
   
-  public function saveOrUpdate($keyword) {
+  public function saveOrUpdate($keyword, $shopId) {
     if ($keyword == null) {
       return 0;
     }
     if ($keyword->getId() == 0) {
-      return $this->save($keyword);
+      return $this->save($keyword, $shopId);
     }
-    return $this->update($keyword);
+    return $this->update($keyword, $shopId);
   }
   
-  public function save($keyword) {
+  public function save($keyword, $shopId) {
     if ($keyword == null) {
       return 0;
     }
+    
+    if (($i = $this->exists($keyword)) == null) {
+      $keyword->setId($i);
+    } else {
+      $q = $this->db->prepare("INSERT INTO `Keyword` (name) VALUES (?)");
+      $r = $q->execute(array($keyword));
+    }
+    if ($r == 1) {
+      $keyword->setId($this->db->lastInsertId());
+      $q = $this->db->prepare("INSERT INTO `ShopKeywords` (shopId, keywordId) VALUES (?,?)");
+      $r = $q->execute($shopId, $keyword->getId());
+    }
+    return $r;
   }
   
-  public function update($keyword) {
+  public function update($keyword, $shopId) {
     if ($keyword == null || $keyword->getId() == null || $keyword->getId() < 1) {
       return 0;
     }
@@ -66,6 +79,19 @@ class KeywordDao {
       return 0;
     }
     return $this->db->exec("DELETE FROM Keyword WHERE id = ".$this->db->quote($keywordId, PDO::PARAM_INT));
+  }
+  
+  private function exists($keyword) {
+    if ($keyword == null || $keyword == "") {
+      return null;
+    }
+    $q = $this->db->prepare("SELECT id FROM `Keyword` WHERE name=?");
+    $r = $q->execute(array($keyword));
+    $r = $r->fetchAll();
+    if (count($r) == 1) {
+      return $r[0]["id"];
+    }
+    return null;
   }
   
   private function fetchKeyword($t) {

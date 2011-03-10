@@ -37,6 +37,15 @@ if ($name != null
   $shop->setLogo($logo);
   $shop->setPhone($phone);
   $shop->setWebServiceUrl($webServiceUrl);
+  
+  $words = explode(";", $keywords);
+  foreach ($words as $w) {
+    if ($w != "") {
+      array_push($array, new Keyword($w));
+    }
+  }
+  $shop->setKeywords($keywords);
+  
   $result = $shopManager->saveOrUpdate($shop);
   $id = $shop->getId();
 }

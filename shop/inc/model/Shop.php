@@ -181,6 +181,10 @@ class Shop {
     }
     return $this->keywords;
   }
+  
+  public function setKeywords($keywords) {
+    $this->keywords = $keywords;
+  }
 }
 
 ?>

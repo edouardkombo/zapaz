@@ -55,7 +55,11 @@
           </form>
         </td>
         <td id="map-fields">
-          <div id="google-map-canvas"></div>
+          <div id="google-map-canvas">
+            <mx:bloc id="word">
+              <span><mx:text id="value"/></span>
+            </mx:bloc id="word">
+          </div>
         </td>
       </tr>
     </table>

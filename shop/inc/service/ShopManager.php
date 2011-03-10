@@ -49,7 +49,19 @@ class ShopManager {
   }
   
   public function saveOrUpdate($shop) {
-    return $this->shopDao->saveOrUpdate($shop);
+    global $db;
+    try {
+      $db->beginTransaction();
+      $this->shopDao->saveOrUpdate($shop);
+      foreach ($shop->getKeywords() as $w) {
+        $this->keywordDao->saveOrUpdate($w);
+      }
+      $db->commit();
+    } catch (PDOException $e) {
+      $db->rollBack();
+      return 0;
+    }
+    return 1;
   }
 }
 
