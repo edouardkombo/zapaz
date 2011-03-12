@@ -20,7 +20,8 @@ class Product {
   private $type = null;
   private $shop = null;
   private $details = null;
-
+  private $offer = null;
+  
   function __construct($categoryId, $typeId, $shopId, $name, $manufacturer, $price, $id = 0) {
     $this->id = $id;
     $this->name = $name;
@@ -44,7 +45,7 @@ class Product {
   }
 
   public function getName() {
-    return $this->nameId;
+    return $this->name;
   }
 
   public function setCategoryId($id) {
@@ -92,11 +93,11 @@ class Product {
   }
 
   public function getDescription() {
-    return $description;
+    return $this->description;
   }
 
   public function getCategory() {
-    if ($this->category == null && $this->categoryId != 0) {
+    if ($this->category == null && $this->categoryId > 0) {
       $d = new CategoryDao();
       $this->category = $d->getCategoryById($this->categoryId);
     }
@@ -111,7 +112,7 @@ class Product {
   }
 
   public function getType() {
-    if ($this->type == null && $this->typeId != 0) {
+    if ($this->type == null && $this->typeId > 0) {
       $d = new ProductTypeDao();
       $this->type = $d->getTypeById($this->typeId);
     }
@@ -134,7 +135,7 @@ class Product {
   }
   
   public function getShop() {
-    if ($this->shop == null && $this->shopId != 0) {
+    if ($this->shop == null && $this->shopId > 0) {
       $d = new ShopDao();
       $this->shop = $d->getShopById($this->shopId);
     }
@@ -149,11 +150,31 @@ class Product {
   }
 
   public function getDetails() {
-    if ($this->details == null && $this->id) {
+    if ($this->details == null && $this->id > 0) {
       $d = new ProductDetailDao();
-      $this->product = $d->getDetailsForProductId($this->id);
+      $this->details = $d->getDetailsForProductId($this->id);
     }
-    return $this->product;
+    return $this->details;
+  }
+
+  public function setDetails($details) {
+    $this->details = $details;
+  }
+  
+  /**
+   * Get the current offer.
+   * @return The current available offer.
+   */
+  public function getOffer() {
+    if ($this->offer == null && $this->id > 0) {
+      $d = new OfferDao();
+      $this->offer = $d->getOfferByProductId($this->id);
+    }
+    return $this->offer;
+  }
+  
+  public function setOffer($offer) {
+    $this->offer = $offer;
   }
 }
 

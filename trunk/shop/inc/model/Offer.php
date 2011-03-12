@@ -16,12 +16,13 @@ class Offer {
   private $displayOnlyImage;
   private $product = null;
 
-  function __construct($productId, $price, $startTime, $endTime, $id = 0) {
+  function __construct($productId, $price, $startTime, $endTime, $displayOnlyImage, $id = 0) {
     $this->id = $id;
     $this->productId = $productId;
     $this->price = $price;
     $this->startTime = $startTime;
     $this->endTime = $endTime;
+    $this->displayOnlyImage = $displayOnlyImage;
   }
 
   public function setId($id) {

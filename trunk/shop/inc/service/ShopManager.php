@@ -52,13 +52,21 @@ class ShopManager {
     global $db;
     try {
       $db->beginTransaction();
-      $this->shopDao->saveOrUpdate($shop);
-      foreach ($shop->getKeywords() as $w) {
-        $this->keywordDao->saveOrUpdate($w);
+      if (!$this->shopDao->saveOrUpdate($shop)) {
+        throw new Exception("Failed to save shop.");
+      }
+        
+      if (!$this->keywordDao->deleteAll($shop->getId())) {
+        throw new Exception("Failed to delete old keywords.");
+      }
+      
+      if (!$this->keywordDao->saveAll($shop->getKeywords(), $shop->getId())) {
+        throw new Exception("Failed to save new keywords.");
       }
       $db->commit();
-    } catch (PDOException $e) {
+    } catch (Exception $e) {
       $db->rollBack();
+      echo $e;
       return 0;
     }
     return 1;
