@@ -28,7 +28,7 @@ class Keyword {
   }
 
   public function getName() {
-    return $this->nameId;
+    return $this->name;
   }
 
 }

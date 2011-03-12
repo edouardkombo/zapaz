@@ -48,16 +48,26 @@ try {
 include(MX_GENERAL_PATH.'ModeliXe.php');
 
 // Model
+include(INC_GENERAL_PATH.'model/Category.php');
 include(INC_GENERAL_PATH.'model/Currency.php');
+include(INC_GENERAL_PATH.'model/DetailType.php');
 include(INC_GENERAL_PATH.'model/Keyword.php');
+include(INC_GENERAL_PATH.'model/Offer.php');
+include(INC_GENERAL_PATH.'model/Product.php');
+include(INC_GENERAL_PATH.'model/ProductDetail.php');
+include(INC_GENERAL_PATH.'model/ProductType.php');
 include(INC_GENERAL_PATH.'model/Shop.php');
 
 // DAO 
+include(INC_GENERAL_PATH.'dao/CategoryDao.php');
 include(INC_GENERAL_PATH.'dao/CurrencyDao.php');
 include(INC_GENERAL_PATH.'dao/KeywordDao.php');
+include(INC_GENERAL_PATH.'dao/ProductDao.php');
+include(INC_GENERAL_PATH.'dao/ProductTypeDao.php');
 include(INC_GENERAL_PATH.'dao/ShopDao.php');
 
 // Services
+include(INC_GENERAL_PATH.'service/ProductManager.php');
 include(INC_GENERAL_PATH.'service/ShopManager.php');
 }
 

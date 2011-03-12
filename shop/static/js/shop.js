@@ -125,6 +125,7 @@ var addKeyword = function() {
       var span = document.createElement("span");
           span.appendChild(document.createTextNode(txt));
         $(span).click(function() { $(this).remove(); });
+      $("#keywords").append("\n");
       $("#keywords").append(span);
       $("input[name=word]").val('');
     }
@@ -154,5 +155,6 @@ var parseShop = function() {
   $("input[name=latitude]").attr('disabled', true);
   $("input[name=longitude]").attr('disabled', true);
   $("input[name=state]").attr('disabled', true);
+  $("#keywords span").each(function() { $(this).click(function() { $(this).remove(); }); });
   initGoogleMap();
 };

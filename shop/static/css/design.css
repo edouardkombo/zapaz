@@ -198,128 +198,59 @@ div.light.green img { margin-top:-16px; }
 
 /************** shop/view *******************/
 #ishop { width:99%; padding:1%; }
-#ishop-fields { width:650px; }
-#ishop fieldset, #ishop .fieldset { width:600px; margin:10px 20px; padding:5px; border:1px solid #ccc; font-size:13px; }
-#ishop .fieldset { border: 0; }
-#ishop legend { padding:0 5px; background-color: white; font-style: italic; font-size:1.1em; font-weight: bold; }
-#ishop label { width:150px; float:left; clear:left; margin-top:5px; }
-#ishop label:after { content:" :"; }
-#ishop input, #ishop select { float:left; margin:2px; width:400px; }
-#ishop input.alone { margin:2px 0 2px 152px; }
-#ishop #logo { position:relative; width:96px; height:96px; float:left; border:2px solid #c6c6c6; cursor: pointer; margin:20px 15px; padding:5px; }
-#iship #logo:hover { border-color:darkblue; }
-#ishop #rlogo { width:440px; float:left; }
-#ishop #rlogo label { width:120px; }
-#ishop #rlogo input, #ishop #rlogo select { width:293px; margin-left:14px; }
-#ishop fieldset + fieldset { padding:10px 15px; width:580px; }
-#submit-shop { width:100%; }
-#ishop #logo a { position:absolute; left:0; top:86px; width:100%; height:14px; padding:3px 0; text-align:center; display:block; background-color:lightblue; }
+form.regular, td#form-regular { width:650px; }
+form.regular fieldset, form.regular .fieldset { width:600px; margin:10px 20px; padding:5px; border:1px solid #ccc; font-size:13px; }
+form.regular .fieldset { border: 0; }
+form.regular legend { padding:0 5px; background-color: white; font-style: italic; font-size:1.1em; font-weight: bold; }
+form.regular label { width:150px; float:left; clear:left; margin-top:5px; }
+form.regular label:after { content:" :"; }
+form.regular input, form.regular textarea { float:left; margin:2px; width:400px; }
+form.regular select { float:left; margin:2px; width:410px; }
+form.regular input.alone { margin:2px 0 2px 152px; }
+form.regular .logo { position:relative; width:96px; height:96px; float:left; border:2px solid #c6c6c6; cursor: pointer; margin:20px 15px; padding:5px; }
+form.regular .logo:hover { border-color:darkblue; }
+form.regular .info { width:440px; float:left; }
+form.regular .info label { width:120px; }
+form.regular .info input, form.regular .info textarea { width:293px; margin-left:14px; }
+form.regular .info select { width:303px; margin-left:14px; }
+form.regular fieldset + fieldset { padding:10px 15px; width:580px; }
+form.regular .submit-button { width:100%; }
+form.regular .logo a { position:absolute; left:0; top:86px; width:100%; height:14px; padding:3px 0; text-align:center; display:block; background-color:lightblue; }
+form.regular p { padding:5px; margin:0 5px; text-indent: 15px; text-align: justify; }
+form.regular ul { padding:5px 35px; margin:0 15px; }
+
 #ishop #word { width:364px; }
 #ishop #keywords { width:100%; min-height:21px; border:1px solid #bbb; padding:3px; }
 #ishop #submit-word { float:left; margin:2px 0 0 0; width:50px; }
 #map-fields { padding:18px 0; }
-#help-location p, #ishop p { padding:5px; margin:0 5px; text-indent: 15px; text-align: justify; }
 #google-map-canvas { width: 100%; height:836px; margin:0 5px; }
-#keywords span {
-  cursor:pointer;
-  display:inline-block;
-  background-image: url(http://static.shop.zap.com/img/cross.png);
-	background-repeat:no-repeat;
-  background-color:#3692e7;
-  background-position:right;
-  border:1px solid #293ea9;
-  border-radius:7px;
-  padding:2px 15px 2px 4px;
-  margin:3x 2px 0 1px;
-}
+#keywords span { cursor:pointer; display:inline-block; background-image: url(http://static.shop.zap.com/img/cross.png); background-repeat:no-repeat; background-color:#3692e7; background-position:right; border:1px solid #293ea9; border-radius:7px; padding:2px 15px 2px 4px; margin:3x 2px 0 1px; }
 #keywords span:hover { background-color:#80b6e8; border-color:#5184d2; }
 
+/************ product/view ****************/
+table#list-products tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
+table#list-products tbody tr:hover td { background-color:#F6F6F6; }
+table#list-products tbody tr:hover td:nth-child(2) a { border-color:#CCC; }
+table#list-products tbody tr.current { background-color:#FFF6C3; }
+table#list-products tbody tr.current td:nth-child(2) a { border-color:#FFF6C3; }
+table#list-products tbody tr.current:hover td { background-color:#FFF6C3; }
+table#list-products tbody tr.current:hover td:nth-child(2) a { border-color:#CCC; }
+table#list-products tbody td:nth-child(1), table#list-products thead td:nth-child(1) { width:20px; text-align:center; }
+table#list-products tbody td:nth-child(2) a { display:block; height:14px; overflow:hidden; color:black; text-decoration:none; border:1px solid white; }
+table#list-products td.link { width:400px; }
+table#list-products tbody td.link a { display:block; height:14px; overflow:hidden; color:#06C; text-decoration:none; }
+table#list-products tbody td.link a:hover { text-decoration:underline; }
 
-/************ namespace/view ****************/
-table#list-namespaces tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
-table#list-namespaces tbody tr:hover td { background-color:#F6F6F6; }
-table#list-namespaces tbody tr:hover td:nth-child(2) a { border-color:#CCC; }
-table#list-namespaces tbody tr.current { background-color:#FFF6C3; }
-table#list-namespaces tbody tr.current td:nth-child(2) a { border-color:#FFF6C3; }
-table#list-namespaces tbody tr.current:hover td { background-color:#FFF6C3; }
-table#list-namespaces tbody tr.current:hover td:nth-child(2) a { border-color:#CCC; }
-table#list-namespaces tbody td:nth-child(1), table#list-namespaces thead td:nth-child(1) { width:20px; text-align:center; }
-table#list-namespaces tbody td:nth-child(2) a { display:block; height:14px; overflow:hidden; color:black; text-decoration:none; border:1px solid white; }
-table#list-namespaces td.link { width:400px; }
-table#list-namespaces tbody td.link a { display:block; height:14px; overflow:hidden; color:#06C; text-decoration:none; }
-table#list-namespaces tbody td.link a:hover { text-decoration:underline; }
+input[name=nameFilter] { position:absolute; top:5px; right:5px; width:400px; }
+input[name=typeFilter] { position:absolute; top:5px; right:420px; width:150px; }
+input[name=categoryFilter] { position:absolute; top:5px; right:585px; width:150px; }
+input.filter.default { font-style: italic; color: #B0B0B0; }
 
-table#list-namespaces.list-map td:nth-child(3) {
-  width:250px;
-  text-align:left;
-  height:14px;
-  padding:5px 4px;
-}
-table#list-namespaces.list-map td.edition { padding:0; }
-table#list-namespaces.list-map input[type=text] { margin:0; border:0; height:14px; padding:5px 4px; width:248px; border:1px solid white; }
-
- /************ namespace/edit ****************/
-table#edit-namespace tbody td { height:14px; padding:5px 4px; border-bottom:1px solid #E6E6E6; border-right:1px solid #F3F3F3; }
-table#edit-namespace tbody td:first-child { width:40px; }
-table#edit-namespace tbody td:nth-child(2) { width:8px; padding:0 8px; text-align:center; vertical-align:middle; }
-table#edit-namespace tbody td.part { font-weight:bold; font-size:1.1em; padding-left: 20px; }
-table#edit-namespace tbody tr:hover td { background-color:#F6F6F6; }
-table#edit-namespace tbody tr.current { background-color:#FFF6C3; }
-table#edit-namespace tbody tr.current:hover td { background-color:#FFF6C3; }
-table#edit-namespace tbody td:nth-child(3) { width:120px; }
-table#edit-namespace tbody td:nth-child(4) { padding:0 10px 0 0; }
-table#edit-namespace input[type=text], table#edit-namespace input[type=url] { margin:0; border:0; height:14px; padding:5px 4px; width:100%; border:1px solid white; }
-table#edit-namespace input[type=text]:focus, table#edit-namespace input[type=url]:focus { border:1px solid #eeab29; box-shadow:0 0 4px #ebc57c; }
-table#edit-namespace tbody td.sans { text-align:left; }
-
-a.small-source {
-  display:inline-block;
-  width:10px;
-  height:10px;
-  background-image:url(http://static.shop.zap.com/img/external-link-icon.png);
-}
-a.small-source.hidden { visibility:hidden; }
-h2 .date { display:none; }
-
-.scrollable {
-	position:relative;
-	overflow:hidden;
-	width: 100%;
-	height:118px;
-}
-
-.scrollable .items {
-	position:absolute;
-	width:20000em;
-}
-
-.items div {
-  float:left;
-	height:100px;
-}
-
-.description { overflow:auto; text-align: justify; white-space:pre-line; }
-p.description {
-  height:96px;
-  padding:2px;
-  border:1px solid #CCC;
-}
-p.description:hover { background-color:#F6F6F6; } /*#FFF6C3*/
-div.text-id { text-align:center; }
-a.lock {
-  position:absolute;
-  right:0;
-  top:104px;
-  background-image: url(http://static.shop.zap.com/img/lock.png);
-	background-repeat:no-repeat;
-	display:block;
-  width:31px;
-  height:22px;
-	cursor:pointer;
-}
-a.lock:hover { background-position: 0 -22px; }
-a.lock.current { background-position: 0 -44px; }
-a.lock.disabled { visibility:hidden; }
+/************ product/edit  ************/
+table#product-details { width:100%; }
+table#product-details thead td { text-align: center; font-weight: bold; padding:3px 0; }
+table#product-details td:first-child { width: 30%; }
+table#product-details input { width:95%; margin:auto; }
 
 #lock-background { position:fixed; top:0; left:0; display:none; width:100%; height:100%; background-image:url(http://static.shop.zap.com/img/bg-shadow.png); }
 #popup { position:fixed; top:0; left:0; width:750px; height:109px; background-color: white; padding:25px 15px; border:5px solid #5184d2; /*#084;*/ border-radius:10px; }

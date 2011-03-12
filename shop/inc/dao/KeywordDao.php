@@ -39,59 +39,33 @@ class KeywordDao {
     return $array;
   }
   
-  public function saveOrUpdate($keyword, $shopId) {
-    if ($keyword == null) {
-      return 0;
-    }
-    if ($keyword->getId() == 0) {
-      return $this->save($keyword, $shopId);
-    }
-    return $this->update($keyword, $shopId);
-  }
-  
-  public function save($keyword, $shopId) {
-    if ($keyword == null) {
+  public function saveAll($keywords, $shopId) {
+    if ($keywords == null || count($keywords) == 0 || $shopId == null || $shopId < 1) {
       return 0;
     }
     
-    if (($i = $this->exists($keyword)) == null) {
-      $keyword->setId($i);
-    } else {
-      $q = $this->db->prepare("INSERT INTO `Keyword` (name) VALUES (?)");
-      $r = $q->execute(array($keyword));
+    $r1 = 0;
+    $r2 = 0;
+    foreach ($keywords as $k) {
+      $r1 = $this->db->exec("INSERT INTO `Keyword` (name) VALUES (".$this->db->quote($k->getName(), PDO::PARAM_STR).")");
+      $k->setId($this->db->lastInsertId());
+
+      $q  = $this->db->prepare("INSERT INTO `ShopKeywords` (shopId, keywordId) VALUES (?,?)");
+      $r2 = $q->execute(array($shopId, $k->getId()));
     }
-    if ($r == 1) {
-      $keyword->setId($this->db->lastInsertId());
-      $q = $this->db->prepare("INSERT INTO `ShopKeywords` (shopId, keywordId) VALUES (?,?)");
-      $r = $q->execute($shopId, $keyword->getId());
+    return $r1 && $r2;
+  }
+  
+  public function deleteAll($shopId) {
+    if ($shopId == null || $shopId < 1) {
+      return 0;
+    }
+    $q = $this->db->query("SELECT keywordId FROM ShopKeywords WHERE shopId = ".$this->db->quote($shopId, PDO::PARAM_INT));
+    $r = true;
+    while (($t = $q->fetch(PDO::FETCH_ASSOC))) {
+      $r &= $this->db->exec("DELETE FROM Keyword WHERE id = ".$this->db->quote($t["keywordId"], PDO::PARAM_INT));
     }
     return $r;
-  }
-  
-  public function update($keyword, $shopId) {
-    if ($keyword == null || $keyword->getId() == null || $keyword->getId() < 1) {
-      return 0;
-    }
-  }
-  
-  public function delete($keywordId) {
-    if ($keywordId == null || $keywordId < 1) {
-      return 0;
-    }
-    return $this->db->exec("DELETE FROM Keyword WHERE id = ".$this->db->quote($keywordId, PDO::PARAM_INT));
-  }
-  
-  private function exists($keyword) {
-    if ($keyword == null || $keyword == "") {
-      return null;
-    }
-    $q = $this->db->prepare("SELECT id FROM `Keyword` WHERE name=?");
-    $r = $q->execute(array($keyword));
-    $r = $r->fetchAll();
-    if (count($r) == 1) {
-      return $r[0]["id"];
-    }
-    return null;
   }
   
   private function fetchKeyword($t) {

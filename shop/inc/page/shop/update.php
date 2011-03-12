@@ -39,9 +39,10 @@ if ($name != null
   $shop->setWebServiceUrl($webServiceUrl);
   
   $words = explode(";", $keywords);
+  $keywords = array();
   foreach ($words as $w) {
     if ($w != "") {
-      array_push($array, new Keyword($w));
+      array_push($keywords, new Keyword($w));
     }
   }
   $shop->setKeywords($keywords);

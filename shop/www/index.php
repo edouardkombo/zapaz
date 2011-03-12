@@ -13,6 +13,7 @@ $javascript = array(
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery.tools.min.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/jquery-ui-admin.min.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/vars.js",
+    PROTOCOL.DOMAIN_ZSHOP."/js/filter.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/shop.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/product.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/offer.js",

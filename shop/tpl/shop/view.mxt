@@ -3,9 +3,9 @@
   <div class="box-content">
     <table id="ishop" cellpadding="0" cellspacing="0">
       <tr>
-        <td id="ishop-fields">
-          <form method="post" action="#">
-            <div class="fieldset" id="help-location">
+        <td id="form-regular">
+          <form method="post" action="#" class="regular">
+            <div class="fieldset">
               <h3>Your location</h3>
                 <p>To apply your data, you need to provide as precisely as possible your geolocation. This geolocation is used to define an area of influence in which users will be able to access to your advertisements and products information. You can have only one geolocation for now.</p>
                 <p>Move on the map to your location and click on the place you are. A draggable pin will appear corresponding to your shop and so your center of influence area. Your influence area is then displayed as a circle. Everybody in that circle has the ability to watch your advertisements, looking for products or basic shop information.</p>
@@ -14,8 +14,8 @@
             <fieldset>
               <legend>Basic</legend>
               <mx:hidden id="hlogo" />
-              <div id="logo"><img alt="logo" width="96" height="96" mXattribut="src:logo"/></div>
-              <div id="rlogo">
+              <div class="logo"><img alt="logo" width="96" height="96" mXattribut="src:logo"/></div>
+              <div class="info">
                 <label for="name">Name <span class="required">*</span></label><mx:formField id="name" />
                 <label for="email">Email <span class="required">*</span></label><mx:formField id="email" />
                 <label for="latitude">Latitude <span class="required">*</span></label><mx:formField id="latitude" />
@@ -39,7 +39,11 @@
               <legend>Keywords</legend>
               <p>By providing keywords, you help users to find easier what they are interested in an increase the probability to have more visitors becoming customers.</p>
               <p>You really need to fill that section if you don't plan to list your products and offers in that database. Contrariwise, if you plan to insert in a short time information about your products, this section will be automatically completed.</p>
-              <div id="keywords"></div>
+              <div id="keywords">
+                <mx:bloc id="word">
+                  <span><mx:text id="value"/></span>
+                </mx:bloc id="word">
+              </div>
               <label for="word">Keyword</label><input type="text" name="word" value="" id="word"/>
               <div id="submit-word" class="submit-button">
                 <div class="top"></div>
@@ -55,11 +59,7 @@
           </form>
         </td>
         <td id="map-fields">
-          <div id="google-map-canvas">
-            <mx:bloc id="word">
-              <span><mx:text id="value"/></span>
-            </mx:bloc id="word">
-          </div>
+          <div id="google-map-canvas"></div>
         </td>
       </tr>
     </table>

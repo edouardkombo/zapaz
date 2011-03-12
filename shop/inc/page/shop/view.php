@@ -46,7 +46,7 @@ if ($keywords == null || count($keywords) == 0) {
   $template->MxBloc($pre."word", "reset");
 } else {
   foreach ($keywords as $word) {
-    $template->MxText($pre."word.value", $word);
+    $template->MxText($pre."word.value", $word->getName());
     $template->MxBloc($pre."word", "loop");
   }
 }
