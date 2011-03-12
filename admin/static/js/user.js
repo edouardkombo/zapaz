@@ -1,16 +1,17 @@
-var addUser = function() {
-};
-
-var editUser = function(user) {
-
-};
-
-var doEditUser = function(input) {
- 
-};
 
 var deleteUsers = function() {
- 
+ var arr = getCheckedLines();
+  if (arr[0] == "") {
+    alert("You need to select at least one user to delete it.");
+  } else if (confirm("Are you sure you want to delete the following users:\n" + arr[1])) {
+    $.post("/user/delete", {pids:arr[0]}, function(xml) {
+      var result = $(xml).find('result').text() == arr[2] ? true : false;
+      if (result)
+        refreshUsers();
+      else
+        alert("Impossible to delete users.");
+    });
+  }
 };
 
 

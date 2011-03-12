@@ -1,13 +1,3 @@
-var addShop = function() {
-  var n = $("input[name=shopName]").val();
-  $.post("shop/update", {name:n}, function(xml) {
-    var result = $(xml).find('result').text() == '1' ? true : false;
-    if (result)
-      refreshShops();
-    else
-      alert("The operation failed!");
-  });
-};
 
 var deleteShops = function() {
   var arr = getCheckedLines();
