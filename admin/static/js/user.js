@@ -19,7 +19,7 @@ var filterUser = function(filter) {
  refreshUsers(null, filter, "", function() {
     if (lastFilterValue != filter) {
       lastFilterValue = filter;
-      var input = $("input[name=filter]");
+      var input = $("input[email=filter]");
       $(input).focus();
       var txt = $(input).val();
       $(input).val('');
@@ -65,12 +65,8 @@ var changeUser = function(link, filter, start, limit, callback) {
 };
 
 var parseUser = function() {
-  $("#submit-user").click(addUser);
-  $("#create-user").submit(function() {addUser();return false;});
-  $("#create-user input").keypress(function(e) {if (e.keyCode == 13) {addUser();return false;}});
   $("#list-users thead input:checkbox").click(checkAllLines);
   $("#list-users tbody input:checkbox").click(function() {checkLine($(this));});
-  $("#list-users tbody td:nth-child(2) a").click(function() { editUser($(this)); });
   $("a[href=#remove]").click(deleteUsers);
   $("select[name=limit]").change(function() {refreshUsers();});
   $("a.other-page").click(function() {refreshShops($(this).text());});
@@ -78,5 +74,6 @@ var parseUser = function() {
   $("a[href=#prev-page]").click(function() {refreshUsers(null, null, "prev");});
   $("a[href=#next-page]").click(function() {refreshUsers(null, null, "next");});
   $("a[href=#last-page]").click(function() {refreshUsers(null, null, "last");});
+  $("a[rev=external]").each(function() { $(this).attr('target', '_blank'); });
   setUpFilter(defaultUserFilterText, filterUser);  
 };

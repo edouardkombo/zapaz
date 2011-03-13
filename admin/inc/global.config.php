@@ -5,7 +5,7 @@ $root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) -
   
 define("ROOT"                     , $root                           );
 
-// Distant database and domains, for release
+//Distant database and domains, for release
 //define("MYSQL_HOSTNAME"           , "mysql51-19.pro"                );
 //define("MYSQL_PORT"               , "3306"                          );
 //define("MYSQL_USERNAME"           , "datesvaczap"                   );
@@ -20,7 +20,7 @@ define("ROOT"                     , $root                           );
 define("MYSQL_HOSTNAME"           , "localhost"                     );
 define("MYSQL_PORT"               , "3306"                          );
 define("MYSQL_USERNAME"           , "root"                          );
-define("MYSQL_PASSWORD"           , "datesvac"                      );
+define("MYSQL_PASSWORD"           , "zappaz"                      );
 define("MYSQL_DB_ADMIN"           , "zapgen"                        );
 define("DOMAIN"                   , "zap.com"                       );
 define("DOMAIN_ADMIN"             , "admin.".DOMAIN                 );
