@@ -2,7 +2,7 @@
 $fullPage = isset($fullPage) ? $fullPage : false;
 $pre      = $fullPage        ? "content.": "";
 if (!$fullPage)
-  include('../inc/local.config.php');
+  include('../inc/global.config.php');
 
 $in = $_POST;
 
