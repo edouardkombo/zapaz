@@ -17,17 +17,17 @@ function ValidateEmail($email)
 { 
    $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#'; 
    if(preg_match($Syntaxe,$email)) 
-      return true; 
+      return $email; 
    else 
-     return false; 
+     return null; 
 }
 
 function ValidateURL($url){
 
    if (filter_var($url, FILTER_VALIDATE_URL)) 
-      return true; 
+      return $url; 
    else 
-     return false; 
+     return null; 
 }
 
 $result = 0;
