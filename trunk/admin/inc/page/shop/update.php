@@ -1,6 +1,7 @@
 <?php
 
 $in = $_POST;
+//$in = $_GET;
 
 $id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
 $name = isset($in['name']) && $in['name'] != ""                      ? $in['name'] : null;
@@ -40,5 +41,14 @@ if ($name != null) {
 echo '<?xml version="1.0" encoding="utf-8"?>';
 echo '<r>';
 echo '<result>'.$result.'</result>';
+echo '<id>'.$id.'</id>';
+echo '<name>'.$name.'</name>';
+echo '<currencyId>'.$currencyId.'</currencyId>';
+echo '<latitude>'.$latitude.'</latitude>';
+echo '<longitude>'.$longitude.'</longitude>';
+echo '<email>'.$email.'</email>';
+echo '<countOfProducts>'.$countOfProducts.'</countOfProducts>';
+echo '<creationTime>'.$creationTime.'</creationTime>';
+echo '<$lastUpdate>'.$lastUpdate.'</$lastUpdate>';
 echo '</r>';
 ?>
