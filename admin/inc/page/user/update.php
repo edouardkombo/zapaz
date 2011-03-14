@@ -1,13 +1,15 @@
 <?php
 
-$in = $_POST;
-//$in = $_GET;
+include '../../service/UserManager.php';
+
+//$in = $_POST;
+$in = $_GET;
 
 
 
 $id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
 $email = isset($in['email']) && ValidateEmail($in['email']);
-$password = isset($in['password']) && cryptPassword($in['password']);
+$password = isset($in['password']) && $in['password'] != null &&cryptPassword($in['password']);
 
 function ValidateEmail($email) 
 { 
@@ -19,8 +21,7 @@ function ValidateEmail($email)
 }
 
 function cryptPassword($pw){
-  //return CRYPT_SHA256($pw);
-  return $pw;
+  return crypt($pw);
 }
 
 $result = 0;
@@ -29,7 +30,7 @@ if ($email != null) {
   $result = $userManager->saveOrUpdate(new User($email, $password));
 }
 
-// update?id=2&email=aaa@gmail.com&password=123
+// update.php?id=2&email=aaa@gmail.com&password=123
 
 echo '<?xml version="1.0" encoding="utf-8"?>';
 echo '<r>';
