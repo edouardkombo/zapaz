@@ -1,7 +1,6 @@
 <div class="box">
   <h2>Product list</h2>
   <input title="Name filter" class="filter" type="text" name="nameFilter" mXattribut="value:nameFilter" />
-  <input title="Category filter" class="filter" type="text" name="categoryFilter" mXattribut="value:categoryFilter" />
   <input title="Type filter" class="filter" type="text" name="typeFilter" mXattribut="value:typeFilter" />
   <div class="box-content">
     <form method="post" action="#">

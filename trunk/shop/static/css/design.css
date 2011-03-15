@@ -79,6 +79,43 @@ hr {
 }
 
 ul#menu {
+  position:absolute;
+  top:10px;
+  right:30px;
+  width:113px;
+  height:24px;
+  display:block;
+  list-style: none none;
+  background-color:#F6F6F6;
+  border:1px solid #ababab;
+  border-radius:5px;
+}
+
+ul#menu > li {
+  display:inline-block;
+  font-size:1.2em;
+  color:#06C;
+  float:left;
+}
+
+ul#menu a {
+  color:#333;
+  text-decoration:none;
+  display:block;
+  padding:4px 5px;
+  text-align: center;
+}
+
+ul#menu li.current {
+  background-color:#5184d2;
+}
+
+ul#menu li.current a {
+  color:#efefef;
+  font-weight:bold;
+}
+
+ul#submenu {
 	position:absolute;
 	top:45px;
 	left:0;
@@ -91,14 +128,14 @@ ul#menu {
 	padding:8px 0 0 0;
 }
 
-ul#menu > li {
+ul#submenu > li {
   display:inline-block;
 	margin:0 2px;
 }
 
-ul#menu > li:first-child { margin-left:8px; }
+ul#submenu > li:first-child { margin-left:8px; }
 
-ul#menu a {
+ul#submenu a {
   display:block;
   width:100px;
   height:20px;
@@ -113,7 +150,7 @@ ul#menu a {
 	border-radius:5px;
 }
 
-ul#menu a.current {
+ul#submenu a.current {
 	background-color:#E6E9EF;
 	color:#333;
 }
@@ -198,7 +235,7 @@ div.light.green img { margin-top:-16px; }
 
 /************** shop/view *******************/
 #ishop { width:99%; padding:1%; }
-form.regular, td#form-regular { width:650px; }
+form.regular, td#form-regular { width:650px; margin:auto; }
 form.regular fieldset, form.regular .fieldset { width:600px; margin:10px 20px; padding:5px; border:1px solid #ccc; font-size:13px; }
 form.regular .fieldset { border: 0; }
 form.regular legend { padding:0 5px; background-color: white; font-style: italic; font-size:1.1em; font-weight: bold; }
@@ -220,7 +257,7 @@ form.regular p { padding:5px; margin:0 5px; text-indent: 15px; text-align: justi
 form.regular ul { padding:5px 35px; margin:0 15px; }
 
 #ishop #word { width:364px; }
-#ishop #keywords { width:100%; min-height:21px; border:1px solid #bbb; padding:3px; }
+#ishop #keywords { width:98%; min-height:21px; border:1px solid #bbb; padding:3px 1%; }
 #ishop #submit-word { float:left; margin:2px 0 0 0; width:50px; }
 #map-fields { padding:18px 0; }
 #google-map-canvas { width: 100%; height:836px; margin:0 5px; }
@@ -243,21 +280,30 @@ table#list-products tbody td.link a:hover { text-decoration:underline; }
 
 input[name=nameFilter] { position:absolute; top:5px; right:5px; width:400px; }
 input[name=typeFilter] { position:absolute; top:5px; right:420px; width:150px; }
-input[name=categoryFilter] { position:absolute; top:5px; right:585px; width:150px; }
 input.filter.default { font-style: italic; color: #B0B0B0; }
 
 /************ product/edit  ************/
-table#product-details { width:100%; }
-table#product-details thead td { text-align: center; font-weight: bold; padding:3px 0; }
-table#product-details td:first-child { width: 30%; }
-table#product-details input { width:95%; margin:auto; }
+#product-details { width:100%; }
+#product-details thead td { text-align: center; font-weight: bold; padding:3px 0; }
+#product-details td:first-child { width: 150px; text-align:center; }
+#product-details select { width:150px; margin:0 5px 3px 5px; }
+#product-details input { width:100%; margin:0 5px 3px 5px; }
+form#edit-product .submit-button, #edit-product #cancel { width:100px; float: right; }
+
+#popup #newType { width:300px; float:right; }
+#popup #submit-new-type { float:right; margin:3px 0 0 2px; width:50px; }
+#popup #type-values { width:98%; min-height:21px; border:1px solid #bbb; padding:3px 1%; }
+#popup span { cursor:pointer; display:inline-block; background-image: url(http://static.shop.zap.com/img/cross.png); background-repeat:no-repeat; background-color:#3692e7; background-position:right; border:1px solid #293ea9; border-radius:7px; padding:2px 15px 2px 4px; margin:3x 2px 0 1px; }
+#popup span:hover { background-color:#80b6e8; border-color:#5184d2; }
+#popup label[for=newType] { float:right; width:auto; margin-right:10px; }
+#popup #submit-close { clear:both; float:right; width:150px; margin:0; }
 
 #lock-background { position:fixed; top:0; left:0; display:none; width:100%; height:100%; background-image:url(http://static.shop.zap.com/img/bg-shadow.png); }
-#popup { position:fixed; top:0; left:0; width:750px; height:109px; background-color: white; padding:25px 15px; border:5px solid #5184d2; /*#084;*/ border-radius:10px; }
+#popup { position:fixed; top:0; left:0; width:750px; background-color: white; padding:25px 15px; border:5px solid #5184d2; /*#084;*/ border-radius:10px; }
 #popup h1 { font-size:14px; height:25px; border-bottom:1px solid #ececec; text-indent:15px; }
-#popup p { font-size:12px; margin:15px 0 0 0; padding:3px 25px 2px 25px;  }
+#popup p { font-size:12px; margin-top:15px; padding:3px 25px 2px 25px;  }
 #popup p + p { margin:0; }
-#popup fieldset { border: 1px solid #ececec; padding:4px; }
+#popup fieldset { border: 1px solid #ececec; padding:4px; margin-bottom:5px; }
 #popup legend { font-weight:bold; padding:2px; font-size:13px; margin:0 0 0 5px; text-transform:capitalize; }
 #popup label { float:left; clear:left; width:135px; margin:7px 0 0 15px; font-size:12px; font-weight:normal; }
 #popup input { float:left;  width:575px; margin:3px 0; font-size:12px; }

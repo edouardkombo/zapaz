@@ -11,6 +11,11 @@ if (!$fullPage) {
   $template->SetModeliXe();
 }
 
+$template->MxAttribut("header.submenu.link", "#info");
+$template->MxAttribut("header.submenu.class", "current");
+$template->MxText("header.submenu.text", "Shop Information");
+$template->MxBloc("header.submenu", "loop");
+
 $shopManager = new ShopManager();
 $shop = $shopManager->getShop();
 if ($shop == null) {

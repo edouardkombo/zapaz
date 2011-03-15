@@ -15,11 +15,13 @@ class ProductManager {
   private $productDao;
   private $typeDao;
   private $categoryDao;
+  private $detailTypeDao;
   
   public function __construct() {
     $this->productDao = new ProductDao();
     $this->typeDao = new ProductTypeDao();
     $this->categoryDao = new CategoryDao();
+    $this->detailTypeDao = new DetailTypeDao();
   }
   
   public function getProductById($productId) {
@@ -31,11 +33,15 @@ class ProductManager {
   }
   
   public function getAllCategories() {
-    return $this->categoryDao->getAllCategories('', 0, 100);
+    return $this->categoryDao->getAllCategories('', 0, 1000);
   }
   
   public function getAllTypes() {
-    return $this->typeDao->getAllProductTypes('', 0, 100);
+    return $this->typeDao->getAllProductTypes('', 0, 1000);
+  }
+  
+  public function getAllDetailTypes() {
+    return $this->detailTypeDao->getAllDetailTypes('', 0, 1000);
   }
   
   public function count($filter = '') {

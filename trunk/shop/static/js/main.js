@@ -68,9 +68,8 @@ $(document).ready(function() {
   var i = 0;
   switch (v) {
 		case "product": i = 2; parseProduct(); break;
-		case "offer"  : i = 3; parseOffer();   break;
 		case "shop"   :
     default       : i = 1; parseShop();    break;
 	}
-  $("#menu li:nth-child(" + i + ") a").addClass('current');
+  $("#menu li:nth-child(" + i + ")").addClass('current');
 });

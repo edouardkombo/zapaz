@@ -165,7 +165,7 @@ class Product {
    * Get the current offer.
    * @return The current available offer.
    */
-  public function getOffer() {
+  public function getCurrentOffer() {
     if ($this->offer == null && $this->id > 0) {
       $d = new OfferDao();
       $this->offer = $d->getOfferByProductId($this->id);

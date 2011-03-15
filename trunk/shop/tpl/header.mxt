@@ -14,9 +14,13 @@
   <body>
     <h1>Administration | shop.zap.com</h1>
     <ul id="menu">
-      <li><a href="/?p=shop">Shop Information</a></li>
+      <li><a href="/?p=shop">Infos</a></li>
       <li><a href="/?p=product">Products</a></li>
-      <li><a href="/?p=offer">Offers</a></li>
+    </ul>
+    <ul id="submenu">
+      <mx:bloc id="submenu">
+        <li><a mXattribut="class:class" mXattribut="href:link"><mx:text id="text"/></a></li>
+      </mx:bloc id="submenu">
     </ul>
     <table id="page">
       <tr>
