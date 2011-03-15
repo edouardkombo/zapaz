@@ -44,6 +44,14 @@ class ProductManager {
     return $this->detailTypeDao->getAllDetailTypes('', 0, 1000);
   }
   
+  public function saveDetailType($type) {
+    return $this->detailTypeDao->saveDetailType($type);
+  }
+  
+  public function deleteDetailType($type) {
+    return $this->detailTypeDao->deleteDetailType($type);
+  }
+  
   public function count($filter = '') {
     return $this->productDao->count($filter);
   }

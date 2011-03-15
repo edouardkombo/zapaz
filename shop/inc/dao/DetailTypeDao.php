@@ -28,6 +28,22 @@ class DetailTypeDao {
     return $array;
   }
   
+  public function saveDetailType($type) {
+    if ($type == null) {
+      return 0;
+    }
+    $q = $this->db->prepare("INSERT INTO DetailType (name) VALUES (?)");
+    return $q->execute(array($type->getName()));
+  }
+  
+  public function deleteDetailType($type) {
+    if ($type == null) {
+      return 0;
+    }
+    $q = $this->db->prepare("DELETE FROM DetailType WHERE name = ?");
+    return $q->execute(array($type->getName()));
+  }
+  
   private function fetchDetailType($t) {
     return new DetailType($t["name"], $t["id"]);
   }

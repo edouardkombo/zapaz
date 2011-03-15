@@ -6,7 +6,7 @@ $template->SetModeliXe();
 $productManager = new ProductManager();
 $detailTypeList = $productManager->getAllDetailTypes();
 
-if ($detailTypeList == null || count($detailTypeList)) {
+if ($detailTypeList == null || count($detailTypeList) == 0) {
     $template->MxBloc("type", "reset");
 } else {
   foreach ($detailTypeList as $t) {
