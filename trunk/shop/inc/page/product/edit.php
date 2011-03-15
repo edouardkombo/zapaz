@@ -39,7 +39,11 @@ $template->MxFormField($pre."price", "text", "price", $p->getPrice());
 $template->MxFormField($pre."description", "textarea", "description", $p->getDescription(), 'cols="40" rows="6"');
 
 $details = $p->getDetails();
-$detailTypeList = $productManager->getAllDetailTypes();
+$tmpList = $productManager->getAllDetailTypes();
+$detailTypeList = array();
+foreach ($tmpList as $t) {
+  $detailTypeList[$t->getName()] = $t->getName();
+}
 if ($details == null) {
   $details = array();
 }

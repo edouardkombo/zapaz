@@ -20,7 +20,19 @@ var editProduct = function() {
     $("#corps").html(xml);
     initPictureChangeButton();
     $("#edit-detail-types").click(editDetailTypeList);
+    $("input[name=detailName]").keypress(function(e) { if (e.keyCode == 13) { addNewDetailTypeLine(); return false; }});
+    $("input[name=detailName]").blur(addNewDetailTypeLine);
   });
+};
+
+var addNewDetailTypeLine = function() {
+  if ($("#product-details tbody tr:last input").val() != "") {
+    var tr = $("#product-details tbody tr:last").clone();
+    $("#product-details tbody").append(tr);
+    $("#product-details tbody tr:last input").val('');
+    $("#product-details tbody tr:last input").keypress(function(e) { if (e.keyCode == 13) { addNewDetailTypeLine(); return false; }});
+    $("#product-details tbody tr:last input").blur(addNewDetailTypeLine);
+  }
 };
 
 var editDetailTypeList = function() {
@@ -35,45 +47,62 @@ var editDetailTypeList = function() {
       $("#popup").animate({'left':left + 'px'});
     });
     $("#popup #type-values span").each(function() {
-      $(this).click(function() { removeDetailType($(this)); });
+      $(this).click(function() {removeDetailType($(this));});
     });
     $("#popup #submit-new-type").click(addDetailType);
-    $("#popup input[name=newType]").keypress(function(e) { if (e.keyCode == 13) { addDetailType(); return false; } });
-    $("#popup #submit-close").click(function() {$("#lock-background").fadeOut('normal', function() {$("#lock-background").remove();});});
+    $("#popup input[name=newType]").keypress(function(e) {if (e.keyCode == 13) {addDetailType();return false;}});
+    $("#popup #submit-close").click(function() {
+      $("#lock-background").fadeOut('normal', function() {
+        var select = document.createElement('select');
+            select.setAttribute('name', 'detailType');
+        $("#type-values span").each(function() {
+          var opt = document.createElement('option');
+              opt.setAttribute('value', $(this).text());
+              opt.appendChild(document.createTextNode( $(this).text() ));
+          select.appendChild(opt);
+        });
+        $(select).replaceAll("select[name=detailType]");
+        $("#lock-background").remove();
+        
+      });
+    });
   });  
 };
 
 var addDetailType = function() {
-  var v = $("input[name=newType]").val();
-  if (v != "") {
-    var ok = true;
-    $("#type-values span").each(function() {
-      if ($(this).text() == v) {
-        ok = false;
+  var v = $("input[name=newType]").val().toLowerCase();
+  if (v == "") return;
+  if (v.length > 12) {
+    alert("Type is too long. Twelve characters max.");
+    return;
+  }
+  var ok = true;
+  $("#type-values span").each(function() {
+    if ($(this).text().toLowerCase() == v) {
+      ok = false;
+    }
+  });
+  if (!ok) {
+    alert("This type is already in the list.");
+  } else {
+    $.post("/product/add-detail-type", {"type":v}, function(xml) {
+      var result = $(xml).find('result').text() == "1";
+      if (result) {
+        var span = document.createElement('span');
+            span.appendChild(document.createTextNode(v));
+          $(span).click(function() {removeDetailType($(this));});
+        $("#type-values").append("\n");
+        $("#type-values").append(span);
+        $("input[name=newType]").val('');
+      } else {
+        alert("Failed to save the type.");
       }
     });
-    if (!ok) {
-      alert("This type is already in the list.");
-    } else {
-      $.post("/product/add-detail-type", {"type":v}, function(xml) {
-        var result = $(xml).find('result').text() == "1";
-        if (result) {
-          var span = document.createElement('span');
-              span.appendChild(document.createTextNode(v));
-            $(span).click(function() { removeDetailType($(this)); });
-          $("#type-values").append("\n");
-          $("#type-values").append(span);
-          $("input[name=newType]").val('');
-        } else {
-          alert("Failed to save the type.");
-        }
-      });
-    }
   }
 };
 
 var removeDetailType = function(elt) {
-  var v = $(elt).val();
+  var v = $(elt).text();
   $.post("/product/remove-detail-type", {"type":v}, function(xml) {
     var result = $(xml).find('result').text() == "1";
     if (result) {

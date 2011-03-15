@@ -283,7 +283,7 @@ input[name=typeFilter] { position:absolute; top:5px; right:420px; width:150px; }
 input.filter.default { font-style: italic; color: #B0B0B0; }
 
 /************ product/edit  ************/
-#product-details { width:100%; }
+#product-details { width:95%; margin:auto; }
 #product-details thead td { text-align: center; font-weight: bold; padding:3px 0; }
 #product-details td:first-child { width: 150px; text-align:center; }
 #product-details select { width:150px; margin:0 5px 3px 5px; }
