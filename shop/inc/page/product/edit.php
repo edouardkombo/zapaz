@@ -28,7 +28,9 @@ if ($p == null) {
 
 $picture = $p->getPicture() != null ? PROTOCOL.DOMAIN_ZSHOP.$p->getPicture() : PROTOCOL.DOMAIN_ZSHOP."/img/noimage.jpg";
 
-$template->MxAttribut($pre."plogo", $picture);
+$template->MxHidden($pre."hpicture", $template->GetQueryString(array("hpicture" => $p->getPicture())));
+
+$template->MxAttribut($pre."ppicture", $picture);
 $template->MxFormField($pre."name", "text", "name", $p->getName());
 $template->MxFormField($pre."manufacturer", "text", "manufacturer", $p->getManufacturer());
 $template->MxSelect($pre."category", "category", $p->getCategoryId(), $categories);
@@ -37,29 +39,18 @@ $template->MxFormField($pre."price", "text", "price", $p->getPrice());
 $template->MxFormField($pre."description", "textarea", "description", $p->getDescription(), 'cols="40" rows="6"');
 
 $details = $p->getDetails();
+$detailTypeList = $productManager->getAllDetailTypes();
 if ($details == null) {
   $details = array();
 }
-array_push($details, new ProductDetail("", 0, 0));
+if (count($details) == 0) {
+  array_push($details, new ProductDetail('', '', ''));
+}
 foreach ($details as $d) {
-  $typeName = $d->getDetailType() != null ? $d->getDetailType()->getName() : "";
-  $template->MxFormField($pre."detail.type", "text", "detailType", $typeName);
+  $template->MxSelect($pre."detail.type", "detailType", $d->getDetailType(), $detailTypeList);
   $template->MxFormField($pre."detail.name", "text", "detailName", $d->getName());
-  $template->MxBloc("detail", "loop");
+  $template->MxBloc($pre."detail", "loop");
 }
-
-$offer = $p->getOffer();
-if ($offer == null) {
-  $offer = new Offer(0, 0, 0, 0, 0);
-}
-
-$picture = $offer->getCommercialImage() != null ? PROTOCOL.DOMAIN_ZSHOP.$offer->getCommercialImage() : PROTOCOL.DOMAIN_ZSHOP."/img/noimage.jpg";
-
-$template->MxAttribut($pre."ologo", $picture);
-$template->MxAttribut($pre."onlyImage", $offer->getDisplayOnlyImage());
-$template->MxFormField($pre."discountPrice", "text", "discountPrice", "0");
-$template->MxFormField($pre."startTime", "text", "startTime", "0");
-$template->MxFormField($pre."endTime", "text", "endTime", "0");
 
 $template->MxHidden($pre."productId", $template->GetQueryString(array("id" => $p->getId())));
 

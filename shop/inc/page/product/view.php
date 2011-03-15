@@ -19,7 +19,6 @@ if (!$fullPage) {
 }
 
 $template->MxAttribut($pre."nameFilter", $nameFilter);
-$template->MxAttribut($pre."categoryFilter", $categoryFilter);
 $template->MxAttribut($pre."typeFilter", $typeFilter);
 
 $template->MxSelect($pre."limitSelect", "limit", $limit, array(

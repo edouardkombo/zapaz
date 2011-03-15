@@ -8,11 +8,81 @@ var addProduct = function() {
   editProduct();
 };
 
+var addDetailLine = function() {
+  var select = document.createElement('select');
+  
+  var td = document.createElement('td');
+    $(td).append();
+}
+
 var editProduct = function() {
   $.get("/product/edit", {}, function(xml) {
     $("#corps").html(xml);
+    initPictureChangeButton();
+    $("#edit-detail-types").click(editDetailTypeList);
   });
 };
+
+var editDetailTypeList = function() {
+  $.get("/product/edit-detail-types", function(xml) {
+    $("body").append(xml);
+    $("#popup").css('left', '-1000px');
+    $("#lock-background").fadeIn('normal', function() {
+      var height = $("#popup").innerHeight();
+      var top = (parseInt($("body").innerHeight(), 10) - height - 60) / 2;
+      $("#popup").css('top', top + 'px');
+      var left = (parseInt($("body").innerWidth(), 10) - 780 - 10) / 2;
+      $("#popup").animate({'left':left + 'px'});
+    });
+    $("#popup #type-values span").each(function() {
+      $(this).click(function() { removeDetailType($(this)); });
+    });
+    $("#popup #submit-new-type").click(addDetailType);
+    $("#popup input[name=newType]").keypress(function(e) { if (e.keyCode == 13) { addDetailType(); return false; } });
+    $("#popup #submit-close").click(function() {$("#lock-background").fadeOut('normal', function() {$("#lock-background").remove();});});
+  });  
+};
+
+var addDetailType = function() {
+  var v = $("input[name=newType]").val();
+  if (v != "") {
+    var ok = true;
+    $("#type-values span").each(function() {
+      if ($(this).text() == v) {
+        ok = false;
+      }
+    });
+    if (!ok) {
+      alert("This type is already in the list.");
+    } else {
+      $.post("/product/add-detail-type", {"type":v}, function(xml) {
+        var result = $(xml).find('result').text() == "1";
+        if (result) {
+          var span = document.createElement('span');
+              span.appendChild(document.createTextNode(v));
+            $(span).click(function() { removeDetailType($(this)); });
+          $("#type-values").append("\n");
+          $("#type-values").append(span);
+          $("input[name=newType]").val('');
+        } else {
+          alert("Failed to save the type.");
+        }
+      });
+    }
+  }
+};
+
+var removeDetailType = function(elt) {
+  var v = $(elt).val();
+  $.post("/product/remove-detail-type", {"type":v}, function(xml) {
+    var result = $(xml).find('result').text() == "1";
+    if (result) {
+      $(elt).remove();
+    } else {
+      alert("Failed to remove the type");
+    }
+  });
+}
 
 var deleteProducts = function() {
   var arr = getCheckedLines();
@@ -41,6 +111,45 @@ var filterProduct = function(name, filter) {
     }
   });
 };
+
+var initPictureChangeButton = function() {
+  var a = document.createElement("a");
+      a.setAttribute("href", "#logo");
+      a.appendChild(document.createTextNode("Change picture"));
+    $(a).click(askPicture);
+    $(a).hide();
+  $(".logo").append(a);
+  $(".logo").hover(
+    function() {$(a).show();},
+    function() {$(a).hide();}
+  );
+};
+
+var askPicture = function() {
+  $.post("/product/logo", function(xml) {
+    $("body").append(xml);
+    $("#popup form").ajaxForm({success: function(xml) {
+      var result = $(xml).find('result').text() == "1";
+      var path   = $(xml).find('path').text();
+      if (result) {
+        $("#lock-background").fadeOut('normal', function() {$("#lock-background").remove();});
+        $("input[name=hpicture]").val(path);
+        $(".logo img").attr('src', 'http://static.shop.zap.com/' + path);
+      }
+    }});
+    $("#popup").css('left', '-1000px');
+    $("#lock-background").fadeIn('normal', function() {
+      var height = $("#popup").innerHeight();
+      var top = (parseInt($("body").innerHeight(), 10) - height - 60) / 2;
+      $("#popup").css('top', top + 'px');
+      var left = (parseInt($("body").innerWidth(), 10) - 780 - 10) / 2;
+      $("#popup").animate({'left':left + 'px'});
+    });
+    $("#popup .cancel-button").click(function() {$("#lock-background").fadeOut('normal', function() {$("#lock-background").remove();});});
+    $("#popup .submit-button").click(function() {$("#popup form").submit();});
+  });
+};
+
 
 var refreshProducts = function(page, nameFilter, categoryFilter, typeFilter, action, callback) {
   if (page == null)
@@ -90,7 +199,7 @@ var parseProduct = function() {
   $("#create-product input").keypress(function(e) {if (e.keyCode == 13) {addProduct();return false;}});
   $("#list-products thead input:checkbox").click(checkAllLines);
   $("#list-products tbody input:checkbox").click(function() {checkLine($(this));});
-  $("#list-products tbody td:nth-child(2) a").click(function() { editProduct($(this)); });
+  $("#list-products tbody td:nth-child(2) a").click(function() {editProduct($(this));});
   $("a[href=#remove]").click(deleteProducts);
   $("select[name=limit]").change(function() {refreshProducts();});
   $("a.other-page").click(function() {refreshProducts($(this).text());});

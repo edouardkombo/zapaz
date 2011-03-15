@@ -9,7 +9,7 @@ define("ROOT"                     , $root                           );
 define("MYSQL_HOSTNAME"           , "localhost"                     );
 define("MYSQL_PORT"               , "3306"                          );
 define("MYSQL_USERNAME"           , "root"                          );
-define("MYSQL_PASSWORD"           , "datesvac"                      );
+define("MYSQL_PASSWORD"           , "zappaz"                        );
 define("MYSQL_DB_SHOP"            , "zapshop"                       );
 
 // Domaines et sous domaines
@@ -61,6 +61,7 @@ include(INC_GENERAL_PATH.'model/Shop.php');
 // DAO 
 include(INC_GENERAL_PATH.'dao/CategoryDao.php');
 include(INC_GENERAL_PATH.'dao/CurrencyDao.php');
+include(INC_GENERAL_PATH.'dao/DetailTypeDao.php');
 include(INC_GENERAL_PATH.'dao/KeywordDao.php');
 include(INC_GENERAL_PATH.'dao/ProductDao.php');
 include(INC_GENERAL_PATH.'dao/ProductTypeDao.php');

@@ -78,8 +78,8 @@ var initLogoChangeButton = function() {
       a.appendChild(document.createTextNode("Change logo"));
     $(a).click(askLogo);
     $(a).hide();
-  $("#logo").append(a);
-  $("#logo").hover(
+  $(".logo").append(a);
+  $(".logo").hover(
     function() {$(a).show();},
     function() {$(a).hide();}
   );
@@ -94,7 +94,7 @@ var askLogo = function() {
       if (result) {
         $("#lock-background").fadeOut('normal', function() { $("#lock-background").remove(); });
         $("input[name=hlogo]").val(path);
-        $("#logo img").attr('src', 'http://static.shop.zap.com/' + path);
+        $(".logo img").attr('src', 'http://static.shop.zap.com/' + path);
       }
     }});
     $("#popup").css('left', '-1000px');
