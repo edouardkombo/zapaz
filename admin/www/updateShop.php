@@ -1,4 +1,5 @@
 <?php
+include('../inc/global.config.php');
 
 $in = $_POST;
 //$in = $_GET;
@@ -8,11 +9,9 @@ $name = isset($in['name']) && $in['name'] != ""                      ? $in['name
 $currencyId   = isset($in['currencyId'])   && is_numeric($in['currencyId']) && $in['currencyId'] > 0 ? $in['currencyId']   : 0;
 $latitude = isset($in['latitude']) && $in['latitude'] != ""          ? $in['latitude'] : null;
 $longitude = isset($in['longitude']) && $in['longitude'] != ""       ? $in['longitude'] : null;
-//$webServiceUrl = isset($in['webServiceUrl']) && ValidateURL($in['webServiceUrl']);
+$webServiceUrl = isset($in['webServiceUrl']) && ValidateURL($in['webServiceUrl']);
 $email = isset($in['email']) && ValidateEmail($in['email']);
-$countOfProducts = isset($in['countOfProducts'])   && is_numeric($in['countOfProducts']) ;
-$creationTime = isset($in['creationTime'])   && is_numeric($in['creationTime']) ;
-$lastUpdate = isset($in['lastUpdate'])   && is_numeric($in['lastUpdate']) ;
+
 
 function ValidateEmail($email) 
 { 

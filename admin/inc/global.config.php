@@ -9,7 +9,7 @@ define("ROOT"                     , $root                           );
 //define("MYSQL_HOSTNAME"           , "mysql51-19.pro"                );
 //define("MYSQL_PORT"               , "3306"                          );
 //define("MYSQL_USERNAME"           , "datesvaczap"                   );
-//define("MYSQL_PASSWORD"           , "rh(MEL23fr"                    );
+//define("MYSQL_PASSWORD"           , "zappaz"                    );
 //define("MYSQL_DB_ADMIN"           , "datesvaczap"                   );
 //define("DOMAIN"                   , "zap.dates-vacances-scolaires.com");
 //define("DOMAIN_ADMIN"             , DOMAIN                 );

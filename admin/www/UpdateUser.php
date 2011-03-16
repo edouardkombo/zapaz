@@ -1,6 +1,6 @@
 <?php
 
-include '../../service/UserManager.php';
+include('../inc/global.config.php');
 
 //$in = $_POST;
 $in = $_GET;
@@ -30,7 +30,7 @@ if ($email != null) {
   $result = $userManager->saveOrUpdate(new User($email, $password));
 }
 
-// update.php?id=2&email=aaa@gmail.com&password=123
+// updateUser.php?id=2&email=aaa@gmail.com&password=123
 
 echo '<?xml version="1.0" encoding="utf-8"?>';
 echo '<r>';
