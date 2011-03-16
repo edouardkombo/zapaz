@@ -29,7 +29,7 @@ if ($p == null) {
 
 $picture = $p->getPicture() != null ? PROTOCOL.DOMAIN_ZSHOP.$p->getPicture() : PROTOCOL.DOMAIN_ZSHOP."/img/noimage.jpg";
 
-$template->MxHidden($pre."hpicture", $template->GetQueryString(array("hpicture" => $p->getPicture())));
+$template->MxHidden($pre."hidden", $template->GetQueryString(array("id" => $p->getId(), "hpicture" => $p->getPicture())));
 
 $template->MxAttribut($pre."ppicture", $picture);
 $template->MxFormField($pre."name", "text", "name", $p->getName());
@@ -57,8 +57,6 @@ foreach ($details as $d) {
   $template->MxFormField($pre."detail.name", "text", "detailName", $d->getName());
   $template->MxBloc($pre."detail", "loop");
 }
-
-$template->MxHidden($pre."productId", $template->GetQueryString(array("id" => $p->getId())));
 
 if (!$fullPage) {
   $template->MxWrite();

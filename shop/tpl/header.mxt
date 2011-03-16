@@ -13,9 +13,11 @@
   </head>
   <body>
     <h1>Administration | shop.zap.com</h1>
+    <mx:select id="shopList"/>
+    <mx:hidden id="currentShopId"/>
     <ul id="menu">
-      <li><a href="/?p=shop">Infos</a></li>
-      <li><a href="/?p=product">Products</a></li>
+      <li><a href="#shop">Infos</a></li>
+      <li><a href="#product">Products</a></li>
     </ul>
     <ul id="submenu">
       <mx:bloc id="submenu">

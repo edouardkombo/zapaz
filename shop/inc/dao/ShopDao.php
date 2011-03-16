@@ -14,8 +14,11 @@ class ShopDao {
     $this->db = $db;
   }
   
-  public function getShop() {
-    $q = $this->db->query("SELECT * FROM Shop LIMIT 1");
+  public function getShopById($id) {
+    if ($id == null || $id < 1) {
+      return null;
+    }
+    $q = $this->db->query("SELECT * FROM Shop WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchShop($t);
     }

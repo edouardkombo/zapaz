@@ -2,9 +2,7 @@
 
 include('../inc/global.config.php');
 
-$array_page = array("shop", "product", "offer");
-
-$page = isset($_GET['p']) && in_array($_GET['p'], $array_page) ? $_GET['p'] : $array_page[0];
+$array_page = array("shop", "product");
 
 $javascript = array(
     "http://maps.google.com/maps/api/js?sensor=false",
@@ -17,6 +15,7 @@ $javascript = array(
     PROTOCOL.DOMAIN_ZSHOP."/js/shop.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/product.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/offer.js",
+    PROTOCOL.DOMAIN_ZSHOP."/js/views.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/gmaps.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/main.js"
 );
@@ -26,7 +25,7 @@ $css = array(
     PROTOCOL.DOMAIN_ZSHOP."/css/jquery-ui-admin.css"
 );
 
-$template = new ModeliXe($page.'/default.mxt');
+$template = new ModeliXe('/default.mxt');
 $template->SetModeliXe();
 
 foreach ($css as $f) {
@@ -39,7 +38,7 @@ foreach ($javascript as $js) {
 }
 
 $fullPage = true;
-include('../inc/page/'.$page.'/view.php');
+include('../inc/page/default/view.php');
 
 $template->MxWrite();
 

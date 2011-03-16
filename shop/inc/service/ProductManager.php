@@ -38,6 +38,10 @@ class ProductManager {
     return $this->categoryDao->getAllCategories('', 0, 1000);
   }
   
+  public function getUsedCategories($shopId) {
+    return $this->categoryDao->getUsedCategories($shopId);
+  }
+  
   public function getAllCategoriesAsDictionary() {
     $list = array();
     $tmpList = $this->getAllCategories();

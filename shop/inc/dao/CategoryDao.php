@@ -38,6 +38,22 @@ class CategoryDao {
     }
     return $array;
   }
+  
+  public function getUsedCategories($shopId) {
+    $array   = array();
+    if ($shopId == null || $shopId < 1) {
+      return $array;
+    }
+    
+    $q = $this->db->prepare("SELECT c.* FROM Product p JOIN Category c ON p.categoryId = c.id WHERE p.shopId = ?");
+    $q->execute(array($shopId));
+    if ($q != null) {
+      while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        array_push($array, $this->fetchCategory($t));
+      }
+    }
+    return $array;
+  }
 
   public function count($filter = '') {
     $filter .= "%";

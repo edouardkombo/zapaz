@@ -115,6 +115,24 @@ ul#menu li.current a {
   font-weight:bold;
 }
 
+select[name=shops] {
+  position:absolute;
+  top:10px;
+  right:150px;
+  width:200px;
+  padding:4px;
+  font-size:1.2em;
+}
+
+p#blank {
+  font-weight:bold;
+  margin:auto;
+  font-size:2em;
+  width:100%;
+  padding:200px 0;
+  text-align: center;
+}
+
 ul#submenu {
 	position:absolute;
 	top:45px;
@@ -277,6 +295,11 @@ table#list-products tbody td:nth-child(2) a { display:block; height:14px; overfl
 table#list-products td.link { width:400px; }
 table#list-products tbody td.link a { display:block; height:14px; overflow:hidden; color:#06C; text-decoration:none; }
 table#list-products tbody td.link a:hover { text-decoration:underline; }
+table#list-products tbody td:nth-child(2) { width:300px; }
+table#list-products td:nth-child(3) { width:100px; text-align: center; }
+table#list-products td:nth-child(4) { width:100px; text-align: center; }
+table#list-products td:nth-child(5) { width:50px; text-align: center; }
+table#list-products tbody td:nth-child(6) { width:200px; }
 
 input[name=nameFilter] { position:absolute; top:5px; right:5px; width:400px; }
 input[name=typeFilter] { position:absolute; top:5px; right:420px; width:150px; }
