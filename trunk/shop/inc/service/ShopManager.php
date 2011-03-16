@@ -63,21 +63,23 @@ class ShopManager {
     return $address;
   }
   
-  public function saveOrUpdate($shop) {
+  public function saveOrUpdate($shop, $keywords) {
     global $db;
     try {
       $db->beginTransaction();
       if (!$this->shopDao->saveOrUpdate($shop)) {
         throw new Exception("Failed to save shop.");
       }
-        
-      if (!$this->keywordDao->deleteAll($shop->getId())) {
-        throw new Exception("Failed to delete old keywords.");
+      $array = array();
+      if ($keywords != null) {
+        foreach ($keywords as $w) {
+          array_push($array, new Keyword($w, $shop->getId()));
+        }
       }
+      $shop->setKeywords($array);
       
-      if (!$this->keywordDao->saveAll($shop->getKeywords(), $shop->getId())) {
-        throw new Exception("Failed to save new keywords.");
-      }
+      $this->keywordDao->deleteAll($shop->getId());
+      $this->keywordDao->saveAll($shop->getKeywords());
       $db->commit();
     } catch (Exception $e) {
       $db->rollBack();

@@ -41,11 +41,11 @@ var isEmail        = function(v) { return v != "" && isRFC822ValidEmail(v); }
 
 var updateShop = function() {
   var params = getFormValues("#ishop");
-  params["logo"] = $("input[name=hlogo]").val();
-  params["id"] = $("input[name=id]").val();
-  params["keywords"] = $("input[name=keywords]").val();
+  params["id"]         = $("input[name=currentShopId]").val();
+  params["logo"]       = $("input[name=hlogo]").val();
+  params["keywords"]   = $("input[name=keywords]").val();
   params["currencyId"] = $("select[name=currency] option:selected").val();
-  params["countryId"] = $("select[name=country] option:selected").val();
+  params["countryId"]  = $("select[name=country] option:selected").val();
   var keywords = "";
   $("#keywords span").each(function() {
     keywords += $(this).text() + ";";
@@ -62,7 +62,7 @@ var updateShop = function() {
     $.post("/shop/update", params, function(xml) {
       var result = $(xml).find("result").text() == "1";
       var id = $(xml).find('id').text();
-      $("input[name=id]").val(id);
+      $("input[name=currentShopId]").val(id);
       if (result) {
         alert("Data has been saved!");
       } else {

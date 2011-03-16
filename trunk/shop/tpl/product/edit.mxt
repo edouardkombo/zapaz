@@ -11,7 +11,6 @@
         <div class="info">
           <label for="name">Name</label><mx:formField id="name"/>
           <label for="manufacturer">Manufacturer</label><mx:formField id="manufacturer"/>
-          <label for="shop">Shop</label><mx:select id="shop"/>
           <label for="category">Category</label><mx:select id="category"/>
           <label for="type">Type</label><mx:select id="type"/>
           <label for="price">Price</label><mx:formField id="price"/>

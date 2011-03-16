@@ -12,11 +12,23 @@ var displayBlank = function() {
   });
 };
 
+var goodDisplay = function() {
+  var v = $("input[name=currentShopId]").val();
+  if (v == "0") {
+    displayBlank();
+    return false;
+  }
+  return true;
+};
+
 var displayNewShopInfo = function() {
   
 };
 
 var displayShopInfo = function() {
+  if (!goodDisplay()) {
+    return false;
+  }
   refreshShop();
   
   $("#menu li").removeClass('current');
@@ -33,6 +45,9 @@ var displayShopInfo = function() {
 };
 
 var displayProducts = function() {
+  if (!goodDisplay()) {
+    return false;
+  }
   var id = $("input[name=currentShopId]").val();
   
   $("#menu li").removeClass('current');

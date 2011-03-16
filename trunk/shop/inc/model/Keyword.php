@@ -9,10 +9,12 @@ class Keyword {
 
   private $id;
   private $name;
+  private $shopId;
 
-  function __construct($name, $id = 0) {
+  function __construct($name, $shopId, $id = 0) {
     $this->id = $id;
     $this->name = $name;
+    $this->shopId = $shopId;
   }
 
   public function setId($id) {
@@ -31,6 +33,13 @@ class Keyword {
     return $this->name;
   }
 
+  public function getShopId() {
+    return $this->shopId;
+  }
+
+  public function setShopId($shopId) {
+    $this->shopId = $shopId;
+  }
 }
 
 ?>

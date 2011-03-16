@@ -3,7 +3,7 @@
 $in = $_POST;
 
 $id           = isset($in["id"])           && is_numeric($in["id"])       && $in["id"]     > 0 ? stripslashes($in["id"])             : 0;
-$picture      = isset($in["hpicture"])     && $in["hpicture"]     != "" ? stripslashes($in["hpicture"])     : "";
+$picture      = isset($in["picture"])      && $in["picture"]      != "" ? stripslashes($in["picture"])      : "";
 $name         = isset($in["name"])         && $in["name"]         != "" ? stripslashes($in["name"])         : null;
 $manufacturer = isset($in["manufacturer"]) && $in["manufacturer"] != "" ? stripslashes($in["manufacturer"]) : null;
 $categoryId   = isset($in["category"])     && is_numeric($in["category"]) && $in["category"] > 0 ? stripslashes($in["category"]) : null;

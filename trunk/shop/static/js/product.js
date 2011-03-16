@@ -1,11 +1,18 @@
 var addProduct = function() {
-//  var v = $("input[name=productName]").val();
-//  if (v == "") {
-//    alert("You must enter a product name before adding a product item.");
-//  } else {
-//    
-//  }
-  editProduct();
+  var v = $("input[name=productName]").val();
+  if (v == "") {
+    alert("You must enter a product name before adding a product item.");
+  } else {
+    $.post("/product/edit", {'name':v}, function(xml) {
+      $("#corps").html(xml);
+      initPictureChangeButton();
+      $("#edit-detail-types").click(editDetailTypeList);
+      $("input[name=detailName]").keypress(function(e) { if (e.keyCode == 13) { addNewDetailTypeLine(); return false; }});
+      $("input[name=detailName]").blur(addNewDetailTypeLine);
+      $("#update-product").click(updateProduct);
+      $("#cancel").click(refreshProducts);
+    });
+  }
 };
 
 var addDetailLine = function() {
@@ -16,15 +23,22 @@ var addDetailLine = function() {
 }
 
 var editProduct = function() {
-  $.get("/product/edit", {}, function(xml) {
-    $("#corps").html(xml);
-    initPictureChangeButton();
-    $("#edit-detail-types").click(editDetailTypeList);
-    $("input[name=detailName]").keypress(function(e) { if (e.keyCode == 13) { addNewDetailTypeLine(); return false; }});
-    $("input[name=detailName]").blur(addNewDetailTypeLine);
-    $("#update-product").click(updateProduct);
-    $("#cancel").click(refreshProducts);
-  });
+  var arr = getCheckedLines();
+  if (arr[2] == 0) {
+    alert("Vous devez sélectionner au moins un libellé pour pouvoir l'éditer.");
+  } else if (arr[2] > 1) {
+    alert("Vous ne pouvez sélectionner qu'un seul libellé pour pouvoir l'éditer.");
+  } else {
+    $.post("/product/edit", {'id':arr[0]}, function(xml) {
+      $("#corps").html(xml);
+      initPictureChangeButton();
+      $("#edit-detail-types").click(editDetailTypeList);
+      $("input[name=detailName]").keypress(function(e) { if (e.keyCode == 13) { addNewDetailTypeLine(); return false; }});
+      $("input[name=detailName]").blur(addNewDetailTypeLine);
+      $("#update-product").click(updateProduct);
+      $("#cancel").click(refreshProducts);
+    });
+  }
 };
 
 var updateProduct = function() {
@@ -33,7 +47,7 @@ var updateProduct = function() {
   params["picture"]      = $("input[name=hpicture]").val();
   params["name"]         = $("input[name=name]").val();
   params["manufacturer"] = $("input[name=manufacturer]").val();
-  params["shop"]         = $("select[name=shop]").val();
+  params["shop"]         = $("input[name=currentShopId]").val();
   params["category"]     = $("select[name=category]").val();
   params["type"]         = $("select[name=type]").val();
   params["price"]        = $("input[name=price]").val();
@@ -54,7 +68,7 @@ var updateProduct = function() {
     if (result) {
       refreshProducts();
     } else {
-      alert(xml);
+      alert("Failed to save the product");
     }
   });
 };
@@ -257,6 +271,10 @@ var changeProduct = function(link, nameFilter, categoryFilter, typeFilter, start
 };
 
 var parseProduct = function() {
+  $("#list-products tbody td:nth-child(2) a").click(function() {
+    $(this).parent('td').prev('td').children().attr('checked', 'checked');
+    editProduct();
+  });
   $("#submit-product").click(addProduct);
   $("#create-product").submit(function() {addProduct();return false;});
   $("#create-product input").keypress(function(e) {if (e.keyCode == 13) {addProduct();return false;}});

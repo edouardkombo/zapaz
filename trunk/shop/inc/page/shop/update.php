@@ -42,12 +42,11 @@ if ($name != null
   $keywords = array();
   foreach ($words as $w) {
     if ($w != "") {
-      array_push($keywords, new Keyword($w));
+      array_push($keywords, $w);
     }
   }
-  $shop->setKeywords($keywords);
   
-  $result = $shopManager->saveOrUpdate($shop);
+  $result = $shopManager->saveOrUpdate($shop, $keywords);
   $id = $shop->getId();
 }
 

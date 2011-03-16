@@ -1,54 +1,37 @@
 <?php
+
 include('../inc/global.config.php');
 
-//$in = $_POST;
-$in = $_GET;
+$in = $_POST;
 
-$id    = isset($in['id'])    && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
-$name  = isset($in['name'])  && $in['name'] != ""                     ? $in['name'] : null;
-$email = isset($in['email']) && $in['email'] != ""                   ? $in['email'] : null ;
-$currencyId   = isset($in['currencyId'])   && is_numeric($in['currencyId']) && $in['currencyId'] > 0 ? $in['currencyId']   : 0;
-$latitude = isset($in['latitude']) && $in['latitude'] != ""          ? $in['latitude'] : null;
-$longitude = isset($in['longitude']) && $in['longitude'] != ""       ? $in['longitude'] : null;
-$webServiceUrl = isset($in['webServiceUrl']) &&  $in['webServiceUrl'] != ""       ? $in['webServiceUrl'] : null;
-$email = isset($in['email']) && ValidateEmail($in['email']);
-
-
-function ValidateEmail($email) 
-{ 
-   $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#'; 
-   if(preg_match($Syntaxe,$email)) 
-      return $email; 
-   else 
-     return null; 
-}
-
-function ValidateURL($url){
-
-   if (filter_var($url, FILTER_VALIDATE_URL)) 
-      return $url; 
-   else 
-     return null; 
-}
+$id            = isset($in['id'])            && is_numeric($in['id']) && $in['id'] > 0 ? $in['id'] : 0;
+$name          = isset($in['name'])          && preg_match("/^[a-zA-Zäëÿüïöâêûîôéèàç\-_ ]+$/", $in["name"]) ? $in['name'] : null;
+$email         = isset($in['email'])         && filter_var($in['email'], FILTER_VALIDATE_EMAIL) ? $in["email"] : null;
+$currencyId    = isset($in['currencyId'])    && is_numeric($in['currencyId']) && $in['currencyId'] > 0 ? $in['currencyId'] : 0;
+$latitude      = isset($in['latitude'])      && filter_var($in['latitude'], FILTER_VALIDATE_FLOAT) ? $in['latitude'] : null;
+$longitude     = isset($in['longitude'])     && filter_var($in['longitude'], FILTER_VALIDATE_FLOAT) ? $in['longitude'] : null;
+$webServiceUrl = isset($in['webServiceUrl']) && filter_var($in['webServiceUrl'], FILTER_VALIDATE_URL) ? $in['webServiceUrl'] : null;
 
 $result = 0;
 
-if ($name != null && ValidateEmail($email) &&ValidateURL($in['webServiceUrl'])) {
+if ($name != null && validateEmail($email) && validateUrl($in['webServiceUrl'])) {
   $shopManager = new ShopManager();
   $result = $shopManager->saveOrUpdate(new Shop($id, $name, $currencyId, $latitude, $longitude, $email, $countOfProducts, $creationTime, $lastUpdate));
 }
 
-echo '<?xml version="1.0" encoding="utf-8"?>';
-echo '<r>';
-echo '<result>'.$result.'</result>';
-echo '<id>'.$id.'</id>';
-echo '<name>'.$name.'</name>';
-echo '<currencyId>'.$currencyId.'</currencyId>';
-echo '<latitude>'.$latitude.'</latitude>';
-echo '<longitude>'.$longitude.'</longitude>';
-echo '<email>'.$email.'</email>';
-echo '<countOfProducts>'.$countOfProducts.'</countOfProducts>';
-echo '<creationTime>'.$creationTime.'</creationTime>';
-echo '<$lastUpdate>'.$lastUpdate.'</$lastUpdate>';
-echo '</r>';
+echo <<< END
+<?xml version="1.0" encoding="utf-8"?>
+<r>
+  <result>$result</result>
+  <id>$id</id>
+  <name>$name</name>
+  <currencyId>$currencyId</currencyId>
+  <latitude>$latitude</latitude>
+  <longitude>$longitude</longitude>
+  <email>$email</email>
+  <countOfProducts>$countOfProducts</countOfProducts>
+  <creationTime>$creationTime</creationTime>
+  <lastUpdate>$lastUpdate</lastUpdate>
+</r>
+END
 ?>

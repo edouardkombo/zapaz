@@ -19,6 +19,22 @@ class ProductDetailDao {
     $this->db = $db;
   }
   
+  public function getDetailsForProductId($productId) {
+    $array = array();
+    if ($productId == null || $productId < 1) {
+      return $array();
+    }
+    
+    $q = $this->db->query("SELECT * FROM ProductDetail WHERE productId = ".$this->db->quote($productId, PDO::PARAM_INT));
+    if ($q != null) {
+      while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        array_push($array, $this->fetch($t));
+      }
+    }
+    
+    return $array;
+  }
+  
   public function saveOrUpdate($productDetail) {
     if ($productDetail == null) {
       return 0;
@@ -72,6 +88,10 @@ class ProductDetailDao {
       return 0;
     }
     return $this->db->exec("DELETE FROM ProductDetail WHERE productId = ".$this->db->quote($productId, PDO::PARAM_INT));
+  }
+  
+  private function fetch($t) {
+    return new ProductDetail($t["name"], $t["productId"], $t["detailTypeId"], $t["id"]);
   }
 }
 
