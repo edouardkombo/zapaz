@@ -114,7 +114,7 @@ class Product {
   public function getType() {
     if ($this->type == null && $this->typeId > 0) {
       $d = new ProductTypeDao();
-      $this->type = $d->getTypeById($this->typeId);
+      $this->type = $d->getProductTypeById($this->typeId);
     }
     return $this->type;
   }

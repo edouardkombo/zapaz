@@ -14,9 +14,10 @@ if (!$fullPage) {
 }
 
 $productManager = new ProductManager();
-
-$categories = $productManager->getAllCategories();
-$productTypes = $productManager->getAllTypes();
+$shopManager    = new ShopManager();
+$shops          = $shopManager->getAllShopsAsDictionary();
+$categories     = $productManager->getAllCategoriesAsDictionary();
+$productTypes   = $productManager->getAllTypesAsDictionary();
 
 $p = null;
 if ($id != null) {
@@ -33,6 +34,7 @@ $template->MxHidden($pre."hpicture", $template->GetQueryString(array("hpicture" 
 $template->MxAttribut($pre."ppicture", $picture);
 $template->MxFormField($pre."name", "text", "name", $p->getName());
 $template->MxFormField($pre."manufacturer", "text", "manufacturer", $p->getManufacturer());
+$template->MxSelect($pre."shop", "shop", $p->getShopId(), $shops);
 $template->MxSelect($pre."category", "category", $p->getCategoryId(), $categories);
 $template->MxSelect($pre."type", "type", $p->getTypeId(), $productTypes);
 $template->MxFormField($pre."price", "text", "price", $p->getPrice());

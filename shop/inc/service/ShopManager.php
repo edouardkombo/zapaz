@@ -21,6 +21,21 @@ class ShopManager {
     return $this->shopDao->getShop();
   }
   
+  public function getAllShops() {
+    return $this->shopDao->getAllShops('', 0, 1000);
+  }
+  
+  public function getAllShopsAsDictionary() {
+    $list = array();
+    $tmpList = $this->getAllShops();
+    if ($tmpList != null) {
+      foreach ($tmpList as $t) {
+        $list[$t->getId()] = $t->getName();
+      }
+    }
+    return $list;
+  }
+  
   public function getAllCurrencies() {
     $tmp = $this->currencyDao->getAllCurrencies();
     $array = array();

@@ -73,6 +73,57 @@ class ProductDao {
     return $r != null ? $r->count : 0;
   }
   
+  public function saveOrUpdate($product) {
+    if ($product == null) {
+      return 0;
+    }
+    if ($product->getId() == 0) {
+      return $this->save($product);
+    }
+    return $this->update($product);
+  }
+  
+  public function save($product) {
+    if ($product == null) {
+      return 0;
+    }
+    $sql = "INSERT INTO Product (name, categoryId, typeId, shopId, manufacturer, price, description, picture) VALUE (?, ?, ?, ?, ?, ?, ?, ?)";
+    $q = $this->db->prepare($sql);
+    $r = $q->execute(array(
+      $product->getName(),
+      $product->getCategoryId(),
+      $product->getTypeId(),
+      $product->getShopId(),
+      $product->getManufacturer(),
+      $product->getPrice(),
+      $product->getDescription(),
+      $product->getPicture()
+    ));
+    if ($r == 1) {
+      $product->setId($this->db->lastInsertId());
+    }
+    return $r;
+  }
+  
+  public function update($product) {
+    if ($product == null || $product->getId() == null || $product->getId() < 1) {
+      return 0;
+    }
+    $sql = "UPDATE Product SET name = ?, categoryId = ?, typeId = ?, shopId = ?, manufacturer = ?, price = ?, description = ?, picture = ? WHERE id = ?";
+    $q = $this->db->prepare($sql);
+    return $q->execute(array(
+      $product->getName(),
+      $product->getCategoryId(),
+      $product->getTypeId(),
+      $product->getShopId(),
+      $product->getManufacturer(),
+      $product->getPrice(),
+      $product->getDescription(),
+      $product->getPicture(),
+      $product->getId()
+    ));
+  }
+  
   public function delete($productId) {
     if ($productId == null || $productId < 1) {
       return 0;

@@ -28,6 +28,19 @@ class DetailTypeDao {
     return $array;
   }
   
+  public function getDetailTypeByName($name) {
+    if ($name == null || $name == "") {
+      return null;
+    }
+    
+    $q = $this->db->prepare("SELECT * FROM DetailType WHERE name = ?");
+    $q->execute(array($name));
+    if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+      return $this->fetchDetailType($t);
+    }
+    return null;
+  }
+  
   public function saveDetailType($type) {
     if ($type == null) {
       return 0;
