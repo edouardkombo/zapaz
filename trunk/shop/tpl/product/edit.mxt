@@ -4,7 +4,7 @@
     <form method="post" action="#" id="edit-product" class="regular">
       <fieldset>
         <legend>Product information</legend>
-        <mx:hidden id="hpicture" />
+        <mx:hidden id="hidden" />
         <div class="logo">
           <img alt="picture" width="96" height="96" mXattribut="src:ppicture"/>
         </div>
@@ -56,7 +56,6 @@
         </table>
       </fieldset>
       <div class="fieldset">
-        <mx:hidden id="productId" />
         <div id="update-product" class="submit-button">
           <div class="top"></div>
           <div class="content">Save</div>

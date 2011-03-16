@@ -142,8 +142,16 @@ var showStateField = function() {
   $("input[name=state]").prev('label').show();
 };
 
+var refreshShop = function() {
+  changeShop();
+};
+
 var changeShop = function() {
-  
+  var shopId = $("input[name=currentShopId]").val();
+  $.post("/shop/view", {'shopId':shopId}, function(xml) {
+    $("#corps").html(xml);
+    parseShop();
+  });
 };
 
 var parseShop = function() {

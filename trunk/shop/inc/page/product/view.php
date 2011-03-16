@@ -3,9 +3,10 @@
 $fullPage = isset($fullPage) ? $fullPage : false;
 $pre      = $fullPage        ? "content.": "";
 if (!$fullPage)
-  include('../inc/local.config.php');
+  include('../inc/global.config.php');
 
 $in = $_POST;
+$shopId = isset($in["shopId"]) && is_numeric($in["shopId"]) && $in["shopId"] > 0 ? $in["shopId"] : 0;
 
 $limit          = isset($in['limit'])          && $in['limit'] > 0 && $in['limit'] < 100 ? $in['limit']                        : 15;
 $startIndex     = isset($in['start'])          && $in['start'] >= 0                      ? $in['start']                        : 0;
@@ -62,7 +63,6 @@ if (count($productList) == 0) {
     $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $p->getId());
     $template->MxBloc     ($pre."row.input", "loop");
     $template->MxText     ($pre."row.name", $p->getName());
-    $template->MxText     ($pre."row.category", $p->getCategory()->getName());
     $template->MxText     ($pre."row.type", $p->getType()->getName());
     $template->MxText     ($pre."row.manufacturer", $p->getManufacturer());
     $template->MxText     ($pre."row.price", $p->getPrice());

@@ -35,7 +35,7 @@ class ProductDao {
     $categoryFilter .= '%';
     $typeFilter .= '%';
     $array   = array();
-
+    
     $q = $this->db->prepare("
       SELECT p.*, t.name AS type, c.name AS category 
       FROM `Product` p

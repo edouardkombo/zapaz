@@ -17,8 +17,8 @@ class ShopManager {
     $this->keywordDao = new KeywordDao();
   }
   
-  public function getShop() {
-    return $this->shopDao->getShop();
+  public function getShopById($id) {
+    return $this->shopDao->getShopById($id);
   }
   
   public function getAllShops() {

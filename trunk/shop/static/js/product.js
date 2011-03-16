@@ -29,6 +29,7 @@ var editProduct = function() {
 
 var updateProduct = function() {
   var params = {};
+  params["id"]           = $("input[name=id]").val();
   params["picture"]      = $("input[name=hpicture]").val();
   params["name"]         = $("input[name=name]").val();
   params["manufacturer"] = $("input[name=manufacturer]").val();
@@ -217,12 +218,11 @@ var refreshProducts = function(page, nameFilter, categoryFilter, typeFilter, act
   if (page == null)
     page = $("a.current.other-page").text();
   
-  if(nameFilter == null) nameFilter = $("input[name=nameFilter]").val();
+  if(nameFilter == null || nameFilter == undefined) nameFilter = $("input[name=nameFilter]").val();
   if (nameFilter == defaultProductNameFilterText) nameFilter = '';
-  if(categoryFilter == null) categoryFilter = $("input[name=categoryFilter]").val();
-  if (categoryFilter == defaultCategoryFilterText) categoryFilter = '';
-  if(typeFilter == null) nameFilter = $("input[name=typeFilter]").val();
+  if(typeFilter == null || typeFilter == undefined) typeFilter = $("input[name=typeFilter]").val();
   if (typeFilter == defaultTypeFilterText) typeFilter = '';
+  if(categoryFilter == null || categoryFilter == undefined) categoryFilter = $("#submenu a.current").text();
   
   var limit = $("select[name=limit]").val();
   start = (page - 1) * limit;
@@ -245,7 +245,8 @@ var changeProduct = function(link, nameFilter, categoryFilter, typeFilter, start
   if (typeFilter == null) typeFilter = "";
   if (start  == null) start  = 0;
   if (limit  == null) limit  = 15;
-  var param = {'nameFilter': nameFilter, 'categoryFilter':categoryFilter, 'typeFilter':typeFilter, 'start':start, 'limit':limit};
+  var shopId = $("input[name=currentShopId]").val();
+  var param = {'shopId':shopId, 'nameFilter': nameFilter, 'categoryFilter':categoryFilter, 'typeFilter':typeFilter, 'start':start, 'limit':limit};
   $.post(link, param, function(xml) {
     $("#corps").html(xml);
     parseProduct();
@@ -270,6 +271,5 @@ var parseProduct = function() {
   $("a[href=#next-page]").click(function() {refreshProducts(null, null, "next");});
   $("a[href=#last-page]").click(function() {refreshProducts(null, null, "last");});
   setUpFilter("nameFilter", defaultProductNameFilterText, filterProduct);
-  setUpFilter("categoryFilter", defaultCategoryFilterText, filterProduct);
   setUpFilter("typeFilter", defaultTypeFilterText, filterProduct);
 };

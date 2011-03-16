@@ -2,22 +2,18 @@
 $fullPage = isset($fullPage) ? $fullPage : false;
 $pre      = $fullPage        ? "content.": "";
 if (!$fullPage)
-  include('../inc/local.config.php');
+  include('../inc/global.config.php');
 
 $in = $_POST;
+$shopId = isset($in["shopId"]) && is_numeric($in["shopId"]) && $in["shopId"] > 0 ? $in["shopId"] : 0;
 
 if (!$fullPage) {
   $template = new ModeliXe('shop/view.mxt');
   $template->SetModeliXe();
 }
 
-$template->MxAttribut("header.submenu.link", "#info");
-$template->MxAttribut("header.submenu.class", "current");
-$template->MxText("header.submenu.text", "Shop Information");
-$template->MxBloc("header.submenu", "loop");
-
 $shopManager = new ShopManager();
-$shop = $shopManager->getShop();
+$shop = $shopManager->getShopById($shopId);
 if ($shop == null) {
   $shop = new Shop("", "", "", "", "", 1, 1, "", 0, 0);
 }

@@ -39,15 +39,6 @@ checkAllLines = function() {
 	}
 }
 
-changePanes = function() {
-	var lien = $("#menu .current").attr('href').substring(1);
-	switch (lien) {
-		case "shop"   : changeShop();    break;
-		case "product": changeProduct(); break;
-		case "offer"  : changeOffer();   break;
-	}
-}
-
 rebuildLinks = function() {
   $("#corps a").each(function() {
     var lien = $(this).attr('href');
@@ -57,19 +48,21 @@ rebuildLinks = function() {
 }
 
 $(document).ready(function() {
-  var v = window.location.toString().match(/.*?p=(.*)/i);
-  if (v != null) {
-    v = v[1];
-    var iv = v.indexOf("#", 0);
-    if (iv > 0) {
-      v = v.substr(0, iv);
+  $("select[name=shops]").change(function() {
+    var v = $(this).val();
+    $("input[name=currentShopId]").val(v);
+    if (v == 0) {
+      displayBlank();
+    } else if (v == 999999) {
+      displayNewShopInfo();
+    } else {
+      if ($("#menu li.current a").text() == "Products") {
+        displayProducts();
+      } else {
+        displayShopInfo();
+      }
     }
-  }
-  var i = 0;
-  switch (v) {
-		case "product": i = 2; parseProduct(); break;
-		case "shop"   :
-    default       : i = 1; parseShop();    break;
-	}
-  $("#menu li:nth-child(" + i + ")").addClass('current');
+  });
+  $("#menu li:first a").click(displayShopInfo);
+  $("#menu li:last a").click(displayProducts);
 });
