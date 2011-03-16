@@ -2,16 +2,15 @@
 
 include('../inc/global.config.php');
 
-//$in = $_POST;
-$in = $_GET;
+$in = $_POST;
 
- $id = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
- $userId = isset($in['userId'])   && is_numeric($in['userId']) && $in['userId'] > 0 ? $in['userId']   : 0;
- $choice = isset($in['choice']) && $in['choice'] != ""               ? $in['choice'] : null;
- $startTime;
- $endTime;
- $creationTime;
- $lastUpdate;
+$id = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
+$userId = isset($in['userId'])   && is_numeric($in['userId']) && $in['userId'] > 0 ? $in['userId']   : 0;
+$choice = isset($in['choice']) && $in['choice'] != ""               ? $in['choice'] : null;
+$startTime;
+$endTime;
+$creationTime;
+$lastUpdate;
    
 
 

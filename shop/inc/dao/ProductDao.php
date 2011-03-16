@@ -23,7 +23,7 @@ class ProductDao {
       FROM `Product` p
         JOIN `Category` c ON p.categoryId = c.id
         JOIN ProductType t ON p.typeId = t.id
-      WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+      WHERE p.id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchProduct($t);
     }

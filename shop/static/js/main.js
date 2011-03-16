@@ -54,6 +54,7 @@ $(document).ready(function() {
     if (v == 0) {
       displayBlank();
     } else if (v == 999999) {
+      $("input[name=currentShopId]").val('0');
       displayNewShopInfo();
     } else {
       if ($("#menu li.current a").text() == "Products") {

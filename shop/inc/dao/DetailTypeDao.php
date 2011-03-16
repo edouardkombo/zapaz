@@ -14,6 +14,19 @@ class DetailTypeDao {
     $this->db = $db;
   }
   
+  public function getDetailTypeById($typeId) {
+    if ($typeId == null || $typeId < 1) {
+      return null;
+    }
+    
+    $q = $this->db->prepare("SELECT * FROM DetailType WHERE name = ?");
+    $q->execute(array($typeId));
+    if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+      return $this->fetch($t);
+    }
+    return null;
+  }
+  
   public function getAllDetailTypes($filter = '', $startIndex = 0, $length = 10) {
     $filter .= "%";
     $array   = array();
@@ -22,7 +35,7 @@ class DetailTypeDao {
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
-        array_push($array, $this->fetchDetailType($t));
+        array_push($array, $this->fetch($t));
       }
     }
     return $array;
@@ -36,7 +49,7 @@ class DetailTypeDao {
     $q = $this->db->prepare("SELECT * FROM DetailType WHERE name = ?");
     $q->execute(array($name));
     if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
-      return $this->fetchDetailType($t);
+      return $this->fetch($t);
     }
     return null;
   }
@@ -57,7 +70,7 @@ class DetailTypeDao {
     return $q->execute(array($type->getName()));
   }
   
-  private function fetchDetailType($t) {
+  private function fetch($t) {
     return new DetailType($t["name"], $t["id"]);
   }
 }

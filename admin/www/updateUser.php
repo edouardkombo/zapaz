@@ -2,10 +2,7 @@
 
 include('../inc/global.config.php');
 
-//$in = $_POST;
-$in = $_GET;
-
-
+$in = $_POST;
 
 $id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
 $email = isset($in['email']) && $in['email'] != ""               ? $in['email'] : null ;
@@ -13,7 +10,7 @@ $password = isset($in['password']) && $in['password'] != ""      ? $in['password
 
 function ValidateEmail($email) 
 { 
-   $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#'; 
+   $Syntaxe = '#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#'; 
    if(preg_match($Syntaxe,$email))
       return TRUE; 
    else 

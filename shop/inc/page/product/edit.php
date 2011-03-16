@@ -4,9 +4,10 @@ $pre      = $fullPage        ? "content.": "";
 if (!$fullPage)
   include('../inc/global.config.php');
 
-$in = $_GET;
+$in = $_POST;
 
-$id = isset($in['id']) && $in['id'] > 0 ? $in['id'] : null;
+$id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : null;
+$name = isset($in['name']) && $in['name'] != ""                      ? $in['name'] : "";
 
 if (!$fullPage) {
   $template = new ModeliXe('product/edit.mxt');
@@ -14,8 +15,6 @@ if (!$fullPage) {
 }
 
 $productManager = new ProductManager();
-$shopManager    = new ShopManager();
-$shops          = $shopManager->getAllShopsAsDictionary();
 $categories     = $productManager->getAllCategoriesAsDictionary();
 $productTypes   = $productManager->getAllTypesAsDictionary();
 
@@ -24,7 +23,7 @@ if ($id != null) {
   $p = $productManager->getProductById($id);
 }
 if ($p == null) {
-  $p = new Product(0, 0, 0, "", "", 0);
+  $p = new Product(0, 0, 0, $name, "", 0);
 }
 
 $picture = $p->getPicture() != null ? PROTOCOL.DOMAIN_ZSHOP.$p->getPicture() : PROTOCOL.DOMAIN_ZSHOP."/img/noimage.jpg";
@@ -34,7 +33,6 @@ $template->MxHidden($pre."hidden", $template->GetQueryString(array("id" => $p->g
 $template->MxAttribut($pre."ppicture", $picture);
 $template->MxFormField($pre."name", "text", "name", $p->getName());
 $template->MxFormField($pre."manufacturer", "text", "manufacturer", $p->getManufacturer());
-$template->MxSelect($pre."shop", "shop", $p->getShopId(), $shops);
 $template->MxSelect($pre."category", "category", $p->getCategoryId(), $categories);
 $template->MxSelect($pre."type", "type", $p->getTypeId(), $productTypes);
 $template->MxFormField($pre."price", "text", "price", $p->getPrice());

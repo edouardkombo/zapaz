@@ -71,7 +71,7 @@ class ProductDetail {
   public function getDetailType() {
     if ($this->detailType == null && $this->detailTypeId != 0) {
       $d = new DetailTypeDao();
-      $this->detailType = $d->getProductById($this->detailTypeId);
+      $this->detailType = $d->getDetailTypeById($this->detailTypeId);
     }
     return $this->detailType;
   }
