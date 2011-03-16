@@ -1,15 +1,16 @@
 <?php
 include('../inc/global.config.php');
 
-$in = $_POST;
-//$in = $_GET;
+//$in = $_POST;
+$in = $_GET;
 
-$id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
-$name = isset($in['name']) && $in['name'] != ""                      ? $in['name'] : null;
+$id    = isset($in['id'])    && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
+$name  = isset($in['name'])  && $in['name'] != ""                     ? $in['name'] : null;
+$email = isset($in['email']) && $in['email'] != ""                   ? $in['email'] : null ;
 $currencyId   = isset($in['currencyId'])   && is_numeric($in['currencyId']) && $in['currencyId'] > 0 ? $in['currencyId']   : 0;
 $latitude = isset($in['latitude']) && $in['latitude'] != ""          ? $in['latitude'] : null;
 $longitude = isset($in['longitude']) && $in['longitude'] != ""       ? $in['longitude'] : null;
-$webServiceUrl = isset($in['webServiceUrl']) && ValidateURL($in['webServiceUrl']);
+$webServiceUrl = isset($in['webServiceUrl']) &&  $in['webServiceUrl'] != ""       ? $in['webServiceUrl'] : null;
 $email = isset($in['email']) && ValidateEmail($in['email']);
 
 
@@ -32,7 +33,7 @@ function ValidateURL($url){
 
 $result = 0;
 
-if ($name != null) {
+if ($name != null && ValidateEmail($email) &&ValidateURL($in['webServiceUrl'])) {
   $shopManager = new ShopManager();
   $result = $shopManager->saveOrUpdate(new Shop($id, $name, $currencyId, $latitude, $longitude, $email, $countOfProducts, $creationTime, $lastUpdate));
 }
