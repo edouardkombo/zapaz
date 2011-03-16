@@ -22,6 +22,39 @@ var editProduct = function() {
     $("#edit-detail-types").click(editDetailTypeList);
     $("input[name=detailName]").keypress(function(e) { if (e.keyCode == 13) { addNewDetailTypeLine(); return false; }});
     $("input[name=detailName]").blur(addNewDetailTypeLine);
+    $("#update-product").click(updateProduct);
+    $("#cancel").click(refreshProducts);
+  });
+};
+
+var updateProduct = function() {
+  var params = {};
+  params["picture"]      = $("input[name=hpicture]").val();
+  params["name"]         = $("input[name=name]").val();
+  params["manufacturer"] = $("input[name=manufacturer]").val();
+  params["shop"]         = $("select[name=shop]").val();
+  params["category"]     = $("select[name=category]").val();
+  params["type"]         = $("select[name=type]").val();
+  params["price"]        = $("input[name=price]").val();
+  params["description"]  = $("textarea[name=description]").val();
+  var details = "";
+  $("#product-details input").each(function() {
+    if ($(this).val() != "") {
+      var v = $(this).parent('td').prev('td').children('select').val();
+      if (details != "") {
+        details += "||";
+      }
+      details += v + ";" + $(this).val();
+    }
+  });
+  params["details"] = details;
+  $.post("/product/update", params, function(xml) {
+    var result = $(xml).find('result').text() == "1";
+    if (result) {
+      refreshProducts();
+    } else {
+      alert(xml);
+    }
   });
 };
 

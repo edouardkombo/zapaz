@@ -13,13 +13,15 @@
 class ProductManager {
   
   private $productDao;
-  private $typeDao;
+  private $productTypeDao;
+  private $productDetailDao;
   private $categoryDao;
   private $detailTypeDao;
   
   public function __construct() {
     $this->productDao = new ProductDao();
-    $this->typeDao = new ProductTypeDao();
+    $this->productTypeDao = new ProductTypeDao();
+    $this->productDetailDao = new ProductDetailDao();
     $this->categoryDao = new CategoryDao();
     $this->detailTypeDao = new DetailTypeDao();
   }
@@ -36,8 +38,30 @@ class ProductManager {
     return $this->categoryDao->getAllCategories('', 0, 1000);
   }
   
+  public function getAllCategoriesAsDictionary() {
+    $list = array();
+    $tmpList = $this->getAllCategories();
+    if ($tmpList != null) {
+      foreach ($tmpList as $t) {
+        $list[$t->getId()] = $t->getName();
+      }
+    }
+    return $list;
+  }
+  
   public function getAllTypes() {
-    return $this->typeDao->getAllProductTypes('', 0, 1000);
+    return $this->productTypeDao->getAllProductTypes('', 0, 1000);
+  }
+  
+  public function getAllTypesAsDictionary() {
+    $list = array();
+    $tmpList = $this->getAllTypes();
+    if ($tmpList != null) {
+      foreach ($tmpList as $t) {
+        $list[$t->getId()] = $t->getName();
+      }
+    }
+    return $list;
   }
   
   public function getAllDetailTypes() {
@@ -54,6 +78,35 @@ class ProductManager {
   
   public function count($filter = '') {
     return $this->productDao->count($filter);
+  }
+  
+  public function saveOrUpdateProduct($product, $productDetails) {
+    global $db;
+    try {
+      $db->beginTransaction();
+      if (!$this->productDao->saveOrUpdate($product)) {
+        throw new PDOException("Failed to save the product");
+      }
+      
+      $this->productDetailDao->deleteAll($product->getId());
+      if ($productDetails != null && count($productDetails) > 0) {
+        foreach ($productDetails as $pd) {
+          $t = $this->detailTypeDao->getDetailTypeByName($pd[0]);
+          if ($t != null) {
+            $d = new ProductDetail($pd[1], $product->getId(), $t->getId());
+            if (!$this->productDetailDao->save($d)) {
+              throw new PDOException("Failed to save a product detail.");
+            }
+          }
+        }
+      }
+      
+      $db->commit();
+    } catch (PDOException $e) {
+      echo $e;
+      return 0;
+    }
+    return 1;
   }
   
   public function delete($productId) {

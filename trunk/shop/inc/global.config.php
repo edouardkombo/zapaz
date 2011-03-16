@@ -63,7 +63,9 @@ include(INC_GENERAL_PATH.'dao/CategoryDao.php');
 include(INC_GENERAL_PATH.'dao/CurrencyDao.php');
 include(INC_GENERAL_PATH.'dao/DetailTypeDao.php');
 include(INC_GENERAL_PATH.'dao/KeywordDao.php');
+include(INC_GENERAL_PATH.'dao/OfferDao.php');
 include(INC_GENERAL_PATH.'dao/ProductDao.php');
+include(INC_GENERAL_PATH.'dao/ProductDetailDao.php');
 include(INC_GENERAL_PATH.'dao/ProductTypeDao.php');
 include(INC_GENERAL_PATH.'dao/ShopDao.php');
 

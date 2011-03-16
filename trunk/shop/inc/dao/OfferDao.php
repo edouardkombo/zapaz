@@ -25,8 +25,8 @@ class OfferDao {
     }
     $q = $this->db->prepare("SELECT *
       FROM `Offer`
-      WHERE timeStart < ?
-        AND timeEnd > ?
+      WHERE startTime < ?
+        AND endTime > ?
         AND productId = ?");
     $t = time();
     $q->execute(array($t, $t, $productId));

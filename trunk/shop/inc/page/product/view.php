@@ -59,7 +59,7 @@ if (count($productList) == 0) {
   $template->MxBloc($pre."row", "reset");
 } else {
   foreach ($productList as $p) {
-    $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $c->getId());
+    $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $p->getId());
     $template->MxBloc     ($pre."row.input", "loop");
     $template->MxText     ($pre."row.name", $p->getName());
     $template->MxText     ($pre."row.category", $p->getCategory()->getName());
@@ -70,13 +70,11 @@ if (count($productList) == 0) {
     
     $color = $p->getPicture() == null ? "red" : "green";
     $template->MxAttribut ($pre."row.c1", "light $color");
-    $template->MxImage    ($pre."row.light1", PROTOCOL.DOMAIN_ZADMIN."/img/light.png", $color);
-    $template->MxBloc     ($pre."row", "loop");
+    $template->MxImage    ($pre."row.light1", PROTOCOL.DOMAIN_ZSHOP."/img/light.png", $color);
     
-    $color = $ns->getOffer() == null ? "red" : "green";
+    $color = $p->getCurrentOffer() == null ? "red" : "green";
     $template->MxAttribut ($pre."row.c2", "light $color");
-    $template->MxImage    ($pre."row.light2", PROTOCOL.DOMAIN_ZADMIN."/img/light.png", $color);
-    $template->MxBloc     ($pre."row", "loop");
+    $template->MxImage    ($pre."row.light2", PROTOCOL.DOMAIN_ZSHOP."/img/light.png", $color);
     
     $template->MxBloc($pre."row", "loop");
   }

@@ -22,6 +22,20 @@ class ShopDao {
     return null;
   }
   
+  public function getAllShops($filter = '', $startIndex = 0, $length = 10) {
+    $filter .= "%";
+    $array   = array();
+
+    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q->execute(array($filter));
+    if ($q != null) {
+      while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        array_push($array, $this->fetchShop($t));
+      }
+    }
+    return $array;
+  }
+  
   public function saveOrUpdate($shop) {
     if ($shop == null) {
       return 0;
