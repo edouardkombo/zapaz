@@ -51,6 +51,20 @@ class UserDao {
     return $r != null ? $r->count : 0;
   }
   
+  /*
+   * Authentication of a user
+   */
+  
+  public function verifyUser($login,$password){
+    $filter = '';
+    $filter .= "%";
+    $q = $this->db->prepare("SELECT * FROM `User` WHERE email='$login' AND password='$password'");
+    $q->execute(array($filter));
+    $r = $q->fetch(PDO::FETCH_OBJ);
+    if ($r!=null) return TRUE;
+    else return False;
+  }
+  
   public function saveOrUpdate($user) {
     if ($user == null) {
       return 0;

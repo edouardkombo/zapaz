@@ -37,6 +37,11 @@ class UserManager {
   public function deleteChoice($userChoiceId) {
     return $this->userChoiceDao->delete($userChoiceId);
   }
+
+  public function verifyUser($login,$password){
+    return $this->userDao->verifyUser($login,$password);
+  }
+
   
 }
 
