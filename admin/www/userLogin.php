@@ -45,6 +45,7 @@ if (ValidateEmail($email)){
 if(isset($_GET['erreur']) && $_GET['erreur'] == 'logout'){
 	
 	session_unset("authentification");
+  session_destroy();
 	//header("Location:UserLogin.php?erreur=delog"); To define
 }
 
