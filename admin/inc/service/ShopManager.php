@@ -28,6 +28,10 @@ class ShopManager {
   public function delete($shopId) {
     return $this->shopDao->delete($shopId);
   }
+  
+  public function checkAuthentication($login,$password){
+    return $this->shopDao->checkShop($login,$password);
+  }
 }
 
 ?>

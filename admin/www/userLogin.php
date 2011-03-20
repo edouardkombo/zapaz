@@ -2,7 +2,7 @@
 
 include('../inc/global.config.php');
 
-$in = $_GET;
+$in = $_POST;
 
 $id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
 $email = isset($in['email']) && $in['email'] != ""               ? $in['email'] : null ;
