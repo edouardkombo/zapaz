@@ -24,6 +24,11 @@ function cryptPassword($pw){
 if ($name != null && $email!=null && $publicUid !=null &&  $webServiceUrl!= null){
   $shopManager = new ShopManager();
   $result = $shopManager->saveOrUpdate(new Shop(cryptPassword($publicUid), $name, $currencyId, $latitude, $longitude, $email, $countOfProducts, $creationTime, $lastUpdate));
+  $_SESSION['name']= 'name';
+  $_SESSION['currencyId']= 'currencyId';
+  $_SESSION['latitude']= 'latitude';
+  $_SESSION['longitude']= 'longitude';
+  $_SESSION['webServiceUrl']= 'webServiceUrl';
 }
 
 echo <<< END
