@@ -38,8 +38,8 @@ class UserManager {
     return $this->userChoiceDao->delete($userChoiceId);
   }
 
-  public function verifyUser($login,$password){
-    return $this->userDao->verifyUser($login,$password);
+  public function checkAuthentication($login,$password){
+    return $this->userDao->checkUser($login,$password);
   }
 
   

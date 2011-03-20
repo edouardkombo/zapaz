@@ -55,7 +55,7 @@ class UserDao {
    * Authentication of a user
    */
   
-  public function verifyUser($login,$password){
+  public function checkUser($login,$password){
     $filter = '';
     $filter .= "%";
     $q = $this->db->prepare("SELECT * FROM `User` WHERE email='$login' AND password='$password'");

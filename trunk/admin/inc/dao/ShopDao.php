@@ -51,6 +51,20 @@ class ShopDao {
     return $r != null ? $r->count : 0;
   }
   
+  /*
+   * Authentication of a shop
+   */
+  
+  public function checkShop($login,$password){
+    $filter = '';
+    $filter .= "%";
+    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE email='$login' AND publicUid='$password'");
+    $q->execute(array($filter));
+    $r = $q->fetch(PDO::FETCH_OBJ);
+    if ($r!=null) return TRUE;
+    else return False;
+  }
+  
   public function saveOrUpdate($shop) {
     if ($shop == null) {
       return 0;
