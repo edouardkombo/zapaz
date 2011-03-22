@@ -4,7 +4,7 @@ include('../inc/global.config.php');
 
 $in = $_POST;
 
-$id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
+$id   = isset($in['id'])   && filter_var($in['id'], FILTER_VALIDATE_INT) && $in['id'] > 0 ? $in['id']   : 0;
 $email = isset($in['email']) && $in['email'] != ""               ? $in['email'] : null ;
 $password = isset($in['password']) && $in['password'] != ""      ? $in['password'] : null;
 
