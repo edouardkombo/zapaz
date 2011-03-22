@@ -6,8 +6,8 @@ $in = $_POST;
 
 session_start();
 
-$id            = isset($in['id'])            && is_numeric($in['id']) && $in['id'] > 0 ? $in['id'] : 0;
-$publicUid     = isset($in['id'])            && is_numeric($in['id']) && $in['id'] > 0 ? $in['id'] : 0;
+$id            = isset($in['id'])            && filter_var($in['id'], FILTER_VALIDATE_INT) && $in['id'] > 0 ? $in['id'] : 0;
+$publicUid     = isset($in['publicUid'])     && filter_var($in['publicUid'], FILTER_VALIDATE_INT) && $in['publicUid'] > 0 ? $in['publicUid'] : 0;
 $name          = isset($in['name'])          && preg_match("/^[a-zA-Zäëÿüïöâêûîôéèàç\-_ ]+$/", $in["name"]) ? $in['name'] : null;
 $email         = isset($in['email'])         && filter_var($in['email'], FILTER_VALIDATE_EMAIL) ? $in["email"] : null;
 $currencyId    = isset($in['currencyId'])    && is_numeric($in['currencyId']) && $in['currencyId'] > 0 ? $in['currencyId'] : 0;

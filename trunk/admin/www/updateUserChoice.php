@@ -4,8 +4,8 @@ include('../inc/global.config.php');
 
 $in = $_POST;
 
-$id = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : 0;
-$userId = isset($in['userId'])   && is_numeric($in['userId']) && $in['userId'] > 0 ? $in['userId']   : 0;
+$id = isset($in['id'])   && filter_var($in['id'], FILTER_VALIDATE_INT) && $in['id'] > 0 ? $in['id']   : 0;
+$userId = isset($in['userId'])   && filter_var($in['userId'], FILTER_VALIDATE_INT) && $in['userId'] > 0 ? $in['userId']   : 0;
 $choice = isset($in['choice']) && $in['choice'] != ""               ? $in['choice'] : null;
 $startTime;
 $endTime;
