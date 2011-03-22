@@ -30,8 +30,8 @@ class ProductManager {
     return $this->productDao->getProductById($productId);
   }
   
-  public function getAllProducts($nameFilter = '', $categoryFilter = '', $typeFilter = '', $startIndex = 0, $length = 10) {
-    return $this->productDao->getAllProducts($nameFilter, $categoryFilter, $typeFilter, $startIndex, $length);
+  public function getAllProducts($shopId, $nameFilter = '', $categoryFilter = '', $typeFilter = '', $startIndex = 0, $length = 10) {
+    return $this->productDao->getAllProducts($shopId, $nameFilter, $categoryFilter, $typeFilter, $startIndex, $length);
   }
   
   public function getAllCategories() {
@@ -80,8 +80,8 @@ class ProductManager {
     return $this->detailTypeDao->deleteDetailType($type);
   }
   
-  public function count($filter = '') {
-    return $this->productDao->count($filter);
+  public function count($shopId, $nameFilter = '', $categoryFilter = '', $typeFilter = '') {
+    return $this->productDao->count($shopId, $nameFilter, $categoryFilter, $typeFilter);
   }
   
   public function saveOrUpdateProduct($product, $productDetails) {

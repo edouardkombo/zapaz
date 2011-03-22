@@ -6,8 +6,8 @@ if (!$fullPage)
 
 $in = $_POST;
 
-$limit       = isset($in['limit'])  && $in['limit'] > 0 && $in['limit'] < 100 ? $in['limit']                : 15;
-$startIndex  = isset($in['start'])  && $in['start'] >= 0                      ? $in['start']                : 0;
+$startIndex  = isset($in['start'])  && filter_var($in['start'], FILTER_VALIDATE_INT) && $in['start'] >= 0                      ? $in['start']                : 0;
+$limit       = isset($in['limit'])  && filter_var($in['limit'], FILTER_VALIDATE_INT) && $in['limit'] > 0 && $in['limit'] < 100 ? $in['limit']                : 15;
 $filter      = isset($in['filter']) && $in['filter'] != null                  ? stripslashes($in['filter']) : '';
 
 if (!$fullPage) {

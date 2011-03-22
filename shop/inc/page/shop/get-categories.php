@@ -2,7 +2,7 @@
 include('../inc/global.config.php');
 
 $in = $_POST;
-$shopId = isset($in["shopId"]) && is_numeric($in["shopId"]) && $in["shopId"] > 0 ? $in["shopId"] : 0;
+$shopId = isset($in["shopId"]) && filter_var($in["shopId"], FILTER_VALIDATE_INT) && $in["shopId"] > 0 ? $in["shopId"] : 0;
 
 $productManager = new ProductManager();
 

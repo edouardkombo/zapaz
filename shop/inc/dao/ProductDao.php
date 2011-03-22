@@ -30,7 +30,7 @@ class ProductDao {
     return null;
   }
   
-  public function getAllProducts($nameFilter = '', $categoryFilter = '', $typeFilter = '',  $startIndex = 0, $length = 10) {
+  public function getAllProducts($shopId, $nameFilter = '', $categoryFilter = '', $typeFilter = '',  $startIndex = 0, $length = 10) {
     $nameFilter .= "%";
     $categoryFilter .= '%';
     $typeFilter .= '%';
@@ -41,12 +41,13 @@ class ProductDao {
       FROM `Product` p
         JOIN `Category` c ON p.categoryId = c.id
         JOIN ProductType t ON p.typeId = t.id
-      WHERE p.name LIKE ?
+      WHERE p.shopId = ?
+        AND p.name LIKE ?
         AND c.name LIKE ?
         AND t.name LIKE ?
       ORDER BY name ASC
       LIMIT $startIndex, $length");
-    $q->execute(array($nameFilter, $categoryFilter, $typeFilter));
+    $q->execute(array($shopId, $nameFilter, $categoryFilter, $typeFilter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
         array_push($array, $this->fetchProduct($t));
@@ -55,7 +56,7 @@ class ProductDao {
     return $array;
   }
   
-  public function count($nameFilter = '', $categoryFilter = '', $typeFilter = '') {
+  public function count($shopId, $nameFilter = '', $categoryFilter = '', $typeFilter = '') {
     $nameFilter .= "%";
     $categoryFilter .= '%';
     $typeFilter .= '%';
@@ -65,10 +66,11 @@ class ProductDao {
       FROM `Product` p
         JOIN `Category` c ON p.categoryId = c.id
         JOIN ProductType t ON p.typeId = t.id
-      WHERE p.name LIKE ?
+      WHERE p.shopId = ?
+        AND p.name LIKE ?
         AND c.name LIKE ?
         AND t.name LIKE ?");
-    $q->execute(array($nameFilter, $categoryFilter, $typeFilter));
+    $q->execute(array($shopId, $nameFilter, $categoryFilter, $typeFilter));
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
   }
