@@ -1,16 +1,16 @@
 <?php
+
 include('../inc/global.config.php');
 
-  $categoryManager = new CategoryManager();
-  $categories = $categoryManager->getAllCategories();
-  
+$categoryManager = new CategoryManager();
+$categories = $categoryManager->getAllCategories();
+
 $doc = new DomDocument('1.0', 'utf-8');
 $root = $doc->createElement('root');
 $root = $doc->appendChild($root);
 
-foreach ($categories  as $cat) {
-  
-  $category = $doc->createElement('Category');
+foreach ($categories as $cat) {
+  $category = $doc->createElement('category');
   $category = $root->appendChild($category);
   $name = $cat->getName();
   $value = $doc->createTextNode($name);
@@ -18,6 +18,4 @@ foreach ($categories  as $cat) {
 }
 $xml_string = $doc->saveXML();
 echo $xml_string;
-
-
 ?>

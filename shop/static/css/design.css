@@ -292,14 +292,14 @@ table#list-products tbody tr.current:hover td { background-color:#FFF6C3; }
 table#list-products tbody tr.current:hover td:nth-child(2) a { border-color:#CCC; }
 table#list-products tbody td:nth-child(1), table#list-products thead td:nth-child(1) { width:20px; text-align:center; }
 table#list-products tbody td:nth-child(2) a { display:block; height:14px; overflow:hidden; color:black; text-decoration:none; border:1px solid white; }
-table#list-products td.link { width:400px; }
+table#list-products td.link { width:150px; }
 table#list-products tbody td.link a { display:block; height:14px; overflow:hidden; color:#06C; text-decoration:none; }
 table#list-products tbody td.link a:hover { text-decoration:underline; }
-table#list-products tbody td:nth-child(2) { width:300px; }
 table#list-products td:nth-child(3) { width:100px; text-align: center; }
 table#list-products td:nth-child(4) { width:100px; text-align: center; }
 table#list-products td:nth-child(5) { width:50px; text-align: center; }
-table#list-products tbody td:nth-child(6) { width:200px; }
+table#list-products tbody td:nth-child(6) { width:400px; }
+table#list-products tbody td:nth-child(9) { width:60px; text-align:center; }
 
 input[name=nameFilter] { position:absolute; top:5px; right:5px; width:400px; }
 input[name=typeFilter] { position:absolute; top:5px; right:420px; width:150px; }

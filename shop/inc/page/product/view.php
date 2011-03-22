@@ -60,13 +60,18 @@ if (count($productList) == 0) {
   $template->MxBloc($pre."row", "reset");
 } else {
   foreach ($productList as $p) {
+    $description = $p->getDescription();
+    if (strlen($description) > 70) {
+      $description = substr($description, 0, 69)."…";
+    }
+    
     $template->MxCheckerField($pre."row.input.check", "checkbox", "check", $p->getId());
     $template->MxBloc     ($pre."row.input", "loop");
     $template->MxText     ($pre."row.name", $p->getName());
     $template->MxText     ($pre."row.type", $p->getType()->getName());
     $template->MxText     ($pre."row.manufacturer", $p->getManufacturer());
     $template->MxText     ($pre."row.price", $p->getPrice());
-    $template->MxText     ($pre."row.description", $p->getDescription());
+    $template->MxText     ($pre."row.description", $description);
     
     $color = $p->getPicture() == null ? "red" : "green";
     $template->MxAttribut ($pre."row.c1", "light $color");
