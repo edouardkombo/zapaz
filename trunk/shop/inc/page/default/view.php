@@ -16,9 +16,12 @@ if (!$fullPage) {
   $template->SetModeliXe();
 } else {
   $shopManager = new ShopManager();
-  $shops = $shopManager->getAllShopsAsDictionary();
-  array_unshift($shops, "");
-  $shops["999999"] = "New Shop...";
+  $tmp = $shopManager->getAllShopsAsDictionary();
+  $shops = array("0" => "");
+  foreach ($tmp as $k => $v) {
+    $shops[$k] = $v;
+  }
+  $shops["999999"] = "New Shop…";
   $template->MxSelect("header.shopList", "shops", $shopId, $shops);
   $template->MxHidden("header.currentShopId", $template->GetQueryString(array("currentShopId" => $shopId)));
 }
