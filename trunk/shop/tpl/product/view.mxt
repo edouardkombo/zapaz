@@ -16,6 +16,7 @@
             <td><a href="#">Description</a></td>
             <td class="status"><a href="#" title="Image">I</a></td>
             <td class="status"><a href="#" title="Has an offer now">O</a></td>
+            <td></td>
           </tr>
         </thead>
         <tfoot>
@@ -61,6 +62,7 @@
             <td><mx:text id="description"/></td>
             <td><div mXattribut="class:c1"><mx:image id="light1"/></div></td>
             <td><div mXattribut="class:c2"><mx:image id="light2"/></div></td>
+            <td><a href="#new-offer">New Offer</a></td>
           </tr>
 </mx:bloc id="row">
         </tbody>
