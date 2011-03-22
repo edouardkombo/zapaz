@@ -6,7 +6,7 @@ if (!$fullPage)
 
 $in = $_POST;
 
-$id   = isset($in['id'])   && is_numeric($in['id']) && $in['id'] > 0 ? $in['id']   : null;
+$id   = isset($in['id'])   && filter_var($in['id'], FILTER_VALIDATE_INT) && $in['id'] > 0 ? $in['id']   : null;
 $name = isset($in['name']) && $in['name'] != ""                      ? $in['name'] : "";
 
 if (!$fullPage) {

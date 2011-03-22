@@ -45,7 +45,7 @@ class CategoryDao {
       return $array;
     }
     
-    $q = $this->db->prepare("SELECT c.* FROM Product p JOIN Category c ON p.categoryId = c.id WHERE p.shopId = ?");
+    $q = $this->db->prepare("SELECT c.* FROM Product p JOIN Category c ON p.categoryId = c.id WHERE p.shopId = ? GROUP BY c.name ASC");
     $q->execute(array($shopId));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {

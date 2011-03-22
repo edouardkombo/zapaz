@@ -15,13 +15,6 @@ var addProduct = function() {
   }
 };
 
-var addDetailLine = function() {
-  var select = document.createElement('select');
-  
-  var td = document.createElement('td');
-    $(td).append();
-}
-
 var editProduct = function() {
   var arr = getCheckedLines();
   if (arr[2] == 0) {
@@ -66,7 +59,7 @@ var updateProduct = function() {
   $.post("/product/update", params, function(xml) {
     var result = $(xml).find('result').text() == "1";
     if (result) {
-      refreshProducts();
+      displayProducts();
     } else {
       alert("Failed to save the product");
     }
@@ -169,7 +162,7 @@ var deleteProducts = function() {
     $.post("/product/delete", {pids:arr[0]}, function(xml) {
       var result = $(xml).find('result').text() == arr[2] ? true : false;
       if (result)
-        refreshProducts();
+        displayProducts();
       else
         alert("Impossible to delete products.");
     });

@@ -6,10 +6,10 @@ if (!$fullPage)
   include('../inc/global.config.php');
 
 $in = $_POST;
-$shopId = isset($in["shopId"]) && is_numeric($in["shopId"]) && $in["shopId"] > 0 ? $in["shopId"] : 0;
+$shopId = isset($in["shopId"]) && filter_var($in["shopId"], FILTER_VALIDATE_INT) && $in["shopId"] > 0 ? $in["shopId"] : 0;
 
-$limit          = isset($in['limit'])          && $in['limit'] > 0 && $in['limit'] < 100 ? $in['limit']                        : 15;
-$startIndex     = isset($in['start'])          && $in['start'] >= 0                      ? $in['start']                        : 0;
+$startIndex     = isset($in['start']) && filter_var($in['start'], FILTER_VALIDATE_INT) && $in['start'] >= 0                      ? $in['start']                        : 0;
+$limit          = isset($in['limit']) && filter_var($in['limit'], FILTER_VALIDATE_INT) && $in['limit'] > 0 && $in['limit'] < 100 ? $in['limit']                        : 15;
 $nameFilter     = isset($in['nameFilter'])     && $in['nameFilter'] != null              ? stripslashes($in['nameFilter'])     : '';
 $categoryFilter = isset($in['categoryFilter']) && $in['categoryFilter'] != null          ? stripslashes($in['categoryFilter']) : '';
 $typeFilter     = isset($in['typeFilter'])     && $in['typeFilter'] != null              ? stripslashes($in['typeFilter'])     : '';
@@ -32,7 +32,7 @@ $template->MxSelect($pre."limitSelect", "limit", $limit, array(
 ));
 
 $productManager = new ProductManager();
-$count = $productManager->count($nameFilter, $categoryFilter, $typeFilter);
+$count = $productManager->count($shopId, $nameFilter, $categoryFilter, $typeFilter);
 $nbPage = $count / $limit + 1;
 while ($startIndex >= $count)
   $startIndex -= $limit;
@@ -55,7 +55,7 @@ for ($i = 1, $j = 0; $i < $nbPage && $j < 5; $i++) {
 $template->MxAttribut($pre."maxPage", (int)$nbPage);
 $template->MxFormField($pre."newProduct", "text", "productName", "", 'size="60"');
 
-$productList = $productManager->getAllProducts($nameFilter, $categoryFilter, $typeFilter, $startIndex, $limit);
+$productList = $productManager->getAllProducts($shopId, $nameFilter, $categoryFilter, $typeFilter, $startIndex, $limit);
 if (count($productList) == 0) {
   $template->MxBloc($pre."row", "reset");
 } else {

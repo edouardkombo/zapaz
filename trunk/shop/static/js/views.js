@@ -21,14 +21,7 @@ var goodDisplay = function() {
   return true;
 };
 
-var displayNewShopInfo = function() {
-  
-};
-
 var displayShopInfo = function() {
-  if (!goodDisplay()) {
-    return false;
-  }
   refreshShop();
   
   $("#menu li").removeClass('current');
@@ -54,7 +47,7 @@ var displayProducts = function() {
   $("#menu li:last").addClass('current');
   
   $("#submenu").empty();
-  $.post("/shop/getcategories", {'shopId':id}, function(xml) {
+  $.post("/shop/get-categories", {'shopId':id}, function(xml) {
     var filter = "";
     $(xml).find('c').each(function() {
       if (filter == "") { 
