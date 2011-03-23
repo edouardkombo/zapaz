@@ -274,6 +274,7 @@ var parseProduct = function() {
   $("#list-products thead input:checkbox").click(checkAllLines);
   $("#list-products tbody input:checkbox").click(function() {checkLine($(this));});
   $("#list-products tbody td:nth-child(2) a").click(function() {editProduct($(this));});
+  $("#list-product a[href=#new-offer]").click(function() { createOffer($(this)); });
   $("a[href=#remove]").click(deleteProducts);
   $("select[name=limit]").change(function() {refreshProducts();});
   $("a.other-page").click(function() {refreshProducts($(this).text());});

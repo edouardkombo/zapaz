@@ -74,6 +74,7 @@ include(INC_GENERAL_PATH.'service/CategoryManager.php');
 include(INC_GENERAL_PATH.'service/ProductTypeManager.php');
 include(INC_GENERAL_PATH.'service/ShopManager.php');
 include(INC_GENERAL_PATH.'service/UserManager.php');
+include(INC_GENERAL_PATH.'service/SpatialManager.php');
 }
 
 ?>
