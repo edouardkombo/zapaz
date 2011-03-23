@@ -5,13 +5,10 @@ class Spatial {
   private static $a = 6378137.0; // distance from the center to the equator (meters)
   private static $b = 6356752.3; // distance from the center to the north/south pole (meters)
   
-  public static function getGreatSquareAround($spot) {
+  public static function getGreatSquareAround($lat, $lng) {
     $array = array();
-    if ($spot != null && get_class($spot) == 'Spot') {
-      $lat = deg2rad($spot->getLatitude());
-      $lng = deg2rad($spot->getLongitude());
-      
-      $d = M_SQRT2 * (SPOT_DEFAULT_RADIUS + SPOT_MAX_RADIUS + SPOT_MIN_DISTANCE);
+    if (filter_var($lat, FILTER_VALIDATE_FLOAT) && filter_var($lng, FILTER_VALIDATE_EMAIL)) {
+      $d = M_SQRT2 * MAX_HORIZON;
       
       $ne = Spatial::moveGeoPoint($lat, $lng, $d, deg2rad(-45));
       $sw = Spatial::moveGeoPoint($lat, $lng, $d, deg2rad(135));

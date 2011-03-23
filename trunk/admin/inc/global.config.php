@@ -34,6 +34,8 @@ define("MX_GENERAL_PATH"          , INC_GENERAL_PATH."ModeliXe/"    );
 define("MX_ERROR_PATH"            , INC_GENERAL_PATH."ModeliXe/"    );
 
 // Variables globales
+define("MAX_HORIZON", 500); // meters
+
 // TOUJOURS DECLARER ET INITIALISER UNE VARIABLE !!!
 $result     = "";
 $db         = NULL;       // Base de donnée
