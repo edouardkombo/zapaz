@@ -22,6 +22,9 @@ var goodDisplay = function() {
 };
 
 var displayShopInfo = function() {
+  if (!goodDisplay() && $("select[name=shops]").val() != "999999") {
+    return false;
+  }
   refreshShop();
   
   $("#menu li").removeClass('current');
