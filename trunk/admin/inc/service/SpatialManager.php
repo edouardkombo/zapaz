@@ -10,6 +10,9 @@ class SpatialManager {
     if (filter_var($lat, FILTER_VALIDATE_FLOAT) && filter_var($lng, FILTER_VALIDATE_FLOAT)) {
       $d = M_SQRT2 * MAX_HORIZON;
       
+      $lat = deg2rad($lat);
+      $lng = deg2rad($lng);
+      
       $ne = SpatialManager::moveGeoPoint($lat, $lng, $d, deg2rad(-45));
       $sw = SpatialManager::moveGeoPoint($lat, $lng, $d, deg2rad(135));
       array_push($array, $ne);
