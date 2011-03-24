@@ -40,6 +40,28 @@ class ShopDao {
     }
     return $array;
   }
+ 
+/*Returns shops within a maximum distance of specified
+*latitude and longitude. 
+* -Rachel
+*/
+  public function getAllClosestShops($latitude1, $longitude1, $latitude2, $longitude2, $maxDistance) {
+    $array   = array();
+    //$query = "SELECT * FROM `Shop` "; //add lat,long...
+    
+    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE latitude BETWEEN :latitude2 AND :latitude1 AND longitude BETWEEN :longitude1 AND :longitude2 ");
+    $q->execute(array(':latitude1' => $latitude1, ':latitude2' => $latitude2, ':longitude1' => $longitude1, ':longitude2' => $longitude2));
+    
+    if ($q != null) {
+      //echo "not null";
+      while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        array_push($array, $this->fetchShop($t));
+      }
+    }
+   
+    return $array;
+  }
+  
   /* @mohamed
    * 
    */
@@ -95,7 +117,7 @@ class ShopDao {
   }
   
   private function fetchShop($t) {
-    return new Shop(
+    $s = new Shop(
       $t["publicUid"],
       $t["name"],
       $t["currencyId"],
@@ -107,6 +129,8 @@ class ShopDao {
       $t["lastUpdate"],
       $t["id"]
     );
+    $s->setWebServiceUrl($t["webServiceUrl"]);
+    return $s;
   }
 }
 

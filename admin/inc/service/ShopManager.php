@@ -17,6 +17,10 @@ class ShopManager {
     return $this->shopDao->getAllShops($filter, $startIndex, $limit);
   }
   
+  public function getAllClosestShops($latitude1, $longitude1, $latitude2, $longitude2, $maxDistance) {
+    return $this->shopDao->getAllClosestShops($latitude1, $longitude1, $latitude2, $longitude2,$maxDistance);
+  }
+  
   public function count($filter = '') {
     return $this->shopDao->count($filter);
   }
