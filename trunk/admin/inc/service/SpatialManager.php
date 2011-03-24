@@ -1,6 +1,6 @@
 <?php
 
-class Spatial {
+class SpatialManager {
   
   private static $a = 6378137.0; // distance from the center to the equator (meters)
   private static $b = 6356752.3; // distance from the center to the north/south pole (meters)
