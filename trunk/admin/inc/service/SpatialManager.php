@@ -7,11 +7,11 @@ class SpatialManager {
   
   public static function getGreatSquareAround($lat, $lng) {
     $array = array();
-    if (filter_var($lat, FILTER_VALIDATE_FLOAT) && filter_var($lng, FILTER_VALIDATE_EMAIL)) {
+    if (filter_var($lat, FILTER_VALIDATE_FLOAT) && filter_var($lng, FILTER_VALIDATE_FLOAT)) {
       $d = M_SQRT2 * MAX_HORIZON;
       
-      $ne = Spatial::moveGeoPoint($lat, $lng, $d, deg2rad(-45));
-      $sw = Spatial::moveGeoPoint($lat, $lng, $d, deg2rad(135));
+      $ne = SpatialManager::moveGeoPoint($lat, $lng, $d, deg2rad(-45));
+      $sw = SpatialManager::moveGeoPoint($lat, $lng, $d, deg2rad(135));
       array_push($array, $ne);
       array_push($array, $sw);
     }
@@ -32,7 +32,7 @@ class SpatialManager {
 //                          Math.cos(lat1)*Math.sin(d/R)*Math.cos(theta) );
 //    var lon2 = lon1 + Math.atan2(Math.sin(theta)*Math.sin(d/R)*Math.cos(lat1), 
 //                      Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
-    $r = Spatial::getRadiusOfEarth($lat1);
+    $r = SpatialManager::getRadiusOfEarth($lat1);
     $dr = $distance / $r;
     
     $lat2 = asin(sin($lat1) * cos($dr) + cos($lat1) * sin($dr) * cos($theta));
@@ -59,12 +59,12 @@ class SpatialManager {
       $lat2 = deg2rad($lat2);
       $lng2 = deg2rad($lng2);
       
-      $r1 = Spatial::getRadiusOfEarth($lat1);
-      $r2 = Spatial::getRadiusOfEarth($lat2);
+      $r1 = SpatialManager::getRadiusOfEarth($lat1);
+      $r2 = SpatialManager::getRadiusOfEarth($lat2);
       $r  = ($r1 + $r2) / 2;
       
       $deltaLambda = $lng2 - $lng1;
-      $h = Spatial::haversine($lat2 - $lat1) + cos($lat1) * cos($lat2) * Spatial::haversine($deltaLambda);
+      $h = SpatialManager::haversine($lat2 - $lat1) + cos($lat1) * cos($lat2) * SpatialManager::haversine($deltaLambda);
       $rh = sqrt($h);
       return 2 * $r * asin($rh);
     }
@@ -85,10 +85,10 @@ class SpatialManager {
   private static function getRadiusOfEarth($phi) {
     $cphi   = cos($phi);
     $sphi   = sin($phi);
-    $acphi  = Spatial::$a * $cphi;
-    $bsphi  = Spatial::$b * $sphi;
-    $aacphi = Spatial::$a * $acphi;
-    $bbsphi = Spatial::$b * $bsphi;
+    $acphi  = SpatialManager::$a * $cphi;
+    $bsphi  = SpatialManager::$b * $sphi;
+    $aacphi = SpatialManager::$a * $acphi;
+    $bbsphi = SpatialManager::$b * $bsphi;
     
     $num  = $aacphi * $aacphi + $bbsphi * $bbsphi;
     $den  = $acphi  * $acphi  + $bsphi  * $bsphi;
