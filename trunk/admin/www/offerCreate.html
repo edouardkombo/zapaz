@@ -30,6 +30,20 @@
       {
         document.write("hi");  
         alert(xml);
+        
+          $(xml).find('shop').each( function() {
+            document.write("here"); 
+            var name = $(this).children('name').text();
+            //$(this).children('keywords').find('w').each(function() {
+              //$(this).text();
+            //});
+            var ws = $(this).children('webServiceUrl').text(); // ws url!
+            // Process ws url and fetch data about products/offers of this shop
+
+            document.write('<p>ShopName: ' + name + ' WebServiceUrl: ' + ws + '</p>');
+        });
+        
+        //*Need To: Process ws url and fetch data about products/offers of this shop
       
       });
       
