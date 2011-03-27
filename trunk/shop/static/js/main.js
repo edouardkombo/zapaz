@@ -39,6 +39,15 @@ checkAllLines = function() {
 	}
 }
 
+changePanes = function() {
+	var lien = $("#menu .current").attr('href').substring(1);
+	switch (lien) {
+		case "shop"   : changeShop();    break;
+		case "product": changeProduct(); break;
+		case "offer"  : changeOffer();   break;
+	}
+}
+
 rebuildLinks = function() {
   $("#corps a").each(function() {
     var lien = $(this).attr('href');
@@ -63,7 +72,13 @@ $(document).ready(function() {
         displayShopInfo();
       }
     }
-  });
-  $("#menu li:first a").click(displayShopInfo);
-  $("#menu li:last a").click(displayProducts);
+  }
+  var i = 0;
+  switch (v) {
+		case "product": i = 2; parseProduct(); break;
+		case "offer"  : i = 3; parseOffer();   break;
+		case "shop"   :
+    default       : i = 1; parseShop();    break;
+	}
+  $("#menu li:nth-child(" + i + ") a").addClass('current');
 });

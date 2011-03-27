@@ -4,9 +4,8 @@
     <form method="post" action="#" id="edit-product" class="regular">
       <fieldset>
         <legend>Product information</legend>
-        <mx:hidden id="hidden" />
         <div class="logo">
-          <img alt="picture" width="96" height="96" mXattribut="src:ppicture"/>
+          <img alt="picture" width="96" height="96" mXattribut="src:plogo"/>
         </div>
         <div class="info">
           <label for="name">Name</label><mx:formField id="name"/>
@@ -38,28 +37,35 @@
               <td>Value</td>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <td><a href="#edit-types" id="edit-detail-types">Edit List</a></td>
-              <td>&nbsp;</td>
-            </tr>
-          </tfoot>
           <tbody>
             <mx:bloc id="detail">
               <tr>
-                <td><mx:select id="type" /></td>
+                <td><mx:formField id="type" /></td>
                 <td><mx:formField id="name" /></td>
               </tr>
             </mx:bloc id="detail">
           </tbody>
         </table>
       </fieldset>
+      <fieldset>
+        <legend>Offer</legend>
+        <div class="logo">
+          <img alt="picture" width="96" height="96" mXattribut="src:ologo"/>
+          <label for="onlyImage">Display Only Image</label><input type="checkbox" name="onlyImage" mXattribut="value:onlyImage"/>
+        </div>
+        <div class="info">
+          <label for="discountPrice">Discount Price</label><mx:formField id="discountPrice"/>
+          <label for="startTime">Start Time</label><mx:formField id="startTime"/>
+          <label for="endTime">End Time</label><mx:formField id="endTime"/>
+        </div>
+      </fieldset>
       <div class="fieldset">
-        <div id="update-product" class="submit-button">
+        <mx:hidden id="productId" />
+        <div id="update-product" class="submit-button right">
           <div class="top"></div>
           <div class="content">Save</div>
         </div>
-        <div id="cancel" class="cancel-button">
+        <div id="cancel" class="cancel-button right">
           <div class="top"></div>
           <div class="content">Cancel</div>
         </div>

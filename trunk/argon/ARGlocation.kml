@@ -59,12 +59,12 @@
 				if(distanceGTL < .002) //at GTL
 				{	
 					document.getElementById("pic").innerHTML='<img src=" http://www.femto-st.fr/i/d/b/gtl_bat.jpg " alt="GTL pic" />'
-					document.getElementById("distance").innerHTML = "GTL Distance: <br>" + distanceGTL;
+					document.getElementById("distance").innerHTML = "GTL Distance: <br>" + distanceGTL + "<br>Updates: " + counter;
 				}
 				else if(distanceALOES < 0.002)//at ALOES
 				{
 				document.getElementById("pic").innerHTML='<img src="http://www.metz.supelec.fr/metz/residence/images/miniatures/img_7770.png" alt="ALOES pic" />'
-				document.getElementById("distance").innerHTML = "ALOES Distance: <br>" + distanceALOES;
+				document.getElementById("distance").innerHTML = "ALOES Distance: <br>" + distanceALOES + "<br>Updates: " + counter;
 				}
 				else //display generic
 				{
@@ -83,9 +83,10 @@
             $(document).bind('locationChanged',function(event) {displayLocation()});
             console.log('description_javascript initialized');
         }
-        </script>
+		
+	    </script>
         
-		<div id="outputDiv" style="font-family:sans-serif; font-size:8px; width:300px">Location: [14]</div>
+		<div id="outputDiv" style="font-family:sans-serif; font-size:8px; width:300px">Location: [76]</div>
 		<div id="distance" style="font-family:sans-serif; font-size:8px; width:300px">Distance??</div>
 		<div id="pic" style="font-family:sans-serif; font-size:8px; width:300px">Pic?</div>
         
