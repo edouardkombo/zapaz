@@ -1,6 +1,7 @@
 <div class="box">
   <h2>Product list</h2>
   <input title="Name filter" class="filter" type="text" name="nameFilter" mXattribut="value:nameFilter" />
+  <input title="Category filter" class="filter" type="text" name="categoryFilter" mXattribut="value:categoryFilter" />
   <input title="Type filter" class="filter" type="text" name="typeFilter" mXattribut="value:typeFilter" />
   <div class="box-content">
     <form method="post" action="#">
@@ -10,6 +11,7 @@
           <tr>
             <td><input type="checkbox" name="checkAll" value="0" /></td>
             <td><a href="#">Name</a></td>
+            <td><a href="#">Category</a></td>
             <td><a href="#">Type</a></td>
             <td><a href="#">Manufacturer</a></td>
             <td><a href="#">Price</a></td>
@@ -56,6 +58,7 @@
           <tr>
             <td><mx:bloc id="input"><mx:checker id="check" /></mx:bloc id="input"></td>
             <td><a href="#"><mx:text id="name" /></a></td>
+            <td><mx:text id="category"/></td>
             <td><mx:text id="type"/></td>
             <td><mx:text id="manufacturer"/></td>
             <td><mx:text id="price"/></td>
