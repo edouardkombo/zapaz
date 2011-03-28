@@ -1,46 +1,46 @@
 <html>
-    <head>
-       <script type="text/javascript" src="http://static.admin.zap.com/js/jquery.js"> 
-       </script>
-    </head>
-<body>
+  <head>
+    <script type="text/javascript" src="http://static.admin.zap.com/js/jquery.js"> 
+    </script>
+  </head>
+  <body>
 
-<script type="text/javascript">
-//var myLoc = KHARMA.getLocation();                                    
-//var myLat = myLoc.latitude;
-//var myLon = myLoc.longitude;
+    <script type="text/javascript">
+      //var myLoc = KHARMA.getLocation();                                    
+      //var myLat = myLoc.latitude;
+      //var myLon = myLoc.longitude;
 
-//function getOffers(){
-    var params = {};
-    params['latitude'] = 49.115399672969794;
-    params['longitude'] = 6.175689243408215;
-    params['maxDistance'] = 0; //to be implemented later
+      //function getOffers(){
+      var params = {};
+      params['latitude'] = 49.115399672969794;
+      params['longitude'] = 6.175689243408215;
+      params['maxDistance'] = 0; //to be implemented later
     
-    document.write("myLat: " + params['latitude'] + "<br>"); 
-    document.write("myLon: " + params['longitude'] + "<br>"); 
+      document.write("myLat: " + params['latitude'] + "<br>"); 
+      document.write("myLon: " + params['longitude'] + "<br>"); 
 
-    //build the URL that requests data from getStores.php
-    var url= "http://admin.zap.com/getStores.php";
+      //build the URL that requests data from getStores.php
+      var url= "http://admin.zap.com/getStores.php";
     
-    document.write("url: " + url + "<br>"); 
+      document.write("url: " + url + "<br>"); 
     
-    //$.get("admin.zap.com/getStores.php", { latitude: "49.115399672969794", longitude: "6.175689243408215" });
+      //$.get("admin.zap.com/getStores.php", { latitude: "49.115399672969794", longitude: "6.175689243408215" });
 
-    $.get(url, params, function(xml) //get xml data from getStores.php
+      $.get(url, params, function(xml) //get xml data from getStores.php
       {
         document.write("hi");  
         alert(xml);
         
-          $(xml).find('shop').each( function() {
-            document.write("here"); 
-            var name = $(this).children('name').text();
-            //$(this).children('keywords').find('w').each(function() {
-              //$(this).text();
-            //});
-            var ws = $(this).children('webServiceUrl').text(); // ws url!
-            // Process ws url and fetch data about products/offers of this shop
+        $(xml).find('shop').each( function() {
+          document.write("here"); 
+          var name = $(this).children('name').text();
+          //$(this).children('keywords').find('w').each(function() {
+          //$(this).text();
+          //});
+          var ws = $(this).children('webServiceUrl').text(); // ws url!
+          // Process ws url and fetch data about products/offers of this shop
 
-            document.write('<p>ShopName: ' + name + ' WebServiceUrl: ' + ws + '</p>');
+          document.write('<p>ShopName: ' + name + ' WebServiceUrl: ' + ws + '</p>');
         });
         
         //*Need To: Process ws url and fetch data about products/offers of this shop
@@ -48,15 +48,15 @@
       });
       
       document.write("here1"); 
-//}
+      //}
 
-</script> 
-    
-    
-<h1>My First Web Page</h1>
-<p id="demo">This is a paragraph.</p>
+    </script> 
 
-<button type="button" onclick="getOffers()">Get Offers</button>
 
-</body>
+    <h1>My First Web Page</h1>
+    <p id="demo">This is a paragraph.</p>
+
+    <button type="button" onclick="getOffers()">Get Offers</button>
+
+  </body>
 </html>

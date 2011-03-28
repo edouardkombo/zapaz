@@ -40,20 +40,17 @@ class ShopDao {
     }
     return $array;
   }
- 
-/*Returns shops within a maximum distance of specified
-*latitude and longitude. 
-* -Rachel
-*/
-  public function getAllClosestShops($latitude1, $longitude1, $latitude2, $longitude2, $maxDistance) {
+  
+  public function getAllClosestShops($minLat, $maxLat, $minLng, $maxLng) {
     $array   = array();
-    //$query = "SELECT * FROM `Shop` "; //add lat,long...
+    if ($minLat == null || $maxLat == null || $minLng == null || $maxLng == null) {
+      return $array;
+    }
     
-    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE latitude BETWEEN :latitude2 AND :latitude1 AND longitude BETWEEN :longitude1 AND :longitude2 ");
-    $q->execute(array(':latitude1' => $latitude1, ':latitude2' => $latitude2, ':longitude1' => $longitude1, ':longitude2' => $longitude2));
+    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE latitude BETWEEN ? AND ? AND longitude BETWEEN ? AND ? ");
+    $q->execute(array($minLat, $maxLat, $minLng, $maxLng));
     
     if ($q != null) {
-      //echo "not null";
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
         array_push($array, $this->fetchShop($t));
       }
@@ -62,9 +59,6 @@ class ShopDao {
     return $array;
   }
   
-  /* @mohamed
-   * 
-   */
   public function count($filter = '') {
     $filter .= "%";
     $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `Shop` WHERE name LIKE ?");
