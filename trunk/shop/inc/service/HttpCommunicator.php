@@ -5,7 +5,7 @@ define("HTTP_POST", 010101);
 define("HTTP_SECURED", 110000);
 define("HTTP_UNSECURED", 111000);
 
-class MyHttpRequest {
+class HttpCommunicator {
 
   private $url;
   private $host;

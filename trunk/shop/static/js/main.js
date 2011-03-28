@@ -66,4 +66,5 @@ $(document).ready(function() {
   });
   $("#menu li:first a").click(displayShopInfo);
   $("#menu li:last a").click(displayProducts);
+  displayBlank();
 });
