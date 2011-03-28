@@ -33,7 +33,7 @@ class ProductManager {
   public function getAllProducts($shopId, $nameFilter = '', $categoryFilter = '', $typeFilter = '', $startIndex = 0, $length = 10) {
     return $this->productDao->getAllProducts($shopId, $nameFilter, $categoryFilter, $typeFilter, $startIndex, $length);
   }
-  
+   
   public function getAllCategories() {
     return $this->categoryDao->getAllCategories('', 0, 1000);
   }

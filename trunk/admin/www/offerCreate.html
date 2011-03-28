@@ -15,6 +15,9 @@
       params['latitude'] = 49.115399672969794;
       params['longitude'] = 6.175689243408215;
       params['maxDistance'] = 0; //to be implemented later
+      
+      var searchterms = {};
+      
     
       document.write("myLat: " + params['latitude'] + "<br>"); 
       document.write("myLon: " + params['longitude'] + "<br>"); 
@@ -28,24 +31,31 @@
 
       $.get(url, params, function(xml) //get xml data from getStores.php
       {
-        document.write("hi");  
-        alert(xml);
-        
-        $(xml).find('shop').each( function() {
-          document.write("here"); 
+          
+          $(xml).find('shop').each( function() {
+          document.write("Getting Valid Shops"); 
           var name = $(this).children('name').text();
-          //$(this).children('keywords').find('w').each(function() {
-          //$(this).text();
-          //});
+          var publicUid = $(this).children('publicUid').text(); 
+          searchterms['publicUid'] = publicUid;
           var ws = $(this).children('webServiceUrl').text(); // ws url!
           // Process ws url and fetch data about products/offers of this shop
-
-          document.write('<p>ShopName: ' + name + ' WebServiceUrl: ' + ws + '</p>');
-        });
+          document.write('<p>ShopName: ' + name + ' PublicUid: ' + publicUid +' WebServiceUrl: ' + ws + '</p>');
+          
+          $.get(ws,searchterms, function(products){
+              document.write("Retrieving Shop Products"); 
+              
+              //use document.createElement();
+              
+              
+          });
+           
+       });
         
-        //*Need To: Process ws url and fetch data about products/offers of this shop
+        
       
       });
+      
+      
       
       document.write("here1"); 
       //}
