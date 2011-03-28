@@ -41,11 +41,11 @@ var isEmail        = function(v) { return v != "" && isRFC822ValidEmail(v); }
 
 var updateShop = function() {
   var params = getFormValues("#ishop");
-  params["logo"] = $("input[name=hlogo]").val();
-  params["id"] = $("input[name=id]").val();
-  params["keywords"] = $("input[name=keywords]").val();
+  params["id"]         = $("input[name=currentShopId]").val();
+  params["logo"]       = $("input[name=hlogo]").val();
+  params["keywords"]   = $("input[name=keywords]").val();
   params["currencyId"] = $("select[name=currency] option:selected").val();
-  params["countryId"] = $("select[name=country] option:selected").val();
+  params["countryId"]  = $("select[name=country] option:selected").val();
   var keywords = "";
   $("#keywords span").each(function() {
     keywords += $(this).text() + ";";
@@ -62,7 +62,7 @@ var updateShop = function() {
     $.post("/shop/update", params, function(xml) {
       var result = $(xml).find("result").text() == "1";
       var id = $(xml).find('id').text();
-      $("input[name=id]").val(id);
+      $("input[name=currentShopId]").val(id);
       if (result) {
         alert("Data has been saved!");
       } else {
@@ -78,8 +78,8 @@ var initLogoChangeButton = function() {
       a.appendChild(document.createTextNode("Change logo"));
     $(a).click(askLogo);
     $(a).hide();
-  $("#logo").append(a);
-  $("#logo").hover(
+  $(".logo").append(a);
+  $(".logo").hover(
     function() {$(a).show();},
     function() {$(a).hide();}
   );
@@ -94,7 +94,7 @@ var askLogo = function() {
       if (result) {
         $("#lock-background").fadeOut('normal', function() { $("#lock-background").remove(); });
         $("input[name=hlogo]").val(path);
-        $("#logo img").attr('src', 'http://static.shop.zap.com/' + path);
+        $(".logo img").attr('src', 'http://static.shop.zap.com/' + path);
       }
     }});
     $("#popup").css('left', '-1000px');
@@ -142,8 +142,16 @@ var showStateField = function() {
   $("input[name=state]").prev('label').show();
 };
 
+var refreshShop = function() {
+  changeShop();
+};
+
 var changeShop = function() {
-  
+  var shopId = $("input[name=currentShopId]").val();
+  $.post("/shop/view", {'shopId':shopId}, function(xml) {
+    $("#corps").html(xml);
+    parseShop();
+  });
 };
 
 var parseShop = function() {

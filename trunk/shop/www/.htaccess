@@ -1,5 +1,6 @@
 Options +FollowSymlinks
 RewriteEngine on
 
+
 # /dir/page
 RewriteRule ^([a-zäëÿüïöâêûîôéèç\-\+]+)/([a-zäëÿüïöâêûîôéèç\-\+]+)$ r.php?d=$1&p=$2 [L]

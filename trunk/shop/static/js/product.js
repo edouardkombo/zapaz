@@ -18,9 +18,9 @@ var addProduct = function() {
 var editProduct = function() {
   var arr = getCheckedLines();
   if (arr[2] == 0) {
-    alert("Vous devez sélectionner au moins un libellé pour pouvoir l'éditer.");
+    alert("Vous devez sÃ©lectionner au moins un libellÃ© pour pouvoir l'Ã©diter.");
   } else if (arr[2] > 1) {
-    alert("Vous ne pouvez sélectionner qu'un seul libellé pour pouvoir l'éditer.");
+    alert("Vous ne pouvez sÃ©lectionner qu'un seul libellÃ© pour pouvoir l'Ã©diter.");
   } else {
     $.post("/product/edit", {'id':arr[0]}, function(xml) {
       $("#corps").html(xml);
