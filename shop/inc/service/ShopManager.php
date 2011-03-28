@@ -21,6 +21,10 @@ class ShopManager {
     return $this->shopDao->getShopById($id);
   }
   
+   public function getShopByPublicUid($publicUid) {
+    return $this->shopDao->getShopByPublicUid($publicUid);
+  }
+  
   public function getAllShops() {
     return $this->shopDao->getAllShops('', 0, 1000);
   }

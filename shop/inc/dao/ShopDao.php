@@ -25,6 +25,17 @@ class ShopDao {
     return null;
   }
   
+  public function getShopByPublicUid($publicUid) {
+    if ($publicUid == null) {
+      return null;
+    }
+    $q = $this->db->query("SELECT * FROM Shop WHERE publicUid = ".$this->db->quote($publicUid, PDO::PARAM_INT));
+    if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
+      return $this->fetchShop($t);
+    }
+    return null;
+  }
+  
   public function getAllShops($filter = '', $startIndex = 0, $length = 10) {
     $filter .= "%";
     $array   = array();
