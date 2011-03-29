@@ -37,33 +37,22 @@ class HttpCommunicator {
   }
 
   public function send() {
-    $t = array();
-    if ($content != NULL) {
-      $t[] = 'POST ' . $this->url . ' HTTP/1.1';
-      $t[] = 'Content-Type: text/html';
-      $t[] = 'Host: ' . $ip . ':' . $port;
-      $t[] = 'Content-Length: ' . strlen($content);
-      $t[] = 'Connection: Close';
-      $t = implode("\r\n", $t) . "\r\n\r\n" . $content;
-    } else {
-      $t[] = 'GET ' . $ur . ' HTTP/1.1';
-      $t = implode("\r\n", $t) . "\r\n\r\n";
-    }
-    $this->prepareRequestHeader();
+  
+    $t = $this->getRequestCode();
 
-    $socket = @fsockopen($ip, $port, $errno, $errstr, 10);
+    $socket = fsockopen($this->host, $this->port, $errno, $errstr, 10);
     // If we don't have a stream resource, abort.
-    if (!(get_resource_type($socket) == 'stream')) {
+    if (!(get_resource_type($socket)== 'stream')) {
       return false;
     }
     if (!fwrite($socket, $t)) {
       fclose($socket);
       return false;
     }
-
+    
     $response = '';
     while (!feof($socket)) {
-      $response .= fgets($socket, 256);
+      $response .= fgets($socket, 128);
     }
     fclose($socket);
     
@@ -116,8 +105,10 @@ class HttpCommunicator {
     }
     $h .= "Content-Length: ".strlen($p)."\n";
     $h .= "Content-Type: text/html\n";
-    $h .= "Host: ".$this->host.":".$this->post."\n";
+    $h .= "Host: ".$this->host.":".$this->port."\n";
     $h .= "Connection: Close\n";
+    
+    return $h;
   }
   
   private function parse($content) {
@@ -190,7 +181,10 @@ class HttpCommunicator {
     unset($tmp);
     return $str;
   }
-
+  
+  public function getResponseContent(){
+    return $this->responseContent;
+  }
 }
 
 ?>
