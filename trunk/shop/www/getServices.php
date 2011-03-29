@@ -2,10 +2,9 @@
 include('../inc/global.config.php');
 
 $uri = 'http://admin.zap.com/getCategories.php';
-$httpCommunicator = new HttpCommunicator($uri,$_GET);
+$httpCommunicator = new HttpCommunicator($uri);
 if ($httpCommunicator->send()) {
-   $xml = $httpCommunicator->getResponseContent();
-   echo $xml;
+   echo $httpCommunicator->getResponseContent();
 }
 
 

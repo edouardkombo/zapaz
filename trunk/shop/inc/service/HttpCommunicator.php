@@ -16,11 +16,11 @@ class HttpCommunicator {
   private $responseHeaders;
   private $responseContent;
 
-  public function __construct($uri, $port = 80, $requestType = HTTP_GET, $requestProtocol = HTTP_UNSECURED) {
+  public function __construct($uri, $port = 80, $requestType = HTTP_GET) {
     $this->port = $port;
     $this->requestType = $requestType;
     $this->requestParameters = array();
-    $this->protocol = $requestProtocol == HTTP_SECURED ? "https://" : "http://";
+    $this->protocol = substr($uri, 0, 5) == "https" ? "https://" : "http://";
     $tmp = parse_url($uri);
     $this->host = $tmp['host'];
     $this->url = str_replace($this->protocol.$this->host, "", $uri);
@@ -37,9 +37,8 @@ class HttpCommunicator {
   }
 
   public function send() {
-  
     $t = $this->getRequestCode();
-
+    
     $socket = fsockopen($this->host, $this->port, $errno, $errstr, 10);
     // If we don't have a stream resource, abort.
     if (!(get_resource_type($socket)== 'stream')) {
@@ -98,15 +97,16 @@ class HttpCommunicator {
     }
     $p = implode("&", $p);
     if ($this->requestType == HTTP_POST) {
-      $h .= "POST $url HTTP/1.1";
+      $h .= "POST $url HTTP/1.1\n";
     } else {
       $url .= "?".$p;
-      $h .= "GET $url HTTP/1.1";
+      $h .= "GET $url HTTP/1.1\n";
     }
     $h .= "Content-Length: ".strlen($p)."\n";
     $h .= "Content-Type: text/html\n";
     $h .= "Host: ".$this->host.":".$this->port."\n";
     $h .= "Connection: Close\n";
+    $h .= "\n";
     
     return $h;
   }
@@ -122,25 +122,24 @@ class HttpCommunicator {
     $this->responseHeaders = explode("\n", $this->responseHeaders);
     unset($hunks);
     unset($header);
-    if (!$this->validateHttpResponse($headers)) {
+    if (!$this->validateHttpResponse($this->responseHeaders)) {
       return false;
     }
     if (in_array('Transfer-Coding: chunked', $this->responseHeaders)) {
-      return trim($this->unchunkHttpResponse($body));
-    } else {
-      return trim($body);
+      $this->unchunkHttpResponse();
     }
+    $this->responseContent = trim($this->responseContent);
   }
 
 //
 // Validate http responses by checking header.  Expects array of
 // headers as argument.  Returns boolean.
 //
-  public function validateHttpResponse($headers=null) {
-    if (!is_array($headers) or count($headers) < 1) {
+  public function validateHttpResponse() {
+    if (!is_array($this->responseHeaders) or count($this->responseHeaders) < 1) {
       return false;
     }
-    switch (trim(strtolower($headers[0]))) {
+    switch (trim(strtolower($this->responseHeaders[0]))) {
       case 'http/1.0 100 ok':
       case 'http/1.0 200 ok':
       case 'http/1.1 100 ok':
@@ -156,13 +155,13 @@ class HttpCommunicator {
 // false on any errors...  Borrows from code posted above by
 // jbr at ya-right dot com.
 //
-  function unchunkHttpResponse($str=null) {
-    if (!is_string($str) or strlen($str) < 1) {
+  function unchunkHttpResponse() {
+    if (!is_string($this->responseContent) or strlen($this->responseContent) < 1) {
       return false;
     }
     $eol = "\r\n";
     $add = strlen($eol);
-    $tmp = $str;
+    $tmp = $this->responseContent;
     $str = '';
     do {
       $tmp = ltrim($tmp);
@@ -179,7 +178,7 @@ class HttpCommunicator {
       $check = trim($tmp);
     } while (!empty($check));
     unset($tmp);
-    return $str;
+    $this->responseContent = $str;
   }
   
   public function getResponseContent(){
