@@ -93,7 +93,7 @@ class HttpCommunicator {
     $url = $this->url;
     $p = array();
     foreach ($this->requestParameters as $k => $v) {
-      array_push($p, url_encode(utf8_encode($k))."=".url_encode(utf8_encode($v)));
+      array_push($p, urlencode($k)."=".urlencode($v));
     }
     $p = implode("&", $p);
     if ($this->requestType == HTTP_POST) {
@@ -102,11 +102,19 @@ class HttpCommunicator {
       $url .= "?".$p;
       $h .= "GET $url HTTP/1.1\n";
     }
-    $h .= "Content-Length: ".strlen($p)."\n";
-    $h .= "Content-Type: text/html\n";
     $h .= "Host: ".$this->host.":".$this->port."\n";
+    $h .= "Content-Length: ".strlen($p)."\n";
     $h .= "Connection: Close\n";
+    if ($this->requestType == HTTP_POST) {
+      $h .= "Content-Type: application/x-www-form-urlencoded\n";
+    }
     $h .= "\n";
+    
+    if ($this->requestType == HTTP_GET) {
+      $h .= "\n";
+    } else if ($this->requestType == HTTP_POST) {
+      $h .= $p;
+    }
     
     return $h;
   }

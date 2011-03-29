@@ -1,10 +1,11 @@
 <?php
+
 include('../inc/global.config.php');
 
 $uri = 'http://admin.zap.com/getCategories.php';
 $httpCommunicator = new HttpCommunicator($uri);
 if ($httpCommunicator->send()) {
-   echo $httpCommunicator->getResponseContent();
+  echo $httpCommunicator->getResponseContent();
 }
 
 
@@ -17,6 +18,4 @@ if ($httpCommunicator->send()) {
 //  $name = $category->item(0)->nodeValue;
 //  $categories = $categoryManager->saveOrUpdate(new Category($name));
 //  }
-
-  
 ?>
