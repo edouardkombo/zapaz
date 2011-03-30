@@ -6,7 +6,7 @@ $in = $_GET;
 
 
 //Add additional regex for expression for search terms
-$publicUid = isset($in["publicUid"]) && $in["publicUid"] != '' ? $in["publicUid"] : 0;
+$publicUid = isset($in['publicUid']) && $in['publicUid'] != '' ? $in['publicUid'] : 0;
 $search1 = isset($in['search1']) ? $in['search1'] : null;
 $search2 = isset($in['search2']) ? $in['search2'] : null;
 
@@ -84,7 +84,7 @@ if ($shop != null) {
 } else {
   //Send error message
 }
-//header("Content-type: text/xml");
+header("Content-type: text/xml");
 echo $doc->saveXML();
 ?>
 

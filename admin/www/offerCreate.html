@@ -32,33 +32,40 @@
       $.get(url, params, function(xml) //get xml data from getStores.php
       {
           
-          $(xml).find('shop').each( function() {
+        $(xml).find('shop').each( function() {
           document.write("Getting Valid Shops"); 
           var name = $(this).children('name').text();
-          var publicUid = $(this).children('publicUid').text(); 
-          searchterms['publicUid'] = publicUid;
-          var ws = $(this).children('webServiceUrl').text(); // ws url!
-          // Process ws url and fetch data about products/offers of this shop
-          document.write('<p>ShopName: ' + name + ' PublicUid: ' + publicUid +' WebServiceUrl: ' + ws + '</p>');
+          var pid = $(this).children('publicUid').text(); 
+          var ws = $(this).children('webServiceUrl').text(); // ws url of shop
+          document.write('<p>ShopName: ' + name + ' PublicUid: ' + pid +' WebServiceUrl: ' + ws + '</p>');
           
-          $.get(ws,searchterms, function(products){
-              document.write("Retrieving Shop Products"); 
-              
+          document.write("Retrieving Shop Products <br>");
+          // Process ws url and fetch data about products/offers of this shop                    
+          $.get(ws, {publicUid: pid}, function(products){ //get xml product data from store ws
+            alert(products);
+            $(products).find('product').each( function() {
+              document.write("Getting Products"); 
+              var productname = $(this).children('name').text();
+              var price = $(this).children('price').text(); 
+              var picture = $(this).children('picture').text(); // ws url!
+              // Process ws url and fetch data about products/offers of this shop
+              document.write('<p>Product: ' + productname + ' Price: ' + price +' Picture: <img src="' +picture+ '" alt ="No Image"/> </p>');
+          
               //use document.createElement();
+              });
               
-              
-          });
+            });
            
-       });
+          });
         
         
       
-      });
+        });
       
       
       
-      document.write("here1"); 
-      //}
+        document.write("here1"); 
+        //}
 
     </script> 
 
