@@ -17,7 +17,7 @@ $city      = isset($in["city"])      && $in["city"]      != "" ? stripslashes($i
 $state     = isset($in["state"])     && $in["state"]     != "" ? stripslashes($in["state"])     : null;
 $countryId = isset($in["countryId"]) && filter_var($in["countryId"], FILTER_VALIDATE_INT) && $in["countryId"] > 0 ? $in["countryId"] : null;
 $phone     = isset($in["phone"])     && $in["phone"]     != "" ? stripslashes($in["phone"])     : null;
-$webServiceUrl = isset($in["webServiceUrl"]) && $in["webServiceUrl"] != "" ? stripslashes($in["webServiceUrl"]) : null;
+$webServiceUrl = isset($in["webServiceUrl"]) && filter_var($in['webServiceUrl'], FILTER_VALIDATE_URL) ? stripslashes($in["webServiceUrl"]) : null;
 $keywords  = isset($in["keywords"])     && $in["keywords"]     != "" ? stripslashes($in["keywords"])     : null;
 
 $result = 0;
@@ -29,7 +29,8 @@ if ($name != null
  && $address0 != null
  && $zipCode != null
  && $city != null
- && $countryId != null) {
+ && $countryId != null
+ && $webServiceUrl != null) {
   $shopManager = new ShopManager();
   $address = $shopManager->mergeAddresses($address0, $address1, $address2);
   $shop = new Shop("", $name, $address, $zipCode, $city, $countryId, $currencyId, $email, $latitude, $longitude, $id);

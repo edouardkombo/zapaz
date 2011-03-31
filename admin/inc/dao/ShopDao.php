@@ -24,9 +24,15 @@ class ShopDao {
     }
     return null;
   }
-  /* @mohamed
-   * 
-   */
+  
+  public function getShopByPublicUid($id) {
+    $q = $this->db->query("SELECT * FROM Shop WHERE publicUid = ".$this->db->quote($id, PDO::PARAM_STR));
+    if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
+      return $this->fetchShop($t);
+    }
+    return null;
+  }
+  
   public function getAllShops($filter = '', $startIndex = 0, $length = 10) {
     $filter .= "%";
     $array   = array();
@@ -67,20 +73,6 @@ class ShopDao {
     return $r != null ? $r->count : 0;
   }
   
-  /*
-   * Authentication of a shop
-   */
-  
-  public function checkShop($login,$password){
-    $filter = '';
-    $filter .= "%";
-    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE email='$login' AND publicUid='$password'");
-    $q->execute(array($filter));
-    $r = $q->fetch(PDO::FETCH_OBJ);
-    if ($r!=null) return TRUE;
-    else return False;
-  }
-  
   public function saveOrUpdate($shop) {
     if ($shop == null) {
       return 0;
@@ -95,12 +87,47 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
+    $q = $this->db->prepare("INSERT INTO Shop (publicUid, name, currencyId, latitude, longitude, email, countOfProducts, creationTime, lastUpdate, webServiceUrl) VALUES (?,?,?,?,?,?,?,?,?,?)");
+    $r = $q->execute(array(
+      $shop->getPublicUid(),
+      $shop->getName(),
+      $shop->getCurrencyId(),
+      $shop->getLatitude(),
+      $shop->getLongitude(),
+      $shop->getEmail(),
+      $shop->getCountOfProducts(),
+      $shop->getCreationTime(),
+      $shop->getLastUpdate(),
+      $shop->getWebServiceUrl()
+    ));
+    if ($r) {
+      $shop->setId($this->db->lastInsertId());
+    }
+    return $r;
   }
   
   public function update($shop) {
     if ($shop == null || $shop->getId() == null || $shop->getId() < 1) {
       return 0;
     }
+    
+    if ($shop == null) {
+      return 0;
+    }
+    $q = $this->db->prepare("UPDATE Shop SET publicUid = ?, name = ?, currencyId = ?, latitude = ?, longitude = ?, email = ?, countOfProducts = ?, creationTime = ?, lastUpdate = ?, webServiceUrl = ? WHERE id = ?");
+    return $q->execute(array(
+      $shop->getPublicUid(),
+      $shop->getName(),
+      $shop->getCurrencyId(),
+      $shop->getLatitude(),
+      $shop->getLongitude(),
+      $shop->getEmail(),
+      $shop->getCountOfProducts(),
+      $shop->getCreationTime(),
+      $shop->getLastUpdate(),
+      $shop->getWebServiceUrl(),
+      $shop->getId()
+    ));
   }
   
   public function delete($shopId) {
