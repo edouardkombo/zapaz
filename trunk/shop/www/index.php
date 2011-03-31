@@ -17,6 +17,7 @@ $javascript = array(
     PROTOCOL.DOMAIN_ZSHOP."/js/offer.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/views.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/gmaps.js",
+    PROTOCOL.DOMAIN_ZSHOP."/js/updater.js",
     PROTOCOL.DOMAIN_ZSHOP."/js/main.js"
 );
 $css = array(

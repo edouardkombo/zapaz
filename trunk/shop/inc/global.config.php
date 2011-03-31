@@ -79,7 +79,10 @@ include(INC_GENERAL_PATH.'dao/ShopDao.php');
 // Services
 include(INC_GENERAL_PATH.'service/ProductManager.php');
 include(INC_GENERAL_PATH.'service/ShopManager.php');
+include(INC_GENERAL_PATH.'service/CategoryManager.php');
+include(INC_GENERAL_PATH.'service/ProductTypeManager.php');
 include(INC_GENERAL_PATH.'service/HttpCommunicator.php');
+
 }
 
 ?>
