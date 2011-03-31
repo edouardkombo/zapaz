@@ -8,12 +8,14 @@ $in = $_POST;
 $shopId = isset($in["shopId"]) && filter_var($in["shopId"], FILTER_VALIDATE_INT) && $in["shopId"] > 0 ? $in["shopId"] : 0;
 
 if ($shopId > 0) {
-  include('shop/view.php');
-  exit();
+//  include('shop/view.php');
+//  exit();
 }
 if (!$fullPage) {
   $template = new ModeliXe('default/view.mxt');
   $template->SetModeliXe();
+  
+  $template->MxImage("preload", PROTOCOL.DOMAIN_ZSHOP."/img/bigload.gif", "Preloading", 'class="bigload"');
 } else {
   $shopManager = new ShopManager();
   $tmp = $shopManager->getAllShopsAsDictionary();

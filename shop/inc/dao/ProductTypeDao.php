@@ -47,37 +47,17 @@ class ProductTypeDao {
     return $r != null ? $r->count : 0;
   }
   
-  
   public function saveOrUpdate($productType) {
     if ($productType == null) {
       return 0;
     }
-    if ($productType->getId() == 0) {
-      return $this->save($productType);
-    }
-    return $this->update($productType);
-  }
-  
-  public function save($productType) {
-    if ($productType == null) {
-      return 0;
-    }
-    $sql = "INSERT INTO ProductType (name) VALUE (?)";
+    $sql = "INSERT INTO ProductType (id,name) VALUE (:id,:name) ON DUPLICATE KEY UPDATE id = :id";
     $q = $this->db->prepare($sql);
-    $r = $q->execute(array($productType->getName()));
-    if ($r == 1) {
-      $productType->setId($this->db->lastInsertId());
-    }
+    $r = $q->execute(array(
+      "id"   => $productType->getId(),
+      "name" => $productType->getName()
+    ));
     return $r;
-  }
-  
-  public function update($productType) {
-    if ($productType == null || $productType->getId() == null || $productType->getId() < 1) {
-      return 0;
-    }
-    $sql = "UPDATE ProductType SET name = ? WHERE id = ?";
-    $q = $this->db->prepare($sql);
-    return $q->execute(array($productType->getName(), $productType->getId()));
   }
   
   public function delete($productTypeId) {

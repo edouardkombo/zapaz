@@ -67,39 +67,13 @@ class CategoryDao {
     if ($category == null) {
       return 0;
     }
-    if ($category->getId() == 0) {
-      return $this->save($category);
-    }
-    return $this->update($category);
-  }
-  
-  public function save($category) {
-    if ($category == null) {
-      return 0;
-    }
-    $sql = "INSERT INTO Category (name) VALUE (?)";
+    $sql = "INSERT INTO Category (id,name) VALUE (:id,:name) ON DUPLICATE KEY UPDATE id = :id";
     $q = $this->db->prepare($sql);
-    $r = $q->execute(array($category->getName()));
-    if ($r == 1) {
-      $category->setId($this->db->lastInsertId());
-    }
+    $r = $q->execute(array(
+      "id"   => $category->getId(),
+      "name" => $category->getName()
+    ));
     return $r;
-  }
-  
-  public function update($category) {
-    if ($category == null || $category->getId() == null || $category->getId() < 1) {
-      return 0;
-    }
-    $sql = "UPDATE Category SET name = ? WHERE id = ?";
-    $q = $this->db->prepare($sql);
-    return $q->execute(array($category->getName(), $category->getId()));
-  }
-  
-  public function delete($categoryId) {
-    if ($categoryId == null || $categoryId < 1) {
-      return 0;
-    }
-    return $this->db->exec("DELETE FROM Category WHERE id = ".$this->db->quote($categoryId, PDO::PARAM_INT));
   }
   
   private function fetchCategory($t) {

@@ -9,14 +9,26 @@ $doc = new DomDocument('1.0', 'utf-8');
 $root = $doc->createElement('root');
 $root = $doc->appendChild($root);
 
-foreach ($productTypes as $pt) {
+$count = $doc->createElement('count');
+$root->appendChild($count);
 
-  $productType = $doc->createElement('type');
-  $productType = $root->appendChild($productType);
-  $name = $pt->getName();
-  $value = $doc->createTextNode($name);
-  $value = $productType->appendChild($value);
+$value = $doc->createTextNode(count($productTypes));
+$count->appendChild($value);
+
+foreach ($productTypes as $t) {
+  $type = $doc->createElement('type');
+  $root->appendChild($type);
+  
+  $id = $doc->createElement('id');
+  $value = $doc->createTextNode($t->getId());
+  $id->appendChild($value);
+  $type->appendChild($id);
+  
+  $name = $doc->createElement('name');
+  $value = $doc->createTextNode($t->getName());
+  $name->appendChild($value);
+  $type->appendChild($name);
 }
-$xml_string = $doc->saveXML();
-echo $xml_string;
+
+echo $doc->saveXML();
 ?>
