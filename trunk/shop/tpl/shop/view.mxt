@@ -20,7 +20,7 @@
                 <label for="email">Email <span class="required">*</span></label><mx:formField id="email" />
                 <label for="latitude">Latitude <span class="required">*</span></label><mx:formField id="latitude" />
                 <label for="longitude">Longitude <span class="required">*</span></label><mx:formField id="longitude" />
-                <label for="webServiceUrl">Web Service URL</label><mx:formField id="webServiceUrl" />
+                <label for="webServiceUrl">Web Service URL <span class="required">*</span></label><mx:formField id="webServiceUrl" />
                 <label for="currency">Currency <span class="required">*</span></label><mx:select id="currency" />
               </div>
             </fieldset>

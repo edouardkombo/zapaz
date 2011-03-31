@@ -3,7 +3,7 @@
 include('../inc/global.config.php');
 
 $productTypeManager = new ProductTypeManager();
-$productTypes = $productTypeManager->getAllProductTypes();
+$productTypes = $productTypeManager->getAllProductTypes('', 0, 1000000);
 
 $doc = new DomDocument('1.0', 'utf-8');
 $root = $doc->createElement('root');

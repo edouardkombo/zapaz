@@ -70,21 +70,50 @@ class ShopManager {
   public function saveOrUpdate($shop, $keywords) {
     global $db;
     try {
-      $db->beginTransaction();
-      if (!$this->shopDao->saveOrUpdate($shop)) {
-        throw new Exception("Failed to save shop.");
+      $keywordString = "";
+      if ($keywords != null && count($keywords) > 0) {
+        $keywordString = implode(";", $keywords);
       }
-      $array = array();
-      if ($keywords != null) {
-        foreach ($keywords as $w) {
-          array_push($array, new Keyword($w, $shop->getId()));
+      if ($shop->getId() != null && $shop->getId() > 0) {
+        $s = $this->shopDao->getShopById($shop->getId());
+        if ($s != null) {
+          $shop->setPublicUid($s->getPublicUid());
         }
       }
-      $shop->setKeywords($array);
       
-      $this->keywordDao->deleteAll($shop->getId());
-      $this->keywordDao->saveAll($shop->getKeywords());
-      $db->commit();
+      $http = new HttpCommunicator(ADMIN_REGISTER, 80, HTTP_POST);
+      $http->addParameter("publicUid", $shop->getPublicUid());
+      $http->addParameter("name", $shop->getName());
+      $http->addParameter("email", $shop->getEmail());
+      $http->addParameter("currencyId", $shop->getCurrencyId());
+      $http->addParameter("latitude", $shop->getLatitude());
+      $http->addParameter("longitude", $shop->getLongitude());
+      $http->addParameter("webServiceUrl", $shop->getWebServiceUrl());
+      $http->addParameter("keywords", $keywordString);
+      if ($http->send() && $http->statusIsOk()) {
+        $response = $http->getResponseContent();
+        $xml = simplexml_load_string($response);
+        $shop->setPublicUid($xml->uid);
+      
+        $db->beginTransaction();
+        if (!$this->shopDao->saveOrUpdate($shop)) {
+          throw new Exception("Failed to save shop.");
+        }
+
+        $array = array();
+        if ($keywords != null) {
+          foreach ($keywords as $w) {
+            array_push($array, new Keyword($w, $shop->getId()));
+          }
+        }
+        $shop->setKeywords($array);
+
+        $this->keywordDao->deleteAll($shop->getId());
+        $this->keywordDao->saveAll($shop->getKeywords());
+        $db->commit();
+      } else {
+        return 0;
+      }
     } catch (Exception $e) {
       $db->rollBack();
       echo $e;

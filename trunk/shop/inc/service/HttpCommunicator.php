@@ -58,35 +58,6 @@ class HttpCommunicator {
     $this->parse($response);
     return true;
   }
-
-  public function getHttpResponseStatus($content=null) {
-    if (empty($content)) {
-      return false;
-    }
-    // split into array, headers and content.
-    $hunks = explode("\r\n\r\n", trim($content));
-    if (!is_array($hunks) or count($hunks) < 2) {
-      return false;
-    }
-    $header = $hunks[count($hunks) - 2];
-    $body = $hunks[count($hunks) - 1];
-    $headers = explode("\n", $header);
-    unset($hunks);
-    unset($header);
-
-    if (!is_array($headers) or count($headers) < 1) {
-      return false;
-    }
-
-    $status = str_replace("HTTP/1.0 ", "", trim($headers[0]));
-    $status = str_replace("HTTP/1.1 ", "", $status);
-
-    return $status;
-  }
-
-  public function httpResponseStatus($uri=null, $post=null) {
-    return getHttpResponseStatus(httpRequest($uri, 80, $post));
-  }
   
   private function getRequestCode() {
     $h = "";
@@ -130,7 +101,7 @@ class HttpCommunicator {
     $this->responseHeaders = explode("\n", $this->responseHeaders);
     unset($hunks);
     unset($header);
-    if (!$this->validateHttpResponse($this->responseHeaders)) {
+    if (!$this->statusIsOk()) {
       return false;
     }
     if (in_array('Transfer-Coding: chunked', $this->responseHeaders)) {
@@ -143,7 +114,7 @@ class HttpCommunicator {
 // Validate http responses by checking header.  Expects array of
 // headers as argument.  Returns boolean.
 //
-  public function validateHttpResponse() {
+  public function statusIsOk() {
     if (!is_array($this->responseHeaders) or count($this->responseHeaders) < 1) {
       return false;
     }

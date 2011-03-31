@@ -39,26 +39,32 @@ class KeywordDao {
     return $array;
   }
   
-  public function saveOrUpdate($keyword) {
-    if ($keyword == null) {
+  public function saveOrUpdate($keywordList, $shopId) {
+    if ($keywordList == null || !is_array($keywordList) || count($keywordList) < 1 || $shopId == null || $shopId < 1) {
       return 0;
     }
-    if ($keyword->getId() == 0) {
-      return $this->save($keyword);
+    $q = $this->db->exec("DELETE FROM ShopKeywords WHERE shopId = ".$this->db->quote($shopId, PDO::PARAM_INT));
+    $c = 0;
+    foreach ($keywordList as $k) {
+      $id = 0;
+      $q = $this->db->query("SELECT * FROM Keyword WHERE name = ".$this->db->quote($k, PDO::PARAM_STR));
+      if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        $id = $t["id"];
+      }
+      if ($id == 0) {
+        $q = $this->db->exec("INSERT INTO Keyword (name) VALUE (".$this->db->quote($k, PDO::PARAM_STR).")");
+        if ($q) {
+          $id = $this->db->lastInsertId();
+        }
+      }
+      if ($id > 0) {
+        $q = $this->db->prepare("INSERT INTO ShopKeywords (keywordId, shopId) VALUES (?,?)");
+        if ($q->execute(array($id, $shopId))) {
+          $c++;
+        }
+      }
     }
-    return $this->update($keyword);
-  }
-  
-  public function save($keyword) {
-    if ($keyword == null) {
-      return 0;
-    }
-  }
-  
-  public function update($keyword) {
-    if ($keyword == null || $keyword->getId() == null || $keyword->getId() < 1) {
-      return 0;
-    }
+    return $c;
   }
   
   public function delete($keywordId) {

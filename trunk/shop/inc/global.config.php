@@ -17,6 +17,13 @@ define("DOMAIN"                   , "zap.com"                       );
 define("DOMAIN_SHOP"              , "shop.".DOMAIN                  );
 define("DOMAIN_ZSHOP"             , "static.".DOMAIN_SHOP           );
 define("PROTOCOL"                 , "http://"                       );
+
+// Urls for admin WS
+define("ADMIN_LOGIN"     , "http://admin.zap.com/loginShop.php");
+define("ADMIN_REGISTER"  , "http://admin.zap.com/registerShop.php");
+define("ADMIN_CATEGORIES", "http://admin.zap.com/getCategories.php");
+define("ADMIN_PT"        , "http://admin.zap.com/getProductTypes.php");
+
 // Chemins
 define("TEMPLATE_GENERAL_PATH"    , ROOT."tpl/"                     );
 define("INC_GENERAL_PATH"         , ROOT."inc/"                     );

@@ -21,7 +21,8 @@ class Shop {
   private $currency = null;
   private $keywords = null;
 
-  function __construct($publicUid, $name, $currencyId, $latitude, $longitude, $email, $countOfProducts, $creationTime, $lastUpdate, $id = 0) {
+  function __construct($publicUid, $name, $currencyId, $latitude, $longitude, $email, $countOfProducts = 0, $creationTime = 0, $lastUpdate = 0, $id = 0) {
+    $t = time();
     $this->id = $id;
     $this->publicUid = $publicUid;
     $this->name = $name;
@@ -30,8 +31,8 @@ class Shop {
     $this->latitude = $latitude;
     $this->email = $email;
     $this->countOfProducts = $countOfProducts;
-    $this->creationTime = $creationTime;
-    $this->lastUpdate = $lastUpdate;
+    $this->creationTime = $creationTime != 0 ? $creationTime : $t;
+    $this->lastUpdate = $lastUpdate != 0 ? $lastUpdate : $t;
   }
 
   public function setId($id) {
@@ -134,6 +135,15 @@ class Shop {
     if ($currency != null && get_class($currency) == "currency") {
       $this->currency = $currency;
       $this->currencyId = $currency->getId();
+    }
+  }
+  
+  public function addKeyword($word) {
+    if ($this->keywords == null) {
+      $this->keywords = array();
+    }
+    if ($word != null && $word != "") {
+      array_push($this->keywords, $word);
     }
   }
 
