@@ -1,3 +1,40 @@
+var showPopup = function(xml, onEndShowCallback, onEndHideCallback) {
+  if ($("#lock-background").length == 0) {
+    $("body").append(xml);
+    $("#lock-background").hide();
+    $("#popup").css('left', '-800px');
+    $("#lock-background").fadeIn('normal', function() {
+      var height = $("#popup").innerHeight();
+      var top = (parseInt($("body").innerHeight(), 10) - 10 - height) / 2;
+      $("#popup").css('top', top + 'px');
+      var left = (parseInt($("body").innerWidth(), 10) - 710 - 10) / 2;
+      $("#popup").animate({'left':left + 'px'}, onEndShowCallback);
+      $("#popup #close").click(function() {hidePopup(onEndHideCallback);});
+    });
+  } else {
+    $("#popup").replaceWith($(xml).find('#popup'));
+    var height = $("#popup").innerHeight();
+    var top = (parseInt($("body").innerHeight(), 10) - 10 - height) / 2;
+    var left = (parseInt($("body").innerWidth(), 10) - 710 - 10) / 2;
+    $("#popup").css('top', top + 'px');
+    $("#popup").css('left', left + 'px');
+    $("#popup #close").click(function() {hidePopup(onEndHideCallback);});
+    if (typeof(onEndShowCallback) === 'function')
+      onEndShowCallback();
+  }
+};
+
+var hidePopup = function(callback) {
+  var rightLimit = $("body").innerWidth();
+  $("#popup").animate({'left':rightLimit + 'px'}, function() {
+    $("#lock-background").fadeOut('normal', function() {
+      $("#lock-background").remove();
+      if (typeof(callback) === 'function')
+        callback();
+    });
+  });
+};
+
 var getFormValues = function(elt) {
   var params = {};
   $(elt).find("input").each(function() {

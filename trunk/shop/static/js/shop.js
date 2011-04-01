@@ -87,26 +87,18 @@ var initLogoChangeButton = function() {
 
 var askLogo = function() {
   $.post("/shop/logo", function(xml) {
-    $("body").append(xml);
-    $("#popup form").ajaxForm({ success: function(xml) {
-      var result = $(xml).find('result').text() == "1";
-      var path   = $(xml).find('path').text();
-      if (result) {
-        $("#lock-background").fadeOut('normal', function() { $("#lock-background").remove(); });
-        $("input[name=hlogo]").val(path);
-        $(".logo img").attr('src', 'http://static.shop.zap.com/' + path);
-      }
-    }});
-    $("#popup").css('left', '-1000px');
-    $("#lock-background").fadeIn('normal', function() {
-      var height = $("#popup").innerHeight();
-      var top = (parseInt($("body").innerHeight(), 10) - height - 60) / 2;
-      $("#popup").css('top', top + 'px');
-      var left = (parseInt($("body").innerWidth(), 10) - 780 - 10) / 2;
-      $("#popup").animate({'left':left + 'px'});
+    showPopup(xml, function() {
+      $("#popup form").ajaxForm({ success: function(xml) {
+        var result = $(xml).find('result').text() == "1";
+        var path   = $(xml).find('path').text();
+        if (result) {
+          hidePopup();
+          $("input[name=hlogo]").val(path);
+          $(".logo img").attr('src', 'http://static.shop.zap.com/' + path);
+        }
+      }});
+      $("#popup #apply").click(function() { $("#popup form").submit(); });
     });
-    $("#popup .cancel-button").click(function() { $("#lock-background").fadeOut('normal', function() { $("#lock-background").remove(); }); });
-    $("#popup .submit-button").click(function() { $("#popup form").submit(); });
   });
 };
 
