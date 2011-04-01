@@ -9,7 +9,7 @@
         <label></label><input type="text" name="endTime" value=""/>
       </fieldset>
     </form>
-    <div id="submit-close" class="submit-button">
+    <div id="submit-close" class="button">
       <div class="top"></div>
       <div class="content">OK</div>
     </div>

@@ -10,7 +10,7 @@
             <span><mx:text id="value"/></span>
           </mx:bloc id="type">
         </div>
-        <div id="submit-new-type" class="submit-button">
+        <div id="submit-new-type" class="button">
           <div class="top"></div>
           <div class="content">Add</div>
         </div>
@@ -18,7 +18,7 @@
         <label for="newType">New value</label>
       </fieldset>
     </form>
-    <div id="submit-close" class="submit-button">
+    <div id="close" class="button new-type">
       <div class="top"></div>
       <div class="content">Close</div>
     </div>

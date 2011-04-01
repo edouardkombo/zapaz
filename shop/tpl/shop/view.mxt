@@ -45,13 +45,13 @@
                 </mx:bloc id="word">
               </div>
               <label for="word">Keyword</label><input type="text" name="word" value="" id="word"/>
-              <div id="submit-word" class="submit-button">
+              <div id="submit-word" class="button">
                 <div class="top"></div>
                 <div class="content">Add</div>
               </div>
             </fieldset>
             <div class="fieldset">
-              <div id="submit-shop" class="submit-button">
+              <div id="submit-shop" class="button">
                 <div class="top"></div>
                 <div class="content">Apply changes</div>
               </div>

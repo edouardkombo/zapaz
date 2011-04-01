@@ -55,11 +55,11 @@
         </table>
       </fieldset>
       <div class="fieldset">
-        <div id="update-product" class="submit-button">
+        <div id="update-product" class="button">
           <div class="top"></div>
           <div class="content">Save</div>
         </div>
-        <div id="cancel" class="cancel-button">
+        <div id="cancel" class="button">
           <div class="top"></div>
           <div class="content">Cancel</div>
         </div>

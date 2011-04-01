@@ -9,11 +9,11 @@
       </fieldset>
     </form>
     <div id="buttons">
-      <div class="cancel-button">
+      <div id="close" class="button">
         <div class="top"></div>
         <div class="content">Cancel</div>
       </div>
-        <div class="submit-button">
+      <div id="apply" class="button">
         <div class="top"></div>
         <div class="content">Apply</div>
       </div>

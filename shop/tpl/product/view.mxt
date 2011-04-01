@@ -43,7 +43,7 @@
             <td colspan="9" class="right">
               <div id="create-product">
                 <mx:formField id="newProduct"/>
-                <div id="submit-product" class="submit-button">
+                <div id="submit-product" class="button">
                   <div class="top"></div>
                   <div class="content">Add new product</div>
                 </div>

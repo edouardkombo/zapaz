@@ -32,12 +32,12 @@ input.red { border-color:red; }
 a.blue { color:#06C; text-decoration:none; padding:0 4px; font-size:1.1em; }
 a.blue:hover { text-decoration:underline; }
 
-.submit-button, .cancel-button { display:inline-block; height:18px; background-color:#E3E3E3; border:1px solid #CCC; border-radius:2px; cursor:pointer; padding:0; margin:0; }
-.submit-button > .top, .cancel-button > .top { height:7px; background-color:#F4F4F4; border-bottom:1px solid #EEE; }
-.submit-button > .content, .cancel-button > .content { margin-top:-8px; padding:0 6px; line-height:18px; text-align:center; }
-.submit-button:hover, .cancel-button:hover { background-color:#F4F4F4; border-color:#888; }
-.submit-button:hover > .top, .cancel-button:hover > .top { background-color:#E3E3E3; }
-.submit-button.right, .cancel-button.right { float:right; }
+.button { display:inline-block; height:18px; background-color:#E3E3E3; border:1px solid #CCC; border-radius:2px; cursor:pointer; padding:0; margin:0; }
+.button > .top { height:7px; background-color:#F4F4F4; border-bottom:1px solid #EEE; }
+.button > .content { margin-top:-8px; padding:0 6px; line-height:18px; text-align:center; }
+.button:hover { background-color:#F4F4F4; border-color:#888; }
+.button:hover > .top { background-color:#E3E3E3; }
+.button.right { float:right; }
 
 .cancel-button { margin:0 5px; }
 
@@ -218,7 +218,7 @@ input[name=filter].default {
 }
 #calendar-chooser input { width:400px; }
 #calendar-chooser input[name=startDate] { width:100px; margin-right:34px; }
-#calendar-chooser .submit-button { position:absolute; top:0; right:0 }
+#calendar-chooser .button { position:absolute; top:0; right:0 }
 
 .box a { color:#06c; text-decoration: none; }
 .box a:hover { text-decoration: underline; }
@@ -272,7 +272,7 @@ form.regular .info label { width:120px; }
 form.regular .info input, form.regular .info textarea { width:293px; margin-left:14px; }
 form.regular .info select { width:303px; margin-left:14px; }
 form.regular fieldset + fieldset { padding:10px 15px; width:580px; }
-form.regular .submit-button { width:100%; }
+form.regular .button { width:100%; }
 form.regular .logo a { position:absolute; left:0; top:86px; width:100%; height:14px; padding:3px 0; text-align:center; display:block; background-color:lightblue; }
 form.regular p { padding:5px; margin:0 5px; text-indent: 15px; text-align: justify; }
 form.regular ul { padding:5px 35px; margin:0 15px; }
@@ -314,7 +314,7 @@ input.filter.default { font-style: italic; color: #B0B0B0; }
 #product-details td:first-child { width: 150px; text-align:center; }
 #product-details select { width:150px; margin:0 5px 3px 5px; }
 #product-details input { width:100%; margin:0 5px 3px 5px; }
-form#edit-product .submit-button, #edit-product #cancel { width:100px; float: right; }
+form#edit-product .button, #edit-product #cancel { width:100px; float: right; }
 
 #popup #newType { width:300px; float:right; }
 #popup #submit-new-type { float:right; margin:3px 0 0 2px; width:50px; }
@@ -322,7 +322,7 @@ form#edit-product .submit-button, #edit-product #cancel { width:100px; float: ri
 #popup span { cursor:pointer; display:inline-block; background-image: url(http://static.shop.zap.com/img/cross.png); background-repeat:no-repeat; background-color:#3692e7; background-position:right; border:1px solid #293ea9; border-radius:7px; padding:2px 15px 2px 4px; margin:3x 2px 0 1px; }
 #popup span:hover { background-color:#80b6e8; border-color:#5184d2; }
 #popup label[for=newType] { float:right; width:auto; margin-right:10px; }
-#popup #submit-close { clear:both; float:right; width:150px; margin:0; }
+#popup .new-type#close { clear:both; float:right; width:150px; margin:0; }
 
 #lock-background { position:fixed; top:0; left:0; display:none; width:100%; height:100%; background-image:url(http://static.shop.zap.com/img/bg-shadow.png); }
 #popup { position:fixed; top:0; left:0; width:750px; background-color: white; padding:25px 15px; border:5px solid #5184d2; /*#084;*/ border-radius:10px; }
@@ -334,4 +334,4 @@ form#edit-product .submit-button, #edit-product #cancel { width:100px; float: ri
 #popup label { float:left; clear:left; width:135px; margin:7px 0 0 15px; font-size:12px; font-weight:normal; }
 #popup input { float:left;  width:575px; margin:3px 0; font-size:12px; }
 #popup #buttons { position:absolute; bottom:0; left:0; width:100%; text-align:right; padding:5px 0; border-top:1px solid #ececec; }
-#popup .submit-button { margin:0 5px 0 0; }
+#popup .button { margin:0 5px 0 0; }
