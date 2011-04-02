@@ -208,6 +208,11 @@ input[name=filter].default {
   color: #B0B0B0;
 }
 
+input.date{
+  font-style: italic;
+  color: #B0B0B0;
+}
+
 #calendar-chooser {
   position: absolute;
   top:5px;
