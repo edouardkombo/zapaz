@@ -17,6 +17,7 @@ class ProductManager {
   private $productDetailDao;
   private $categoryDao;
   private $detailTypeDao;
+  private $offerDao;
   
   public function __construct() {
     $this->productDao = new ProductDao();
@@ -24,6 +25,7 @@ class ProductManager {
     $this->productDetailDao = new ProductDetailDao();
     $this->categoryDao = new CategoryDao();
     $this->detailTypeDao = new DetailTypeDao();
+    $this->offerDao = new OfferDao();
   }
   
   public function getProductById($productId) {
@@ -80,6 +82,15 @@ class ProductManager {
     return $this->detailTypeDao->deleteDetailType($type);
   }
   
+  
+  public function saveOffer($offer) {
+    return $this->offerDao->save($offer);
+  }
+  
+  public function deleteOffer($offer) {
+    return $this->offerDao->delete($offer);
+  }
+  
   public function count($shopId, $nameFilter = '', $categoryFilter = '', $typeFilter = '') {
     return $this->productDao->count($shopId, $nameFilter, $categoryFilter, $typeFilter);
   }
@@ -112,6 +123,7 @@ class ProductManager {
     }
     return 1;
   }
+  
   
   public function delete($productId) {
     return $this->productDao->delete($productId);
