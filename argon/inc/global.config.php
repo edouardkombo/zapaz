@@ -13,7 +13,7 @@ define("MYSQL_PASSWORD"           , "zappaz"                        );
 define("MYSQL_DB_SHOP"            , ""                       );
 
 // Domaines et sous domaines
-define("DOMAIN"                   , "zap.com"                       );
+define("DOMAIN"                   , "argon.com"                     );
 define("DOMAIN_SHOP"              , "shop.".DOMAIN                  );
 define("DOMAIN_ZSHOP"             , "static.".DOMAIN_SHOP           );
 define("PROTOCOL"                 , "http://"                       );
@@ -22,13 +22,6 @@ define("TEMPLATE_GENERAL_PATH"    , ROOT."tpl/"                     );
 define("INC_GENERAL_PATH"         , ROOT."inc/"                     );
 define("MX_GENERAL_PATH"          , INC_GENERAL_PATH."ModeliXe/"    );
 define("MX_ERROR_PATH"            , INC_GENERAL_PATH."ModeliXe/"    );
-
-$countryArray = array(
-    "1" => "France",
-    "2" => "Germany",
-    "3" => "England",
-    "4" => "USA"
-);
   
 // Variables globales
 // TOUJOURS DECLARER ET INITIALISER UNE VARIABLE !!!

@@ -14,7 +14,6 @@ $http = new HttpCommunicator($uri);
 $http->addParameter("latitude", $latitude);
 $http->addParameter("longitude", $longitude);
 
-
 if ($http->send() && $http->statusIsOk()) {
   echo $http->getResponseContent();
 } else {
