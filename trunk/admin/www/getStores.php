@@ -8,7 +8,8 @@ $latitude = isset($in['latitude']) && filter_var($in['latitude'], FILTER_VALIDAT
 $longitude = isset($in['longitude']) && filter_var($in['longitude'], FILTER_VALIDATE_FLOAT) ? $in['longitude'] : null;
 $maxDistance = isset($in['maxDistance']) && filter_var($in['maxDistance'], FILTER_VALIDATE_FLOAT) ? $in['maxDistance'] : null;
 
-
+//echo "longitude: ";
+//echo $longitude;
 
 $distanceBox = SpatialManager::getGreatSquareAround($latitude, $longitude);
 
@@ -26,6 +27,7 @@ $shopManager = new ShopManager();
 $shopsResult = $shopManager->getAllClosestShops($minLat, $maxLat, $minLng, $maxLng);
 
 $doc = new DomDocument('1.0', 'utf-8');
+$doc->formatOutput = true;
 $root = $doc->createElement('root');
 $root = $doc->appendChild($root);
 
@@ -82,7 +84,7 @@ foreach ($shopsResult as $shp) {
 }
 
 // tell the browser what kind of file is come in
-header("Content-type: text/xml");
+//header("Content-type: text/xml");
 
 $xml_string = $doc->saveXML();
 echo $xml_string;
