@@ -19,8 +19,8 @@ if ($http->send() && $http->statusIsOk()) {
   $response = $http->getResponseContent();
   //echo $response;
   
-  $xml = simplexml_load_string($response);
-  echo $xml;
+  //$xml = simplexml_load_string($response);
+  //echo $xml;
   
   $doc = new DOMDocument();
   $doc->loadXML($response);
