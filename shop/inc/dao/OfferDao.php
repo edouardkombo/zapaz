@@ -53,7 +53,7 @@ class OfferDao {
     $sql = "INSERT INTO Offer (productId, price, startTime, endTime, displayOnlyImage) VALUE (?, ?, ?, ?, ?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
-      $offer->getgetProductId(),
+      $offer->getProductId(),
       $offer->getPrice(),
       $offer->getStartTime(),
       $offer->getEndTime(),
@@ -72,7 +72,7 @@ class OfferDao {
     $sql = "UPDATE Offer SET productId = ?, price = ?, startTime = ?, endTime = ?, displayOnlyImage = ? WHERE id = ?";
     $q = $this->db->prepare($sql);
     return $q->execute(array(
-      $offer->getgetProductId(),
+      $offer->getProductId(),
       $offer->getPrice(),
       $offer->getStartTime(),
       $offer->getEndTime(),

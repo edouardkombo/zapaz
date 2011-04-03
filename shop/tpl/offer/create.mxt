@@ -4,12 +4,15 @@
     <p></p>
     <form id="detail-types-list" action="/offer/create" method="post">
       <fieldset>
-        <label></label><input type="text" name="newPrice" value=""/>
-        <label></label><input type="text" name="startTime" value=""/>
-        <label></label><input type="text" name="endTime" value=""/>
+        <label> Current Offer </label><input type="text" name="currentOffer" class="date" placeholder="No offer"/>
+        <p> <br />  <br />  </p>
+        <label> Offer Price </label><input type="text"  name="newPrice" placeholder="Enter a price" value=""/>
+        <label> StartTime </label><input type="date" class="date" name="startTime" />
+        <label> EndTime </label><input type="date" class="date" name="endTime" />
+
       </fieldset>
 
-        <div id="submit-new-type" class="button">
+        <div id="submit-offer" class="button">
           <div class="top"></div>
           <div class="content">Add</div>
         </div>
