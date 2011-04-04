@@ -23,6 +23,7 @@ define("ADMIN_LOGIN"     , "http://admin.zap.com/loginShop.php");
 define("ADMIN_REGISTER"  , "http://admin.zap.com/registerShop.php");
 define("ADMIN_CATEGORIES", "http://admin.zap.com/getCategories.php");
 define("ADMIN_PT"        , "http://admin.zap.com/getProductTypes.php");
+define("ADMIN_CURRENCIES", "http://admin.zap.com/getCurrencies.php");
 
 // Chemins
 define("TEMPLATE_GENERAL_PATH"    , ROOT."tpl/"                     );
@@ -80,6 +81,7 @@ include(INC_GENERAL_PATH.'dao/ShopDao.php');
 include(INC_GENERAL_PATH.'service/ProductManager.php');
 include(INC_GENERAL_PATH.'service/ShopManager.php');
 include(INC_GENERAL_PATH.'service/CategoryManager.php');
+include(INC_GENERAL_PATH.'service/CurrencyManager.php');
 include(INC_GENERAL_PATH.'service/ProductTypeManager.php');
 include(INC_GENERAL_PATH.'service/HttpCommunicator.php');
 

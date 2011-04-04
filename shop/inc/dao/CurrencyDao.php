@@ -36,6 +36,20 @@ class CurrencyDao {
     return $array;
   }
   
+  public function saveOrUpdate($currency) {
+    if ($currency == null) {
+      return 0;
+    }
+    $sql = "INSERT INTO Currency (id,name,symbol) VALUE (:id,:name,:symbol) ON DUPLICATE KEY UPDATE id = :id";
+    $q = $this->db->prepare($sql);
+    $r = $q->execute(array(
+      "id"   => $currency->getId(),
+      "name" => $currency->getName(),
+      "symbol" => $currency->getSymbol()
+    ));
+    return $r;
+  }
+  
   private function fetchCurrency($t) {
     return new Currency($t["name"], $t["symbol"], $t["id"]);
   }
