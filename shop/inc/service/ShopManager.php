@@ -93,7 +93,11 @@ class ShopManager {
       if ($http->send() && $http->statusIsOk()) {
         $response = $http->getResponseContent();
         $xml = simplexml_load_string($response);
-        $shop->setPublicUid($xml->uid);
+        $publicUid = $xml->uid;
+        if (strlen($publicUid) != 32) {
+          return 0;
+        }
+        $shop->setPublicUid($publicUid);
       
         $db->beginTransaction();
         if (!$this->shopDao->saveOrUpdate($shop)) {

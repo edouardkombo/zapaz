@@ -1,30 +1,4 @@
-var displayBlank = function() {
-  $.get("/default/view", function(xml) {
-    $("#corps").html(xml);
-  
-    $("#submenu").empty();
-    var a = document.createElement('a');
-      $(a).attr('href', '#');
-      $(a).text('');
-    var li = document.createElement('li');
-      $(li).append(a);
-    $("#submenu").append(li);
-  });
-};
-
-var goodDisplay = function() {
-  var v = $("input[name=currentShopId]").val();
-  if (v == "0") {
-    displayBlank();
-    return false;
-  }
-  return true;
-};
-
 var displayShopInfo = function() {
-  if (!goodDisplay() && $("select[name=shops]").val() != "999999") {
-    return false;
-  }
   refreshShop();
   
   $("#menu li").removeClass('current');
@@ -41,7 +15,7 @@ var displayShopInfo = function() {
 };
 
 var displayProducts = function() {
-  if (!goodDisplay()) {
+  if ($("select[name=shops]").val() == "999999") {
     return false;
   }
   var id = $("input[name=currentShopId]").val();
