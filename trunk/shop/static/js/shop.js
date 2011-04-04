@@ -64,6 +64,14 @@ var updateShop = function() {
       var id = $(xml).find('id').text();
       $("input[name=currentShopId]").val(id);
       if (result) {
+        if ($("select[name=shops] option[value=" + id + "]").length == 0) {
+          var option = document.createElement('option');
+            $(option).attr('value', id);
+            $(option).attr('selected', 'selected');
+            $(option).text(params["name"]);
+          $("select[name=shops] option").removeAttr('selected');
+          $("select[name=shops] option[value=999999]").before(option);
+        }
         alert("Data has been saved!");
       } else {
         alert("Impossible to update shop's information.");
