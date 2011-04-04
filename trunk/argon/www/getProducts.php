@@ -18,35 +18,28 @@ $http->addParameter("longitude", $longitude);
 if ($http->send() && $http->statusIsOk()) {
   $response = $http->getResponseContent();
   //echo $response;
-  
   //$xml = simplexml_load_string($response);
   //echo $xml;
-  
+
   $doc = new DOMDocument();
   $doc->loadXML($response);
-  
-  $shops = $doc->getElementsByTagName( "shop" );
-  foreach( $shops as $shop )
-  {
-  $names = $shop->getElementsByTagName( "name" );
-  $name = $names->item(0)->nodeValue;
-  
-  $publicUids = $shop->getElementsByTagName( "publicUid" );
-  $publicUid = $publicUids->item(0)->nodeValue;
-  
-  $webServiceUrls = $shop->getElementsByTagName( "webServiceUrl" );
-  $ws = $webServiceUrls->item(0)->nodeValue;
-  
-  echo "Shop Name: $name  PublicUid: $publicUid  WebServiceUrl: $ws\n";
+
+  $shops = $doc->getElementsByTagName("shop");
+  foreach ($shops as $shop) {
+    $names = $shop->getElementsByTagName("name");
+    $name = $names->item(0)->nodeValue;
+
+    $publicUids = $shop->getElementsByTagName("publicUid");
+    $publicUid = $publicUids->item(0)->nodeValue;
+
+    $webServiceUrls = $shop->getElementsByTagName("webServiceUrl");
+    $ws = $webServiceUrls->item(0)->nodeValue;
+
+    echo "Shop Name: $name  PublicUid: $publicUid  WebServiceUrl: $ws\n";
   }
 
   //Create new HttpCommunicator object and call returned webservice
-  
 } else {
-  echo '<?xml version="1.0" encoding="utf-8"?><root/>'; 
+  echo '<?xml version="1.0" encoding="utf-8"?><root/>';
 }
-
-
- 
-
 ?>

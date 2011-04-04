@@ -25,6 +25,17 @@ class CurrencyDao {
     return null;
   }
   
+  public function getAllCurrencies() {
+    $array = array();
+    $q = $this->db->query("SELECT * FROM Currency");
+    if ($q != null) {
+      while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+        array_push($array, $this->fetchCurrency($t));
+      }
+    }
+    return $array;
+  }
+  
   public function saveOrUpdate($currency) {
     if ($currency == null) {
       return 0;

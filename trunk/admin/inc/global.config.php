@@ -76,6 +76,7 @@ include(INC_GENERAL_PATH.'dao/UserChoiceDao.php');
 
 // Services
 include(INC_GENERAL_PATH.'service/CategoryManager.php');
+include(INC_GENERAL_PATH.'service/CurrencyManager.php');
 include(INC_GENERAL_PATH.'service/ProductTypeManager.php');
 include(INC_GENERAL_PATH.'service/ShopManager.php');
 include(INC_GENERAL_PATH.'service/UserManager.php');

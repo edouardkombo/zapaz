@@ -6,6 +6,7 @@ var updateAll = function() {
   $("#menu").hide();
   updateCategories();
   updateProductTypes();
+  updateCurrencies();
 };
 
 var updateCategories = function() {
@@ -50,9 +51,31 @@ var updateProductTypes = function() {
   });
 };
 
+var updateCurrencies = function() {
+  $.get("/default/get-currencies", function(xml) {
+    var count = parseInt($(xml).find('count').text(), 10);
+    if (count == 0) {
+      endUpdate();
+    } else {
+      var i = 0;
+      $(xml).find('currency').each(function() {
+        var id   = $(this).children('id').text();
+        var name = $(this).children('name').text();
+        var symbol = $(this).children('symbol').text();
+        $.post("/default/save-currency", {id:id, name:name, symbol:symbol}, function(x) {
+          i++;
+          if (i == count) {
+            endUpdate();
+          }
+        });
+      });
+    }
+  });
+};
+
 var endUpdate = function() {
   cceu++;
-  if (cceu == 2) {
+  if (cceu == 3) {
     var left = ($(".box-content").innerWidth() - $("#blank p").innerWidth()) / 2;
     $("#blank p").css('left', left + 'px');
     $("img").fadeOut();
