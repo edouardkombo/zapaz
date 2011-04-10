@@ -28,8 +28,20 @@ class OfferDao {
       WHERE startTime < ?
         AND endTime > ?
         AND productId = ?");
-    $t = time();
+    
+    $t = date('Y-M-D');
     $q->execute(array($t, $t, $productId));
+    if ($q != null && $r = $q->fetch(PDO::FETCH_ASSOC)) {
+      return $this->fetchOffer($r);
+    }
+    return null;
+  }
+  
+  public function getOffer($id){
+  if ($id == null || $id < 1) {
+      return null;
+    }
+    $q = $this->db->query("SELECT * FROM Offer WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchOffer($t);
     }
@@ -80,12 +92,13 @@ class OfferDao {
     ));
   }
   
-  public function delete($offerId) {
+ public function delete($offerId) {
     if ($offerId == null || $offerId < 1) {
       return 0;
     }
     return $this->db->exec("DELETE FROM Offer WHERE id = ".$this->db->quote($offerId, PDO::PARAM_INT));
   }
+
   
   public function fetchOffer($t) {
     $o = new Offer($t["productId"], $t["price"], $t["startTime"], $t["endTime"], $t["displayOnlyImage"], $t["id"]);

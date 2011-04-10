@@ -313,6 +313,12 @@ input[name=nameFilter] { position:absolute; top:5px; right:5px; width:400px; }
 input[name=typeFilter] { position:absolute; top:5px; right:420px; width:150px; }
 input.filter.default { font-style: italic; color: #B0B0B0; }
 
+/************* Offer/view  *************/
+
+form.offer fieldset label{ display: inline; float: none;}
+
+
+
 /************ product/edit  ************/
 #product-details { width:95%; margin:auto; }
 #product-details thead td { text-align: center; font-weight: bold; padding:3px 0; }
