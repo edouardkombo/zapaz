@@ -55,6 +55,14 @@ class ProductManager {
     return $list;
   }
   
+  public function getOfferByProductId($productId){
+    return $this->offerDao->getOfferByProductId($productId);
+  }
+  
+   public function getOffer($offerId){
+    return $this->offerDao->getOffer($offerId);
+  }
+  
   public function getAllTypes() {
     return $this->productTypeDao->getAllProductTypes('', 0, 1000);
   }
@@ -87,8 +95,8 @@ class ProductManager {
     return $this->offerDao->save($offer);
   }
   
-  public function deleteOffer($offer) {
-    return $this->offerDao->delete($offer);
+  public function deleteOffer($OfferId) {
+    return $this->offerDao->delete($OfferId);
   }
   
   public function count($shopId, $nameFilter = '', $categoryFilter = '', $typeFilter = '') {

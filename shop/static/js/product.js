@@ -130,6 +130,8 @@ var addDetailType = function() {
   }
 };
 
+
+
 var removeDetailType = function(elt) {
   var v = $(elt).text();
   $.post("/product/remove-detail-type", {"type":v}, function(xml) {

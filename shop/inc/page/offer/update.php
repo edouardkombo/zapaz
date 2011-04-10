@@ -7,8 +7,7 @@ $productId   = isset($in['productId'])   && filter_var($in['productId'], FILTER_
 $price        = isset($in["price"])        && is_numeric($in["price"])    && $in["price"]    > 0 ? stripslashes($in["price"])        : 0;
 $startTime = isset($in['startTime'])   && $in["startTime"]  != "" ? stripslashes($in["startTime"])  : "";
 $endTime = isset($in['endTime'])   && $in["endTime"]  != "" ? stripslashes($in["endTime"])  : "";
-//$displayOnlyImage = isset($in['displayOnlyImage'])   && $in['displayOnlyImage'] > 0 ? $in['displayOnlyImage']   : null;
-$displayOnlyImage;
+$displayOnlyImage = isset($in['displayOnlyImage'])   && filter_var($in['displayOnlyImage'], FILTER_VALIDATE_INT) && $in['displayOnlyImage'] > 0 ? $in['displayOnlyImage']   : null;
 
 
 $result = 0;
@@ -16,7 +15,6 @@ if ($productId != null && $price != null  && $startTime != null  && $endTime != 
   $productManager = new ProductManager();
   $result  = $productManager->saveOffer(new Offer($productId, $price, $startTime, $endTime, $displayOnlyImage)); 
  }
- 
  
 
 echo <<< END
@@ -26,7 +24,7 @@ echo <<< END
 <r><price>$price</price></r>
 <r><startTime>$startTime</startTime></r>
 <r><endTime>$endTime</endTime></r>
-
+<r><displayOnlyImage>$displayOnlyImage</displayOnlyImage></r>
 END
 
 ?>
