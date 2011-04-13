@@ -14,7 +14,7 @@ html, body {
 
 table tr, table td { padding:0; border-collapse: collapse; }
 td { vertical-align:top; }
-select, input[type=text], input[type=file], input.date,textarea {
+select, input[type=text], input[type=file], input[type=date], input.date,textarea {
   position:relative;
   display:inline-block;
   border:1px solid #CCC;
@@ -23,8 +23,8 @@ select, input[type=text], input[type=file], input.date,textarea {
   font-size:11px;
   background-color:white;
 }
-select:hover, input[type=text]:hover, input[type=file]:hover, input.date:hover, textarea:hover { border-color:#888; }
-select:focus, input[type=text]:focus, input[type=file]:focus, input.date:focus, textarea:focus { border:1px solid #c7a054; box-shadow:0 0 8px #ebc57c; }
+select:hover, input[type=text]:hover, input[type=file]:hover, input[type=date]:hover, input.date:hover, textarea:hover { border-color:#888; }
+select:focus, input[type=text]:focus, input[type=file]:focus, input[type=date]:focus, input.date:focus, textarea:focus { border:1px solid #c7a054; box-shadow:0 0 8px #ebc57c; }
 input.red { border-color:red; }
 .required { color:red; }
 
@@ -313,10 +313,6 @@ input[name=nameFilter] { position:absolute; top:5px; right:5px; width:400px; }
 input[name=typeFilter] { position:absolute; top:5px; right:420px; width:150px; }
 input.filter.default { font-style: italic; color: #B0B0B0; }
 
-/************* Offer/view  *************/
-
-form.offer fieldset label{ display: inline; float: none;}
-
 
 
 /************ product/edit  ************/
@@ -346,3 +342,6 @@ form#edit-product .button, #edit-product #cancel { width:100px; float: right; }
 #popup input { float:left;  width:575px; margin:3px 0; font-size:12px; }
 #popup #buttons { position:absolute; bottom:0; left:0; width:100%; text-align:right; padding:5px 0; border-top:1px solid #ececec; }
 #popup .button { margin:0 5px 0 0; }
+
+/************* Offer/view  *************/
+#offer label, #offer input { float:left; clear:none; width:130px; }

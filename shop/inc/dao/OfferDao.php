@@ -29,7 +29,7 @@ class OfferDao {
         AND endTime > ?
         AND productId = ?");
     
-    $t = date('Y-M-D');
+    $t = time();
     $q->execute(array($t, $t, $productId));
     if ($q != null && $r = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchOffer($r);
