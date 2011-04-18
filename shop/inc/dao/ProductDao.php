@@ -20,9 +20,9 @@ class ProductDao {
     }
     $q = $this->db->query("
       SELECT p.*, t.name AS type, c.name AS category 
-      FROM `Product` p
-        JOIN `Category` c ON p.categoryId = c.id
-        JOIN ProductType t ON p.typeId = t.id
+      FROM `".TABLE_PRODUCT."` p
+        JOIN `".TABLE_CATEGORY."` c ON p.categoryId = c.id
+        JOIN `".TABLE_PRODUCT_TYPE."` t ON p.typeId = t.id
       WHERE p.id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchProduct($t);
@@ -38,9 +38,9 @@ class ProductDao {
     
     $q = $this->db->prepare("
       SELECT p.*, t.name AS type, c.name AS category 
-      FROM `Product` p
-        JOIN `Category` c ON p.categoryId = c.id
-        JOIN ProductType t ON p.typeId = t.id
+      FROM `".TABLE_PRODUCT."` p
+        JOIN `".TABLE_CATEGORY."` c ON p.categoryId = c.id
+        JOIN `".TABLE_PRODUCT_TYPE."` t ON p.typeId = t.id
       WHERE p.shopId = ?
         AND p.name LIKE ?
         AND c.name LIKE ?
@@ -63,9 +63,9 @@ class ProductDao {
        
     $q = $this->db->prepare("
       SELECT COUNT(*) AS count
-      FROM `Product` p
-        JOIN `Category` c ON p.categoryId = c.id
-        JOIN ProductType t ON p.typeId = t.id
+      FROM `".TABLE_PRODUCT."` p
+        JOIN `".TABLE_CATEGORY."` c ON p.categoryId = c.id
+        JOIN `".TABLE_PRODUCT_TYPE."` t ON p.typeId = t.id
       WHERE p.shopId = ?
         AND p.name LIKE ?
         AND c.name LIKE ?
@@ -89,7 +89,7 @@ class ProductDao {
     if ($product == null) {
       return 0;
     }
-    $sql = "INSERT INTO Product (name, categoryId, typeId, shopId, manufacturer, price, description, picture) VALUE (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `".TABLE_PRODUCT."` (name, categoryId, typeId, shopId, manufacturer, price, description, picture) VALUE (?, ?, ?, ?, ?, ?, ?, ?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
       $product->getName(),
@@ -111,7 +111,7 @@ class ProductDao {
     if ($product == null || $product->getId() == null || $product->getId() < 1) {
       return 0;
     }
-    $sql = "UPDATE Product SET name = ?, categoryId = ?, typeId = ?, shopId = ?, manufacturer = ?, price = ?, description = ?, picture = ? WHERE id = ?";
+    $sql = "UPDATE `".TABLE_PRODUCT."` SET name = ?, categoryId = ?, typeId = ?, shopId = ?, manufacturer = ?, price = ?, description = ?, picture = ? WHERE id = ?";
     $q = $this->db->prepare($sql);
     return $q->execute(array(
       $product->getName(),
@@ -130,7 +130,7 @@ class ProductDao {
     if ($productId == null || $productId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM Product WHERE id = ".$this->db->quote($productId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_PRODUCT."` WHERE id = ".$this->db->quote($productId, PDO::PARAM_INT));
   }
   
   private function fetchProduct($t) {

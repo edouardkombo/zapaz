@@ -10,13 +10,25 @@ define("MYSQL_HOSTNAME"           , "localhost"                     );
 define("MYSQL_PORT"               , "3306"                          );
 define("MYSQL_USERNAME"           , "root"                          );
 define("MYSQL_PASSWORD"           , "zappaz"                        );
-define("MYSQL_DB_SHOP"            , "zapshop"                       );
+define("MYSQL_DB_SHOP"            , "zap"                           );
 
 // Domaines et sous domaines
 define("DOMAIN"                   , "zap.com"                       );
 define("DOMAIN_SHOP"              , "shop.".DOMAIN                  );
 define("DOMAIN_ZSHOP"             , "static.".DOMAIN_SHOP           );
 define("PROTOCOL"                 , "http://"                       );
+
+// Tables
+define("TABLE_PREPEND"            , "shop_");
+define("TABLE_CATEGORY"           , TABLE_PREPEND."Category"        );
+define("TABLE_CURRENCY"           , TABLE_PREPEND."Currency"        );
+define("TABLE_DETAIL_TYPE"        , TABLE_PREPEND."DetailType"      );
+define("TABLE_KEYWORD"            , TABLE_PREPEND."Keyword"         );
+define("TABLE_SHOP"               , TABLE_PREPEND."Shop"            );
+define("TABLE_OFFER"              , TABLE_PREPEND."Offer"           );
+define("TABLE_PRODUCT"            , TABLE_PREPEND."Product"         );
+define("TABLE_PRODUCT_TYPE"       , TABLE_PREPEND."ProductType"     );
+define("TABLE_PRODUCT_DETAIL"     , TABLE_PREPEND."ProductDetail"   );
 
 // Urls for admin WS
 define("ADMIN_LOGIN"     , "http://admin.zap.com/loginShop.php");

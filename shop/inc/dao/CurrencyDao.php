@@ -18,7 +18,7 @@ class CurrencyDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Currency WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_CURRENCY."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchCurrency($t);
     }
@@ -27,7 +27,7 @@ class CurrencyDao {
   
   public function getAllCurrencies() {
     $array = array();
-    $q = $this->db->query("SELECT * FROM Currency");
+    $q = $this->db->query("SELECT * FROM `".TABLE_CURRENCY."`");
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
         array_push($array, $this->fetchCurrency($t));
@@ -40,7 +40,7 @@ class CurrencyDao {
     if ($currency == null) {
       return 0;
     }
-    $sql = "INSERT INTO Currency (id,name,symbol) VALUE (:id,:name,:symbol) ON DUPLICATE KEY UPDATE id = :id";
+    $sql = "INSERT INTO `".TABLE_CURRENCY."` (id,name,symbol) VALUE (:id,:name,:symbol) ON DUPLICATE KEY UPDATE id = :id";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
       "id"   => $currency->getId(),

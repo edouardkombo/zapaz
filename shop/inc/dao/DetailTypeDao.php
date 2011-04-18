@@ -19,7 +19,7 @@ class DetailTypeDao {
       return null;
     }
     
-    $q = $this->db->prepare("SELECT * FROM DetailType WHERE name = ?");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_DETAIL_TYPE."` WHERE name = ?");
     $q->execute(array($typeId));
     if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetch($t);
@@ -31,7 +31,7 @@ class DetailTypeDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `DetailType` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_DETAIL_TYPE."` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -46,7 +46,7 @@ class DetailTypeDao {
       return null;
     }
     
-    $q = $this->db->prepare("SELECT * FROM DetailType WHERE name = ?");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_DETAIL_TYPE."` WHERE name = ?");
     $q->execute(array($name));
     if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetch($t);
@@ -58,7 +58,7 @@ class DetailTypeDao {
     if ($type == null) {
       return 0;
     }
-    $q = $this->db->prepare("INSERT INTO DetailType (name) VALUES (?)");
+    $q = $this->db->prepare("INSERT INTO `".TABLE_DETAIL_TYPE."` (name) VALUES (?)");
     return $q->execute(array($type->getName()));
   }
   
@@ -66,7 +66,7 @@ class DetailTypeDao {
     if ($type == null) {
       return 0;
     }
-    $q = $this->db->prepare("DELETE FROM DetailType WHERE name = ?");
+    $q = $this->db->prepare("DELETE FROM `".TABLE_DETAIL_TYPE."` WHERE name = ?");
     return $q->execute(array($type->getName()));
   }
   
