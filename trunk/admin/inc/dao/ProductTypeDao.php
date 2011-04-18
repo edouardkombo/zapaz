@@ -18,7 +18,7 @@ class ProductTypeDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM ProductType WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_PRODUCT_TYPE."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchProductType($t);
     }
@@ -29,7 +29,7 @@ class ProductTypeDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `ProductType` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_PRODUCT_TYPE."` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -41,7 +41,7 @@ class ProductTypeDao {
 
   public function count($filter = '') {
     $filter .= "%";
-    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `ProductType` WHERE name LIKE ?");
+    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `".TABLE_PRODUCT_TYPE."` WHERE name LIKE ?");
     $q->execute(array($filter));
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
@@ -62,7 +62,7 @@ class ProductTypeDao {
     if ($productType == null) {
       return 0;
     }
-    $sql = "INSERT INTO ProductType (name) VALUE (?)";
+    $sql = "INSERT INTO `".TABLE_PRODUCT_TYPE."` (name) VALUE (?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array($productType->getName()));
     if ($r == 1) {
@@ -75,7 +75,7 @@ class ProductTypeDao {
     if ($productType == null || $productType->getId() == null || $productType->getId() < 1) {
       return 0;
     }
-    $sql = "UPDATE ProductType SET name = ? WHERE id = ?";
+    $sql = "UPDATE `".TABLE_PRODUCT_TYPE."` SET name = ? WHERE id = ?";
     $q = $this->db->prepare($sql);
     return $q->execute(array($productType->getName(), $productType->getId()));
   }
@@ -84,7 +84,7 @@ class ProductTypeDao {
     if ($productTypeId == null || $productTypeId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM ProductType WHERE id = ".$this->db->quote($productTypeId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_PRODUCT_TYPE."` WHERE id = ".$this->db->quote($productTypeId, PDO::PARAM_INT));
   }
   
   private function fetchProductType($t) {

@@ -18,7 +18,7 @@ class ShopDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Shop WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_SHOP."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchShop($t);
     }
@@ -29,7 +29,7 @@ class ShopDao {
     if ($publicUid == null) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Shop WHERE publicUid = ".$this->db->quote($publicUid, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_SHOP."` WHERE publicUid = ".$this->db->quote($publicUid, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchShop($t);
     }
@@ -40,7 +40,7 @@ class ShopDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_SHOP."` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -64,7 +64,7 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
-    $sql = "INSERT INTO Shop (publicUid, name, address, zipCode, city, state, country, phone, logo, currencyId, email, latitude, longitude, webServiceUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `".TABLE_SHOP."` (publicUid, name, address, zipCode, city, state, country, phone, logo, currencyId, email, latitude, longitude, webServiceUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
       $shop->getPublicUid(),
@@ -92,7 +92,7 @@ class ShopDao {
     if ($shop == null || $shop->getId() == null || $shop->getId() < 1) {
       return 0;
     }
-    $sql = "UPDATE Shop SET publicUid = ?, name = ?, address = ?, zipCode = ?, city = ?, state = ?, country = ?, phone = ?, logo = ?, currencyId = ?, email = ?, latitude = ?, longitude = ?, webServiceUrl = ? WHERE id = ?";
+    $sql = "UPDATE `".TABLE_SHOP."` SET publicUid = ?, name = ?, address = ?, zipCode = ?, city = ?, state = ?, country = ?, phone = ?, logo = ?, currencyId = ?, email = ?, latitude = ?, longitude = ?, webServiceUrl = ? WHERE id = ?";
     $q = $this->db->prepare($sql);
     return $q->execute(array(
       $shop->getPublicUid(),
@@ -117,7 +117,7 @@ class ShopDao {
     if ($shopId == null || $shopId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM Shop WHERE id = ".$this->db->quote($shopId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_SHOP."` WHERE id = ".$this->db->quote($shopId, PDO::PARAM_INT));
   }
   
   private function fetchShop($t) {

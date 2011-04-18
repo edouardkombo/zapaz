@@ -18,7 +18,7 @@ class KeywordDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Keyword WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_KEYWORD."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetch($t);
     }
@@ -30,7 +30,7 @@ class KeywordDao {
     if ($shopId == null || $shopId < 1) {
       return $array;
     }
-    $q = $this->db->query("SELECT * FROM Keyword WHERE shopId = ".$this->db->quote($shopId, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_KEYWORD."` WHERE shopId = ".$this->db->quote($shopId, PDO::PARAM_INT));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
         array_push($array, $this->fetch($t));
@@ -46,7 +46,7 @@ class KeywordDao {
     
     $r = true;
     foreach ($keywords as $k) {
-      $q = $this->db->prepare("INSERT INTO `Keyword` (name, shopId) VALUES (?,?)");
+      $q = $this->db->prepare("INSERT INTO `".TABLE_KEYWORD."` (name, shopId) VALUES (?,?)");
       $r &= $q->execute(array($k->getName(), $k->getShopId()));
       $k->setId($this->db->lastInsertId());
     }
@@ -57,7 +57,7 @@ class KeywordDao {
     if ($shopId == null || $shopId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM Keyword WHERE shopId = ".$this->db->quote($shopId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_KEYWORD."` WHERE shopId = ".$this->db->quote($shopId, PDO::PARAM_INT));
   }
   
   private function fetch($t) {

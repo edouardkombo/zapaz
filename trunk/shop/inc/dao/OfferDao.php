@@ -24,7 +24,7 @@ class OfferDao {
       return null;
     }
     $q = $this->db->prepare("SELECT *
-      FROM `Offer`
+      FROM `".TABLE_OFFER."`
       WHERE startTime < ?
         AND endTime > ?
         AND productId = ?");
@@ -41,7 +41,7 @@ class OfferDao {
   if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Offer WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_OFFER."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchOffer($t);
     }
@@ -62,7 +62,7 @@ class OfferDao {
     if ($offer == null) {
       return 0;
     }
-    $sql = "INSERT INTO Offer (productId, price, startTime, endTime, displayOnlyImage) VALUE (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `".TABLE_OFFER."` (productId, price, startTime, endTime, displayOnlyImage) VALUE (?, ?, ?, ?, ?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
       $offer->getProductId(),
@@ -81,7 +81,7 @@ class OfferDao {
     if ($offer == null || $offer->getId() == null || $offer->getId() < 1) {
       return 0;
     }
-    $sql = "UPDATE Offer SET productId = ?, price = ?, startTime = ?, endTime = ?, displayOnlyImage = ? WHERE id = ?";
+    $sql = "UPDATE `".TABLE_OFFER."` SET productId = ?, price = ?, startTime = ?, endTime = ?, displayOnlyImage = ? WHERE id = ?";
     $q = $this->db->prepare($sql);
     return $q->execute(array(
       $offer->getProductId(),
@@ -96,7 +96,7 @@ class OfferDao {
     if ($offerId == null || $offerId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM Offer WHERE id = ".$this->db->quote($offerId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_OFFER."` WHERE id = ".$this->db->quote($offerId, PDO::PARAM_INT));
   }
 
   

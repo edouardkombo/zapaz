@@ -18,7 +18,7 @@ class CategoryDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Category WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_CATEGORY."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchCategory($t);
     }
@@ -29,7 +29,7 @@ class CategoryDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `Category` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_CATEGORY."` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -45,7 +45,7 @@ class CategoryDao {
       return $array;
     }
     
-    $q = $this->db->prepare("SELECT c.* FROM Product p JOIN Category c ON p.categoryId = c.id WHERE p.shopId = ? GROUP BY c.name ASC");
+    $q = $this->db->prepare("SELECT c.* FROM `".TABLE_PRODUCT."` p JOIN `".TABLE_CATEGORY."` c ON p.categoryId = c.id WHERE p.shopId = ? GROUP BY c.name ASC");
     $q->execute(array($shopId));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -57,7 +57,7 @@ class CategoryDao {
 
   public function count($filter = '') {
     $filter .= "%";
-    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `Category` WHERE name LIKE ?");
+    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `".TABLE_CATEGORY."` WHERE name LIKE ?");
     $q->execute(array($filter));
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
@@ -67,7 +67,7 @@ class CategoryDao {
     if ($category == null) {
       return 0;
     }
-    $sql = "INSERT INTO Category (id,name) VALUE (:id,:name) ON DUPLICATE KEY UPDATE id = :id";
+    $sql = "INSERT INTO `".TABLE_CATEGORY."` (id,name) VALUE (:id,:name) ON DUPLICATE KEY UPDATE id = :id";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
       "id"   => $category->getId(),

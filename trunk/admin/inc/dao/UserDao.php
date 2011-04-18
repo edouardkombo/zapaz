@@ -18,7 +18,7 @@ class UserDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM User WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_USER."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchUser($t);
     }
@@ -31,7 +31,7 @@ class UserDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `User` WHERE email LIKE ? ORDER BY email ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_USER."` WHERE email LIKE ? ORDER BY email ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -45,7 +45,7 @@ class UserDao {
    */
   public function count($filter = '') {
     $filter .= "%";
-    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `User` WHERE email LIKE ?");
+    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `".TABLE_USER."` WHERE email LIKE ?");
     $q->execute(array($filter));
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
@@ -58,7 +58,7 @@ class UserDao {
   public function checkUser($login,$password){
     $filter = '';
     $filter .= "%";
-    $q = $this->db->prepare("SELECT * FROM `User` WHERE email='$login' AND password='$password'");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_USER."` WHERE email='$login' AND password='$password'");
     $q->execute(array($filter));
     $r = $q->fetch(PDO::FETCH_OBJ);
     if ($r!=null) return TRUE;
@@ -91,7 +91,7 @@ class UserDao {
     if ($userId == null || $userId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM User WHERE id = ".$this->db->quote($userId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_USER."` WHERE id = ".$this->db->quote($userId, PDO::PARAM_INT));
   }
   
   private function fetchUser($t) {

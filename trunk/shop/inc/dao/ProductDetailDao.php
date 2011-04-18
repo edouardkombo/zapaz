@@ -25,7 +25,7 @@ class ProductDetailDao {
       return $array();
     }
     
-    $q = $this->db->query("SELECT * FROM ProductDetail WHERE productId = ".$this->db->quote($productId, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_PRODUCT_DETAIL."` WHERE productId = ".$this->db->quote($productId, PDO::PARAM_INT));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
         array_push($array, $this->fetch($t));
@@ -49,7 +49,7 @@ class ProductDetailDao {
     if ($productDetail == null) {
       return 0;
     }
-    $sql = "INSERT INTO ProductDetail (name, productId, detailTypeId) VALUE (?, ?, ?)";
+    $sql = "INSERT INTO `".TABLE_PRODUCT_DETAIL."` (name, productId, detailTypeId) VALUE (?, ?, ?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array(
       $productDetail->getName(),
@@ -66,7 +66,7 @@ class ProductDetailDao {
     if ($productDetail == null || $productDetail->getId() == null || $productDetail->getId() < 1) {
       return 0;
     }
-    $sql = "UPDATE ProductDetail SET name = ?, productId = ?, detailTypeId = ? WHERE id = ?";
+    $sql = "UPDATE `".TABLE_PRODUCT_DETAIL."` SET name = ?, productId = ?, detailTypeId = ? WHERE id = ?";
     $q = $this->db->prepare($sql);
     return $q->execute(array(
       $productDetail->getName(),
@@ -80,14 +80,14 @@ class ProductDetailDao {
     if ($productDetailId == null || $productDetailId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM ProductDetail WHERE id = ".$this->db->quote($productDetailId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_PRODUCT_DETAIL."` WHERE id = ".$this->db->quote($productDetailId, PDO::PARAM_INT));
   }
   
   public function deleteAll($productId) {
     if ($productId == null || $productId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM ProductDetail WHERE productId = ".$this->db->quote($productId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_PRODUCT_DETAIL."` WHERE productId = ".$this->db->quote($productId, PDO::PARAM_INT));
   }
   
   private function fetch($t) {

@@ -18,7 +18,7 @@ class UserChoiceDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM UserChoice WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_USER_CHOICE."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchUserChoice($t);
     }
@@ -65,7 +65,7 @@ class UserChoiceDao {
     if ($userChoiceId == null || $userChoiceId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM UserChoice WHERE id = ".$this->db->quote($userChoiceId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_USER_CHOICE."` WHERE id = ".$this->db->quote($userChoiceId, PDO::PARAM_INT));
   }
   
   private function fetchUserChoice($t) {

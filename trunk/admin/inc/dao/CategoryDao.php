@@ -18,7 +18,7 @@ class CategoryDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Category WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_CATEGORY."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchCategory($t);
     }
@@ -29,7 +29,7 @@ class CategoryDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `Category` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_CATEGORY."` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -41,7 +41,7 @@ class CategoryDao {
 
   public function count($filter = '') {
     $filter .= "%";
-    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `Category` WHERE name LIKE ?");
+    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `".TABLE_CATEGORY."` WHERE name LIKE ?");
     $q->execute(array($filter));
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
@@ -61,7 +61,7 @@ class CategoryDao {
     if ($category == null) {
       return 0;
     }
-    $sql = "INSERT INTO Category (name) VALUE (?)";
+    $sql = "INSERT INTO `".TABLE_CATEGORY."` (name) VALUE (?)";
     $q = $this->db->prepare($sql);
     $r = $q->execute(array($category->getName()));
     if ($r == 1) {
@@ -74,7 +74,7 @@ class CategoryDao {
     if ($category == null || $category->getId() == null || $category->getId() < 1) {
       return 0;
     }
-    $sql = "UPDATE Category SET name = ? WHERE id = ?";
+    $sql = "UPDATE `".TABLE_CATEGORY."` SET name = ? WHERE id = ?";
     $q = $this->db->prepare($sql);
     return $q->execute(array($category->getName(), $category->getId()));
   }
@@ -83,7 +83,7 @@ class CategoryDao {
     if ($categoryId == null || $categoryId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM Category WHERE id = ".$this->db->quote($categoryId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_CATEGORY."` WHERE id = ".$this->db->quote($categoryId, PDO::PARAM_INT));
   }
   
   private function fetchCategory($t) {

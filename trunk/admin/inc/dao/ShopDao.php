@@ -18,7 +18,7 @@ class ShopDao {
     if ($id == null || $id < 1) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM Shop WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_SHOP."` WHERE id = ".$this->db->quote($id, PDO::PARAM_INT));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchShop($t);
     }
@@ -26,7 +26,7 @@ class ShopDao {
   }
   
   public function getShopByPublicUid($id) {
-    $q = $this->db->query("SELECT * FROM Shop WHERE publicUid = ".$this->db->quote($id, PDO::PARAM_STR));
+    $q = $this->db->query("SELECT * FROM `".TABLE_SHOP."` WHERE publicUid = ".$this->db->quote($id, PDO::PARAM_STR));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchShop($t);
     }
@@ -37,7 +37,7 @@ class ShopDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_SHOP."` WHERE name LIKE ? ORDER BY name ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -53,7 +53,7 @@ class ShopDao {
       return $array;
     }
     
-    $q = $this->db->prepare("SELECT * FROM `Shop` WHERE latitude BETWEEN ? AND ? AND longitude BETWEEN ? AND ? ");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_SHOP."` WHERE latitude BETWEEN ? AND ? AND longitude BETWEEN ? AND ? ");
     $q->execute(array($minLat, $maxLat, $minLng, $maxLng));
     
     if ($q != null) {
@@ -67,7 +67,7 @@ class ShopDao {
   
   public function count($filter = '') {
     $filter .= "%";
-    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `Shop` WHERE name LIKE ?");
+    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `".TABLE_SHOP."` WHERE name LIKE ?");
     $q->execute(array($filter));
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
@@ -87,7 +87,7 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
-    $q = $this->db->prepare("INSERT INTO Shop (publicUid, name, currencyId, latitude, longitude, email, countOfProducts, creationTime, lastUpdate, webServiceUrl) VALUES (?,?,?,?,?,?,?,?,?,?)");
+    $q = $this->db->prepare("INSERT INTO `".TABLE_SHOP."` (publicUid, name, currencyId, latitude, longitude, email, countOfProducts, creationTime, lastUpdate, webServiceUrl) VALUES (?,?,?,?,?,?,?,?,?,?)");
     $r = $q->execute(array(
       $shop->getPublicUid(),
       $shop->getName(),
@@ -114,7 +114,7 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
-    $q = $this->db->prepare("UPDATE Shop SET publicUid = ?, name = ?, currencyId = ?, latitude = ?, longitude = ?, email = ?, countOfProducts = ?, creationTime = ?, lastUpdate = ?, webServiceUrl = ? WHERE id = ?");
+    $q = $this->db->prepare("UPDATE `".TABLE_SHOP."` SET publicUid = ?, name = ?, currencyId = ?, latitude = ?, longitude = ?, email = ?, countOfProducts = ?, creationTime = ?, lastUpdate = ?, webServiceUrl = ? WHERE id = ?");
     return $q->execute(array(
       $shop->getPublicUid(),
       $shop->getName(),
@@ -134,7 +134,7 @@ class ShopDao {
     if ($shopId == null || $shopId < 1) {
       return 0;
     }
-    return $this->db->exec("DELETE FROM Shop WHERE id = ".$this->db->quote($shopId, PDO::PARAM_INT));
+    return $this->db->exec("DELETE FROM `".TABLE_SHOP."` WHERE id = ".$this->db->quote($shopId, PDO::PARAM_INT));
   }
   
   private function fetchShop($t) {

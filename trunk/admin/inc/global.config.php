@@ -23,12 +23,23 @@ define("ROOT"                     , $root                           );
 define("MYSQL_HOSTNAME"           , "localhost"                     );
 define("MYSQL_PORT"               , "3306"                          );
 define("MYSQL_USERNAME"           , "root"                          );
-define("MYSQL_PASSWORD"           , "zappaz"                      );
-define("MYSQL_DB_ADMIN"           , "zapgen"                        );
+define("MYSQL_PASSWORD"           , "zappaz"                        );
+define("MYSQL_DB_ADMIN"           , "zap"                        );
 define("DOMAIN"                   , "zap.com"                       );
 define("DOMAIN_ADMIN"             , "admin.".DOMAIN                 );
 define("DOMAIN_ZADMIN"            , "static.".DOMAIN_ADMIN          );
 define("PROTOCOL"                 , "http://"                       );
+
+// Tables
+define("TABLE_PREPEND"            , "gen_");
+define("TABLE_CATEGORY"           , TABLE_PREPEND."Category"        );
+define("TABLE_CURRENCY"           , TABLE_PREPEND."Currency"        );
+define("TABLE_KEYWORD"            , TABLE_PREPEND."Keyword"         );
+define("TABLE_PRODUCT_TYPE"       , TABLE_PREPEND."ProductType"     );
+define("TABLE_SHOP"               , TABLE_PREPEND."Shop"            );
+define("TABLE_SHOP_KEYWORDS"      , TABLE_PREPEND."ShopKeywords"    );
+define("TABLE_USER_CHOICE"        , TABLE_PREPEND."UserChoice"      );
+define("TABLE_USER"               , TABLE_PREPEND."User"            );
 
 // Paths
 define("TEMPLATE_GENERAL_PATH"    , ROOT."tpl/"                     );
