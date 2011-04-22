@@ -1,6 +1,6 @@
 var addCategory = function() {
   var n = $("input[name=categoryName]").val();
-  $.post(rootUrl + "category/update", {name:n}, function(xml) {
+  $.post(rootUrl + "/category/update", {name:n}, function(xml) {
     var result = $(xml).find('result').text() == '1' ? true : false;
     if (result)
       refreshCategories();
