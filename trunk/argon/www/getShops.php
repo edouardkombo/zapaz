@@ -2,6 +2,7 @@
 
 header("Content-type:application/xml");
 include('../inc/global.config.php');
+$in =$_GET;
 
 $latitude = isset($in['lat']) && filter_var($in['lat'], FILTER_VALIDATE_FLOAT) ? $in['lat'] : null;
 $longitude = isset($in['lng']) && filter_var($in['lng'], FILTER_VALIDATE_FLOAT) ? $in['lng'] : null;

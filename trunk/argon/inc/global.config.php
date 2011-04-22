@@ -17,10 +17,7 @@ define("BASE_ADMIN"               , "www.fabienrenaud.com/zap/admin/www");
 define("GET_SHOPS"                , PROTOCOL.BASE_ADMIN."/getStores.php");
 
 // Chemins
-define("TEMPLATE_GENERAL_PATH"    , ROOT."tpl/"                     );
 define("INC_GENERAL_PATH"         , ROOT."inc/"                     );
-define("MX_GENERAL_PATH"          , INC_GENERAL_PATH."ModeliXe/"    );
-define("MX_ERROR_PATH"            , INC_GENERAL_PATH."ModeliXe/"    );
   
 // Variables globales
 // TOUJOURS DECLARER ET INITIALISER UNE VARIABLE !!!
@@ -30,12 +27,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 
 $currentLanguage = "en";
 
-include(MX_GENERAL_PATH.'ModeliXe.php');
 
-// Model
-
-
-// DAO 
 
 // Services
 include(INC_GENERAL_PATH.'service/HttpCommunicator.php');
