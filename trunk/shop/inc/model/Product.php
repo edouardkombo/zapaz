@@ -176,6 +176,25 @@ class Product {
   public function setOffer($offer) {
     $this->offer = $offer;
   }
+  
+  public function getJSON() {
+    $details = $this->getDetails();
+    $subJson = "";
+    foreach ($details as $d) {
+      if ($subJson != "")
+        $subJson .= ",";
+      $subJson .= '{ "name":"'.$d->getDetailType()->getName().'" , "value":"'.$d->getName().'" }';
+    }     
+    return '{'
+     . '"name":"'.$this->getName().'",'
+     . '"manufacturer":"'.$this->getManufacturer().'",'
+     . '"category":"'.$this->getCategory()->getName().'",'
+     . '"type":"'.$this->getType()->getName().'",'
+     . '"price":"'.$this->getPrice().'",'
+     . '"description":"'.$this->getDescription().'",'
+     . '"details":['.$subJson.']'
+     . '}';
+  }
 }
 
 ?>
