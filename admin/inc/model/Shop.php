@@ -42,7 +42,7 @@ class Shop {
   public function getId() {
     return $this->id;
   }
-  
+
   public function getPublicUid() {
     return $this->publicUid;
   }
@@ -50,11 +50,11 @@ class Shop {
   public function setPublicUid($publicUid) {
     $this->publicUid = $publicUid;
   }
-    
+
   public function setName($name) {
     $this->name = $name;
   }
-  
+
   public function getName() {
     return $this->name;
   }
@@ -98,7 +98,7 @@ class Shop {
   public function setWebServiceUrl($webServiceUrl) {
     $this->webServiceUrl = $webServiceUrl;
   }
-  
+
   public function getCountOfProducts() {
     return $this->countOfProducts;
   }
@@ -106,7 +106,7 @@ class Shop {
   public function setCountOfProducts($countOfProducts) {
     $this->countOfProducts = $countOfProducts;
   }
-  
+
   public function getCreationTime() {
     return $this->creationTime;
   }
@@ -114,7 +114,7 @@ class Shop {
   public function setCreationTime($creationTime) {
     $this->creationTime = $creationTime;
   }
-  
+
   public function getLastUpdate() {
     return $this->lastUpdate;
   }
@@ -122,7 +122,7 @@ class Shop {
   public function setLastUpdate($lastUpdate) {
     $this->lastUpdate = $lastUpdate;
   }
-      
+
   public function getCurrency() {
     if ($this->currency == null && $this->currencyId != 0) {
       $d = new CurrencyDao();
@@ -137,7 +137,7 @@ class Shop {
       $this->currencyId = $currency->getId();
     }
   }
-  
+
   public function addKeyword($word) {
     if ($this->keywords == null) {
       $this->keywords = array();
@@ -154,6 +154,31 @@ class Shop {
     }
     return $this->keywords;
   }
+
+  public function getJSON() {
+    $keywords = $this->getKeywords();
+    $subJSON = "";
+
+    foreach ($keywords as $k) {
+      if ($subJSON != "")
+        $subJSON.=",";
+      $subJSON.='{"name":"' . $k->getName() . '"}';
+    }
+
+
+    return "{"
+    . '"name":"' . $this->getName() . '",'
+    . '"publicUid":"' . $this->getPublicUid() . '",'
+    . '"currency":"' . $this->getCurrency()->getSymbol() . '",'
+    . '"latitude":"' . $this->getLatitude() . '",'
+    . '"longitude":"' . $this->getLongitude() . '",'
+    . '"email":"' . $this->getEmail() . '",'
+    . '"webServiceUrl":"' . $this->getWebServiceUrl() . '",'
+    . '"countOfProducts":"' . $this->getCountOfProducts() . '",'
+    . '"keywords":[' . $subJSON . ']'
+    . "}";
+  }
+
 }
 
 ?>
