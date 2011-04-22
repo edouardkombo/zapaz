@@ -94,7 +94,7 @@ $(document).ready(function() {
     var v = $(this).val();
     $("input[name=currentShopId]").val(v);
     if (v == 0) {
-      displayBlank();
+      // Do nothing
     } else if (v == 999999) {
       $("input[name=currentShopId]").val('0');
       displayShopInfo();
@@ -108,5 +108,4 @@ $(document).ready(function() {
   });
   $("#menu li:first a").click(displayShopInfo);
   $("#menu li:last a").click(displayProducts);
-  displayBlank();
 });

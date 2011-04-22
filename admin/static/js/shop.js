@@ -4,7 +4,7 @@ var deleteShops = function() {
   if (arr[0] == "") {
     alert("You need to select at least one shop to delete it.");
   } else if (confirm("Are you sure you want to delete the following shops:\n" + arr[1])) {
-    $.post("/shop/delete", {pids:arr[0]}, function(xml) {
+    $.post(rootUrl + "/shop/delete", {pids:arr[0]}, function(xml) {
       var result = $(xml).find('result').text() == arr[2] ? true : false;
       if (result)
         refreshShops();
@@ -46,11 +46,11 @@ var refreshShops = function(page, filter, action, callback) {
   } else if (action == "last") {
     start = (parseInt($("a[href=#last-page]").attr('rel'), 10) - 1) * limit;
   }
-  changeShop("/shop/view", filter, start, limit, callback);
+  changeShop(rootUrl + "/shop/view", filter, start, limit, callback);
 };
 
 var changeShop = function(link, filter, start, limit, callback) {
-  if (link   == null) link   = "/shop/view";
+  if (link   == null) link   = rootUrl + "/shop/view";
   if (filter == null) filter = "";
   if (start  == null) start  = 0;
   if (limit  == null) limit  = 15;

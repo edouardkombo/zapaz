@@ -1,7 +1,7 @@
 var createOffer = function(a) {
     var lineId = $(a).parent('td').parent('tr').find('input[name=check]').val();
     checkOffer(lineId);
-    $.get("/offer/create", {id:lineId}, function(xml) {
+    $.get(rootUrl + "/offer/create", {id:lineId}, function(xml) {
     showPopup(xml, function() {;     
       $("#popup #type-values span").each(function() {$(this).click(function() {removeDetailType($(this));});});
       initPictureChangeButton();
@@ -36,7 +36,7 @@ function checkOffer(productId){
  function hasOffer(pId) {
    var v = pId;
    var offId = null;
-   $.post("/product/hasOffer", {id:v}, function(xml) {
+   $.post(rootUrl + "/product/hasOffer", {id:v}, function(xml) {
     alert(xml);
     var offerId = $(xml).find('offerId').text();
     offId = offerId;  
@@ -73,7 +73,7 @@ var addOffer = function(productId){
   }else{params["displayOnlyImage"] = 0;}
   
   if (ok) {
-    $.post("/offer/update", params, function(xml) {     
+    $.post(rootUrl + "/offer/update", params, function(xml) {     
     var result = $(xml).find('result').text() == "1";
     alert(xml);
       if (result) {
@@ -88,7 +88,7 @@ var addOffer = function(productId){
 
 var removeOffer = function(offerId){
   var v = offerId;
-  $.post("/offer/delete", {id:v}, function(xml) {
+  $.post(rootUrl + "/offer/delete", {id:v}, function(xml) {
     var result = $(xml).find('result').text() == "1";
     if (result) {
       refreshProducts();
@@ -100,28 +100,25 @@ var removeOffer = function(offerId){
 
 
 function compareDates(){
+  var start = $("input[name=startTime]").val();
+  var end   = $("input[name=endTime]").val();
+  var day1,month1,year1,day2,month2,year2;
 
-var start = $("input[name=startTime]").val();
-var end = $("input[name=endTime]").val();
-var day1,month1,year1,day2,month2,year2;
+  month1 = start.substring(5, 7) - 1; 
+  day1   = start.substring(8, 10) - 0;
+  year1  = start.substring(0, 4) - 0;
 
-month1 = start.substring(5, 7) - 1; 
-day1 = start.substring(8, 10) - 0;
-year1 = start.substring(0, 4) - 0;
+  month2 = end.substring(5, 7) - 1; 
+  day2   = end.substring(8, 10) - 0;
+  year2  = end.substring(0, 4) - 0;
 
-month2 = end.substring(5, 7) - 1; 
-day2 = end.substring(8, 10) - 0;
-year2 = end.substring(0, 4) - 0;
+  var date1 = new Date(year1,month1,day1);
+  var date2 = new Date(year2,month2,day2);
 
-
-var date1 = new Date(year1,month1,day1);
-var date2 = new Date(year2,month2,day2);
-
-if (date1 < date2){ 
-  return true;
-}
-else{return false;}
-
+  if (date1 < date2){ 
+    return true;
+  }
+  return false;
 }
 var initPictureChangeButton = function() {
   var a = document.createElement("a");
@@ -130,16 +127,13 @@ var initPictureChangeButton = function() {
     $(a).click(askPicture);
     $(a).hide();
   $(".commercialImage").append(a);
-  $(".commercialImage").hover(
-    function() {$(a).show();},
-    function() {$(a).hide();}
-  );
+  $(".commercialImage").hover(function() {$(a).show();}, function() {$(a).hide();});
 };
 
 
 
 var askPicture = function() {
-  $.post("/offer/commercialImage", function(xml) {
+  $.post(rootUrl + "/offer/commercialImage", function(xml) {
     showPopup(xml, function() {
       $("#popup form").ajaxForm({success: function(xml) {
         var result = $(xml).find('result').text() == "1";
@@ -147,7 +141,7 @@ var askPicture = function() {
         if (result) {
           hidePopup(function() {
             $("input[name=hpicture]").val(path);
-            $(".commercialImage img").attr('src', 'http://static.shop.zap.com/' + path);
+            $(".commercialImage img").attr('src', staticUrl + "/" + path);
           });
         }
       }});

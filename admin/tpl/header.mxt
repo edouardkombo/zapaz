@@ -13,10 +13,10 @@
   <body>
     <h1>Administration | admin.zap.com</h1>
     <ul id="menu">
-      <li><a href="/?p=shop">Shops</a></li>
-      <li><a href="/?p=user">Users</a></li>
-      <li><a href="/?p=category">Categories</a></li>
-      <li><a href="/?p=product-type">Product Types</a></li>
+      <li><a href="?p=shop">Shops</a></li>
+      <li><a href="?p=user">Users</a></li>
+      <li><a href="?p=category">Categories</a></li>
+      <li><a href="?p=product-type">Product Types</a></li>
     </ul>
     <table id="page">
       <tr>

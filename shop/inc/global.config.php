@@ -2,21 +2,31 @@
 
 if (!defined("MYSQL_HOSTNAME")) {
 
-$root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) - 3);
-  
-// Base de données
-define("ROOT"                     , $root                           );
-define("MYSQL_HOSTNAME"           , "localhost"                     );
-define("MYSQL_PORT"               , "3306"                          );
-define("MYSQL_USERNAME"           , "root"                          );
-define("MYSQL_PASSWORD"           , "zappaz"                        );
-define("MYSQL_DB_SHOP"            , "zap"                           );
+$root = "/homez.193/datesvac/fabienrenaud/www/zap/shop/";
+//$root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) - 3);
 
-// Domaines et sous domaines
-define("DOMAIN"                   , "zap.com"                       );
-define("DOMAIN_SHOP"              , "shop.".DOMAIN                  );
-define("DOMAIN_ZSHOP"             , "static.".DOMAIN_SHOP           );
+define("ROOT"                     , $root                           );
+
+// Distant database and domains, for release
+define("MYSQL_HOSTNAME"           , "mysql51-19.pro"                );
+define("MYSQL_PORT"               , "3306"                          );
+define("MYSQL_USERNAME"           , "datesvaczap"                   );
+define("MYSQL_PASSWORD"           , "rhMELf23r"                     );
+define("MYSQL_DB_SHOP"            , "datesvaczap"                   );
+
+// Domains
+define("DOMAIN"                   , "www.fabienrenaud.com/zap/shop"     );
+define("DOMAIN_SHOP"             , DOMAIN."/www"                   );
+define("DOMAIN_ZSHOP"            , DOMAIN."/static"                );
 define("PROTOCOL"                 , "http://"                       );
+
+// Local database, for tests and debug
+//define("ROOT"                     , $root                           );
+//define("MYSQL_HOSTNAME"           , "localhost"                     );
+//define("MYSQL_PORT"               , "3306"                          );
+//define("MYSQL_USERNAME"           , "root"                          );
+//define("MYSQL_PASSWORD"           , "zappaz"                        );
+//define("MYSQL_DB_SHOP"            , "zap"                           );
 
 // Tables
 define("TABLE_PREPEND"            , "shop_");
@@ -31,11 +41,12 @@ define("TABLE_PRODUCT_TYPE"       , TABLE_PREPEND."ProductType"     );
 define("TABLE_PRODUCT_DETAIL"     , TABLE_PREPEND."ProductDetail"   );
 
 // Urls for admin WS
-define("ADMIN_LOGIN"     , "http://admin.zap.com/loginShop.php");
-define("ADMIN_REGISTER"  , "http://admin.zap.com/registerShop.php");
-define("ADMIN_CATEGORIES", "http://admin.zap.com/getCategories.php");
-define("ADMIN_PT"        , "http://admin.zap.com/getProductTypes.php");
-define("ADMIN_CURRENCIES", "http://admin.zap.com/getCurrencies.php");
+define("ADMIN_BASE"      , PROTOCOL."www.fabienrenaud.com/zap/admin/www");
+define("ADMIN_LOGIN"     , ADMIN_BASE."/loginShop.php"              );
+define("ADMIN_REGISTER"  , ADMIN_BASE."/registerShop.php"           );
+define("ADMIN_CATEGORIES", ADMIN_BASE."/getCategories.php"          );
+define("ADMIN_PT"        , ADMIN_BASE."/getProductTypes.php"        );
+define("ADMIN_CURRENCIES", ADMIN_BASE."/getCurrencies.php"          );
 
 // Chemins
 define("TEMPLATE_GENERAL_PATH"    , ROOT."tpl/"                     );
@@ -44,10 +55,10 @@ define("MX_GENERAL_PATH"          , INC_GENERAL_PATH."ModeliXe/"    );
 define("MX_ERROR_PATH"            , INC_GENERAL_PATH."ModeliXe/"    );
 
 $countryArray = array(
-    "1" => "France",
-    "2" => "Germany",
-    "3" => "England",
-    "4" => "USA"
+  "1" => "France",
+  "2" => "Germany",
+  "3" => "England",
+  "4" => "USA"
 );
   
 // Variables globales

@@ -26,6 +26,7 @@ if (!$fullPage) {
   $shops["999999"] = "New Shop…";
   $template->MxSelect("header.shopList", "shops", $shopId, $shops);
   $template->MxHidden("header.currentShopId", $template->GetQueryString(array("currentShopId" => $shopId)));
+  $template->MxImage("content.preload", PROTOCOL.DOMAIN_ZSHOP."/img/bigload.gif", "Preloading", 'class="bigload"');
 }
 
 if (!$fullPage) {

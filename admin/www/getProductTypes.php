@@ -1,5 +1,6 @@
 <?php
 
+header("Content-type:application/xml");
 include('../inc/global.config.php');
 
 $productTypeManager = new ProductTypeManager();

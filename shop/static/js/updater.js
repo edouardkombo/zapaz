@@ -10,7 +10,7 @@ var updateAll = function() {
 };
 
 var updateCategories = function() {
-  $.get("/default/get-categories", function(xml) {
+  $.get(rootUrl + "/default/get-categories", function(xml) {
     var count = parseInt($(xml).find('count').text(), 10);
     if (count == 0) {
       endUpdate();
@@ -19,7 +19,7 @@ var updateCategories = function() {
       $(xml).find('category').each(function() {
         var id   = $(this).children('id').text();
         var name = $(this).children('name').text();
-        $.post("/default/save-category", {id:id,name:name}, function(x) {
+        $.post(rootUrl + "/default/save-category", {id:id,name:name}, function(x) {
           i++;
           if (i == count) {
             endUpdate();
@@ -31,7 +31,7 @@ var updateCategories = function() {
 };
 
 var updateProductTypes = function() {
-  $.get("/default/get-product-types", function(xml) {
+  $.get(rootUrl + "/default/get-product-types", function(xml) {
     var count = parseInt($(xml).find('count').text(), 10);
     if (count == 0) {
       endUpdate();
@@ -40,7 +40,7 @@ var updateProductTypes = function() {
       $(xml).find('type').each(function() {
         var id   = $(this).children('id').text();
         var name = $(this).children('name').text();
-        $.post("/default/save-product-type", {id:id,name:name}, function(x) {
+        $.post(rootUrl + "/default/save-product-type", {id:id,name:name}, function(x) {
           i++;
           if (i == count) {
             endUpdate();
@@ -52,7 +52,7 @@ var updateProductTypes = function() {
 };
 
 var updateCurrencies = function() {
-  $.get("/default/get-currencies", function(xml) {
+  $.get(rootUrl + "/default/get-currencies", function(xml) {
     var count = parseInt($(xml).find('count').text(), 10);
     if (count == 0) {
       endUpdate();
@@ -62,7 +62,7 @@ var updateCurrencies = function() {
         var id   = $(this).children('id').text();
         var name = $(this).children('name').text();
         var symbol = $(this).children('symbol').text();
-        $.post("/default/save-currency", {id:id, name:name, symbol:symbol}, function(x) {
+        $.post(rootUrl + "/default/save-currency", {id:id, name:name, symbol:symbol}, function(x) {
           i++;
           if (i == count) {
             endUpdate();
