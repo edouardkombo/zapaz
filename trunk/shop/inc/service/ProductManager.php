@@ -115,6 +115,7 @@ class ProductManager {
       if ($productDetails != null && count($productDetails) > 0) {
         foreach ($productDetails as $pd) {
           $t = $this->detailTypeDao->getDetailTypeByName($pd[0]);
+          echo $t->getId()." ".$pd[0]."\n";
           if ($t != null) {
             $d = new ProductDetail($pd[1], $product->getId(), $t->getId());
             if (!$this->productDetailDao->save($d)) {

@@ -1,6 +1,6 @@
 var addCategory = function() {
   var n = $("input[name=categoryName]").val();
-  $.post("category/update", {name:n}, function(xml) {
+  $.post(rootUrl + "category/update", {name:n}, function(xml) {
     var result = $(xml).find('result').text() == '1' ? true : false;
     if (result)
       refreshCategories();
@@ -29,7 +29,7 @@ var doEditCategory = function(input) {
   var oldValue = $(input).attr('old');
   
   var param = {"id":id, "name":name};
-  $.post("category/update", param, function(xml) {
+  $.post(rootUrl + "category/update", param, function(xml) {
     var result = $(xml).find('result').text() == '1' ? true : false;
     var txt = oldValue;
     if (result) {
@@ -51,7 +51,7 @@ var deleteCategories = function() {
   if (arr[0] == "") {
     alert("You need to select at least one category to delete it.");
   } else if (confirm("Are you sure you want to delete the following categories:\n" + arr[1])) {
-    $.post("/category/delete", {pids:arr[0]}, function(xml) {
+    $.post(rootUrl + "/category/delete", {pids:arr[0]}, function(xml) {
       var result = $(xml).find('result').text() == arr[2] ? true : false;
       if (result)
         refreshCategories();
@@ -92,11 +92,11 @@ var refreshCategories = function(page, filter, action, callback) {
   } else if (action == "last") {
     start = (parseInt($("a[href=#last-page]").attr('rel'), 10) - 1) * limit;
   }
-  changeCategory("/category/view", filter, start, limit, callback);
+  changeCategory(rootUrl + "/category/view", filter, start, limit, callback);
 };
 
 var changeCategory = function(link, filter, start, limit, callback) {
-  if (link   == null) link   = "/category/view";
+  if (link   == null) link   = rootUrl + "/category/view";
   if (filter == null) filter = "";
   if (start  == null) start  = 0;
   if (limit  == null) limit  = 15;
