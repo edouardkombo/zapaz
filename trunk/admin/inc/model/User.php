@@ -6,16 +6,25 @@
  * @author mohamed
  */
 class User {
+  private $session;
 
   private $id;
-  private $email;
-  private $password;
+  private $facebookId;
+  private $facebookName;
+  private $creationTime;
+  private $lastConnection;
   private $choices = null;
 
-  function __construct($email, $password, $id = 0) {
-    $this->id = $id;
-    $this->email = $email;
-    $this->password = $password;
+  function __construct($facebookId, $facebookName, $creationTime = 0, $lastConnection = 0, $id = 0) {
+    global $session;
+    $this->session = $session;
+    
+    $t = time();
+    $this->id             = $id;
+    $this->facebookId     = $facebookId;
+    $this->facebookName   = $facebookName;
+    $this->creationTime   = $creationTime   > 0 ? $creationTime   : $t;
+    $this->lastConnection = $lastConnection > 0 ? $lastConnection : $t;
   }
 
   public function setId($id) {
@@ -25,21 +34,25 @@ class User {
   public function getId() {
     return $this->id;
   }
-
-  public function setEmail($email) {
-    $this->email = $email;
+  
+  public function getFacebookId() {
+    return $this->facebookId;
   }
 
-  public function getEmail() {
-    return $this->email;
+  public function getFacebookName() {
+    return $this->facebookName;
   }
 
-  public function setPassword($pw) {
-    $this->password = $pw;
+  public function getCreationTime() {
+    return $this->creationTime;
   }
 
-  public function getPassword() {
-    return $this->password;
+  public function getLastConnection() {
+    return $this->lastConnection;
+  }
+  
+  public function canRead() {
+    return $this->session->getPermissions() & PERMISSIONS_VIEW;
   }
   
   public function getChoices() {
