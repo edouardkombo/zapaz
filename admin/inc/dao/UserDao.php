@@ -24,14 +24,12 @@ class UserDao {
     }
     return null;
   }
-    /* @mohamed
-   * 
-   */
+  
   public function getAllUsers($filter = '', $startIndex = 0, $length = 10) {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `".TABLE_USER."` WHERE email LIKE ? ORDER BY email ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_USER."` WHERE facebookName LIKE ? ORDER BY email ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -40,51 +38,26 @@ class UserDao {
     }
     return $array;
   }
-  /* @mohamed
-   * 
-   */
-  public function count($filter = '') {
+  
+  public function count() {
     $filter .= "%";
-    $q = $this->db->prepare("SELECT COUNT(*) AS count FROM `".TABLE_USER."` WHERE email LIKE ?");
-    $q->execute(array($filter));
+    $q = $this->db->query("SELECT COUNT(*) AS count FROM `".TABLE_USER."`");
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
   }
-  
-  /*
-   * Authentication of a user
-   */
-  
-  public function checkUser($login,$password){
-    $filter = '';
-    $filter .= "%";
-    $q = $this->db->prepare("SELECT * FROM `".TABLE_USER."` WHERE email='$login' AND password='$password'");
-    $q->execute(array($filter));
-    $r = $q->fetch(PDO::FETCH_OBJ);
-    if ($r!=null) return TRUE;
-    else return False;
-  }
-  
-  public function saveOrUpdate($user) {
-    if ($user == null) {
-      return 0;
+
+  public function saveOrUpdate() {
+    $sql = "CALL saveOrUpdateUser(?, ?);";
+    $q = $this->db->prepare($sql);
+    $q->execute(array($this->facebookId, $this->facebookName));
+    if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
+      $this->id = $t["id"];
+      $this->facebookName = $t["facebookName"];
+      $this->creationTime = $t["creationTime"];
+      $this->lastConnection = $t["lastConnection"];
+      return 1;
     }
-    if ($user->getId() == 0) {
-      return $this->save($user);
-    }
-    return $this->update($user);
-  }
-  
-  public function save($user) {
-    if ($user == null) {
-      return 0;
-    }
-  }
-  
-  public function update($user) {
-    if ($user == null || $user->getId() == null || $user->getId() < 1) {
-      return 0;
-    }
+    return 0;
   }
   
   public function delete($userId) {
@@ -95,7 +68,7 @@ class UserDao {
   }
   
   private function fetchUser($t) {
-    return new User($t["email"], $t["password"], $t["id"]);
+    return new User($t["facebookId"], $t["facebookName"], $t["creationTime"], $t["lastConnection"], $t["id"]);
   }
 }
 

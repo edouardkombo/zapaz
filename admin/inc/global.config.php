@@ -50,6 +50,8 @@ define("MX_ERROR_PATH"            , INC_GENERAL_PATH."ModeliXe/"    );
 
 // Variables globales
 define("MAX_HORIZON", 500); // meters
+define("FACEBOOK_APP_ID", "");
+define("FACEEBOK_APP_SECRET", "");
 
 // TOUJOURS DECLARER ET INITIALISER UNE VARIABLE !!!
 $result     = "";
@@ -93,6 +95,7 @@ include(INC_GENERAL_PATH.'service/ProductTypeManager.php');
 include(INC_GENERAL_PATH.'service/ShopManager.php');
 include(INC_GENERAL_PATH.'service/UserManager.php');
 include(INC_GENERAL_PATH.'service/SpatialManager.php');
+include(INC_GENERAL_PATH.'service/SessionManager.php');
 }
 
 ?>

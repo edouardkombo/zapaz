@@ -3,59 +3,38 @@
 header("Content-type:application/xml");
 include('../inc/global.config.php');
 
-$in = $_POST;
+$session = new SessionManager();
 
-$id   = isset($in['id'])   && filter_var($in['id'], FILTER_VALIDATE_INT) && $in['id'] > 0 ? $in['id']   : 0;
-$email = isset($in['email']) && $in['email'] != ""               ? $in['email'] : null ;
-$password = isset($in['password']) && $in['password'] != ""      ? $in['password'] : null;
+$cookie = SessionManager::getFacebookCookie();
+if ($cookie != null) {
+  $json     = file_get_contents('https://graph.facebook.com/me?access_token='.$cookie['access_token']);
+  $facebook = json_decode($json);
 
-session_start(); 
-
-function ValidateEmail($email) 
-{ 
-   $Syntaxe = '#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#'; 
-   if(preg_match($Syntaxe,$email))
-      return TRUE; 
-   else 
-     return FALSE; 
+  if (isset($cookie)) {
+    $facebookId   = $facebook->id;
+    $facebookName = $facebook->name;
+    if ($facebookId != null && $facebookName != null) {
+      $user = new User($facebookId, $facebookName);
+      $user->saveOrUpdate();
+      if ($session->create($user)) {
+        $result = 1;
+      }
+    } else {
+      $result = 1000;
+    }
+  } else {
+    $result = 2000;
+  }
+} else {
+  $result = 1011;
 }
 
-function cryptPassword($pw){
-  return hash('sha256', $pw, true);;
-}
+$session->release();
 
-if (ValidateEmail($email)){ 
-
-  
-  $userManager = new UserManager();
-  if($userManager->verifyUser($email, $password)) {
- 
-		
-		//header(".php"); // redirection to users page
-    
-  
-    $result = 0;
-   
-    
-	}
-	else {
-		header("Location:userLogin.php?erreur=logout"); //  unknown user
-	}
-}
-
-if(isset($_GET['erreur']) && $_GET['erreur'] == 'logout'){
-	
-	session_unset("authentification");
-  session_destroy();
-	//header("Location:UserLogin.php?erreur=delog"); To define
-}
-
-  //xml output
- echo '<?xml version="1.0" encoding="utf-8"?>';
-    echo '<r>';
-    echo '<result>'.$result.'</result>';
-    echo '<id>'.$id.'</id>';
-    echo '<email>'.$email.'</email>';
-    //echo '<password>'.$password.'</password>';
-    echo '</r>';
+echo <<< END
+<?xml version="1.0" encoding="utf-8"?>
+<r>
+  <result>$result</result>
+</r>
+END;
 ?>
