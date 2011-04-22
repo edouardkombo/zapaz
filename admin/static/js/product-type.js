@@ -1,6 +1,6 @@
 var addProductType = function() {
   var n = $("input[name=typeName]").val();
-  $.post(rootUrl + "product-type/update", {name:n}, function(xml) {
+  $.post(rootUrl + "/product-type/update", {name:n}, function(xml) {
     var result = $(xml).find('result').text() == '1' ? true : false;
     if (result)
       refreshProductTypes();
@@ -29,7 +29,7 @@ var doEditProductType = function(input) {
   var oldValue = $(input).attr('old');
   
   var param = {"id":id, "name":name};
-  $.post(rootUrl + "product-type/update", param, function(xml) {
+  $.post(rootUrl + "/product-type/update", param, function(xml) {
     var result = $(xml).find('result').text() == '1' ? true : false;
     var txt = oldValue;
     if (result) {

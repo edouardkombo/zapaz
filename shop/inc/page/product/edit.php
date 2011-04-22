@@ -51,7 +51,8 @@ if (count($details) == 0) {
   array_push($details, new ProductDetail('', '', ''));
 }
 foreach ($details as $d) {
-  $template->MxSelect($pre."detail.type", "detailType", $d->getDetailType(), $detailTypeList);
+  $selectValue = $d->getDetailType() != null ? $d->getDetailType()->getName() : "";
+  $template->MxSelect($pre."detail.type", "detailType", $selectValue, $detailTypeList);
   $template->MxFormField($pre."detail.name", "text", "detailName", $d->getName());
   $template->MxBloc($pre."detail", "loop");
 }

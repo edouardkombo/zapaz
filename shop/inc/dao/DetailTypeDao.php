@@ -19,7 +19,7 @@ class DetailTypeDao {
       return null;
     }
     
-    $q = $this->db->prepare("SELECT * FROM `".TABLE_DETAIL_TYPE."` WHERE name = ?");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_DETAIL_TYPE."` WHERE id = ?");
     $q->execute(array($typeId));
     if ($t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetch($t);
