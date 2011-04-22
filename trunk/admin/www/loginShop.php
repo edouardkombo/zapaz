@@ -1,5 +1,6 @@
 <?php
 
+header("Content-type:application/xml");
 $in = $_POST;
 
 session_start();

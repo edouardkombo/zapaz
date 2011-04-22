@@ -1,34 +1,35 @@
 <?php
 
 if (!defined("MYSQL_HOSTNAME")) {
-$root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) - 3);
-  
+
+$root = "/homez.193/datesvac/fabienrenaud/www/zap/admin/";
+//$root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) - 3);
+
 define("ROOT"                     , $root                           );
 
-
-//SHOPS
 // Distant database and domains, for release
-//define("MYSQL_HOSTNAME"           , "mysql51-19.pro"                );
+define("MYSQL_HOSTNAME"           , "mysql51-19.pro"                );
+define("MYSQL_PORT"               , "3306"                          );
+define("MYSQL_USERNAME"           , "datesvaczap"                   );
+define("MYSQL_PASSWORD"           , "rhMELf23r"                     );
+define("MYSQL_DB_ADMIN"           , "datesvaczap"                   );
+
+// Domains
+define("DOMAIN"                   , "www.fabienrenaud.com/zap/admin"    );
+define("DOMAIN_ADMIN"             , DOMAIN."/www"                   );
+define("DOMAIN_ZADMIN"            , DOMAIN."/static"                );
+define("PROTOCOL"                 , "http://"                       );
+
+// Local database, for tests and debug
+//define("MYSQL_HOSTNAME"           , "localhost"                     );
 //define("MYSQL_PORT"               , "3306"                          );
-//define("MYSQL_USERNAME"           , "datesvaczap"                   );
-//define("MYSQL_PASSWORD"           , "zappaz"                    );
-//define("MYSQL_DB_ADMIN"           , "datesvaczap"                   );
-//define("DOMAIN"                   , "zap.dates-vacances-scolaires.com");
-//define("DOMAIN_ADMIN"             , DOMAIN                 );
+//define("MYSQL_USERNAME"           , "root"                          );
+//define("MYSQL_PASSWORD"           , "zappaz"                        );
+//define("MYSQL_DB_ADMIN"           , "zap"                        );
+//define("DOMAIN"                   , "zap.com"                       );
+//define("DOMAIN_ADMIN"             , "admin.".DOMAIN                 );
 //define("DOMAIN_ZADMIN"            , "static.".DOMAIN_ADMIN          );
 //define("PROTOCOL"                 , "http://"                       );
-
-//ADMIN
-// Local database, for tests and debug
-define("MYSQL_HOSTNAME"           , "localhost"                     );
-define("MYSQL_PORT"               , "3306"                          );
-define("MYSQL_USERNAME"           , "root"                          );
-define("MYSQL_PASSWORD"           , "zappaz"                        );
-define("MYSQL_DB_ADMIN"           , "zap"                        );
-define("DOMAIN"                   , "zap.com"                       );
-define("DOMAIN_ADMIN"             , "admin.".DOMAIN                 );
-define("DOMAIN_ZADMIN"            , "static.".DOMAIN_ADMIN          );
-define("PROTOCOL"                 , "http://"                       );
 
 // Tables
 define("TABLE_PREPEND"            , "gen_");

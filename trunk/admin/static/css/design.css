@@ -282,7 +282,7 @@ a.small-source {
   display:inline-block;
   width:10px;
   height:10px;
-  background-image:url(http://static.admin.zap.com/img/external-link-icon.png);
+  background-image:url(http://www.fabienrenaud.com/zap/admin/static/img/external-link-icon.png);
 }
 a.small-source.hidden { visibility:hidden; }
 h2 .date { display:none; }
@@ -316,7 +316,7 @@ a.lock {
   position:absolute;
   right:0;
   top:104px;
-  background-image: url(http://static.admin.zap.com/img/lock.png);
+  background-image: url(http://www.fabienrenaud.com/zap/admin/static/img/lock.png);
 	background-repeat:no-repeat;
 	display:block;
   width:31px;

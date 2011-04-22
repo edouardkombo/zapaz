@@ -10,3 +10,6 @@ var mapGeocoder = null;
 
 var defaultProductFilterText = "Name filter";
 var lastFilterValue = "";
+
+var rootUrl   = "http://www.fabienrenaud.com/zap/shop/www";
+var staticUrl = "http://www.fabienrenaud.com/zap/shop/static";

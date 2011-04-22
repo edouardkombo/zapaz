@@ -2,7 +2,7 @@
   <div id="popup">
     <h1>Create an Offer</h1>
     <p></p>
-    <form id="offer" action="/offer/create" method="post">
+    <form id="offer" action="offer/create" method="post">
       <fieldset>
         <mx:hidden id="hidden" />
         <div class="commercialImage">

@@ -59,7 +59,7 @@ var updateShop = function() {
   assertField(params, "zipCode", stringNotEmpty);
   assertField(params, "city", stringNotEmpty);
   if ($("input.red").length == 0) {
-    $.post("/shop/update", params, function(xml) {
+    $.post(rootUrl + "/shop/update", params, function(xml) {
       var result = $(xml).find("result").text() == "1";
       var id = $(xml).find('id').text();
       $("input[name=currentShopId]").val(id);
@@ -94,7 +94,7 @@ var initLogoChangeButton = function() {
 };
 
 var askLogo = function() {
-  $.post("/shop/logo", function(xml) {
+  $.post(rootUrl + "/shop/logo", function(xml) {
     showPopup(xml, function() {
       $("#popup form").ajaxForm({ success: function(xml) {
         var result = $(xml).find('result').text() == "1";
@@ -102,7 +102,7 @@ var askLogo = function() {
         if (result) {
           hidePopup();
           $("input[name=hlogo]").val(path);
-          $(".logo img").attr('src', 'http://static.shop.zap.com/' + path);
+          $(".logo img").attr('src', staticUrl + '/' + path);
         }
       }});
       $("#popup #apply").click(function() { $("#popup form").submit(); });
@@ -148,7 +148,7 @@ var refreshShop = function() {
 
 var changeShop = function() {
   var shopId = $("input[name=currentShopId]").val();
-  $.post("/shop/view", {'shopId':shopId}, function(xml) {
+  $.post(rootUrl + "/shop/view", {'shopId':shopId}, function(xml) {
     $("#corps").html(xml);
     parseShop();
   });

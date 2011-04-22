@@ -1,6 +1,6 @@
 <?php
 
-define("HTTP_GET" , 101010);
+define("HTTP_GET", 101010);
 define("HTTP_POST", 010101);
 define("HTTP_SECURED", 110000);
 define("HTTP_UNSECURED", 111000);
@@ -23,13 +23,13 @@ class HttpCommunicator {
     $this->protocol = substr($uri, 0, 5) == "https" ? "https://" : "http://";
     $tmp = parse_url($uri);
     $this->host = $tmp['host'];
-    $this->url = str_replace($this->protocol.$this->host, "", $uri);
+    $this->url = str_replace($this->protocol . $this->host, "", $uri);
   }
-  
+
   public function setRequestType($requestType) {
     $this->requestType = $requestType;
   }
-  
+
   public function addParameter($name, $value) {
     if ($name != null && $name != "" && $value != null && $value != "") {
       $this->requestParameters[$name] = $value;
@@ -38,56 +38,58 @@ class HttpCommunicator {
 
   public function send() {
     $t = $this->getRequestCode();
-    
+
     $socket = fsockopen($this->host, $this->port, $errno, $errstr, 10);
     // If we don't have a stream resource, abort.
-    if (!(get_resource_type($socket)== 'stream')) {
+    if (!(get_resource_type($socket) == 'stream')) {
       return false;
     }
     if (!fwrite($socket, $t)) {
       fclose($socket);
       return false;
     }
-    
+
     $response = '';
     while (!feof($socket)) {
       $response .= fgets($socket, 128);
     }
     fclose($socket);
-    
+
     $this->parse($response);
     return true;
   }
-  
+
   private function getRequestCode() {
     $h = "";
     $url = $this->url;
     $p = array();
     foreach ($this->requestParameters as $k => $v) {
-      array_push($p, urlencode($k)."=".urlencode($v));
+      array_push($p, urlencode($k) . "=" . urlencode($v));
     }
     $p = implode("&", $p);
     if ($this->requestType == HTTP_POST) {
       $h .= "POST $url HTTP/1.1\n";
     } else {
-      $url .= "?".$p;
+      $url .= "?" . $p;
       $h .= "GET $url HTTP/1.1\n";
     }
-    $h .= "Host: ".$this->host.":".$this->port."\n";
-    if ($this->requestType == HTTP_POST) $h .= "Content-Length: ".strlen($p)."\n";
+    $h .= "Host: " . $this->host . ":" . $this->port . "\n";
+    if ($this->requestType == HTTP_POST)
+      $h .= "Content-Length: " . strlen($p) . "\n";
     $h .= "Connection: Close\n";
-    if ($this->requestType == HTTP_POST) $h .= "Content-Type: application/x-www-form-urlencoded\n";
+    if ($this->requestType == HTTP_POST)
+      $h .= "Content-Type: application/x-www-form-urlencoded\n";
     $h .= "\n";
-    
+
     if ($this->requestType == HTTP_GET) {
       $h .= "\n";
     } else if ($this->requestType == HTTP_POST) {
       $h .= $p;
     }
-    
+
     return $h;
   }
-  
+
   private function parse($content) {
     // split into array, headers and content.
     $hunks = explode("\r\n\r\n", trim($content));
@@ -106,6 +108,20 @@ class HttpCommunicator {
       $this->unchunkHttpResponse();
     }
     $this->responseContent = trim($this->responseContent);
+
+    /* On some servers, the HTTP content starts with the length of its content
+     * and ends with a 0 on a last dedied line.
+     */
+    $end = substr($this->responseContent, -2);
+    if ($end == "\n0") {
+      $firstLine = "";
+      for ($i = 0; $this->responseContent[$i] != "\n"; $i++) {
+        $firstLine .= $this->responseContent[$i];
+      }
+      if (filter_var($firstLine, FILTER_VALIDATE_INT)) {
+        $this->responseContent = substr($this->responseContent, strlen($firstLine) + 1, hexdec($firstLine));
+      }
+    }
   }
 
 //
@@ -157,10 +173,11 @@ class HttpCommunicator {
     unset($tmp);
     $this->responseContent = $str;
   }
-  
-  public function getResponseContent(){
+
+  public function getResponseContent() {
     return $this->responseContent;
   }
+
 }
 
 ?>

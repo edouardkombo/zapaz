@@ -1,4 +1,7 @@
 var displayShopInfo = function() {
+  if ($("select[name=shops]").val() == "0") {
+    return false;
+  }
   refreshShop();
   
   $("#menu li").removeClass('current');
@@ -15,7 +18,8 @@ var displayShopInfo = function() {
 };
 
 var displayProducts = function() {
-  if ($("select[name=shops]").val() == "999999") {
+  var selectId = $("select[name=shops]").val();
+  if (selectId == "999999" || selectId == "0") {
     return false;
   }
   var id = $("input[name=currentShopId]").val();
@@ -24,7 +28,7 @@ var displayProducts = function() {
   $("#menu li:last").addClass('current');
   
   $("#submenu").empty();
-  $.post("/shop/get-categories", {'shopId':id}, function(xml) {
+  $.post(rootUrl + "/shop/get-categories", {'shopId':id}, function(xml) {
     var filter = "";
     $(xml).find('c').each(function() {
       if (filter == "") { 

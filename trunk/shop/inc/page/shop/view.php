@@ -21,12 +21,13 @@ if ($shop == null) {
 $logo = $shop->getLogo() != null ? PROTOCOL.DOMAIN_ZSHOP.$shop->getLogo() : PROTOCOL.DOMAIN_ZSHOP."/img/logo/nologo.jpg";
 $address = $shopManager->splitAddress($shop->getAddress());
 $currencyArray = $shopManager->getAllCurrencies();
+$wsUrl = $shop->getWebServiceUrl() != null && $shop->getWebServiceUrl() != "" ? $shop->getWebServiceUrl() : PROTOCOL.DOMAIN_SHOP."/getProducts.php";
 
 $template->MxHidden($pre."hlogo", $template->GetQueryString(array("hlogo" => $shop->getLogo())));
 
 $template->MxFormField($pre."name", "text", "name", $shop->getName(), 'id="name"');
 $template->MxFormField($pre."email", "text", "email", $shop->getEmail(), 'id="email"');
-$template->MxFormField($pre."webServiceUrl", "text", "webServiceUrl", $shop->getWebServiceUrl(), 'id="webServiceUrl"');
+$template->MxFormField($pre."webServiceUrl", "text", "webServiceUrl", $wsUrl, 'id="webServiceUrl"');
 $template->MxSelect($pre."currency", "currency", $shop->getCurrencyId(), $currencyArray);
 $template->MxAttribut($pre."logo", $logo);
 

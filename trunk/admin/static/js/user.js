@@ -4,7 +4,7 @@ var deleteUsers = function() {
   if (arr[0] == "") {
     alert("You need to select at least one user to delete it.");
   } else if (confirm("Are you sure you want to delete the following users:\n" + arr[1])) {
-    $.post("/user/delete", {pids:arr[0]}, function(xml) {
+    $.post(rootUrl + "/user/delete", {pids:arr[0]}, function(xml) {
       var result = $(xml).find('result').text() == arr[2] ? true : false;
       if (result)
         refreshUsers();
@@ -46,7 +46,7 @@ if (page == null)
   } else if (action == "last") {
     start = (parseInt($("a[href=#last-page]").attr('rel'), 10) - 1) * limit;
   }
-  changeUser("/user/view", filter, start, limit, callback);
+  changeUser(rootUrl + "/user/view", filter, start, limit, callback);
 };
 
 var changeUser = function(link, filter, start, limit, callback) {

@@ -3,7 +3,7 @@ var addProduct = function() {
   if (v == "") {
     alert("You must enter a product name before adding a product item.");
   } else {
-    $.post("/product/edit", {'name':v}, function(xml) {
+    $.post(rootUrl + "/product/edit", {'name':v}, function(xml) {
       $("#corps").html(xml);
       initPictureChangeButton();
       $("#edit-detail-types").click(editDetailTypeList);
@@ -18,11 +18,11 @@ var addProduct = function() {
 var editProduct = function() {
   var arr = getCheckedLines();
   if (arr[2] == 0) {
-    alert("Vous devez sÃ©lectionner au moins un libellÃ© pour pouvoir l'Ã©diter.");
+    alert("Vous devez sélectionner au moins un libellé pour pouvoir l'éditer.");
   } else if (arr[2] > 1) {
-    alert("Vous ne pouvez sÃ©lectionner qu'un seul libellÃ© pour pouvoir l'Ã©diter.");
+    alert("Vous ne pouvez sÃ©lectionner qu'un seul libellé pour pouvoir l'éditer.");
   } else {
-    $.post("/product/edit", {'id':arr[0]}, function(xml) {
+    $.post(rootUrl + "/product/edit", {'id':arr[0]}, function(xml) {
       $("#corps").html(xml);
       initPictureChangeButton();
       $("#edit-detail-types").click(editDetailTypeList);
@@ -56,7 +56,7 @@ var updateProduct = function() {
     }
   });
   params["details"] = details;
-  $.post("/product/update", params, function(xml) {
+  $.post(rootUrl + "/product/update", params, function(xml) {
     var result = $(xml).find('result').text() == "1";
     if (result) {
       displayProducts();
@@ -77,7 +77,7 @@ var addNewDetailTypeLine = function() {
 };
 
 var editDetailTypeList = function() {
-  $.get("/product/edit-detail-types", function(xml) {
+  $.get(rootUrl + "/product/edit-detail-types", function(xml) {
     showPopup(xml, function() {;
       $("#popup #type-values span").each(function() { $(this).click(function() {removeDetailType($(this));}); });
       $("#popup #submit-new-type").click(addDetailType);
@@ -114,7 +114,7 @@ var addDetailType = function() {
   if (!ok) {
     alert("This type is already in the list.");
   } else {
-    $.post("/product/add-detail-type", {"type":v}, function(xml) {
+    $.post(rootUrl + "/product/add-detail-type", {"type":v}, function(xml) {
       var result = $(xml).find('result').text() == "1";
       if (result) {
         var span = document.createElement('span');
@@ -134,7 +134,7 @@ var addDetailType = function() {
 
 var removeDetailType = function(elt) {
   var v = $(elt).text();
-  $.post("/product/remove-detail-type", {"type":v}, function(xml) {
+  $.post(rootUrl + "/product/remove-detail-type", {"type":v}, function(xml) {
     var result = $(xml).find('result').text() == "1";
     if (result) {
       $(elt).remove();
@@ -149,7 +149,7 @@ var deleteProducts = function() {
   if (arr[0] == "") {
     alert("You need to select at least one product to delete it.");
   } else if (confirm("Are you sure you want to delete the following products:\n" + arr[1])) {
-    $.post("/product/delete", {pids:arr[0]}, function(xml) {
+    $.post(rootUrl + "/product/delete", {pids:arr[0]}, function(xml) {
       var result = $(xml).find('result').text() == arr[2] ? true : false;
       if (result)
         displayProducts();
@@ -186,7 +186,7 @@ var initPictureChangeButton = function() {
 };
 
 var askPicture = function() {
-  $.post("/product/logo", function(xml) {
+  $.post(rootUrl + "/product/logo", function(xml) {
     showPopup(xml, function() {
       $("#popup form").ajaxForm({success: function(xml) {
         var result = $(xml).find('result').text() == "1";
@@ -194,7 +194,7 @@ var askPicture = function() {
         if (result) {
           hidePopup(function() {
             $("input[name=hpicture]").val(path);
-            $(".logo img").attr('src', 'http://static.shop.zap.com/' + path);
+            $(".logo img").attr('src', staticUrl + "/" + path);
           });
         }
       }});
@@ -225,11 +225,11 @@ var refreshProducts = function(page, nameFilter, categoryFilter, typeFilter, act
   } else if (action == "last") {
     start = (parseInt($("a[href=#last-page]").attr('rel'), 10) - 1) * limit;
   }
-  changeProduct("/product/view", nameFilter, categoryFilter, typeFilter, start, limit, callback);
+  changeProduct(rootUrl + "/product/view", nameFilter, categoryFilter, typeFilter, start, limit, callback);
 };
 
 var changeProduct = function(link, nameFilter, categoryFilter, typeFilter, start, limit, callback) {
-  if (link   == null) link   = "/product/view";
+  if (link   == null) link   = rootUrl + "/product/view";
   if (nameFilter == null) nameFilter = "";
   if (categoryFilter == null) categoryFilter = "";
   if (typeFilter == null) typeFilter = "";
