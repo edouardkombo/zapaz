@@ -2,21 +2,20 @@
 
 if (!defined("MYSQL_HOSTNAME")) {
 
-$root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) - 3);
-  
-// Base de données
-define("ROOT"                     , $root                           );
-define("MYSQL_HOSTNAME"           , "localhost"                     );
-define("MYSQL_PORT"               , "3306"                          );
-define("MYSQL_USERNAME"           , "root"                          );
-define("MYSQL_PASSWORD"           , "zappaz"                        );
-define("MYSQL_DB_SHOP"            , ""                       );
 
-// Domaines et sous domaines
-define("DOMAIN"                   , "argon.com"                     );
-define("DOMAIN_SHOP"              , "shop.".DOMAIN                  );
-define("DOMAIN_ZSHOP"             , "static.".DOMAIN_SHOP           );
-define("PROTOCOL"                 , "http://"                       );
+$root = "/homez.193/datesvac/fabienrenaud/www/zap/argon/";
+//$root = substr($_SERVER['DOCUMENT_ROOT'], 0, strlen($_SERVER['DOCUMENT_ROOT']) - 3);
+
+define("ROOT"                     , $root                           );
+
+// Domains
+define("DOMAIN"                   , "www.fabienrenaud.com/zap/argon"    );
+define("DOMAIN_ADMIN"             , DOMAIN."/www"                   );
+define("DOMAIN_ZADMIN"            , DOMAIN."/static"                );
+define("PROTOCOL"                 , "http://");
+define("BASE_ADMIN"               , "www.fabienrenaud.com/zap/admin/www");
+define("GET_SHOPS"                , PROTOCOL.BASE_ADMIN."/getStores.php");
+
 // Chemins
 define("TEMPLATE_GENERAL_PATH"    , ROOT."tpl/"                     );
 define("INC_GENERAL_PATH"         , ROOT."inc/"                     );
@@ -30,13 +29,6 @@ $db         = NULL;       // Base de donnée
 $currentUrl = $_SERVER['REQUEST_URI'];
 
 $currentLanguage = "en";
-
-try {
-  $db = new PDO("mysql:dbname=".MYSQL_DB_SHOP.";host=".MYSQL_HOSTNAME, MYSQL_USERNAME, MYSQL_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-  $db->query('SET NAMES "utf8"');
-} catch (PDOException $e) {
-  exit($e);
-}
 
 include(MX_GENERAL_PATH.'ModeliXe.php');
 

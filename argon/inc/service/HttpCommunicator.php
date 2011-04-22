@@ -118,8 +118,9 @@ class HttpCommunicator {
       for ($i = 0; $this->responseContent[$i] != "\n"; $i++) {
         $firstLine .= $this->responseContent[$i];
       }
-      if (filter_var($firstLine, FILTER_VALIDATE_INT)) {
-        $this->responseContent = substr($this->responseContent, strlen($firstLine) + 1, hexdec($firstLine));
+      $size = hexdec($firstLine);
+      if ($size > 0 && $size < strlen($this->responseContent) - strlen($firstLine)) {
+        $this->responseContent = substr($this->responseContent, strlen($firstLine) + 1, $size);
       }
     }
   }
