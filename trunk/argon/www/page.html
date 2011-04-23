@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
       <link href="test.css" type="text/css" rel="stylesheet"/>
   </head>
   <body>
-    <div id="menu"><ul id="product-list"></ul></div>
+    <ul id="product-list">
+<!--      <li> <img src="footwear.jpg" /> 
+      <span class="name"> Foot Wear </span>
+        <span class="price"> 39,99 € </span> 
+        <span class="manufacturer"> Adidas </span>
+        <span class="shop"> Your Sport </span>
+      <a href="#" ></a>  </li>-->
+         
+    </ul>
       <script type="text/javascript">
         var productList = document.getElementById('product-list');
         var rootUrl  = "http://www.fabienrenaud.com/zap/argon/www";
@@ -34,14 +43,34 @@
             $(data).each(function(i, item) {
               var url = item.webServiceUrl;
               var uid = item.publicUid;
+              var shopName = item.name; 
               var currency = item.currency;
               $.getJSON(url, {publicUid:uid}, function(data) {
                 $(data).each(function(i, item) {
+                  
+                  var span1 = document.createElement("span");
+                      span1.setAttribute("class", "name");
+                      span1.appendChild(document.createTextNode(item.name));
+                  var span2 = document.createElement("span");
+                      span2.setAttribute("class", "price");
+                      span2.appendChild(document.createTextNode(item.price + currency));
+                  var span3 = document.createElement("span");
+                      span3.setAttribute("class", "manufacturer");
+                      span3.appendChild(document.createTextNode(item.manufacturer));
+                  var span4 = document.createElement("span");
+                      span4.setAttribute("class", "shop");
+                      span4.appendChild(document.createTextNode(shopName));
                   var a = document.createElement("a");
-                      a.appendChild(document.createTextNode(item.name));
                       a.setAttribute('href', '#');
+                  var image = document.createElement("img");
+                      image.setAttribute("src", item.picture);
                   var li = document.createElement("li");
+                      li.appendChild(span1);
+                      li.appendChild(span2);
+                      li.appendChild(span3);
+                      li.appendChild(span4);
                       li.appendChild(a);
+                      li.appendChild(image);
                   productList.appendChild(li);
                 });
               });
@@ -51,5 +80,8 @@
         
         fetchProducts();
       </script>
+      
+      
+      
   </body>
 </html>
