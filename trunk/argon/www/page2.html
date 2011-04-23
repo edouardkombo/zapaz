@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      #preferences {
+        position:absolute;
+        top:0;
+      }
+      #toolbar {
+        position:absolute;
+        top:150px;
+        left:0;
+        width:360px;
+        height:30px;
+        background-image: url("toolbar-bg.gif");
+        background-repeat: repeat-x;
+      }
+      
+      #toolbar > * {
+        float:left;
+        border-top:2px solid #abbff3;
+      }
+      
+      #toolbar > *:hover {
+        background-color: #b5c6cf;
+      }
+      
+      #toolbar form {
+        margin-right:1px;
+        width:280px;
+        height:28px;
+      }
+      
+      #toolbar input {
+        width:96%;
+        margin:2px 2%;
+      }
+      
+      a.preferences {
+        float:right;
+        background-image:url("gear.png");
+        background-repeat:no-repeat;
+        background-position: center 3px;
+        width:30px;
+        height:28px;
+      }
+      
+      a.zap {
+        display:block;
+        margin-right:1px;
+        font-weight:bold;
+        text-decoration: none;
+        color:#207ba6;
+        padding:2px 4px;
+        font-variant:small-caps;
+      }
+      a.zap:first-letter { font-size:1.2em; }
+    </style>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script type="text/javascript">
+      var rootUrl  = "http://www.fabienrenaud.com/zap/argon/www";
+      
+      var showFacebookButton = function(callback) {
+        $("a.fb_button").show();
+        if (typeof(callback) === 'function') 
+          callback();
+      };
+
+      var hideFacebookButton = function(callback) {
+        $("a.fb_button").hide();
+        if (typeof(callback) === 'function') 
+          callback();
+      };
+      
+      var afterLoggedIn = function() {
+        FB.getLoginStatus(function(response) {
+          if (response.session) {
+            $.post(rootUrl + "/userLogin.php", {}, function(xml) {
+              var logged = $(xml).find('logged').text() == "1";
+              if (parseResponse(xml) && logged) {
+                isLoggedIn = true;
+                hideFacebookButton(showControlSpot);
+              }
+            });
+          }
+        });
+      };
+
+      $(document).ready(function() {
+        FB.init({ appId:'193388247366826', cookie:true,status:true, xfbml:true });
+        FB.Event.subscribe("auth.login", function() { afterLoggedIn(); });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="preferences">
+      <div id="fb-root"></div>
+      <fb:login-button on-login="afterLoggedIn();'">Login with Facebook</fb:login-button>
+    </div>
+    <div id="toolbar">
+      <a href="#" class="zap">ZAP</a>
+      <form action="go.html" method="post">
+        <input type="search" id="search" placeholder="Search..." autosave="applestyle_srch" results="5" />
+      </form>
+      <a href="#" class="preferences"></a>
+    </div>
+  </body>
+</html>

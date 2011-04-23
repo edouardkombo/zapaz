@@ -50,8 +50,8 @@ define("MX_ERROR_PATH"            , INC_GENERAL_PATH."ModeliXe/"    );
 
 // Variables globales
 define("MAX_HORIZON", 500); // meters
-define("FACEBOOK_APP_ID", "");
-define("FACEEBOK_APP_SECRET", "");
+define("FACEBOOK_APP_ID"    , "186165901430266");
+define("FACEEBOK_APP_SECRET", "0aad15498b67277ed7aad305ea2d66b7");
 
 // TOUJOURS DECLARER ET INITIALISER UNE VARIABLE !!!
 $result     = "";

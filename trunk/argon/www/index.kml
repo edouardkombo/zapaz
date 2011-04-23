@@ -96,12 +96,14 @@
   top:16px;
   right: 5px;
 }
-      </style>
+      #toolbar > * {
+        float:left;
+        border-top:2px solid #abbff3;
+      }
       
-      <ul id="product-list">
-        <li>test</li>
-        <li>item</li>
-      </ul>
+      #toolbar > *:hover {
+        background-color: #b5c6cf;
+      }
       
       <script type="text/javascript">
         var productList = document.getElementById('product-list');
@@ -157,7 +159,21 @@
         $(document).ready(function() {
           fetchProducts();
         });
-      </script>
+      };
+
+      $(document).ready(function() {
+        FB.init({ appId:'193388247366826', cookie:true,status:true, xfbml:true });
+        FB.Event.subscribe("auth.login", function() { afterLoggedIn(); });
+      });
+    </script>
+    
+    <div id="toolbar">
+      <a href="#" class="zap">ZAP</a>
+      <form action="go.html" method="post">
+        <input type="search" id="search" placeholder="Search..." autosave="applestyle_srch" results="5" />
+      </form>
+      <a href="#" class="preferences"></a>
+    </div>
     ]]></description>
       
     <overlayXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/> 
