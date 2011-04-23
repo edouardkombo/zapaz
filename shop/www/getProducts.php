@@ -1,5 +1,6 @@
 <?php
 
+header("Content-type: application/json");
 include('../inc/global.config.php');
 
 $in = $_GET;
@@ -29,7 +30,7 @@ if ($shop != null) {
 $json = "[";
 foreach ($products as $p) {
   if ($json != "[")
-    $json .= ",";
+    $json .= ", ";
   $json .= $p->getJSON();
 }
 $json .= "]";

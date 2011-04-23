@@ -1,5 +1,6 @@
 <?php
 
+header("Content-type: application/json");
 include('../inc/global.config.php');
 
 $in = $_GET;
@@ -26,7 +27,7 @@ $shopsResult = $shopManager->getAllClosestShops($minLat, $maxLat, $minLng, $maxL
 $json = "[";
 foreach ($shopsResult as $sr){
   if($json != "[")
-    $json .= ",";
+    $json .= ", ";
   $json .= $sr->getJSON();  
 }
 $json .= "]";

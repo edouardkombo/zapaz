@@ -27,137 +27,49 @@
   <ScreenOverlay>
     <name>myOverlay</name>
       <description><![CDATA[
+     
+      <style type="text/css">
+      ul { st
+      
+      </style>
+      
+      <ul id="product-list">
+        <li>test</li>
+        <li>item</li>
+      </ul>
+      
       <script type="text/javascript">
+        var productList = document.getElementById('product-list');
         var rootUrl  = "http://www.fabienrenaud.com/zap/argon/www";
         var shops    = {};
         
-        var removePlacemarkers = function () {
-          for (kmlObjId in KHARMA.dom.elements) {
-            var kmlObj = KHARMA.dom.elements[kmlObjId];
-            var feature = document.getElementById(kmlObj.id);
-            if (feature && kmlObjId.substring(0,2) == 'PM') {
-              //var distance = $(feature).data("distance");
-              //console.log("***** " + distance);
-              $(feature).remove();
-              KHARMA.dom.removeElementWithID(kmlObj.id);
-            }
-          }
-        }
-        
-        var fetchProducts = function() {
-          removePlacemarkers(); //clear out old placemarkers, if any
+        var fetchProducts = function() {          
+          $(productList).empty();
           
-          $.getJSON(rootUrl + "/getShops.php", { lat:myLoc.latitude , lng:myLoc.longitude }, function(data) {
-            
+          var myLoc = KHARMA.getLocation();
+          var lat = 49.116846;
+          var lng = 6.178501;
+          $.getJSON(rootUrl + "/getShops.php", { lat:lat, lng:lng }, function(data) {
+            $.each(data, function(i, item) {
+              var url = item.webServiceUrl;
+              var uid = item.publicUid;
+              var currency = item.currency;
+              $.getJSON(url, {publicUid:uid}, function(data) {
+                $.each(data, function(i, item) {
+                  var li = document.createElement("li");
+                      li.appendChild(document.createTextNode(item.name));
+                  productList.appendChild(li);
+                });
+              });
+            });
           });
         };
-      </script> 
-      
-      <style type="text/css">
-        div.inputStyle
-        {
-          width:            360px;
-          height:            85px;
-          left:            -20px;
-          top:            -20px;
-          position:           absolute;
-      
-          background-color:      rgba(220, 234, 255, 0.7);
-          border-style:        solid;
-          border-width:        1px;
-          border-color:        rgba(0, 0, 0, 1.0);
-        }
         
-        div.searchButtonStyle
-        {
-          width:            36px;
-          height:            36px;
-          left:            280px;
-          top:            44px;
-          position:           absolute;
-        }
-        
-        div.textStyle
-        {
-          width:            150px;
-          height:            36px;
-          left:            20px;
-          top:            40;
-          position:           absolute;
-          
-          font-family:        sans-serif;
-          font-size:          10px;
-        }
-        
-        div.imageStyle
-        {
-          width:            300px;
-          height:            220px;
-          left:            10px;
-          top:            60;
-          position:           absolute;
-          
-          font-family:        sans-serif;
-          font-size:          10px;
-          text-align:          center;
-        }
-        
-        div.labelStyle
-        {
-          width:            210px;
-          height:            36px;
-          left:            55px;
-          top:            10px;
-          position:           absolute;
-          
-          font-family:        sans-serif;
-          font-size:          12px;
-          vertical-align:        bottom;
-          text-align:          left;
-          color:            rgba(0, 0, 0, 1);
-        }
-        
-        div.iconStyle
-        {
-          width:            24px;
-          height:            24px;
-          left:            25px;
-          top:            13px;
-          position:           absolute;
-        }
-        
-        div.resultCountStyle
-        {
-          width:            150px;
-          height:            36px;
-          left:            166px;
-          top:            23px;
-          position:           absolute;
-          
-          font-family:        sans-serif;
-          font-size:          8px;
-          vertical-align:        bottom;
-          text-align:          right;
-          color:            rgba(0, 0, 0, 1);
-        }
-      </style>
-      
-  
-      <div id="searchDiv" class="inputStyle">
-        <form name="input" action="javascript:flickrSearch();" method="get">
-          <div id="iconDiv" class="iconStyle"><img src="http://www.iconspedia.com/uploads/1912642692.png" height="24" width="24" /></div>
-          <div id="labelDiv" class="labelStyle">Flickr Search</div>
-          <div id="textDiv" class="textStyle"><input id="keywordTxt" size="18" type="text" value=""/></div>
-          <div id"searchDiv" class="searchButtonStyle" ><input type="image" src="http://isaackulka.com/images/search.gif" alt="Submit" /></div>
-          <div id="spinDiv" class="searchButtonStyle" style="visibility:hidden;"><img src="http://isaackulka.com/images/spinner.gif" /></div>
-          <div id="resultCountDiv" class="resultCountStyle"></div>
-          
-        </form>
-      </div>
-      
+        $(document).ready(function() {
+          fetchProducts();
+        });
+      </script>
     ]]></description>
-      
-      
       
     <overlayXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/> 
     <screenXY x="0.01" y="1.0" xunits="fraction" yunits="fraction"/>
@@ -170,10 +82,10 @@
   <styleUrl>#documentStyle</styleUrl> 
   
   <!-- KML document description -->
-  <name>Flickr Search</name>
-  <Snippet>Flickr Search for Argon</Snippet>
+  <name>Zap</name>
+  <Snippet>Zap for Argon</Snippet>
   <description><![CDATA[
-    <div><p><b>Flickr Search for Argon</b></p>
+    <div><p><b>Zap for Argon</b></p>
     <p>
     <b>notes:</b>
     <ul>
