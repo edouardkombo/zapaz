@@ -15,6 +15,7 @@ define("DOMAIN_ZADMIN"            , DOMAIN."/static"                );
 define("PROTOCOL"                 , "http://");
 define("BASE_ADMIN"               , "www.fabienrenaud.com/zap/admin/www");
 define("GET_SHOPS"                , PROTOCOL.BASE_ADMIN."/getStores.php");
+define("USER_LOGIN"               , PROTOCOL.BASE_ADMIN."/userLogin.php");
 
 // Chemins
 define("INC_GENERAL_PATH"         , ROOT."inc/"                     );
