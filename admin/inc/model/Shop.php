@@ -167,7 +167,7 @@ class Shop {
     return "{"
     . '"name":"' . $this->getName() . '", '
     . '"publicUid":"' . $this->getPublicUid() . '", '
-    . '"currency":"' . $this->getCurrency()->getName() . '", '
+    . '"currency":"' . $this->getCurrency()->getSymbol() . '", '
     . '"latitude":"' . $this->getLatitude() . '", '
     . '"longitude":"' . $this->getLongitude() . '", '
     . '"email":"' . $this->getEmail() . '", '

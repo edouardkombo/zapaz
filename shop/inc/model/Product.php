@@ -190,6 +190,7 @@ class Product {
      . '"manufacturer":"'.$this->getManufacturer().'", '
      . '"category":"'.$this->getCategory()->getName().'", '
      . '"type":"'.$this->getType()->getName().'", '
+     . '"picture":"'.PROTOCOL.DOMAIN_ZSHOP.$this->getPicture().'", '      
      . '"price":"'.$this->getPrice().'", '
      . '"description":"'.$this->getDescription().'", '
      . '"details":['.$subJson.']'
