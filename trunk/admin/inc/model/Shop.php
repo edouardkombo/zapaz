@@ -161,20 +161,18 @@ class Shop {
 
     foreach ($keywords as $k) {
       if ($subJSON != "")
-        $subJSON.=",";
+        $subJSON.=", ";
       $subJSON.='{"name":"' . $k->getName() . '"}';
     }
-
-
     return "{"
-    . '"name":"' . $this->getName() . '",'
-    . '"publicUid":"' . $this->getPublicUid() . '",'
-    . '"currency":"' . $this->getCurrency()->getSymbol() . '",'
-    . '"latitude":"' . $this->getLatitude() . '",'
-    . '"longitude":"' . $this->getLongitude() . '",'
-    . '"email":"' . $this->getEmail() . '",'
-    . '"webServiceUrl":"' . $this->getWebServiceUrl() . '",'
-    . '"countOfProducts":"' . $this->getCountOfProducts() . '",'
+    . '"name":"' . $this->getName() . '", '
+    . '"publicUid":"' . $this->getPublicUid() . '", '
+    . '"currency":"' . $this->getCurrency()->getName() . '", '
+    . '"latitude":"' . $this->getLatitude() . '", '
+    . '"longitude":"' . $this->getLongitude() . '", '
+    . '"email":"' . $this->getEmail() . '", '
+    . '"webServiceUrl":"' . $this->getWebServiceUrl() . '", '
+    . '"countOfProducts":"' . $this->getCountOfProducts() . '", '
     . '"keywords":[' . $subJSON . ']'
     . "}";
   }

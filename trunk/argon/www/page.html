@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+      <link href="test.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div id="menu"><ul id="product-list"></ul></div>
+      <script type="text/javascript">
+        var productList = document.getElementById('product-list');
+        var rootUrl  = "http://www.fabienrenaud.com/zap/argon/www";
+        var shops    = {};
+        
+        var removePlacemarkers = function () {
+          for (kmlObjId in KHARMA.dom.elements) {
+            var kmlObj = KHARMA.dom.elements[kmlObjId];
+            var feature = document.getElementById(kmlObj.id);
+            if (feature && kmlObjId.substring(0,2) == 'PM') {
+              //var distance = $(feature).data("distance");
+              //console.log("***** " + distance);
+              $(feature).remove();
+              KHARMA.dom.removeElementWithID(kmlObj.id);
+            }
+          }
+        };
+        
+        var fetchProducts = function() {
+          // removePlacemarkers();
+          $(productList).empty();
+          
+          var lat = 49.116846;
+          var lng = 6.178501;
+          $.getJSON(rootUrl + "/getShops.php", { lat:lat, lng:lng }, function(data) {
+            $(data).each(function(i, item) {
+              var url = item.webServiceUrl;
+              var uid = item.publicUid;
+              var currency = item.currency;
+              $.getJSON(url, {publicUid:uid}, function(data) {
+                $(data).each(function(i, item) {
+                  var a = document.createElement("a");
+                      a.appendChild(document.createTextNode(item.name));
+                      a.setAttribute('href', '#');
+                  var li = document.createElement("li");
+                      li.appendChild(a);
+                  productList.appendChild(li);
+                });
+              });
+            });
+          });
+        };
+        
+        fetchProducts();
+      </script>
+  </body>
+</html>

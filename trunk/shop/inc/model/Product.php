@@ -182,16 +182,16 @@ class Product {
     $subJson = "";
     foreach ($details as $d) {
       if ($subJson != "")
-        $subJson .= ",";
-      $subJson .= '{ "name":"'.$d->getDetailType()->getName().'" , "value":"'.$d->getName().'" }';
+        $subJson .= ", ";
+      $subJson .= '{ "name":"'.$d->getDetailType()->getName().'", "value":"'.$d->getName().'" }';
     }     
     return '{'
-     . '"name":"'.$this->getName().'",'
-     . '"manufacturer":"'.$this->getManufacturer().'",'
-     . '"category":"'.$this->getCategory()->getName().'",'
-     . '"type":"'.$this->getType()->getName().'",'
-     . '"price":"'.$this->getPrice().'",'
-     . '"description":"'.$this->getDescription().'",'
+     . '"name":"'.$this->getName().'", '
+     . '"manufacturer":"'.$this->getManufacturer().'", '
+     . '"category":"'.$this->getCategory()->getName().'", '
+     . '"type":"'.$this->getType()->getName().'", '
+     . '"price":"'.$this->getPrice().'", '
+     . '"description":"'.$this->getDescription().'", '
      . '"details":['.$subJson.']'
      . '}';
   }
