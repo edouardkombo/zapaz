@@ -3,66 +3,168 @@
   <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  </head>
+  <body>
     <style type="text/css">
-      #preferences {
-        position:absolute;
-        top:0;
+      * { font-size:9px; font-family:Arial, Verdana, sans-serif; }
+      #frame { position:absolute; top:-13px; left:-5px; width:322px; height:420px; }
+      .panel { position:absolute; width:322px; height:420px; background:url(bar-bg2.gif) repeat-x top center; }
+      #main { top:0; left:0; }
+      #preferences { top:-420px; left:0; background-color:#efefef; color:#333; }
+
+      .button { position:absolute; top:7px; left:5px; height:30px; }
+      .button.back .bgl { float:left; width:12px; height:30px; background:url(back-bgl.gif) no-repeat; }
+      .button.back .bgr { float:left; width:4px; height:30px; background:url(back-bgr.gif) no-repeat; }
+      .button .ctt { float:left; height:20px; color:#efefef; padding:3px 4px 7px 4px; background:url(back-bgc.gif) repeat-x; font-variant:small-caps; }
+
+      #product-list-box {
+        width:322px;
+        height:376px;
+        overflow:hidden;
+      }
+      #product-list {
+        color: #333;
+        font-size: 10px;
+        margin:0;
+        padding:0;
+      }
+      #product-list li  {
+        border-bottom: 1px solid #CCC;
+        position: relative;
+        list-style: none;
+        width: 322px;
+        height: 50px;
+        font-family:'Myriad Pro',tahoma;  
+        text-decoration:none;  
+        font-size:13px;  
+        background-color:white;
+      }
+      #product-list li > * {  position: absolute; overflow: hidden; height:20px;}
+
+      #product-list li img{
+        top: 5px;
+        left: 5px;
+        width:40px;
+        height:40px;
+      }
+      #product-list li span.name {
+        top:5px;
+        left: 60px;
+        width: 160px;
+        font-weight: bold;
+      }
+      #product-list li span.manufacturer {
+        top:22px;
+        left: 60px;
+        width: 100px;
+        font-family: cursive;
+        font-size: 10px;
+        font-style: italic;
+        text-indent: 5px;
+      }
+      #product-list li span.price {
+        top:5px;
+        right: 30px;
+        width: 70px;
+        font-family: monospace;
+        text-align: right;
+      }
+
+      #product-list li span.shop {
+        top: 25px;
+        right: 30px;
+        width: 120px;
+        text-align: right;
+        font-weight:500;
+        padding-right: 5px;
+      }
+
+      #product-list li a {
+        background: url("next.png") no-repeat center;
+        height: 15px;
+        width: 16px;
+        top:16px;
+        right: 5px;
       }
       #toolbar {
-        position:absolute;
-        top:150px;
-        left:0;
-        width:360px;
-        height:30px;
-        background-image: url("toolbar-bg.gif");
-        background-repeat: repeat-x;
+        width:322px;
+        height:44px;
       }
-      
+
       #toolbar > * {
         float:left;
-        border-top:2px solid #abbff3;
+        border-top:4px solid #abbff3;
       }
-      
+
       #toolbar > *:hover {
         background-color: #b5c6cf;
       }
-      
+
       #toolbar form {
         margin-right:1px;
-        width:280px;
-        height:28px;
+        width:286px;
+        height:24px;
       }
-      
+
       #toolbar input {
         width:96%;
         margin:2px 2%;
       }
-      
+
       a.preferences {
         float:right;
-        background-image:url("gear.png");
+        background-image:url("gear2.png");
         background-repeat:no-repeat;
         background-position: center 3px;
-        width:30px;
-        height:28px;
+        width:34px;
+        height:34px;
       }
-      
-      a.zap {
-        display:block;
-        margin-right:1px;
-        font-weight:bold;
-        text-decoration: none;
-        color:#207ba6;
-        padding:2px 4px;
-        font-variant:small-caps;
+
+      #preferences #content {
+        margin-top:50px;
+        padding:5px 30px;
       }
-      a.zap:first-letter { font-size:1.2em; }
+      #preferences input { float:left; clear:left; margin-top:15px; }
+      #preferences label { float:left; margin:12px 0 0 10px; }
+
     </style>
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
+
+    <div id="frame">
+      <div id="preferences" class="panel">
+        <div class="button back">
+          <div class="bgl"></div>
+          <div class="ctt">Back</div>
+          <div class="bgr"></div>
+        </div>
+        <div id="content">
+          <div id="fb-root"></div>
+          <fb:login-button on-login="afterLoggedIn();'">Login with Facebook</fb:login-button>
+          <input type="checkbox" name="streetView"><label>Street View Mode</label>
+        </div>
+      </div>
+      <div id="main" class="panel">
+        <div id="toolbar">
+          <form action="go.html" method="post">
+            <input type="search" id="search" placeholder="Zap Search..." autosave="applestyle_srch" results="5" />
+          </form>
+          <a class="preferences"></a>
+        </div>
+        <div id="product-list-box">
+          <ul id="product-list"></ul>
+        </div>
+      </div>
+    </div>
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
     <script type="text/javascript">
+      var defaultTop = -13;
+      var defaultLeft = -5;
+      var defaultWidth = 322;
+      var defaultHeight = 420;
+      var productList = document.getElementById('product-list');
       var rootUrl  = "http://www.fabienrenaud.com/zap/argon/www";
-      
+      var shops    = {};
+        
       var showFacebookButton = function(callback) {
         $("a.fb_button").show();
         if (typeof(callback) === 'function') 
@@ -74,38 +176,128 @@
         if (typeof(callback) === 'function') 
           callback();
       };
-      
+
       var afterLoggedIn = function() {
         FB.getLoginStatus(function(response) {
           if (response.session) {
-            $.post(rootUrl + "/userLogin.php", {}, function(xml) {
+            /*$.post(rootUrl + "/userLogin.php", {}, function(xml) {
               var logged = $(xml).find('logged').text() == "1";
               if (parseResponse(xml) && logged) {
                 isLoggedIn = true;
                 hideFacebookButton(showControlSpot);
               }
-            });
+            });*/
           }
         });
       };
 
-      $(document).ready(function() {
-        FB.init({ appId:'193388247366826', cookie:true,status:true, xfbml:true });
+      var initFacebook = function() {
+        FB.init({ appId:'186165901430266', cookie:false, status:false, xfbml:true });
         FB.Event.subscribe("auth.login", function() { afterLoggedIn(); });
+      };
+      
+      var scrollProductList = function (e) {
+        if (e.target.tagName.toLowerCase() != "a") {
+          var listHeight = $("#product-list-box").innerHeight();
+          var minMarginTop = - $(productList).innerHeight() + listHeight + 2;
+          if (minMarginTop > 0) {
+            minMarginTop = 0;
+          }
+          var li = $(this);
+          while (!$(li).is("li")) {
+            li = $(li).parent();
+          }
+          var index = parseInt($(li).prevAll().length);
+          var rightClick = e.button == 2;
+          var sign = rightClick ? 1 : -1; // 1 = scroll top, -1 = scroll bottom
+          var marginTop = -index * 50;
+          if (sign > 0) {
+            marginTop += listHeight - 50;
+          }
+          if (sign > 0 && marginTop > 0) {
+            marginTop = 0;
+          } else if (sign < 0 && marginTop < minMarginTop) {
+            marginTop = minMarginTop;
+          }
+          $(productList).animate({'margin-top':marginTop+"px"});
+          return false;
+        }
+        return true;
+      };
+        
+      var fetchProducts = function() {          
+        $(productList).empty();
+          
+//        var myLoc = KHARMA.getLocation();
+        var lat = 49.116846;
+        var lng = 6.178501;
+        $.getJSON(rootUrl + "/getShops.php", { lat:lat, lng:lng }, function(data) {
+          $.each(data, function(i, item) {
+            var url = item.webServiceUrl;
+            var uid = item.publicUid;
+            var shopName = item.name; 
+            var currency = item.currency;
+            $.getJSON(url, {publicUid:uid}, function(data) {
+              $.each(data,function(i, item) {
+                  
+                var span1 = document.createElement("span");
+                span1.setAttribute("class", "name");
+                span1.appendChild(document.createTextNode(item.name));
+                var span2 = document.createElement("span");
+                span2.setAttribute("class", "price");
+                span2.appendChild(document.createTextNode(item.price + currency));
+                var span3 = document.createElement("span");
+                span3.setAttribute("class", "manufacturer");
+                span3.appendChild(document.createTextNode(item.manufacturer));
+                var span4 = document.createElement("span");
+                span4.setAttribute("class", "shop");
+                span4.appendChild(document.createTextNode(shopName));
+                var a = document.createElement("a");
+                a.setAttribute('href', '#');
+                var img = document.createElement("img");
+                img.setAttribute("src", item.picture);
+                var li = document.createElement("li");
+                    li.appendChild(span1);
+                    li.appendChild(span2);
+                    li.appendChild(span3);
+                    li.appendChild(span4);
+                    li.appendChild(a);
+                    li.appendChild(img);
+                  $(li).click(scrollProductList);
+                productList.appendChild(li);
+              });
+            });
+          });
+        });
+      };
+        
+      var moveToTop = function() {
+        var t = parseInt($("#frame").css('top').replace('px',''), 10);
+        $("#frame").animate({'top':(t + defaultHeight) + 'px'},'normal');
+      };
+        
+      var moveToBottom = function() {
+        var t = parseInt($("#frame").css('top').replace('px',''), 10);
+        $("#frame").animate({'top':(t - defaultHeight) + 'px'},'normal');
+      };
+        
+      var moveToRight = function() {
+        var l = parseInt($("#frame").css('left').replace('px',''), 10);
+        $("#frame").animate({'left':(l + defaultWidth) + 'px'}, 'normal');
+      };
+        
+      var moveToLeft = function() {
+        var l = parseInt($("#frame").css('left').replace('px',''), 10);
+        $("#frame").animate({'left':(l - defaultWidth) + 'px'}, 'normal');
+      };
+        
+      $(document).ready(function() {
+        fetchProducts();
+        $("a.preferences").click(moveToTop);
+        $("#preferences .back").click(moveToBottom);
       });
+        
+      $.getScript("http://connect.facebook.net/en_US/all.js", initFacebook);
     </script>
-  </head>
-  <body>
-    <div id="preferences">
-      <div id="fb-root"></div>
-      <fb:login-button on-login="afterLoggedIn();'">Login with Facebook</fb:login-button>
-    </div>
-    <div id="toolbar">
-      <a href="#" class="zap">ZAP</a>
-      <form action="go.html" method="post">
-        <input type="search" id="search" placeholder="Search..." autosave="applestyle_srch" results="5" />
-      </form>
-      <a href="#" class="preferences"></a>
-    </div>
   </body>
 </html>
