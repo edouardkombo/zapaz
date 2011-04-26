@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Document>  
+    <Style id="documentStyle">
+      <IconStyle>
+        <Icon>
+          <href>http://www.iconspedia.com/uploads/1912642692.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+  
+    <Style id="overlayStyle"> <!-- style for ScreenOverlay -->
+      <BalloonStyle>
+        <displayMode>undecorated</displayMode>
+      </BalloonStyle>
+    </Style>
+  
+    <Style id="flickrStyle"> <!-- style for placemarkers -->
+      <IconStyle>
+        <scale>1.0</scale>
+        <Icon>
+          <href>http://www.iconspedia.com/uploads/1912642692.png</href> <!-- url to twitter logo -->
+        </Icon>
+        <hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction" />
+      </IconStyle>
+    </Style>
+    <ScreenOverlay>
+      <name>myOverlay</name>
+      <description><![CDATA[
+     
+      <style type="text/css">
+      * { font-size:9px; font-family:Arial, Verdana, sans-serif; }
+      #frame { position:absolute; top:-13px; left:-5px; width:322px; height:420px; }
+      .panel { position:absolute; width:322px; height:420px; background:url(bar-bg2.gif) repeat-x top center; }
+      #main { top:0; left:0; }
+      #preferences { top:-420px; left:0; background-color:#efefef; color:#333; }
+      #pInfo{top:0; left:322px; height:376px;}
+      
+      .button { position:absolute; top:7px; left:5px; height:30px; }
+      .button.back .bgl { float:left; width:12px; height:30px; background:url(back-bgl.gif) no-repeat; }
+      .button.back .bgr { float:left; width:4px; height:30px; background:url(back-bgr.gif) no-repeat; }
+      .button .ctt { float:left; height:20px; color:#efefef; padding:3px 4px 7px 4px; background:url(back-bgc.gif) repeat-x; font-variant:small-caps; }
+      
+      #product-details {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      width: 322px;
+      height: 376px;
+    }
+
+    #product-details > div{
+      position: relative;
+      margin: auto;
+      width: 250px;
+      border: 1px outset #CCC;
+      border-top-left-radius: 5px 5px;
+      border-top-right-radius: 5px 5px;
+      border-bottom-left-radius: 5px 5px;
+      border-bottom-right-radius: 5px 5px;
+    }
+
+    #product-details div.main { 
+      position: relative; 
+      width: 250px;
+      padding-top: 90px;
+      font-family:Arial,Verdana,sans-serif ; 
+      text-decoration:none;
+      background-color:white;
+    }
+
+    #product-details .main > * { 
+      position: absolute; 
+      color:#333;
+      font-size:6px;
+    }
+
+
+    #product-details div img{
+      width: 80px;
+      height: 80px;
+      left: 5px;
+      top: 5px;
+    }
+
+    #product-details div span.name{
+      top:10px;
+      left: 100px;
+      text-align: left;
+      width: 150px;
+      font-size: 6.5px;
+      font-weight: bold;
+    }
+
+    #product-details div span.manufacturer{
+      top:25px;
+      left: 100px;
+      width: 150px;
+      font-style: italic;
+      text-indent: 5px;
+      text-align: left;
+    }
+
+    #product-details .price{
+      top:88px;
+      right: 5px;
+      width: 70px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size:7px;
+      text-align: right;
+      color: red;
+    }
+
+
+    #product-details div h4{top:75px;  left: 5px; font-style: italic;}
+
+    #product-details div.main p{
+      position: relative;
+      width: 240px;
+      text-align: justify;
+      padding: 5px ;
+      text-indent: 10px;
+    }
+
+    #product-details div.main span.category{
+      top: 38px;
+      right: 0;
+      width: 150px;
+      text-align: right;
+      padding: 5px;
+      font-size: 5px;
+    }
+
+
+    #product-details .main > table{
+      position: relative;
+      width:80%;
+      margin: auto;
+      margin-top:-10px;
+      padding:2px 0;
+    }
+    
+    
+    #product-details td{ font-size: 6px; }
+    
+    #product-details td:first-child {
+      padding-right:5px;
+      border-right: 1px solid #CCC;
+    }
+
+    #product-details td:last-child {
+      padding-left:5px;
+    }
+    
+    #product-details div a {
+      display: block;
+      width: 100%;
+      padding: 3px 0;
+      background-color: #363636;
+      text-align:center;
+      text-decoration: none;
+      color: white;
+      font-size: 7px;
+     }
+    #product-details a#header {
+      border-top-left-radius: 5px 5px;
+      border-top-right-radius: 5px 5px;
+    }
+
+    #product-details a#footer{
+      border-bottom-left-radius: 5px 5px;
+      border-bottom-right-radius: 5px 5px; 
+     }
+
+      #product-list-box {
+        width:322px;
+        height:376px;
+        overflow:hidden;
+      }
+      #product-list {
+        color: #333;
+        font-size: 10px;
+        margin:0;
+        padding:0;
+      }
+      #product-list li  {
+        border-bottom: 1px solid #CCC;
+        position: relative;
+        list-style: none;
+        width: 322px;
+        height: 50px;
+        font-family:'Myriad Pro',tahoma;  
+        text-decoration:none;  
+        font-size:13px;  
+       background-color:white;
+      }
+      #product-list li > * {  position: absolute; overflow: hidden; height:20px;}
+
+      #product-list li img{
+        top: 5px;
+        left: 5px;
+        width:40px;
+        height:40px;
+      }
+      #product-list li span.name {
+        top:5px;
+        left: 60px;
+        width: 160px;
+        font-weight: bold;
+      }
+      #product-list li span.manufacturer {
+        top:22px;
+        left: 60px;
+        width: 100px;
+        font-family: cursive;
+        font-size: 10px;
+        font-style: italic;
+        text-indent: 5px;
+      }
+      #product-list li span.price {
+        top:5px;
+        right: 30px;
+        width: 70px;
+        font-family: monospace;
+        text-align: right;
+      }
+
+      #product-list li span.shop {
+        top: 25px;
+        right: 30px;
+        width: 120px;
+        text-align: right;
+        font-weight:500;
+        padding-right: 5px;
+      }
+
+      #product-list li a {
+        background: url("next2.png") no-repeat center;
+        height: 40px;
+        width: 26px;
+        top:5px;
+        right: 0;
+      }
+      
+      #product-list li a:active{
+        background-color:#CCC;
+      }
+        
+      #toolbar {
+        width:322px;
+        height:44px;
+      }
+      
+      #toolbar > * {
+        float:left;
+        border-top:4px solid #abbff3;
+      }
+      
+      #toolbar > *:hover {
+        background-color: #b5c6cf;
+      }
+      
+      #toolbar form {
+        margin-right:1px;
+        width:286px;
+        height:24px;
+      }
+      
+      #toolbar input {
+        width:96%;
+        margin:2px 2%;
+      }
+      
+      a.preferences {
+        float:right;
+        background-image:url("gear2.png");
+        background-repeat:no-repeat;
+        background-position: center 3px;
+        width:34px;
+        height:34px;
+      }
+       
+      #preferences #content {
+        margin-top:50px;
+        padding:5px 30px;
+      }
+      #preferences input { float:left; clear:left; margin-top:15px; }
+      #preferences label { float:left; margin:12px 0 0 10px; }
+      
+      </style>
+      
+      <div id="frame">
+        <div id="preferences" class="panel">
+          <div class="button back">
+            <div class="bgl"></div>
+            <div class="ctt">Back</div>
+            <div class="bgr"></div>
+          </div>
+          <div id="content">
+            <div id="fb-root"></div>
+            <fb:login-button on-login="afterLoggedIn();'">Login with Facebook</fb:login-button>
+            <input type="checkbox" name="streetView"><label>Street View Mode</label>
+          </div>
+        </div>
+        <div id="main" class="panel">
+          <div id="toolbar">
+            <form action="go.html" method="post">
+              <input type="search" id="search" placeholder="Zap Search..." autosave="applestyle_srch" results="5" />
+            </form>
+            <a class="preferences"></a>
+          </div>
+          <div id="product-list-box">
+            <ul id="product-list"></ul>
+          </div>
+        </div>
+        <div id="pInfo" class="panel">
+          <div class="button back">
+            <div class="bgl"></div>
+            <div class="ctt">Back</div>
+            <div class="bgr"></div>
+          </div>
+          <div id="product-details"></div>           
+        </div>
+      </div>
+      
+      <script type="text/javascript">
+        var defaultTop = -13;
+        var defaultLeft = -5;
+        var defaultWidth = 322;
+        var defaultHeight = 420;
+        var productList = document.getElementById('product-list');
+        var productDetails = document.getElementById('product-details');
+        var rootUrl  = "http://www.fabienrenaud.com/zap/argon/www";
+        var shops    = {};
+        
+        var showFacebookButton = function(callback) {
+          $("a.fb_button").show();
+          if (typeof(callback) === 'function') 
+            callback();
+        };
+
+        var hideFacebookButton = function(callback) {
+          $("a.fb_button").hide();
+          if (typeof(callback) === 'function') 
+            callback();
+        };
+
+        var afterLoggedIn = function() {
+          FB.getLoginStatus(function(response) {
+            if (response.session) {
+              /*$.post(rootUrl + "/userLogin.php", {}, function(xml) {
+                var logged = $(xml).find('logged').text() == "1";
+                if (parseResponse(xml) && logged) {
+                  isLoggedIn = true;
+                  hideFacebookButton(showControlSpot);
+                }
+              });*/
+            }
+          });
+        };
+
+        var initFacebook = function() {
+          FB.init({ appId:'186165901430266', cookie:false, status:false, xfbml:true });
+          FB.Event.subscribe("auth.login", function() { afterLoggedIn(); });
+        };
+        
+        var scrollProductList = function (e) {
+          if (e.target.tagName.toLowerCase() != "a") {
+            var listHeight = $("#product-list-box").innerHeight();
+            var minMarginTop = - $(productList).innerHeight() + listHeight + 2;
+            if (minMarginTop > 0) {
+              minMarginTop = 0;
+            }
+            var li = $(this);
+            while (!$(li).is("li")) {
+              li = $(li).parent();
+            }
+            var index = parseInt($(li).prevAll().length);
+            var rightClick = e.button == 2;
+            var sign = rightClick ? 1 : -1; // 1 = scroll top, -1 = scroll bottom
+            var marginTop = -index * 50;
+            if (sign > 0) {
+              marginTop += listHeight - 50;
+            }
+            if (sign > 0 && marginTop > 0) {
+              marginTop = 0;
+            } else if (sign < 0 && marginTop < minMarginTop) {
+              marginTop = minMarginTop;
+            }
+            $(productList).animate({'margin-top':marginTop+"px"});
+            return false;
+          }
+          return true;
+        };
+
+        
+        
+        
+        var fetchProducts = function() {          
+          $(productList).empty();
+          
+          var myLoc = KHARMA.getLocation();
+          var lat = 49.116846;
+          var lng = 6.178501;
+          $.getJSON(rootUrl + "/getShops.php", { lat:lat, lng:lng }, function(data) {
+            $.each(data, function(i, item) {
+              var url = item.webServiceUrl;
+              var uid = item.publicUid;
+              var shopName = item.name; 
+              var currency = item.currency;
+              $.getJSON(url, {publicUid:uid}, function(data) {
+                $.each(data,function(i, item) {
+                  
+                  var span1 = document.createElement("span");
+                      span1.setAttribute("class", "name");
+                      span1.appendChild(document.createTextNode(item.name));
+                  var span2 = document.createElement("span");
+                      span2.setAttribute("class", "price");
+                      span2.appendChild(document.createTextNode(item.price + currency));
+                  var span3 = document.createElement("span");
+                      span3.setAttribute("class", "manufacturer");
+                      span3.appendChild(document.createTextNode(item.manufacturer));
+                  var span4 = document.createElement("span");
+                      span4.setAttribute("class", "shop");
+                      span4.appendChild(document.createTextNode(shopName));
+                  var a = document.createElement("a");
+                      $(a).click(function(){productInfo(item.name,item.picture,item.manufacturer,item.price + currency,
+                  shopName,item.description,item.category,item.type,item.details)});
+                  var img = document.createElement("img");
+                      img.setAttribute("src", item.picture);
+                  var li = document.createElement("li");
+                      li.setAttribute('number', i);
+                      li.appendChild(span1);
+                      li.appendChild(span2);
+                      li.appendChild(span3);
+                      li.appendChild(span4);
+                      li.appendChild(a);
+                      li.appendChild(img);
+                    $(li).click(scrollProductList);
+                  productList.appendChild(li);
+                });
+              });
+            });
+          });
+        };
+        
+        var productInfo = function(name,image,manufacturer,price,shop,description,category,productType,details){
+          var header = document.createElement("a");
+              header.setAttribute("id", "header");
+              header.appendChild(document.createTextNode("Shop Information"));
+          var footer = document.createElement("a");
+              footer.setAttribute("id", "footer");
+              footer.appendChild(document.createTextNode("Find that Shop"));
+          var img = document.createElement("img");
+              img.setAttribute("src", image)
+          var span1 = document.createElement("span");
+              span1.setAttribute("class", "name");
+              span1.appendChild(document.createTextNode(name));
+          var span2 = document.createElement("span");
+              span2.setAttribute("class", "price");
+              span2.appendChild(document.createTextNode(price));
+          var span3 = document.createElement("span");
+              span3.setAttribute("class", "manufacturer");
+              span3.appendChild(document.createTextNode(manufacturer));
+          var span4 =document.createElement("span");
+              span4.setAttribute("class", "category");
+              span4.appendChild(document.createTextNode("Category: "+category));
+              span4.appendChild(document.createElement("br"));
+              span4.appendChild(document.createTextNode("Type: "+productType));
+          var h4 = document.createElement("h4");
+              h4.appendChild(document.createTextNode("Description"));
+          var p = document.createElement("p");
+              p.appendChild(document.createTextNode(description));
+          var table = document.createElement("table");
+              table.setAttribute("class", "detailsType");
+              $(details).each(function(i,detail){
+                var td1 = document.createElement("td");
+                    td1.appendChild(document.createTextNode(detail.name));
+                var td2 = document.createElement("td");
+                    td2.appendChild(document.createTextNode(detail.value));
+                var tr = document.createElement("tr");
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    table.appendChild(tr);
+              })
+          var div3 = document.createElement("div");
+              div3.setAttribute("class", "main");
+              div3.appendChild(img);
+              div3.appendChild(span1);
+              div3.appendChild(span2);
+              div3.appendChild(span3);
+              div3.appendChild(span4);
+              div3.appendChild(h4);
+              div3.appendChild(p);
+              div3.appendChild(table);
+          var div2 = document.createElement("div");
+              div2.appendChild(header);
+              div2.appendChild(div3);
+              div2.appendChild(footer);
+              
+          $(productDetails).empty();
+          productDetails.appendChild(div2);
+          
+          var hp = $("#pInfo").innerHeight();
+          var hd = $(div2).innerHeight();
+          var mgtop = (hp - hd) / 2;
+          $(div2).css("margin-top",mgtop+"px");
+          
+          moveToRight();
+       };
+        
+        var moveToTop = function() {
+          var t = parseInt($("#frame").css('top').replace('px',''), 10);
+          $("#frame").animate({'top':(t + defaultHeight) + 'px'},'normal');
+        };
+        
+        var moveToBottom = function() {
+          var t = parseInt($("#frame").css('top').replace('px',''), 10);
+          $("#frame").animate({'top':(t - defaultHeight) + 'px'},'normal');
+        };
+        
+        var moveToRight = function() {
+          var l = parseInt($("#frame").css('left').replace('px',''), 10);
+          $("#frame").animate({'left':(l - defaultWidth) + 'px'}, 'normal');
+        };
+        
+        var moveToLeft = function() {
+          var l = parseInt($("#frame").css('left').replace('px',''), 10);
+          $("#frame").animate({'left':(l + defaultWidth) + 'px'}, 'normal');
+        };
+        
+        $(document).ready(function() {
+          fetchProducts();
+          $("a.preferences").click(moveToTop);
+          $("#preferences .back").click(moveToBottom);
+          $("#pInfo .back").click(moveToLeft);
+        });
+        
+        $.getScript("http://connect.facebook.net/en_US/all.js", initFacebook);
+    </script>
+    ]]>
+      </description>
+      
+      <overlayXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/> 
+      <screenXY x="0.01" y="1.0" xunits="fraction" yunits="fraction"/>
+      <size x="0" y="0" xunits="pixels" yunits="pixels"/>
+    
+      <styleUrl>#overlayStyle</styleUrl>  
+  
+    </ScreenOverlay>
+  
+    <styleUrl>#documentStyle</styleUrl> 
+  
+  <!-- KML document description -->
+    <name>Zap</name>
+    <Snippet>Zap for Argon</Snippet>
+    <description><![CDATA[
+    <div><p><b>Zap for Argon</b></p>
+    <p>
+    <b>notes:</b>
+    <ul>
+    <li>Searches for geo-tagged Flickr photos within 5km of user's current location
+    <li>Displays photos as icons within the AR browser's viewing space
+    <li>Click on icons to view larger photo<br>
+    <li>The javascript functions use JQuery to retrieve JSON data from a Flickr search built within the Yahoo Pipes framework
+    <li>The pipes JSON data is then used to create new JSON placemark objects that are then turned into new KML placemarks
+    <li>Once the kml placemarks have been rendered in the display, the user may begin interacting with them
+    </ul>
+  ]]>
+    </description>   
+  
+  </Document>
+</kml>
