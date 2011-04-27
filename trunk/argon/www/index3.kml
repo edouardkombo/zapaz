@@ -35,7 +35,7 @@
       #main { top:0; left:0; }
       #preferences { top:-420px; left:0; background-color:#efefef; color:#333; }
       #pInfo{top:0; left:322px; height:376px;}
-      #sInfo{top:420px; left:322px; height:376px;}
+      #sInfo{top:-420px; left:322px; height:376px;}
       
       .button { position:absolute; top:7px; left:5px; height:30px; }
       .button.back .bgl { float:left; width:12px; height:30px; background:url(back-bgl.gif) no-repeat; }
@@ -466,17 +466,22 @@
           var h4 = document.createElement("h4");
               h4.appendChild(document.createTextNode("Address"));
           var p = document.createElement("p");
-              p.appendChild(document.createTextNode(shop.address.replace("¤","\n"));
-              p.setAttribute('style', 'white-space: pre;');
+              p.appendChild(document.createTextNode(shop.address.replace("¤","\n").replace("¤","\n").replace("¤","\n").replace("¤","\n").replace("¤","\n")));
+              p.setAttribute('style', 'white-space: pre; text-indent:0; padding-left:15px;');
+              var keys = "";
+              $(shop.keywords).each(function(i, k){
+                if (keys != "") {
+                  keys += ", ";
+                }
+                keys += k.name;
+              });
           var table = document.createElement("table");
               table.setAttribute("class", "detailsType");
+              var td = document.createElement("td");
+                  td.appendChild(document.createTextNode(keys));
               var tr = document.createElement("tr");
+                  tr.appendChild(td);
               table.appendChild(tr);
-              $(shop.keywords).each(function(i, k){
-                var td = document.createElement("td");
-                    td.appendChild(document.createTextNode(k.name));
-                    tr.appendChild(td);
-              });
           var div3 = document.createElement("div");
               div3.setAttribute("class", "main");
               div3.appendChild(img);
@@ -496,7 +501,7 @@
           var mgtop = (hp - hd) / 2;
           $(div2).css("margin-top",mgtop+"px");
           
-          moveToBottom();
+          moveToTop();
         };
         
         // ps = partial shop
@@ -597,7 +602,7 @@
           $("a.preferences").click(moveToTop);
           $("#preferences .back").click(moveToBottom);
           $("#pInfo .back").click(moveToLeft);
-          $("#sInfo .back").click(moveToTop);
+          $("#sInfo .back").click(moveToBottom);
         });
         
         $.getScript("http://connect.facebook.net/en_US/all.js", initFacebook);
