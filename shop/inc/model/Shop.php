@@ -198,6 +198,8 @@ class Shop {
     $address .= $this->getZipCode()." ".$this->getCity()."¤";
     $address .= $countryArray[$this->getCountryId()];
     
+    $pic = $this->getLogo() != null && $this->getLogo() != "" ? PROTOCOL.DOMAIN_ZSHOP.$this->getLogo() : "";
+    
     $keywords = $this->getKeywords();
     $subJSON = "";
 
@@ -208,13 +210,14 @@ class Shop {
     }
     return "{"
     . '"name":"' . $this->getName() . '", '
-    . '"logo":"' . $this->getLogo() . '", '
+    . '"logo":"' . $pic . '", '
     . '"address":"' . $address . '", '
     . '"publicUid":"' . $this->getPublicUid() . '", '
     . '"currency":"' . $this->getCurrency()->getSymbol() . '", '
     . '"latitude":"' . $this->getLatitude() . '", '
     . '"longitude":"' . $this->getLongitude() . '", '
     . '"email":"' . $this->getEmail() . '", '
+    . '"phone":"' . $this->getPhone() . '", '        
     . '"webServiceUrl":"' . $this->getWebServiceUrl() . '", '
     . '"keywords":[' . $subJSON . ']'
     . "}";
