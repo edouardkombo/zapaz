@@ -187,14 +187,15 @@ class Shop {
   }
 
   public function getJSON() {
+    global $countryArray;
     $address = "";
     $addresses = ShopManager::splitAddress($this->getAddress());
     foreach ($addresses as $a) {
       if ($a != "") {
-        $address .= $a."\n";
+        $address .= $a."¤";
       }
     }
-    $address .= $this->getZipCode()." ".$this->getCity()."\n";
+    $address .= $this->getZipCode()." ".$this->getCity()."¤";
     $address .= $countryArray[$this->getCountryId()];
     
     $keywords = $this->getKeywords();
@@ -215,7 +216,6 @@ class Shop {
     . '"longitude":"' . $this->getLongitude() . '", '
     . '"email":"' . $this->getEmail() . '", '
     . '"webServiceUrl":"' . $this->getWebServiceUrl() . '", '
-    . '"countOfProducts":"' . $this->getCountOfProducts() . '", '
     . '"keywords":[' . $subJSON . ']'
     . "}";
   }
