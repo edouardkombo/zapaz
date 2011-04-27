@@ -41,137 +41,137 @@
       .button.back .bgr { float:left; width:4px; height:30px; background:url(back-bgr.gif) no-repeat; }
       .button .ctt { float:left; height:20px; color:#efefef; padding:3px 4px 7px 4px; background:url(back-bgc.gif) repeat-x; font-variant:small-caps; }
       
-      #product-details {
-      position: absolute;
-      top: 44px;
-      left: 0;
-      width: 322px;
-      height: 376px;
-    }
+      .ibox {
+        position: absolute;
+        top: 44px;
+        left: 0;
+        width: 322px;
+        height: 376px;
+      }
 
-    #product-details > div{
-      position: relative;
-      margin: auto;
-      width: 250px;
-      border: 1px outset #CCC;
-      border-top-left-radius: 5px 5px;
-      border-top-right-radius: 5px 5px;
-      border-bottom-left-radius: 5px 5px;
-      border-bottom-right-radius: 5px 5px;
-    }
+      .ibox > div{
+        position: relative;
+        margin: auto;
+        width: 250px;
+        border: 1px outset #CCC;
+        border-top-left-radius: 5px 5px;
+        border-top-right-radius: 5px 5px;
+        border-bottom-left-radius: 5px 5px;
+        border-bottom-right-radius: 5px 5px;
+      }
 
-    #product-details div.main { 
-      position: relative; 
-      width: 250px;
-      padding-top: 90px;
-      font-family:Arial,Verdana,sans-serif ; 
-      text-decoration:none;
-      background-color:white;
-    }
+      .ibox div.main { 
+        position: relative; 
+        width: 250px;
+        padding-top: 90px;
+        font-family:Arial,Verdana,sans-serif ; 
+        text-decoration:none;
+        background-color:white;
+      }
 
-    #product-details .main > * { 
-      position: absolute; 
-      color:#333;
-      font-size:6px;
-    }
-
-
-    #product-details div img{
-      width: 80px;
-      height: 80px;
-      left: 5px;
-      top: 5px;
-    }
-
-    #product-details div span.name{
-      top:10px;
-      left: 100px;
-      text-align: left;
-      width: 150px;
-      font-size: 6.5px;
-      font-weight: bold;
-    }
-
-    #product-details div span.manufacturer{
-      top:25px;
-      left: 100px;
-      width: 150px;
-      font-style: italic;
-      text-indent: 5px;
-      text-align: left;
-    }
-
-    #product-details .price{
-      top:88px;
-      right: 5px;
-      width: 70px;
-      font-family: monospace;
-      font-weight: bold;
-      font-size:7px;
-      text-align: right;
-      color: red;
-    }
+      .ibox .main > * { 
+        position: absolute; 
+        color:#333;
+        font-size:6px;
+      }
 
 
-    #product-details div h4{top:75px;  left: 5px; font-style: italic;}
+      .ibox div img{
+        width: 80px;
+        height: 80px;
+        left: 5px;
+        top: 5px;
+      }
 
-    #product-details div.main p{
-      position: relative;
-      width: 240px;
-      text-align: justify;
-      padding: 5px ;
-      text-indent: 10px;
-    }
+      .ibox div span.name{
+        top:10px;
+        left: 100px;
+        text-align: left;
+        width: 150px;
+        font-size: 6.5px;
+        font-weight: bold;
+      }
 
-    #product-details div.main span.category{
-      top: 38px;
-      right: 0;
-      width: 150px;
-      text-align: right;
-      padding: 5px;
-      font-size: 5px;
-    }
+      .ibox div span.manufacturer{
+        top:25px;
+        left: 100px;
+        width: 150px;
+        font-style: italic;
+        text-indent: 5px;
+        text-align: left;
+      }
+
+      .ibox .price{
+        top:88px;
+        right: 5px;
+        width: 70px;
+        font-family: monospace;
+        font-weight: bold;
+        font-size:7px;
+        text-align: right;
+        color: red;
+      }
 
 
-    #product-details .main > table{
-      position: relative;
-      width:80%;
-      margin: auto;
-      margin-top:-10px;
-      padding:2px 0;
-    }
-    
-    
-    #product-details td{ font-size: 6px; }
-    
-    #product-details td:first-child {
-      padding-right:5px;
-      border-right: 1px solid #CCC;
-    }
+      .ibox div h4{top:75px;  left: 5px; font-style: italic;}
 
-    #product-details td:last-child {
-      padding-left:5px;
-    }
-    
-    #product-details div a {
-      display: block;
-      width: 100%;
-      padding: 3px 0;
-      background-color: #363636;
-      text-align:center;
-      text-decoration: none;
-      color: white;
-      font-size: 7px;
-     }
-    #product-details a#header {
-      border-top-left-radius: 5px 5px;
-      border-top-right-radius: 5px 5px;
-    }
+      .ibox div.main p{
+        position: relative;
+        width: 240px;
+        text-align: justify;
+        padding: 5px ;
+        text-indent: 10px;
+      }
 
-    #product-details a#footer{
-      border-bottom-left-radius: 5px 5px;
-      border-bottom-right-radius: 5px 5px; 
-     }
+      .ibox div.main span.category{
+        top: 38px;
+        right: 0;
+        width: 150px;
+        text-align: right;
+        padding: 5px;
+        font-size: 5px;
+      }
+
+
+      .ibox .main > table{
+        position: relative;
+        width:80%;
+        margin: auto;
+        margin-top:-10px;
+        padding:2px 0;
+      }
+
+
+      .ibox td{ font-size: 6px; }
+
+      .ibox td:first-child {
+        padding-right:5px;
+        border-right: 1px solid #CCC;
+      }
+
+      .ibox td:last-child {
+        padding-left:5px;
+      }
+
+      .ibox div a {
+        display: block;
+        width: 100%;
+        padding: 3px 0;
+        background-color: #363636;
+        text-align:center;
+        text-decoration: none;
+        color: white;
+        font-size: 7px;
+       }
+      .ibox a#header {
+        border-top-left-radius: 5px 5px;
+        border-top-right-radius: 5px 5px;
+      }
+
+      .ibox a#footer{
+        border-bottom-left-radius: 5px 5px;
+        border-bottom-right-radius: 5px 5px; 
+       }
 
       #product-list-box {
         width:322px;
@@ -320,19 +320,27 @@
             <div class="ctt">Back</div>
             <div class="bgr"></div>
           </div>
-          <div id="product-details"></div>           
+          <div class="ibox" id="product-details"></div>           
+        </div>
+        <div id="sInfo" class="panel">
+          <div class="button back">
+            <div class="bgl"></div>
+            <div class="ctt">Back</div>
+            <div class="bgr"></div>
+          </div>
+          <div class="ibox" id="shop-details"></div>  
         </div>
       </div>
       
       <script type="text/javascript">
-        var defaultTop = -13;
-        var defaultLeft = -5;
-        var defaultWidth = 322;
-        var defaultHeight = 420;
-        var productList = document.getElementById('product-list');
+        var defaultTop     = -13;
+        var defaultLeft    = -5;
+        var defaultWidth   = 322;
+        var defaultHeight  = 420;
+        var productList    = document.getElementById('product-list');
         var productDetails = document.getElementById('product-details');
-        var rootUrl  = "http://www.fabienrenaud.com/zap/argon/www";
-        var shops    = {};
+        var shopDetails    = document.getElementById('shop-details');
+        var rootUrl        = "http://www.fabienrenaud.com/zap/argon/www";
         
         var showFacebookButton = function(callback) {
           $("a.fb_button").show();
@@ -365,7 +373,7 @@
           FB.Event.subscribe("auth.login", function() { afterLoggedIn(); });
         };
         
-        var scrollProductList = function (e) {
+        var scrollProductList = function (e, top) {
           if (e.target.tagName.toLowerCase() != "a") {
             var listHeight = $("#product-list-box").innerHeight();
             var minMarginTop = - $(productList).innerHeight() + listHeight + 2;
@@ -378,7 +386,8 @@
             }
             var index = parseInt($(li).prevAll().length);
             var rightClick = e.button == 2;
-            var sign = rightClick ? 1 : -1; // 1 = scroll top, -1 = scroll bottom
+            //var sign = rightClick ? 1 : -1; // 1 = scroll top, -1 = scroll bottom
+            var sign = top ? 1 : -1;
             var marginTop = -index * 50;
             if (sign > 0) {
               marginTop += listHeight - 50;
@@ -393,9 +402,6 @@
           }
           return true;
         };
-
-        
-        
         
         var fetchProducts = function() {          
           $(productList).empty();
@@ -404,14 +410,13 @@
           var lat = 49.116846;
           var lng = 6.178501;
           $.getJSON(rootUrl + "/getShops.php", { lat:lat, lng:lng }, function(data) {
-            $.each(data, function(i, item) {
-              var url = item.webServiceUrl;
-              var uid = item.publicUid;
-              var shopName = item.name; 
-              var currency = item.currency;
+            $.each(data, function(i, item1) {
+              var url = item1.webServiceUrl;
+              var uid = item1.publicUid;
+              var shopName = item1.name; 
+              var currency = item1.currency;
               $.getJSON(url, {publicUid:uid}, function(data) {
-                $.each(data,function(i, item) {
-                  
+                $.each(data, function(i, item) {
                   var span1 = document.createElement("span");
                       span1.setAttribute("class", "name");
                       span1.appendChild(document.createTextNode(item.name));
@@ -425,8 +430,8 @@
                       span4.setAttribute("class", "shop");
                       span4.appendChild(document.createTextNode(shopName));
                   var a = document.createElement("a");
-                      $(a).click(function(){productInfo(item.name,item.picture,item.manufacturer,item.price + currency,
-                  shopName,item.description,item.category,item.type,item.details)});
+                      $(a).click(function(){productInfo(item1, item.name, item.picture, item.manufacturer, item.price + currency,
+                  shopName, item.description, item.category, item.type, item.details)});
                   var img = document.createElement("img");
                       img.setAttribute("src", item.picture);
                   var li = document.createElement("li");
@@ -437,7 +442,8 @@
                       li.appendChild(span4);
                       li.appendChild(a);
                       li.appendChild(img);
-                    $(li).click(scrollProductList);
+                    $(li).click(function(e) { scrollProductList(e, false); });
+                    $(li).dblclick(function(e) { scrollProductList(e, true); });
                   productList.appendChild(li);
                 });
               });
@@ -445,10 +451,70 @@
           });
         };
         
-        var productInfo = function(name,image,manufacturer,price,shop,description,category,productType,details){
+        var shopInfo = function(shop) {
+          var img = document.createElement("img");
+              img.setAttribute("src", shop.picture);
+          var span1 = document.createElement("span");
+              span1.setAttribute("class", "name");
+              span1.appendChild(document.createTextNode(name));
+          var span2 = document.createElement("span");
+              span2.setAttribute("class", "price");
+              span2.appendChild(document.createTextNode(price));
+          var span3 = document.createElement("span");
+              span3.setAttribute("class", "manufacturer");
+              span3.appendChild(document.createTextNode(manufacturer));
+          var span4 =document.createElement("span");
+              span4.setAttribute("class", "category");
+              span4.appendChild(document.createTextNode("Category: "+category));
+              span4.appendChild(document.createElement("br"));
+              span4.appendChild(document.createTextNode("Type: "+productType));
+          var h4 = document.createElement("h4");
+              h4.appendChild(document.createTextNode("Description"));
+          var p = document.createElement("p");
+              p.appendChild(document.createTextNode(description));
+          var table = document.createElement("table");
+              table.setAttribute("class", "detailsType");
+              $(details).each(function(i,detail){
+                var td1 = document.createElement("td");
+                    td1.appendChild(document.createTextNode(detail.name));
+                var td2 = document.createElement("td");
+                    td2.appendChild(document.createTextNode(detail.value));
+                var tr = document.createElement("tr");
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    table.appendChild(tr);
+              });
+          var div3 = document.createElement("div");
+              div3.setAttribute("class", "main");
+              div3.appendChild(img);
+              div3.appendChild(span1);
+              div3.appendChild(span2);
+              div3.appendChild(span3);
+              div3.appendChild(span4);
+              div3.appendChild(h4);
+              div3.appendChild(p);
+              div3.appendChild(table);
+          var div2 = document.createElement("div");
+              div2.appendChild(header);
+              div2.appendChild(div3);
+              div2.appendChild(footer);
+              
+          $(productDetails).empty();
+          productDetails.appendChild(div2);
+          
+          var hp = $("#pInfo").innerHeight();
+          var hd = $(div2).innerHeight();
+          var mgtop = (hp - hd) / 2;
+          $(div2).css("margin-top",mgtop+"px");
+          
+          moveToBottom();
+        };
+        
+        var productInfo = function(fullShop, name, image, manufacturer, price, shop, description, category, productType, details){
           var header = document.createElement("a");
               header.setAttribute("id", "header");
               header.appendChild(document.createTextNode("Shop Information"));
+            $(header).click(function() { shopInfo(fullShop); });
           var footer = document.createElement("a");
               footer.setAttribute("id", "footer");
               footer.appendChild(document.createTextNode("Find that Shop"));
@@ -483,7 +549,7 @@
                     tr.appendChild(td1);
                     tr.appendChild(td2);
                     table.appendChild(tr);
-              })
+              });
           var div3 = document.createElement("div");
               div3.setAttribute("class", "main");
               div3.appendChild(img);
@@ -535,6 +601,7 @@
           $("a.preferences").click(moveToTop);
           $("#preferences .back").click(moveToBottom);
           $("#pInfo .back").click(moveToLeft);
+          $("#sInfo .back").click(moveToTop);
         });
         
         $.getScript("http://connect.facebook.net/en_US/all.js", initFacebook);
@@ -556,17 +623,7 @@
     <name>Zap</name>
     <Snippet>Zap for Argon</Snippet>
     <description><![CDATA[
-    <div><p><b>Zap for Argon</b></p>
-    <p>
-    <b>notes:</b>
-    <ul>
-    <li>Searches for geo-tagged Flickr photos within 5km of user's current location
-    <li>Displays photos as icons within the AR browser's viewing space
-    <li>Click on icons to view larger photo<br>
-    <li>The javascript functions use JQuery to retrieve JSON data from a Flickr search built within the Yahoo Pipes framework
-    <li>The pipes JSON data is then used to create new JSON placemark objects that are then turned into new KML placemarks
-    <li>Once the kml placemarks have been rendered in the display, the user may begin interacting with them
-    </ul>
+    <strong>Zap for Argon</strong>
   ]]>
     </description>   
   
