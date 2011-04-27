@@ -31,16 +31,16 @@
       <style type="text/css">
       * { font-size:9px; font-family:Arial, Verdana, sans-serif; }
       #frame { position:absolute; top:-13px; left:-5px; width:322px; height:420px; }
-      .panel { position:absolute; width:322px; height:420px; background:url(bar-bg2.gif) repeat-x top center; }
+      .panel { position:absolute; width:322px; height:420px; background:url(img/bar-bg.gif) repeat-x top center; }
       #main { top:0; left:0; }
       #preferences { top:-420px; left:0; background-color:#efefef; color:#333; }
       #pInfo{top:0; left:322px; height:376px;}
       #sInfo{top:-420px; left:322px; height:376px;}
       
       .button { position:absolute; top:7px; left:5px; height:30px; }
-      .button.back .bgl { float:left; width:12px; height:30px; background:url(back-bgl.gif) no-repeat; }
-      .button.back .bgr { float:left; width:4px; height:30px; background:url(back-bgr.gif) no-repeat; }
-      .button .ctt { float:left; height:20px; color:#efefef; padding:3px 4px 7px 4px; background:url(back-bgc.gif) repeat-x; font-variant:small-caps; }
+      .button.back .bgl { float:left; width:12px; height:30px; background:url(img/back-bgl.gif) no-repeat; }
+      .button.back .bgr { float:left; width:4px; height:30px; background:url(img/back-bgr.gif) no-repeat; }
+      .button .ctt { float:left; height:20px; color:#efefef; padding:3px 4px 7px 4px; background:url(img/back-bgc.gif) repeat-x; font-variant:small-caps; }
       
       .ibox {
         position: absolute;
@@ -191,7 +191,7 @@
         list-style: none;
         width: 322px;
         height: 50px;
-        font-family:'Myriad Pro',tahoma;  
+        font-family:Arial,Verdana,sans-serif;  
         text-decoration:none;  
         font-size:13px;  
        background-color:white;
@@ -237,7 +237,7 @@
       }
 
       #product-list li a {
-        background: url("next2.png") no-repeat center;
+        background: url("img/next.png") no-repeat center;
         height: 40px;
         width: 26px;
         top:5px;
@@ -275,7 +275,7 @@
       
       a.preferences {
         float:right;
-        background-image:url("gear2.png");
+        background-image:url("img/gear.png");
         background-repeat:no-repeat;
         background-position: center 3px;
         width:34px;
@@ -407,6 +407,8 @@
           $(productList).empty();
           
           var myLoc = KHARMA.getLocation();
+//          var lat = myLoc.location;
+//          var lng = myLoc.latitude;
           var lat = 49.116846;
           var lng = 6.178501;
           $.getJSON(rootUrl + "/getShops.php", { lat:lat, lng:lng }, function(data) {
@@ -453,7 +455,7 @@
         var shopInfo = function(shop) {
           var img = document.createElement("img");
           if (shop.logo == "") {
-            img.setAttribute("src", "noimage.jpg");
+            img.setAttribute("src", "img/noimage.jpg");
           } else {
             img.setAttribute("src", shop.logo);
           }
@@ -626,7 +628,8 @@
     <name>Zap</name>
     <Snippet>Zap for Argon</Snippet>
     <description><![CDATA[
-    <strong>Zap for Argon</strong>
+    <h1>Zap for Argon</h1>
+    <p>Zap is a personalized advertisement application which provides users with customized advertisements and store information depending on their location and personal preferences. Zap is an application built on the Argon browser.</p>
   ]]>
     </description>   
   
