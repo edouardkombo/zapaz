@@ -185,6 +185,40 @@ class Shop {
   public function setKeywords($keywords) {
     $this->keywords = $keywords;
   }
+
+  public function getJSON() {
+    $address = "";
+    $addresses = ShopManager::splitAddress($this->getAddress());
+    foreach ($addresses as $a) {
+      if ($a != "") {
+        $address .= $a."\n";
+      }
+    }
+    $address .= $this->getZipCode()." ".$this->getCity()."\n";
+    $address .= $countryArray[$this->getCountryId()];
+    
+    $keywords = $this->getKeywords();
+    $subJSON = "";
+
+    foreach ($keywords as $k) {
+      if ($subJSON != "")
+        $subJSON.=", ";
+      $subJSON.='{"name":"' . $k->getName() . '"}';
+    }
+    return "{"
+    . '"name":"' . $this->getName() . '", '
+    . '"logo":"' . $this->getLogo() . '", '
+    . '"address":"' . $address . '", '
+    . '"publicUid":"' . $this->getPublicUid() . '", '
+    . '"currency":"' . $this->getCurrency()->getSymbol() . '", '
+    . '"latitude":"' . $this->getLatitude() . '", '
+    . '"longitude":"' . $this->getLongitude() . '", '
+    . '"email":"' . $this->getEmail() . '", '
+    . '"webServiceUrl":"' . $this->getWebServiceUrl() . '", '
+    . '"countOfProducts":"' . $this->getCountOfProducts() . '", '
+    . '"keywords":[' . $subJSON . ']'
+    . "}";
+  }
 }
 
 ?>
