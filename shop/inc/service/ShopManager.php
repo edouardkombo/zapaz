@@ -80,12 +80,10 @@ class ShopManager {
           $shop->setPublicUid($s->getPublicUid());
         }
       }
-      $pic = $shop->getLogo() != null && $shop->getLogo() != "" ? PROTOCOL.DOMAIN_ZSHOP.$shop->getLogo() : "";
       
       $http = new HttpCommunicator(ADMIN_REGISTER, 80, HTTP_POST);
       $http->addParameter("publicUid", $shop->getPublicUid());
       $http->addParameter("name", $shop->getName());
-      $http->addParameter("picture", $pic);
       $http->addParameter("email", $shop->getEmail());
       $http->addParameter("currencyId", $shop->getCurrencyId());
       $http->addParameter("latitude", $shop->getLatitude());

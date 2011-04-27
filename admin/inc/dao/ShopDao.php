@@ -87,11 +87,10 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
-    $q = $this->db->prepare("INSERT INTO `".TABLE_SHOP."` (publicUid, name, picture, currencyId, latitude, longitude, email, countOfProducts, creationTime, lastUpdate, webServiceUrl) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+    $q = $this->db->prepare("INSERT INTO `".TABLE_SHOP."` (publicUid, name, currencyId, latitude, longitude, email, countOfProducts, creationTime, lastUpdate, webServiceUrl) VALUES (?,?,?,?,?,?,?,?,?,?)");
     $r = $q->execute(array(
       $shop->getPublicUid(),
       $shop->getName(),
-      $shop->getPicture(),
       $shop->getCurrencyId(),
       $shop->getLatitude(),
       $shop->getLongitude(),
@@ -115,11 +114,10 @@ class ShopDao {
     if ($shop == null) {
       return 0;
     }
-    $q = $this->db->prepare("UPDATE `".TABLE_SHOP."` SET publicUid = ?, name = ?, picture = ?, currencyId = ?, latitude = ?, longitude = ?, email = ?, countOfProducts = ?, creationTime = ?, lastUpdate = ?, webServiceUrl = ? WHERE id = ?");
+    $q = $this->db->prepare("UPDATE `".TABLE_SHOP."` SET publicUid = ?, name = ?, currencyId = ?, latitude = ?, longitude = ?, email = ?, countOfProducts = ?, creationTime = ?, lastUpdate = ?, webServiceUrl = ? WHERE id = ?");
     return $q->execute(array(
       $shop->getPublicUid(),
       $shop->getName(),
-      $shop->getPicture(),
       $shop->getCurrencyId(),
       $shop->getLatitude(),
       $shop->getLongitude(),
@@ -143,7 +141,6 @@ class ShopDao {
     $s = new Shop(
       $t["publicUid"],
       $t["name"],
-      $t["picture"],
       $t["currencyId"],
       $t["latitude"],
       $t["longitude"],

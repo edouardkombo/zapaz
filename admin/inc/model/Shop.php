@@ -10,7 +10,6 @@ class Shop {
   private $id;
   private $publicUid;
   private $name;
-  private $picture;
   private $currencyId;
   private $latitude;
   private $longitude;
@@ -22,12 +21,11 @@ class Shop {
   private $currency = null;
   private $keywords = null;
 
-  function __construct($publicUid, $name, $picture, $currencyId, $latitude, $longitude, $email, $countOfProducts = 0, $creationTime = 0, $lastUpdate = 0, $id = 0) {
+  function __construct($publicUid, $name, $currencyId, $latitude, $longitude, $email, $countOfProducts = 0, $creationTime = 0, $lastUpdate = 0, $id = 0) {
     $t = time();
     $this->id = $id;
     $this->publicUid = $publicUid;
     $this->name = $name;
-    $this->picture = $picture;
     $this->currencyId = $currencyId;
     $this->longitude = $longitude;
     $this->latitude = $latitude;
@@ -59,14 +57,6 @@ class Shop {
 
   public function getName() {
     return $this->name;
-  }
-  
-  public function getPicture() {
-    return $this->picture;
-  }
-  
-  public function setPicture($picture) {
-    $this->picture = $picture;
   }
 
   public function setCurrencyId($id) {
@@ -176,7 +166,6 @@ class Shop {
     }
     return "{"
     . '"name":"' . $this->getName() . '", '
-    . '"picture":"' . $this->getPicture() . '", '
     . '"publicUid":"' . $this->getPublicUid() . '", '
     . '"currency":"' . $this->getCurrency()->getSymbol() . '", '
     . '"latitude":"' . $this->getLatitude() . '", '

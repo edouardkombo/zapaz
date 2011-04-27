@@ -10,7 +10,6 @@ ob_start();
 
 $publicUid     = isset($in['publicUid'])     && preg_match("/^([0-9a-f]{32})$/", $in["publicUid"]) ? $in['publicUid'] : null;
 $name          = isset($in['name'])          && preg_match("/^[a-zA-Z0-9äëÿüïöâêûîôéèàç'\-_ ]+$/", stripslashes($in["name"])) ? stripslashes($in['name']) : null;
-$picture       = isset($in['picture'])       && filter_var($in['picture'], FILTER_VALIDATE_URL) ? $in['picture'] : "";
 $email         = isset($in['email'])         && filter_var($in['email'], FILTER_VALIDATE_EMAIL) ? $in["email"] : null;
 $currencyId    = isset($in['currencyId'])    && is_numeric($in['currencyId']) && $in['currencyId'] > 0 ? $in['currencyId'] : null;
 $latitude      = isset($in['latitude'])      && filter_var($in['latitude'], FILTER_VALIDATE_FLOAT) ? $in['latitude'] : null;
@@ -21,7 +20,7 @@ $keywordString = isset($in['keywords'])      && $in['keywords'] != "" ? stripsla
 $result = 0;
 if ($name != null && $latitude != null && $longitude != null && $currencyId != null && $email != null && $webServiceUrl!= null){
   $shopManager = new ShopManager();
-  $shop = new Shop($publicUid, $name, $picture, $currencyId, $latitude, $longitude, $email);
+  $shop = new Shop($publicUid, $name, $currencyId, $latitude, $longitude, $email);
   $shop->setWebServiceUrl($webServiceUrl);
   
   if ($keywordString != null) {
