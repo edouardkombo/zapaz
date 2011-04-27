@@ -1,0 +1,28 @@
+var scrollProductList = function (e) {
+  if (e.target.tagName.toLowerCase() != "a") {
+    var listHeight = $("#product-list-box").innerHeight();
+    var minMarginTop = - $(productList).innerHeight() + listHeight + 2;
+    if (minMarginTop > 0) {
+      minMarginTop = 0;
+    }
+    var li = $(this);
+    while (!$(li).is("li")) {
+      li = $(li).parent();
+    }
+    var index = parseInt($(li).prevAll().length);
+    var rightClick = e.button == 2;
+    var sign = rightClick ? 1 : -1; // 1 = scroll top, -1 = scroll bottom
+    var marginTop = -index * 50;
+    if (sign > 0) {
+      marginTop += listHeight - 50;
+    }
+    if (sign > 0 && marginTop > 0) {
+      marginTop = 0;
+    } else if (sign < 0 && marginTop < minMarginTop) {
+      marginTop = minMarginTop;
+    }
+    $(productList).animate({'margin-top':marginTop+"px"});
+    return false;
+  }
+  return true;
+};
