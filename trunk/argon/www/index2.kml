@@ -35,6 +35,7 @@
       #main { top:0; left:0; }
       #preferences { top:-420px; left:0; background-color:#efefef; color:#333; }
       #pInfo{top:0; left:322px; height:376px;}
+      #sInfo{top:420px; left:322px; height:376px;}
       
       .button { position:absolute; top:7px; left:5px; height:30px; }
       .button.back .bgl { float:left; width:12px; height:30px; background:url(back-bgl.gif) no-repeat; }
@@ -453,7 +454,7 @@
         
         var shopInfo = function(shop) {
           var img = document.createElement("img");
-              img.setAttribute("src", shop.picture);
+              img.setAttribute("src", shop.logo);
           var span1 = document.createElement("span");
               span1.setAttribute("class", "name");
               span1.appendChild(document.createTextNode(shop.name));
@@ -465,38 +466,32 @@
           var h4 = document.createElement("h4");
               h4.appendChild(document.createTextNode("Address"));
           var p = document.createElement("p");
-              p.appendChild(document.createTextNode(shop.address0));
+              p.appendChild(document.createTextNode(shop.address.replace("¤","\n"));
+              p.setAttribute('style', 'white-space: pre;');
           var table = document.createElement("table");
               table.setAttribute("class", "detailsType");
-              $(details).each(function(i,detail){
-                var td1 = document.createElement("td");
-                    td1.appendChild(document.createTextNode(detail.name));
-                var td2 = document.createElement("td");
-                    td2.appendChild(document.createTextNode(detail.value));
-                var tr = document.createElement("tr");
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                    table.appendChild(tr);
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              $(shop.keywords).each(function(i, k){
+                var td = document.createElement("td");
+                    td.appendChild(document.createTextNode(k.name));
+                    tr.appendChild(td);
               });
           var div3 = document.createElement("div");
               div3.setAttribute("class", "main");
               div3.appendChild(img);
               div3.appendChild(span1);
-              div3.appendChild(span2);
-              div3.appendChild(span3);
               div3.appendChild(span4);
               div3.appendChild(h4);
               div3.appendChild(p);
               div3.appendChild(table);
           var div2 = document.createElement("div");
-              div2.appendChild(header);
               div2.appendChild(div3);
-              div2.appendChild(footer);
               
-          $(productDetails).empty();
-          productDetails.appendChild(div2);
+          $(shopDetails).empty();
+          shopDetails.appendChild(div2);
           
-          var hp = $("#pInfo").innerHeight();
+          var hp = $("#sInfo").innerHeight();
           var hd = $(div2).innerHeight();
           var mgtop = (hp - hd) / 2;
           $(div2).css("margin-top",mgtop+"px");
@@ -504,11 +499,18 @@
           moveToBottom();
         };
         
-        var productInfo = function(fullShop, name, image, manufacturer, price, shop, description, category, productType, details){
+        // ps = partial shop
+        var productInfo = function(ps, name, image, manufacturer, price, shop, description, category, productType, details){
           var header = document.createElement("a");
               header.setAttribute("id", "header");
               header.appendChild(document.createTextNode("Shop Information"));
-            $(header).click(function() { shopInfo(fullShop); });
+            $(header).click(function() { 
+              $.getJSON(rootUrl + "/getShopInfos.php", {publicUid:ps.publicUid, wsUrl:ps.webServiceUrl}, function(data) {
+                $(data).each(function(i,fs) {
+                  shopInfo(fs);
+                });
+              });
+            });
           var footer = document.createElement("a");
               footer.setAttribute("id", "footer");
               footer.appendChild(document.createTextNode("Find that Shop"));
