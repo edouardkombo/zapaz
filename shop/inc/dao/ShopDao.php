@@ -29,7 +29,7 @@ class ShopDao {
     if ($publicUid == null) {
       return null;
     }
-    $q = $this->db->query("SELECT * FROM `".TABLE_SHOP."` WHERE publicUid = ".$this->db->quote($publicUid, PDO::PARAM_INT));
+    $q = $this->db->query("SELECT * FROM `".TABLE_SHOP."` WHERE publicUid = ".$this->db->quote($publicUid, PDO::PARAM_STR));
     if ($q != null && $t = $q->fetch(PDO::FETCH_ASSOC)) {
       return $this->fetchShop($t);
     }
