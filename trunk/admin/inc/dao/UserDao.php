@@ -29,7 +29,7 @@ class UserDao {
     $filter .= "%";
     $array   = array();
 
-    $q = $this->db->prepare("SELECT * FROM `".TABLE_USER."` WHERE facebookName LIKE ? ORDER BY email ASC LIMIT $startIndex, $length");
+    $q = $this->db->prepare("SELECT * FROM `".TABLE_USER."` WHERE facebookName LIKE ? ORDER BY facebookName ASC LIMIT $startIndex, $length");
     $q->execute(array($filter));
     if ($q != null) {
       while ($t = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -40,7 +40,6 @@ class UserDao {
   }
   
   public function count() {
-    $filter .= "%";
     $q = $this->db->query("SELECT COUNT(*) AS count FROM `".TABLE_USER."`");
     $r = $q->fetch(PDO::FETCH_OBJ);
     return $r != null ? $r->count : 0;
